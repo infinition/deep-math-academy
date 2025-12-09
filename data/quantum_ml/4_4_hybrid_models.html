@@ -1,0 +1,65 @@
+<div class="space-y-8">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-green-600">
+        <h2 class="text-3xl font-extrabold text-green-800 mb-6">4.4 Modèles Hybrides (CPU + QPU)</h2>
+        <p class="text-lg text-gray-700 leading-relaxed">
+            Les ordinateurs quantiques actuels (NISQ) sont bruités. La solution ? Les faire travailler main dans la main
+            avec des supercalculateurs classiques.
+        </p>
+    </div>
+
+    <!-- La Boucle Hybride -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-6">La Boucle d'Optimisation</h3>
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+            <div class="bg-blue-100 p-4 rounded-xl text-center border border-blue-300 w-48">
+                <div class="text-4xl mb-2">💻</div>
+                <div class="font-bold text-blue-800">CPU Classique</div>
+                <div class="text-xs text-blue-600 mt-1">Optimiseur (Gradient Descent)</div>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <div class="text-gray-400 text-xs text-center">Paramètres $\theta$</div>
+                <div class="text-2xl text-gray-600">➡️</div>
+                <div class="text-2xl text-gray-600">⬅️</div>
+                <div class="text-gray-400 text-xs text-center">Énergie / Coût</div>
+            </div>
+
+            <div class="bg-purple-100 p-4 rounded-xl text-center border border-purple-300 w-48">
+                <div class="text-4xl mb-2">⚛️</div>
+                <div class="font-bold text-purple-800">QPU Quantique</div>
+                <div class="text-xs text-purple-600 mt-1">Circuit Paramétré (Ansatz)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QAOA -->
+    <div class="bg-gradient-to-br from-yellow-50 to-white p-8 rounded-2xl shadow-md border border-yellow-200">
+        <h3 class="text-2xl font-bold text-yellow-900 mb-4">QAOA (Optimisation Combinatoire)</h3>
+        <p class="text-gray-700 mb-4">
+            L'algorithme phare pour résoudre des problèmes comme le Voyageur de Commerce ou le Max-Cut.
+        </p>
+        <p class="text-sm text-gray-600">
+            Il alterne entre un Hamiltonien de problème (coût) et un Hamiltonien de mélange (driver) pour trouver l'état
+            fondamental.
+        </p>
+    </div>
+
+    <!-- Challenges -->
+    <div class="bg-red-50 p-6 rounded-xl border-t-4 border-red-500">
+        <h3 class="text-xl font-bold text-red-800 mb-3">Le Défi : Barren Plateaus</h3>
+        <p class="text-gray-700 text-sm">
+            Dans les grands espaces de Hilbert, le gradient devient exponentiellement petit (le paysage est tout plat).
+            L'optimiseur classique se perd et n'apprend rien. C'est le "vanishing gradient" sous stéroïdes.
+        </p>
+    </div>
+
+    <!-- Viz -->
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
+        <h3 class="text-white font-bold mb-4">Visualisation : Paysage d'Optimisation</h3>
+        <div id="hybrid-viz" class="h-64 bg-black rounded border border-gray-700 flex items-center justify-center">
+            <!-- Viz injected by initHybridModels -->
+            <p class="text-gray-500">Paysage 3D du Coût</p>
+        </div>
+    </div>
+</div>

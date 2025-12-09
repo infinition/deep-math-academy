@@ -1,0 +1,98 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">Statistiques Descriptives</h2>
+            <p class="text-lg text-indigo-100 leading-relaxed">
+                Avant de modéliser, il faut <strong>regarder</strong>. <br>
+                Comment résumer 1 million de chiffres en 2 ou 3 valeurs clés ? (Moyenne, Écart-Type, Médiane).
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>📊 Visualiseur de Distribution</span>
+                </h3>
+                <div
+                    class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-white min-h-[300px]" id="descripCanvasContainer">
+                <canvas id="descripCanvas" width="600" height="300" class="w-full h-full block"></canvas>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 space-y-4">
+                <div class="flex gap-2 items-center">
+                    <input id="newNumber" type="number" class="border p-2 w-24 rounded text-center font-bold text-lg"
+                        placeholder="0-20">
+                    <button onclick="addNumber()"
+                        class="bg-indigo-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-indigo-700 shadow transition">
+                        Ajouter
+                    </button>
+                    <button onclick="addRandomStats()"
+                        class="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg font-bold hover:bg-gray-200 transition text-sm">
+                        + Aléatoire
+                    </button>
+                    <button onclick="resetNumbers()"
+                        class="text-red-500 text-sm ml-auto hover:text-red-700 font-bold px-3">
+                        Tout Effacer
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 text-center mt-4">
+                    <div class="bg-indigo-50 p-3 rounded border border-indigo-100">
+                        <div class="text-xs uppercase font-bold text-indigo-400">Moyenne ($\bar{x}$)</div>
+                        <div class="text-2xl font-bold text-indigo-700" id="meanVal">0</div>
+                    </div>
+                    <div class="bg-purple-50 p-3 rounded border border-purple-100">
+                        <div class="text-xs uppercase font-bold text-purple-400">Médiane</div>
+                        <div class="text-2xl font-bold text-purple-700" id="medianVal">0</div>
+                    </div>
+                    <div class="bg-orange-50 p-3 rounded border border-orange-100">
+                        <div class="text-xs uppercase font-bold text-orange-400">Écart-Type ($\sigma$)</div>
+                        <div class="text-2xl font-bold text-orange-700" id="stdVal">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-indigo-500">
+                <h4 class="font-bold text-gray-800 mb-2">Moyenne vs Médiane</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    La <strong>Moyenne</strong> est sensible aux extrêmes (Bill Gates rentre dans un bar, tout le monde
+                    devient millionnaire en moyenne). <br>
+                    La <strong>Médiane</strong> est robuste (elle reste stable).
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-orange-500">
+                <h4 class="font-bold text-gray-800 mb-2">Écart-Type ($\sigma$)</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    C'est la "distance moyenne" à la moyenne. <br>
+                    Si $\sigma$ est faible, tout le monde est pareil. <br>
+                    Si $\sigma$ est grand, c'est le chaos.
+                </p>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-500">
+                <strong>Quartiles (IQR) :</strong> La boîte qui contient les 50% des gens "normaux" (entre Q1 et Q3).
+            </div>
+
+        </div>
+    </div>
+</div>

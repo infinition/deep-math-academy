@@ -1,0 +1,106 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-emerald-600 to-teal-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">La Théorie des Ensembles</h2>
+            <p class="text-lg text-emerald-100 leading-relaxed">
+                Tout commence par des collections d'objets. <br>
+                En IA, nous manipulons des ensembles de données (Datasets), des ensembles de paramètres
+                ($\mathbb{R}^n$), et des probabilités (événements).
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Flashcards Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        ${createFlashcard("ℝ", "Ensemble des Réels.<br>Ex: -2, 0, 3.14, √2")}
+        ${createFlashcard("ℕ", "Entiers Naturels.<br>Ex: 0, 1, 2, 3...")}
+        ${createFlashcard("ℤ", "Entiers Relatifs.<br>Ex: -5, 0, 5")}
+        ${createFlashcard("⊂ (Inclusion)", "A est DANS B.<br>Ex: Les Chats ⊂ Les Mammifères")}
+        ${createFlashcard("∩ (Intersection)", "Ce qui est commun.<br>A ET B")}
+        ${createFlashcard("∪ (Union)", "Tout rassemblé.<br>A OU B")}
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>🔵 Diagrammes de Venn Interactifs</span>
+                </h3>
+                <div
+                    class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-white min-h-[300px] flex justify-center items-center p-4">
+                <canvas id="vennCanvas" width="420" height="260" class="rounded"></canvas>
+            </div>
+
+            <div class="p-4 bg-gray-50 border-t border-gray-100 text-center">
+                <p id="venn-desc" class="text-sm font-bold text-indigo-600 min-h-[20px]">
+                    A ∪ B : tout ce qui est dans A ou B ou les deux.
+                </p>
+            </div>
+        </div>
+
+        <!-- Controls Column -->
+        <div class="space-y-4">
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+                <h4 class="font-bold text-gray-800 mb-4">Opérations</h4>
+                <div class="space-y-2">
+                    <button onclick="drawVenn('A')"
+                        class="w-full text-left px-4 py-3 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-800 font-bold transition flex justify-between items-center group">
+                        <span>Juste A</span>
+                        <span class="opacity-0 group-hover:opacity-100 transition">👁️</span>
+                    </button>
+                    <button onclick="drawVenn('B')"
+                        class="w-full text-left px-4 py-3 rounded-lg bg-green-50 hover:bg-green-100 text-green-800 font-bold transition flex justify-between items-center group">
+                        <span>Juste B</span>
+                        <span class="opacity-0 group-hover:opacity-100 transition">👁️</span>
+                    </button>
+                    <button onclick="drawVenn('UNION')"
+                        class="w-full text-left px-4 py-3 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold transition flex justify-between items-center group">
+                        <span>Union (A ∪ B)</span>
+                        <span class="opacity-0 group-hover:opacity-100 transition">👁️</span>
+                    </button>
+                    <button onclick="drawVenn('INTER')"
+                        class="w-full text-left px-4 py-3 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-800 font-bold transition flex justify-between items-center group">
+                        <span>Intersection (A ∩ B)</span>
+                        <span class="opacity-0 group-hover:opacity-100 transition">👁️</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 text-xs text-indigo-800">
+                <strong>Pourquoi en IA ?</strong><br>
+                Essentiel pour les probabilités conditionnelles (Bayes) et la logique des bases de données (SQL JOIN).
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Notation Section -->
+    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+        <h4 class="font-bold text-gray-700 mb-2 flex items-center gap-2">
+            <span>∑</span> Notation Sigma (Somme)
+        </h4>
+        <div class="flex flex-col md:flex-row items-center gap-6">
+            <div class="bg-white p-4 rounded shadow-sm font-mono text-xl text-gray-800 border border-gray-200">
+                $\sum_{i=1}^{n} x_i = x_1 + x_2 + ... + x_n$
+            </div>
+            <p class="text-sm text-gray-600 flex-1">
+                Cette notation est omniprésente. Elle signifie simplement "additionner tout". <br>
+                En Deep Learning, on l'utilise pour calculer l'erreur totale (Loss) ou la somme pondérée des entrées
+                d'un neurone.
+            </p>
+        </div>
+    </div>
+</div>

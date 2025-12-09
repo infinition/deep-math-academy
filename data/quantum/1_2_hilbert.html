@@ -1,0 +1,51 @@
+<div class="space-y-6">
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold text-indigo-700 mb-4">1.2 Espaces de Hilbert</h2>
+        <p class="text-gray-700 mb-4">
+            Pour comprendre le quantique, il faut comprendre son terrain de jeu : les <strong>Espaces de
+                Hilbert</strong>.
+            C'est une généralisation des espaces euclidiens (ceux avec des flèches classiques) mais avec des nombres
+            complexes et potentiellement des dimensions infinies.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gray-50 p-4 rounded shadow-sm">
+                <h3 class="font-bold text-lg mb-2">Produit Scalaire Complexe</h3>
+                <p class="text-sm text-gray-600 mb-2">
+                    C'est ce qui nous permet de mesurer des angles et des longueurs.
+                    $$\langle \phi | \psi \rangle = \sum_i \phi_i^* \psi_i$$
+                    Notez le conjugué complexe ($^*$) sur le premier vecteur (le bra $\langle \phi |$).
+                </p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded shadow-sm">
+                <h3 class="font-bold text-lg mb-2">Norme et Orthogonalité</h3>
+                <p class="text-sm text-gray-600 mb-2">
+                    La norme (longueur) est $\|\psi\| = \sqrt{\langle \psi | \psi \rangle}$.
+                    Deux états sont orthogonaux (indépendants) si leur produit scalaire est nul : $\langle \phi | \psi
+                    \rangle = 0$.
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-6">
+            <h3 class="font-bold text-indigo-800 mb-2">Notation Dirac (Bra-Ket)</h3>
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                <li><strong>Ket $|\psi\rangle$</strong> : Vecteur colonne (l'état).</li>
+                <li><strong>Bra $\langle \psi|$</strong> : Vecteur ligne conjugué (la transposée conjuguée).</li>
+                <li><strong>Bra-Ket $\langle \phi | \psi \rangle$</strong> : Produit scalaire (un nombre complexe).</li>
+                <li><strong>Ket-Bra $|\psi\rangle\langle\phi|$</strong> : Opérateur (une matrice).</li>
+            </ul>
+        </div>
+
+        <div class="bg-yellow-50 p-4 rounded border-l-4 border-yellow-500 mt-6">
+            <h3 class="font-bold text-yellow-800">Pourquoi c'est important pour le Qubit ?</h3>
+            <p class="text-gray-700">
+                Un Qubit vit dans un espace de Hilbert de dimension 2.
+                Ses vecteurs de base sont $|0\rangle$ et $|1\rangle$.
+                Tout état de qubit est une combinaison linéaire (superposition) de ces deux bases :
+                $$|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$$
+                avec $|\alpha|^2 + |\beta|^2 = 1$.
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="space-y-8">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-indigo-800">
+        <h2 class="text-3xl font-extrabold text-indigo-900 mb-6">5.1 Théorie Quantique des Champs (QFT)</h2>
+        <p class="text-lg text-gray-700 leading-relaxed">
+            On ne quantifie plus seulement les particules, mais les champs eux-mêmes. C'est le langage du Modèle
+            Standard.
+        </p>
+    </div>
+
+    <!-- Seconde Quantification -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">La Seconde Quantification</h3>
+        <p class="text-gray-600 mb-4">
+            Au lieu de suivre chaque particule $\psi_1, \psi_2...$, on compte combien de particules sont dans chaque
+            état.
+            L'état devient un <strong>Vecteur de Fock</strong> :
+        </p>
+        <div class="bg-gray-100 p-4 rounded text-center font-mono text-xl text-indigo-800">
+            $|n_1, n_2, n_3, ...\rangle$
+        </div>
+        <p class="text-xs text-gray-500 mt-2 text-center">
+            $n_i$ est le nombre de particules dans le mode $i$.
+        </p>
+    </div>
+
+    <!-- Création / Annihilation -->
+    <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-green-50 p-6 rounded-xl border-t-4 border-green-500">
+            <h3 class="text-xl font-bold text-green-900 mb-3">Création ($a^\dagger$)</h3>
+            <p class="text-gray-700 mb-2">Ajoute une particule dans un mode.</p>
+            <p class="font-mono text-center bg-white p-2 rounded shadow-sm">
+                $a^\dagger |n\rangle = \sqrt{n+1} |n+1\rangle$
+            </p>
+        </div>
+
+        <div class="bg-red-50 p-6 rounded-xl border-t-4 border-red-500">
+            <h3 class="text-xl font-bold text-red-900 mb-3">Annihilation ($a$)</h3>
+            <p class="text-gray-700 mb-2">Retire une particule.</p>
+            <p class="font-mono text-center bg-white p-2 rounded shadow-sm">
+                $a |n\rangle = \sqrt{n} |n-1\rangle$
+            </p>
+        </div>
+    </div>
+
+    <!-- Bosons vs Fermions -->
+    <div class="bg-gradient-to-r from-gray-800 to-black text-white p-8 rounded-2xl shadow-lg">
+        <h3 class="text-2xl font-bold mb-6">La Grande Division</h3>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div>
+                <h4 class="text-yellow-400 font-bold mb-2">Bosons (Photons, Gluons...)</h4>
+                <p class="text-sm text-gray-300 mb-2">Spin entier.</p>
+                <p class="font-mono text-xs bg-gray-700 p-2 rounded">
+                    $[a, a^\dagger] = 1$ (Commutateur)
+                </p>
+                <p class="text-xs text-gray-400 mt-2">Peuvent s'entasser dans le même état (Laser, Condensat).</p>
+            </div>
+
+            <div>
+                <h4 class="text-blue-400 font-bold mb-2">Fermions (Électrons, Quarks...)</h4>
+                <p class="text-sm text-gray-300 mb-2">Spin demi-entier.</p>
+                <p class="font-mono text-xs bg-gray-700 p-2 rounded">
+                    $\{a, a^\dagger\} = 1$ (Anticommutateur)
+                </p>
+                <p class="text-xs text-gray-400 mt-2">Principe d'exclusion de Pauli (Pas deux au même endroit !).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Viz -->
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
+        <h3 class="text-white font-bold mb-4">Visualisation : Oscillateur Harmonique Quantique</h3>
+        <div id="qft-viz" class="h-64 bg-black rounded border border-gray-700 flex items-center justify-center">
+            <!-- Viz injected by initQFT -->
+            <p class="text-gray-500">Niveaux d'Énergie</p>
+        </div>
+    </div>
+</div>

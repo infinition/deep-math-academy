@@ -1,0 +1,135 @@
+<div class="max-w-5xl mx-auto space-y-8 fade-in">
+
+    <div
+        class="bg-gradient-to-r from-blue-600 to-cyan-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-3">🎢 La Dérivée : Le "Compteur de Vitesse"</h2>
+            <p class="text-lg text-blue-100 leading-relaxed">
+                Imaginez des montagnes russes. La fonction $f(x)$ est la forme des rails (hauteur).<br>
+                La dérivée $f'(x)$, c'est <strong>l'inclinaison de votre siège</strong> à un instant précis.
+            </p>
+            <div class="mt-4 flex gap-4 text-sm font-mono bg-white/10 p-3 rounded-lg inline-block">
+                <span>Pente montante = Dérivée Positive (+)</span> |
+                <span>Plat = Zéro (0)</span> |
+                <span>Descente = Dérivée Négative (-)</span>
+            </div>
+        </div>
+        <div class="absolute right-0 bottom-0 text-9xl opacity-10">📉</div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 bg-gray-50 border-b flex justify-between items-center">
+            <h3 class="font-bold text-gray-700">🔬 Labo : Visualiser la Tangente</h3>
+            <button id="toggleAnimBtn"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1 rounded-full text-xs font-bold transition flex items-center gap-2">
+                <span>▶️</span> Animation Auto
+            </button>
+        </div>
+
+        <div class="p-6 grid md:grid-cols-3 gap-8">
+            <div class="md:col-span-2 bg-gray-50 rounded-xl border border-gray-200 shadow-inner relative">
+                <canvas id="derivativeCanvas" width="500" height="300" class="w-full h-full cursor-crosshair"></canvas>
+                <div class="absolute top-2 right-2 bg-white/90 backdrop-blur p-2 rounded shadow text-xs font-mono">
+                    <div>f(x) = <span class="text-blue-600 font-bold">x²</span></div>
+                    <div>f'(x) = <span class="text-red-600 font-bold">2x</span></div>
+                </div>
+            </div>
+
+            <div class="space-y-6 flex flex-col justify-center">
+
+                <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Position (x)</label>
+                    <input type="range" id="derivX" min="-2.5" max="2.5" step="0.1" value="1"
+                        class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                    <div class="flex justify-between mt-2 font-mono text-lg">
+                        <span>x :</span>
+                        <span id="xValDisplay" class="font-bold text-gray-800">1.0</span>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div
+                        class="flex justify-between items-center p-3 bg-white rounded border border-l-4 border-l-blue-500 shadow-sm">
+                        <span class="text-sm text-gray-600">Hauteur $f(x)$</span>
+                        <span id="yValDisplay" class="font-bold font-mono text-blue-600">1.00</span>
+                    </div>
+                    <div
+                        class="flex justify-between items-center p-3 bg-white rounded border border-l-4 border-l-red-500 shadow-sm transform scale-105 transition-transform">
+                        <span class="text-sm text-gray-600">Pente $f'(x)$</span>
+                        <span id="slopeVal" class="font-bold font-mono text-red-600 text-xl">2.00</span>
+                    </div>
+                </div>
+
+                <p class="text-xs text-gray-400 text-center italic">
+                    Regarde : quand x est négatif, la pente (rouge) est négative !
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-red-50 p-6 rounded-2xl border-l-4 border-red-500">
+            <h3 class="font-bold text-red-900 text-xl mb-2">⛓️ La Règle de la Chaîne (Chain Rule)</h3>
+            <p class="text-red-800 mb-4">
+                C'est le moteur de l'IA. Si un neurone change un peu, comment cela affecte-t-il la sortie finale 10
+                couches plus loin ?
+            </p>
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <p class="font-mono text-center text-lg mb-2">Effet Total = Effet 1 $\times$ Effet 2</p>
+                <p class="text-sm text-gray-600 text-center">
+                    Si Alice double l'argent de Bob ($\times 2$),<br>
+                    et que Bob triple l'argent de Charlie ($\times 3$),<br>
+                    alors Alice a sextuplé l'argent de Charlie ($\times 6$).
+                </p>
+            </div>
+        </div>
+
+        <div
+            class="bg-gray-900 text-white p-6 rounded-2xl shadow-lg flex flex-col items-center justify-center relative overflow-hidden">
+            <h4 class="font-bold text-gray-400 text-sm mb-6 uppercase tracking-widest">Calculateur d'Influence</h4>
+
+            <div class="flex items-center gap-2 text-xl font-mono">
+                <div class="flex flex-col items-center">
+                    <div
+                        class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center font-bold shadow-lg z-10">
+                        A</div>
+                    <span class="text-xs mt-2 text-blue-300">Entrée</span>
+                </div>
+
+                <div class="w-16 h-1 bg-gray-700 relative group cursor-pointer hover:bg-gray-600 transition">
+                    <div
+                        class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs bg-gray-800 px-2 rounded text-yellow-400">
+                        $\times 2$</div>
+                </div>
+
+                <div class="flex flex-col items-center">
+                    <div
+                        class="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center font-bold shadow-lg z-10">
+                        B</div>
+                    <span class="text-xs mt-2 text-purple-300">Caché</span>
+                </div>
+
+                <div class="w-16 h-1 bg-gray-700 relative group cursor-pointer hover:bg-gray-600 transition">
+                    <div
+                        class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs bg-gray-800 px-2 rounded text-green-400">
+                        $\times 3$</div>
+                </div>
+
+                <div class="flex flex-col items-center">
+                    <div
+                        class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center font-bold shadow-lg z-10">
+                        C</div>
+                    <span class="text-xs mt-2 text-red-300">Sortie</span>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-white/10 p-4 rounded-xl border border-white/20 w-full text-center backdrop-blur-sm">
+                <p class="text-sm text-gray-300">Impact de A sur C (Gradient) :</p>
+                <p class="text-3xl font-bold text-white mt-1">
+                    <span class="text-yellow-400">2</span> $\times$ <span class="text-green-400">3</span> = <span
+                        class="text-white border-b-2 border-white">6</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

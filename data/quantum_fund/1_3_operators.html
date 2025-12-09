@@ -1,0 +1,215 @@
+<div class="space-y-8">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-yellow-500">
+        <h2 class="text-3xl font-extrabold text-yellow-700 mb-6">1.3 Les Opérateurs : Les Acteurs du Changement</h2>
+        <p class="text-lg text-gray-700 leading-relaxed">
+            Dans l'espace de Hilbert, les vecteurs d'état sont statiques jusqu'à ce qu'on agisse sur eux.
+            Les <strong>Opérateurs</strong> sont les machines qui transforment les vecteurs.
+        </p>
+    </div>
+
+    <!-- Types d'Opérateurs -->
+    <div class="grid md:grid-cols-3 gap-6">
+        <!-- Hermitiens -->
+        <div class="bg-purple-50 p-6 rounded-xl border-t-4 border-purple-500 hover:shadow-lg transition">
+            <h3 class="text-xl font-bold text-purple-900 mb-3">1. Hermitiens</h3>
+            <p class="text-sm text-gray-700 mb-3">
+                Ils représentent les <strong>grandeurs observables</strong> (énergie, spin...).
+            </p>
+            <ul class="text-xs text-gray-600 space-y-2">
+                <li>• $A = A^\dagger$ (Auto-adjoint)</li>
+                <li>• Valeurs propres <strong>réelles</strong> (ce qu'on mesure).</li>
+            </ul>
+        </div>
+
+        <!-- Unitaires -->
+        <div class="bg-green-50 p-6 rounded-xl border-t-4 border-green-500 hover:shadow-lg transition">
+            <h3 class="text-xl font-bold text-green-900 mb-3">2. Unitaires</h3>
+            <p class="text-sm text-gray-700 mb-3">
+                Ils représentent l'<strong>évolution</strong> et les <strong>portes quantiques</strong>.
+            </p>
+            <ul class="text-xs text-gray-600 space-y-2">
+                <li>• $U^\dagger U = I$ (Inverse = Adjoint)</li>
+                <li>• Préservent la norme (probabilités).</li>
+                <li>• Réversibles.</li>
+            </ul>
+        </div>
+
+        <!-- Projecteurs -->
+        <div class="bg-red-50 p-6 rounded-xl border-t-4 border-red-500 hover:shadow-lg transition">
+            <h3 class="text-xl font-bold text-red-900 mb-3">3. Projecteurs</h3>
+            <p class="text-sm text-gray-700 mb-3">
+                Ils décrivent l'action de la <strong>mesure</strong> (effondrement).
+            </p>
+            <ul class="text-xs text-gray-600 space-y-2">
+                <li>• $P^2 = P$ (Idempotent)</li>
+                <li>• Projette l'état sur un sous-espace.</li>
+                <li>• Irréversible.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Matrices de Pauli -->
+    <div class="bg-white p-8 rounded-2xl shadow-md">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+            <span>⚛️</span> Les Matrices de Pauli
+        </h3>
+        <p class="text-gray-700 mb-6">
+            Ce sont les opérateurs les plus célèbres pour un Qubit (spin 1/2). Elles sont à la fois Hermitiennes et
+            Unitaires !
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- X -->
+            <div class="text-center group">
+                <div class="font-mono text-3xl font-bold text-indigo-600 mb-2 group-hover:scale-110 transition">X</div>
+                <div class="text-sm font-bold text-gray-500 mb-2">Bit-Flip (NOT)</div>
+                <div class="bg-gray-100 p-3 rounded-lg font-mono text-gray-800 text-lg inline-block">
+                    $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$
+                </div>
+                <p class="text-xs text-gray-400 mt-2">Échange |0⟩ et |1⟩</p>
+            </div>
+
+            <!-- Y -->
+            <div class="text-center group">
+                <div class="font-mono text-3xl font-bold text-indigo-600 mb-2 group-hover:scale-110 transition">Y</div>
+                <div class="text-sm font-bold text-gray-500 mb-2">Bit & Phase Flip</div>
+                <div class="bg-gray-100 p-3 rounded-lg font-mono text-gray-800 text-lg inline-block">
+                    $\begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}$
+                </div>
+                <p class="text-xs text-gray-400 mt-2">Complexe</p>
+            </div>
+
+            <!-- Z -->
+            <div class="text-center group">
+                <div class="font-mono text-3xl font-bold text-indigo-600 mb-2 group-hover:scale-110 transition">Z</div>
+                <div class="text-sm font-bold text-gray-500 mb-2">Phase Flip</div>
+                <div class="bg-gray-100 p-3 rounded-lg font-mono text-gray-800 text-lg inline-block">
+                    $\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$
+                </div>
+                <p class="text-xs text-gray-400 mt-2">Change le signe de |1⟩</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Viz -->
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
+        <div class="space-y-8">
+            <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-yellow-500">
+                <h2 class="text-3xl font-extrabold text-yellow-700 mb-6">1.3 Les Opérateurs : Les Acteurs du Changement
+                </h2>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Dans l'espace de Hilbert, les vecteurs d'état sont statiques jusqu'à ce qu'on agisse sur eux.
+                    Les <strong>Opérateurs</strong> sont les machines qui transforment les vecteurs.
+                </p>
+            </div>
+
+            <!-- Types d'Opérateurs -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Hermitiens -->
+                <div class="bg-purple-50 p-6 rounded-xl border-t-4 border-purple-500 hover:shadow-lg transition">
+                    <h3 class="text-xl font-bold text-purple-900 mb-3">1. Hermitiens</h3>
+                    <p class="text-sm text-gray-700 mb-3">
+                        Ils représentent les <strong>grandeurs observables</strong> (énergie, spin...).
+                    </p>
+                    <ul class="text-xs text-gray-600 space-y-2">
+                        <li>• $A = A^\dagger$ (Auto-adjoint)</li>
+                        <li>• Valeurs propres <strong>réelles</strong> (ce qu'on mesure).</li>
+                    </ul>
+                </div>
+
+                <!-- Unitaires -->
+                <div class="bg-green-50 p-6 rounded-xl border-t-4 border-green-500 hover:shadow-lg transition">
+                    <h3 class="text-xl font-bold text-green-900 mb-3">2. Unitaires</h3>
+                    <p class="text-sm text-gray-700 mb-3">
+                        Ils représentent l'<strong>évolution</strong> et les <strong>portes quantiques</strong>.
+                    </p>
+                    <ul class="text-xs text-gray-600 space-y-2">
+                        <li>• $U^\dagger U = I$ (Inverse = Adjoint)</li>
+                        <li>• Préservent la norme (probabilités).</li>
+                        <li>• Réversibles.</li>
+                    </ul>
+                </div>
+
+                <!-- Projecteurs -->
+                <div class="bg-red-50 p-6 rounded-xl border-t-4 border-red-500 hover:shadow-lg transition">
+                    <h3 class="text-xl font-bold text-red-900 mb-3">3. Projecteurs</h3>
+                    <p class="text-sm text-gray-700 mb-3">
+                        Ils décrivent l'action de la <strong>mesure</strong> (effondrement).
+                    </p>
+                    <ul class="text-xs text-gray-600 space-y-2">
+                        <li>• $P^2 = P$ (Idempotent)</li>
+                        <li>• Projette l'état sur un sous-espace.</li>
+                        <li>• Irréversible.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Matrices de Pauli -->
+            <div class="bg-white p-8 rounded-2xl shadow-md">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                    <span>⚛️</span> Les Matrices de Pauli
+                </h3>
+                <p class="text-gray-700 mb-6">
+                    Ce sont les opérateurs les plus célèbres pour un Qubit (spin 1/2). Elles sont à la fois Hermitiennes
+                    et
+                    Unitaires !
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- X -->
+                    <div class="text-center group">
+                        <div class="font-mono text-3xl font-bold text-indigo-600 mb-2 group-hover:scale-110 transition">
+                            X</div>
+                        <div class="text-sm font-bold text-gray-500 mb-2">Bit-Flip (NOT)</div>
+                        <div class="bg-gray-100 p-3 rounded-lg font-mono text-gray-800 text-lg inline-block">
+                            $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">Échange |0⟩ et |1⟩</p>
+                    </div>
+
+                    <!-- Y -->
+                    <div class="text-center group">
+                        <div class="font-mono text-3xl font-bold text-indigo-600 mb-2 group-hover:scale-110 transition">
+                            Y</div>
+                        <div class="text-sm font-bold text-gray-500 mb-2">Bit & Phase Flip</div>
+                        <div class="bg-gray-100 p-3 rounded-lg font-mono text-gray-800 text-lg inline-block">
+                            $\begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}$
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">Complexe</p>
+                    </div>
+
+                    <!-- Z -->
+                    <div class="text-center group">
+                        <div class="font-mono text-3xl font-bold text-indigo-600 mb-2 group-hover:scale-110 transition">
+                            Z</div>
+                        <div class="text-sm font-bold text-gray-500 mb-2">Phase Flip</div>
+                        <div class="bg-gray-100 p-3 rounded-lg font-mono text-gray-800 text-lg inline-block">
+                            $\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">Change le signe de |1⟩</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Viz -->
+            <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
+                <h3 class="text-white font-bold mb-4">Visualisation : Action d'un Opérateur</h3>
+                <div class="flex flex-col md:flex-row gap-4 items-center">
+                    <div id="operator-viz" class="flex-1 h-64 w-full bg-black rounded border border-gray-700 relative">
+                        <!-- Viz injected by initOperators -->
+                    </div>
+                    <div class="w-full md:w-48 space-y-2">
+                        <p class="text-gray-400 text-sm mb-2">Appliquer :</p>
+                        <button onclick="applyOperator('X')"
+                            class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded font-mono transition">X
+                            (NOT)</button>
+                        <button onclick="applyOperator('Z')"
+                            class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded font-mono transition">Z
+                            (Phase)</button>
+                        <button onclick="applyOperator('H')"
+                            class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded font-mono transition">H
+                            (Hadamard)</button>
+                    </div>
+                </div>
+            </div>
+        </div>

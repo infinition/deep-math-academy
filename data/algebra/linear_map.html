@@ -1,0 +1,79 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-red-600 to-orange-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">Noyau (Ker) & Image (Im)</h2>
+            <p class="text-lg text-red-100 leading-relaxed">
+                Toute matrice est une machine qui prend des vecteurs en entrée et en recrache d'autres en sortie. <br>
+                <strong>Ker (Noyau) :</strong> Tout ce qui est détruit (envoyé sur 0). <br>
+                <strong>Im (Image) :</strong> Tout ce qui peut être créé.
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>🎯 Projection & Perte d'Information</span>
+                </h3>
+                <div class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-gray-50 min-h-[300px]" id="linearMapCanvasContainer">
+                <canvas id="linearMapCanvas" width="600" height="350" class="w-full h-full block"></canvas>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 text-center">
+                <p class="text-sm text-gray-600 mb-4">
+                    Cette matrice projette tout l'espace 2D sur une ligne 1D (l'axe rouge). <br>
+                    Tous les vecteurs sur la ligne pointillée verte (le Noyau) sont écrasés sur 0.
+                </p>
+                <div class="flex justify-center gap-4 text-sm font-bold">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500"></span> Image (L'arrivée)
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-green-500 border border-green-600 border-dashed"></span>
+                        Noyau (La poubelle)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-red-500">
+                <h4 class="font-bold text-gray-800 mb-2">Le Noyau (Ker f)</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    C'est l'ensemble des vecteurs $x$ tels que $Ax = 0$. <br>
+                    Si le noyau n'est pas vide (autre que 0), la matrice <strong>détruit de l'information</strong>. Elle
+                    n'est pas inversible.
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-green-500">
+                <h4 class="font-bold text-gray-800 mb-2">L'Image (Im f)</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    C'est l'espace d'arrivée. <br>
+                    Si on projette la 3D sur un écran 2D, l'Image est le plan de l'écran.
+                </p>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-500 font-mono text-center">
+                dim(Ker) + dim(Im) = Dimension Totale
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,127 @@
+<div class="space-y-8">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-pink-500">
+        <h2 class="text-3xl font-extrabold text-pink-700 mb-6">1.2 L'Arène du Jeu : L'Espace de Hilbert</h2>
+        <p class="text-lg text-gray-700 leading-relaxed">
+            Pour faire de la mécanique quantique, nous avons besoin d'un espace mathématique où vivent nos vecteurs
+            d'état.
+            Cet espace s'appelle un <strong>Espace de Hilbert</strong> ($\mathcal{H}$).
+        </p>
+    </div>
+
+    <!-- Definition -->
+    <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">C'est quoi exactement ?</h3>
+            <ul class="space-y-3 text-gray-600">
+                <li class="flex items-start gap-2">
+                    <span class="text-pink-500 font-bold">1.</span>
+                    <span>C'est un <strong>espace vectoriel</strong> (on peut additionner des états).</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-pink-500 font-bold">2.</span>
+                    <span>Il est défini sur les <strong>nombres complexes</strong> ($\mathbb{C}$).</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-pink-500 font-bold">3.</span>
+                    <span>Il est muni d'un <strong>produit scalaire</strong> (inner product).</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-pink-500 font-bold">4.</span>
+                    <span>Il est <strong>complet</strong> (une propriété technique importante pour l'analyse).</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="bg-gray-900 p-6 rounded-xl shadow-inner flex items-center justify-center">
+            <div id="hilbert-viz" class="text-center">
+                <!-- Viz injected by initHilbertSpace -->
+                <p class="text-gray-400">Visualisation Espace Vectoriel</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Produit Scalaire -->
+    <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-md border border-gray-200">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">Le Produit Scalaire (Bra-Ket)</h3>
+        <p class="text-gray-700 mb-6">
+            C'est l'outil magique qui nous permet de calculer des angles et des longueurs.
+            On le note $\langle \phi | \psi \rangle$.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white p-4 rounded-lg border border-gray-200">
+                <h4 class="font-bold text-indigo-600 mb-2">Notation de Dirac</h4>
+                <p class="font-mono text-sm text-gray-600 mb-2">
+                    $| \psi \rangle$ = Vecteur colonne (Ket)
+                </p>
+                <p class="font-mono text-sm text-gray-600">
+                    $\langle \phi |$ = Vecteur ligne conjugué (Bra)
+                </p>
+                <div class="mt-4 p-3 bg-gray-50 rounded text-center font-mono text-gray-800">
+                    $\langle \phi | \psi \rangle = (\langle \phi |) \times (| \psi \rangle) \in \mathbb{C}$
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg border border-gray-200">
+                <h4 class="font-bold text-green-600 mb-2">Propriétés Clés</h4>
+                <ul class="text-sm space-y-2 text-gray-600">
+                    <li>• <strong>Conjugaison :</strong> $\langle \phi | \psi \rangle = \langle \psi | \phi \rangle^*$
+                    </li>
+                    <li>• <strong>Linéarité :</strong> Linéaire à droite, antilinéaire à gauche.</li>
+                    <li>• <strong>Positivité :</strong> $\langle \psi | \psi \rangle \geq 0$ (C'est la norme au carré !)
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Norme et Orthogonalité -->
+    <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-blue-50 p-6 rounded-xl border-t-4 border-blue-500">
+            <h3 class="text-xl font-bold text-blue-800 mb-2">La Norme</h3>
+            <p class="text-gray-700 mb-4">
+                La "longueur" d'un vecteur d'état. En physique quantique, les états physiques sont toujours de norme 1.
+            </p>
+            <p class="text-center font-mono text-xl text-blue-900 bg-white p-2 rounded shadow-sm">
+                $||\psi|| = \sqrt{\langle \psi | \psi \rangle} = 1$
+            </p>
+        </div>
+
+        <div class="bg-red-50 p-6 rounded-xl border-t-4 border-red-500">
+            <h3 class="text-xl font-bold text-red-800 mb-2">Orthogonalité</h3>
+            <p class="text-gray-700 mb-4">
+                Deux états sont orthogonaux s'ils sont parfaitement distinctables (leur chevauchement est nul).
+            </p>
+            <p class="text-center font-mono text-xl text-red-900 bg-white p-2 rounded shadow-sm">
+                $\langle \phi | \psi \rangle = 0$
+            </p>
+        </div>
+    </div>
+
+    <!-- Bases Orthonormées -->
+    <div class="bg-white p-8 rounded-2xl shadow-lg">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">Bases Orthonormées</h3>
+        <p class="text-gray-700 mb-6">
+            Pour décrire n'importe quel vecteur, on utilise une <strong>base</strong>. C'est comme un système de
+            coordonnées.
+            Pour un Qubit, la base standard (base computationnelle) est :
+        </p>
+
+        <div class="flex justify-center gap-8 mb-6">
+            <div class="text-center">
+                <div class="font-mono text-2xl font-bold text-indigo-600 mb-2">|0⟩</div>
+                <div class="text-sm text-gray-500">Vecteur "Haut"</div>
+                <div class="text-xs font-mono bg-gray-100 p-1 rounded mt-1">$\begin{pmatrix} 1 \\ 0 \end{pmatrix}$</div>
+            </div>
+            <div class="text-center">
+                <div class="font-mono text-2xl font-bold text-indigo-600 mb-2">|1⟩</div>
+                <div class="text-sm text-gray-500">Vecteur "Bas"</div>
+                <div class="text-xs font-mono bg-gray-100 p-1 rounded mt-1">$\begin{pmatrix} 0 \\ 1 \end{pmatrix}$</div>
+            </div>
+        </div>
+
+        <p class="text-center text-gray-600 italic">
+            Ces vecteurs sont de norme 1 et orthogonaux entre eux : $\langle 0 | 1 \rangle = 0$.
+        </p>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-green-600 to-emerald-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">Statistiques : L'Art de l'Inférence</h2>
+            <p class="text-lg text-green-100 leading-relaxed">
+                Les probabilités partent du modèle pour prédire les données.<br>
+                Les statistiques partent des <strong>données</strong> pour retrouver le <strong>modèle</strong>.
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>🔍 Population vs Échantillon</span>
+                </h3>
+                <div
+                    class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-gray-900 min-h-[350px]" id="samplingCanvasContainer">
+                <canvas id="samplingCanvas" width="600" height="350" class="w-full h-full block"></canvas>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 space-y-4">
+                <div class="flex justify-between items-center">
+                    <p class="text-sm text-gray-600">
+                        La population contient <span class="font-bold text-blue-500">Bleus</span> et <span
+                            class="font-bold text-red-500">Rouges</span>. <br>
+                        Essayez de deviner le % de Rouges en prenant un échantillon.
+                    </p>
+                    <div class="text-right">
+                        <div class="text-xs uppercase font-bold text-gray-400">Vraie Proportion (Cachée)</div>
+                        <div id="truePropDisplay" class="text-xl font-bold text-gray-800">???</div>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <button onclick="takeSample(10)"
+                        class="px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold rounded border border-indigo-200 transition">
+                        Prendre 10
+                    </button>
+                    <button onclick="takeSample(50)"
+                        class="px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold rounded border border-indigo-200 transition">
+                        Prendre 50
+                    </button>
+                    <button onclick="revealPopulation()"
+                        class="px-4 py-2 bg-amber-50 hover:bg-amber-100 text-amber-700 font-bold rounded border border-amber-200 transition ml-auto">
+                        Révéler la Vérité
+                    </button>
+                    <button onclick="resetSampling()"
+                        class="px-4 py-2 bg-gray-50 hover:bg-gray-100 text-gray-600 font-bold rounded border border-gray-200 transition">
+                        Reset
+                    </button>
+                </div>
+
+                <div id="sampleResult" class="hidden bg-gray-50 p-3 rounded border border-gray-200 text-center">
+                    <span class="text-sm text-gray-500">Estimation de l'échantillon :</span>
+                    <span id="estPropDisplay" class="text-2xl font-bold text-indigo-600 ml-2">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-indigo-500">
+                <h4 class="font-bold text-gray-800 mb-2">Population ($\mu$)</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    C'est la réalité totale, souvent inaccessible (ex: tous les électeurs d'un pays). <br>
+                    C'est ce qu'on veut connaître.
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-purple-500">
+                <h4 class="font-bold text-gray-800 mb-2">Échantillon ($\bar{x}$)</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    C'est la petite partie qu'on observe. <br>
+                    <strong>Loi des Grands Nombres :</strong> Plus l'échantillon est grand, plus $\bar{x}$ se rapproche
+                    de $\mu$.
+                </p>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-500">
+                <strong>Biais :</strong> Si vous ne sondez que vos amis, votre échantillon n'est pas représentatif !
+            </div>
+
+        </div>
+    </div>
+</div>

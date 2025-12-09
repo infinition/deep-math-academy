@@ -1,0 +1,118 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-violet-600 to-purple-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">Fonctions d'Activation : La Décision</h2>
+            <p class="text-lg text-violet-100 leading-relaxed">
+                Un neurone artificiel est inutile s'il est juste linéaire (une simple multiplication). <br>
+                Pour apprendre des formes complexes, il doit "tordre" l'espace. <br>
+                C'est le rôle de la <strong>Fonction d'Activation</strong> : décider si le signal passe ou non.
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>⚡ Laboratoire d'Activation</span>
+                </h3>
+                <div
+                    class="bg-violet-100 text-violet-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-white min-h-[300px]" id="funcCanvasContainer">
+                <canvas id="functionCanvas" width="600" height="350" class="w-full h-full block"></canvas>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 space-y-6">
+
+                <!-- Function Selector -->
+                <div class="flex justify-center gap-2">
+                    <button onclick="setActivationFunc('sigmoid')" id="btnSigmoid"
+                        class="px-4 py-2 rounded-lg border border-gray-200 hover:bg-violet-50 hover:border-violet-300 transition font-bold text-sm text-gray-600">Sigmoid</button>
+                    <button onclick="setActivationFunc('relu')" id="btnRelu"
+                        class="px-4 py-2 rounded-lg border border-gray-200 hover:bg-violet-50 hover:border-violet-300 transition font-bold text-sm text-gray-600">ReLU</button>
+                    <button onclick="setActivationFunc('tanh')" id="btnTanh"
+                        class="px-4 py-2 rounded-lg border border-gray-200 hover:bg-violet-50 hover:border-violet-300 transition font-bold text-sm text-gray-600">Tanh</button>
+                </div>
+
+                <!-- Input Slider -->
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <label class="font-bold text-gray-700 text-sm">Entrée ($x$)</label>
+                        <span id="inputValDisplay"
+                            class="bg-gray-100 text-gray-800 px-2 py-0.5 rounded text-xs font-mono font-bold">0.00</span>
+                    </div>
+                    <input type="range" id="inputSlider" min="-5" max="5" step="0.1" value="0"
+                        class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-violet-600"
+                        oninput="drawActivation()">
+                </div>
+
+                <!-- Result -->
+                <div class="text-center">
+                    <span class="text-gray-500 text-sm">Sortie ($y$) : </span>
+                    <span id="outputValDisplay" class="text-3xl font-bold text-violet-600 font-mono">0.00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div id="descSigmoid" class="func-desc bg-white p-5 rounded-xl shadow-sm border-l-4 border-blue-500 hidden">
+                <h4 class="font-bold text-gray-800 mb-2">Sigmoid ($\sigma$)</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Écrase tout entre 0 et 1. <br>
+                    <strong>Usage :</strong> Probabilités (ex: "Est-ce un chat ? 0.8"). <br>
+                    <strong>Problème :</strong> "Vanishing Gradient" (les dérivées deviennent nulles aux extrêmes, l'IA
+                    n'apprend plus).
+                </p>
+                <div class="bg-gray-50 p-2 rounded text-xs font-mono text-gray-600">
+                    $f(x) = \frac{1}{1+e^{-x}}$
+                </div>
+            </div>
+
+            <div id="descRelu" class="func-desc bg-white p-5 rounded-xl shadow-sm border-l-4 border-green-500 hidden">
+                <h4 class="font-bold text-gray-800 mb-2">ReLU (Rectified Linear Unit)</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Si négatif -> 0. Si positif -> x. <br>
+                    <strong>Usage :</strong> Le standard absolu en Deep Learning aujourd'hui. <br>
+                    <strong>Avantage :</strong> Calcul ultra-rapide et pas de disparition du gradient (pour x > 0).
+                </p>
+                <div class="bg-gray-50 p-2 rounded text-xs font-mono text-gray-600">
+                    $f(x) = max(0, x)$
+                </div>
+            </div>
+
+            <div id="descTanh" class="func-desc bg-white p-5 rounded-xl shadow-sm border-l-4 border-orange-500 hidden">
+                <h4 class="font-bold text-gray-800 mb-2">Tanh (Tangente Hyperbolique)</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Comme Sigmoid, mais entre -1 et 1. <br>
+                    <strong>Usage :</strong> Souvent préféré à Sigmoid car centré sur 0.
+                </p>
+                <div class="bg-gray-50 p-2 rounded text-xs font-mono text-gray-600">
+                    $f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                <h4 class="font-bold text-gray-700 text-xs uppercase mb-2">Composition</h4>
+                <p class="text-xs text-gray-500">
+                    Un réseau profond, c'est juste ça : <br>
+                    $y = \sigma(W_2 \cdot ReLU(W_1 \cdot x))$
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>

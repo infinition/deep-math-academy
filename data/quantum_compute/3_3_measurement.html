@@ -1,0 +1,73 @@
+<div class="space-y-8">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-red-500">
+        <h2 class="text-3xl font-extrabold text-red-700 mb-6">3.3 La Mesure & La Décohérence</h2>
+        <p class="text-lg text-gray-700 leading-relaxed">
+            Le moment de vérité. Quand le monde quantique devient classique.
+        </p>
+    </div>
+
+    <!-- Effondrement -->
+    <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">L'Effondrement</h3>
+            <p class="text-gray-600 mb-4">
+                Si on mesure un état superposé $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$, le système "choisit"
+                aléatoirement un état.
+            </p>
+            <div class="flex justify-center gap-4 my-4">
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-indigo-600">|0⟩</div>
+                    <div class="text-sm text-gray-500">Proba $|\alpha|^2$</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-indigo-600">|1⟩</div>
+                    <div class="text-sm text-gray-500">Proba $|\beta|^2$</div>
+                </div>
+            </div>
+            <p class="text-sm text-red-600 font-bold">
+                Après la mesure, la superposition est détruite ! L'état devient $|0\rangle$ ou $|1\rangle$.
+            </p>
+        </div>
+
+        <div class="bg-gray-900 p-6 rounded-xl shadow-inner flex items-center justify-center">
+            <div id="measurement-viz" class="text-center">
+                <!-- Viz injected by initMeasurement -->
+                <p class="text-gray-400">Simulation de Mesure</p>
+                <button class="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-500">Mesurer !</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bases de Mesure -->
+    <div class="bg-blue-50 p-8 rounded-2xl shadow-md border border-blue-100">
+        <h3 class="text-2xl font-bold text-blue-900 mb-4">Changer de Point de Vue (Bases)</h3>
+        <p class="text-gray-700 mb-4">
+            On mesure généralement dans la base Z (|0⟩, |1⟩). Mais on peut mesurer dans la base X (|+⟩, |-⟩) !
+        </p>
+        <p class="text-sm text-gray-600 italic mb-4">
+            C'est comme regarder un objet de face ou de profil.
+        </p>
+
+        <div class="bg-white p-4 rounded border border-blue-200">
+            <p class="font-bold text-gray-800 mb-2">Principe d'Incertitude (Heisenberg)</p>
+            <p class="text-sm text-gray-600">
+                Si on connaît parfaitement la valeur en Z (ex: état |0⟩), alors la valeur en X est totalement aléatoire
+                (50% |+⟩, 50% |-⟩).
+                On ne peut pas tout savoir en même temps.
+            </p>
+        </div>
+    </div>
+
+    <!-- Décohérence -->
+    <div class="bg-gray-100 p-8 rounded-2xl shadow-md border-t-4 border-gray-500">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">La Décohérence : L'Ennemi #1</h3>
+        <p class="text-gray-700 mb-4">
+            Pourquoi ne voit-on pas de chats de Schrödinger dans la rue ?
+            Parce que l'environnement (air, photons, chaleur) "mesure" constamment le système.
+        </p>
+        <p class="text-gray-700">
+            L'information quantique (la phase relative entre |0⟩ et |1⟩) fuit vers l'environnement. Le système devient
+            classique.
+        </p>
+    </div>
+</div>

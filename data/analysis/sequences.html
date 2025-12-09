@@ -1,0 +1,88 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-pink-600 to-rose-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">Suites & Convergence : L'Entraînement</h2>
+            <p class="text-lg text-pink-100 leading-relaxed">
+                L'entraînement d'une IA n'est rien d'autre qu'une suite mathématique. <br>
+                À chaque étape (époque), on met à jour les poids : $w_0, w_1, w_2, ...$ <br>
+                Le but ? Que cette suite <strong>converge</strong> vers une solution stable (le minimum d'erreur).
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>📉 Visualisation de la Convergence (Loss)</span>
+                </h3>
+                <div class="bg-rose-100 text-rose-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-white min-h-[300px]" id="seqCanvasContainer">
+                <canvas id="sequenceCanvas" width="600" height="350" class="w-full h-full block"></canvas>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 space-y-6">
+
+                <div class="flex gap-4 items-center">
+                    <button onclick="addSequencePoint()"
+                        class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 px-6 rounded-lg shadow transition flex items-center gap-2">
+                        <span>➕</span> Ajouter une Époque
+                    </button>
+                    <button onclick="resetSequence()"
+                        class="border border-gray-300 text-gray-600 font-bold py-2 px-4 rounded-lg hover:bg-gray-50 transition">
+                        Reset
+                    </button>
+                </div>
+
+                <div class="text-sm text-gray-600">
+                    <p>Observez comment la courbe descend vite au début, puis ralentit (plateau).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-teal-500">
+                <h4 class="font-bold text-gray-800 mb-2">Convergence</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    On dit qu'une suite converge si elle se rapproche indéfiniment d'une valeur limite $L$.
+                    En IA, on veut que la Loss converge vers 0 (ou le minimum possible).
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-red-500">
+                <h4 class="font-bold text-gray-800 mb-2">Divergence</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Si le Learning Rate est trop grand, la suite peut exploser vers l'infini. C'est la divergence.
+                    L'entraînement échoue.
+                </p>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                <h4 class="font-bold text-gray-700 text-xs uppercase mb-2">Séries de Taylor</h4>
+                <p class="text-xs text-gray-500">
+                    C'est une façon de transformer n'importe quelle fonction courbe en une somme infinie de polynômes
+                    simples ($x, x^2, x^3...$).
+                    C'est la base de beaucoup d'optimisations.
+                </p>
+                <div class="mt-2 font-mono text-[10px] bg-white p-2 rounded border">
+                    $e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + ...$
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

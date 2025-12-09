@@ -1,0 +1,111 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-indigo-600 to-violet-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">Opérations Matricielles</h2>
+            <p class="text-lg text-indigo-100 leading-relaxed">
+                Une matrice est un tableau de nombres, mais c'est surtout une <strong>fonction</strong>. <br>
+                Multiplier deux matrices ($A \times B$), c'est composer deux fonctions ($f \circ g$).
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>✖️ Visualiseur de Produit Matriciel</span>
+                </h3>
+                <div
+                    class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-gray-50 flex items-center justify-center p-8" id="matrixContainer">
+                <!-- HTML Grid for Matrix Multiplication Visualization -->
+                <div class="flex items-center gap-4 font-mono text-lg">
+                    <!-- Matrix A -->
+                    <div class="grid grid-cols-2 gap-1 bg-blue-100 p-2 rounded border border-blue-300">
+                        <input type="number" id="ma00" value="1" class="w-12 h-12 text-center border rounded"
+                            oninput="updateMatrixProd()">
+                        <input type="number" id="ma01" value="2" class="w-12 h-12 text-center border rounded"
+                            oninput="updateMatrixProd()">
+                        <input type="number" id="ma10" value="3" class="w-12 h-12 text-center border rounded"
+                            oninput="updateMatrixProd()">
+                        <input type="number" id="ma11" value="4" class="w-12 h-12 text-center border rounded"
+                            oninput="updateMatrixProd()">
+                    </div>
+                    <span class="text-2xl text-gray-400">×</span>
+                    <!-- Matrix B -->
+                    <div class="grid grid-cols-2 gap-1 bg-green-100 p-2 rounded border border-green-300">
+                        <input type="number" id="mb00" value="2" class="w-12 h-12 text-center border rounded"
+                            oninput="updateMatrixProd()">
+                        <input type="number" id="mb01" value="0" class="w-12 h-12 text-center border rounded"
+                            oninput="updateMatrixProd()">
+                        <input type="number" id="mb10" value="1" class="w-12 h-12 text-center border rounded"
+                            oninput="updateMatrixProd()">
+                        <input type="number" id="mb11" value="2" class="w-12 h-12 text-center border rounded"
+                            oninput="updateMatrixProd()">
+                    </div>
+                    <span class="text-2xl text-gray-400">=</span>
+                    <!-- Result C -->
+                    <div class="grid grid-cols-2 gap-1 bg-indigo-100 p-2 rounded border border-indigo-300">
+                        <div id="mc00"
+                            class="w-12 h-12 flex items-center justify-center font-bold text-indigo-800 bg-white rounded shadow-sm">
+                        </div>
+                        <div id="mc01"
+                            class="w-12 h-12 flex items-center justify-center font-bold text-indigo-800 bg-white rounded shadow-sm">
+                        </div>
+                        <div id="mc10"
+                            class="w-12 h-12 flex items-center justify-center font-bold text-indigo-800 bg-white rounded shadow-sm">
+                        </div>
+                        <div id="mc11"
+                            class="w-12 h-12 flex items-center justify-center font-bold text-indigo-800 bg-white rounded shadow-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 text-center">
+                <p id="matrixCalcDetail"
+                    class="text-sm text-gray-600 font-mono bg-gray-50 p-3 rounded border border-gray-200">
+                    Survolez une case du résultat pour voir le calcul.
+                </p>
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-blue-500">
+                <h4 class="font-bold text-gray-800 mb-2">Ligne × Colonne</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Pour obtenir la case (i, j) du résultat, on fait le produit scalaire de la <strong>Ligne i</strong>
+                    de A et de la <strong>Colonne j</strong> de B.
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-amber-500">
+                <h4 class="font-bold text-gray-800 mb-2">Attention !</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    $A \times B \neq B \times A$ (en général). <br>
+                    Mettre ses chaussettes puis ses chaussures $\neq$ Mettre ses chaussures puis ses chaussettes.
+                </p>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-500">
+                <strong>Identité ($I$) :</strong> La matrice avec des 1 sur la diagonale. Elle ne change rien ($A \times
+                I = A$).
+            </div>
+
+        </div>
+    </div>
+</div>

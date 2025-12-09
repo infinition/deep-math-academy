@@ -1,0 +1,25 @@
+<div class="space-y-6">
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold text-indigo-700 mb-4">3.2 Portes Quantiques</h2>
+        <p class="text-gray-700">
+            Les portes logiques quantiques manipulent les qubits. Ce sont des opérations unitaires (réversibles).
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div class="bg-blue-50 p-4 rounded border border-blue-200">
+                <h3 class="font-bold text-blue-800">Porte Hadamard (H)</h3>
+                <p class="text-sm">Crée une superposition. Transforme $|0\rangle$ en $|+\rangle$ et $|1\rangle$ en
+                    $|-\rangle$.</p>
+            </div>
+            <div class="bg-red-50 p-4 rounded border border-red-200">
+                <h3 class="font-bold text-red-800">Porte CNOT</h3>
+                <p class="text-sm">Porte à 2 qubits. Inverse le second qubit si le premier est à 1. Essentielle pour
+                    l'intrication.</p>
+            </div>
+        </div>
+
+        <div id="gates-viz" class="mt-6 h-48 bg-gray-100 rounded flex items-center justify-center">
+            <p class="text-gray-500">Visualisation des portes (à venir)</p>
+        </div>
+    </div>
+</div>

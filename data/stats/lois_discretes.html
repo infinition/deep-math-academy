@@ -1,0 +1,72 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-amber-500 to-orange-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">Lois Discrètes : Le Monde des Entiers</h2>
+            <p class="text-lg text-amber-100 leading-relaxed">
+                Quand on compte des événements (clics, pannes, buts), on utilise des lois discrètes. <br>
+                La somme de petits hasards crée de l'ordre (Loi Normale).
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>🎰 La Planche de Galton (Binomiale)</span>
+                </h3>
+                <div
+                    class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-gray-900 min-h-[400px]" id="galtonCanvasContainer">
+                <canvas id="galtonCanvas" width="600" height="400" class="w-full h-full block"></canvas>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 flex justify-between items-center">
+                <div class="flex gap-2">
+                    <button onclick="dropGaltonBall()"
+                        class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded shadow transition">
+                        Lâcher une Balle
+                    </button>
+                    <button onclick="dropGaltonBallBatch()"
+                        class="px-4 py-2 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold rounded border border-indigo-200 transition">
+                        Pluie de Balles (x50)
+                    </button>
+                    <button onclick="resetGalton()"
+                        class="px-4 py-2 text-red-500 hover:bg-red-50 rounded font-bold ml-2">
+                        Reset
+                    </button>
+                </div>
+                <div class="text-xs text-gray-500 max-w-[150px] text-right">
+                    Chaque balle fait des choix gauche/droite (Bernoulli). La somme forme une courbe en cloche.
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div class="grid grid-cols-1 gap-3">
+                ${createFlashcard("Bernoulli (p)", "L'atome. Pile ou Face. 0 ou 1.")}
+                ${createFlashcard("Binomiale (n, p)", "Somme de n Bernoulli.<br>C'est ce que vous voyez à gauche !")}
+                ${createFlashcard("Poisson (λ)", "Événements rares.<br>Ex: Nombre de météores par heure.")}
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-500">
+                <strong>Espérance E(X) :</strong> La moyenne théorique. Pour une Binomiale, c'est $n \times p$.
+            </div>
+
+        </div>
+    </div>
+</div>

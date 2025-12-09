@@ -1,0 +1,79 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-teal-600 to-cyan-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">Espaces Vectoriels & Bases</h2>
+            <p class="text-lg text-teal-100 leading-relaxed">
+                Un espace vectoriel est un terrain de jeu infini où l'on peut additionner des vecteurs et les étirer.
+                <br>
+                Une <strong>Base</strong> est le kit minimum de vecteurs pour atteindre n'importe quel point de cet
+                espace.
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>🌐 La Base (Le Système de Coordonnées)</span>
+                </h3>
+                <div class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-gray-900 min-h-[350px]" id="spacesCanvasContainer">
+                <canvas id="spacesCanvas" width="600" height="350" class="w-full h-full block"></canvas>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 space-y-4">
+                <p class="text-sm text-gray-600">
+                    Changez les vecteurs de base $\vec{i}$ et $\vec{j}$. <br>
+                    Si ils deviennent colinéaires (alignés), la grille s'écrase : on perd une dimension !
+                </p>
+                <div class="flex justify-center gap-4">
+                    <button onclick="setBasis('standard')"
+                        class="px-4 py-2 border rounded hover:bg-gray-50 text-sm font-bold">Base Standard</button>
+                    <button onclick="setBasis('rotated')"
+                        class="px-4 py-2 border rounded hover:bg-gray-50 text-sm font-bold">Base Tournée</button>
+                    <button onclick="setBasis('collapsed')"
+                        class="px-4 py-2 border border-red-200 bg-red-50 text-red-700 hover:bg-red-100 text-sm font-bold">Base
+                        Écrasée (Dépendant)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-teal-500">
+                <h4 class="font-bold text-gray-800 mb-2">Indépendance Linéaire</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Une famille est <strong>libre</strong> si aucun vecteur n'est redondant. <br>
+                    Si $\vec{u} = 2\vec{v}$, alors $\vec{u}$ n'apporte rien de nouveau. On peut le jeter.
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-indigo-500">
+                <h4 class="font-bold text-gray-800 mb-2">Dimension</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    C'est le nombre de vecteurs dans une base. <br>
+                    Une ligne = 1D. Un plan = 2D. L'espace = 3D.
+                </p>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-500">
+                <strong>Le Rang :</strong> Le nombre de dimensions réelles que couvre une matrice.
+            </div>
+
+        </div>
+    </div>
+</div>

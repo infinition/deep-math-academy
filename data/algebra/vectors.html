@@ -1,0 +1,86 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-cyan-500 to-blue-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">Vecteurs : Les Atomes de l'IA</h2>
+            <p class="text-lg text-cyan-100 leading-relaxed">
+                Un vecteur n'est pas juste une flèche. C'est une liste de nombres qui représente n'importe quoi : <br>
+                une position, une couleur, le sens d'un mot ("Roi" vs "Reine"), ou les paramètres d'un modèle.
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>🏹 Laboratoire Vectoriel</span>
+                </h3>
+                <div class="bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-white min-h-[350px]" id="vectorCanvasContainer">
+                <canvas id="vectorCanvas" width="600" height="350" class="w-full h-full block"></canvas>
+                <div
+                    class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-2 rounded shadow text-xs text-gray-500 pointer-events-none">
+                    Déplacez les vecteurs <span class="font-bold text-blue-500">Bleu</span> et <span
+                        class="font-bold text-red-500">Rouge</span>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 grid grid-cols-2 gap-6">
+
+                <!-- Addition -->
+                <div class="bg-gray-50 p-3 rounded border border-gray-200">
+                    <h4 class="font-bold text-gray-700 text-sm mb-2">Addition ($\vec{u} + \vec{v}$)</h4>
+                    <p class="text-xs text-gray-500 mb-2">Mettre les flèches bout à bout.</p>
+                    <div class="text-xl font-bold text-purple-600 font-mono" id="vecSumVal">(0, 0)</div>
+                </div>
+
+                <!-- Dot Product -->
+                <div class="bg-gray-50 p-3 rounded border border-gray-200">
+                    <h4 class="font-bold text-gray-700 text-sm mb-2">Produit Scalaire ($\vec{u} \cdot \vec{v}$)</h4>
+                    <p class="text-xs text-gray-500 mb-2">Projection. Mesure la similarité (0 = Perpendiculaire).</p>
+                    <div class="text-xl font-bold text-green-600 font-mono" id="vecDotVal">0.00</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-blue-500">
+                <h4 class="font-bold text-gray-800 mb-2">Addition</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    C'est comme faire un trajet. <br>
+                    "Avancer de $\vec{u}$ puis avancer de $\vec{v}$" revient à faire le trajet direct $\vec{u}+\vec{v}$.
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-green-500">
+                <h4 class="font-bold text-gray-800 mb-2">Produit Scalaire (Dot Product)</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Fondamental en IA ! <br>
+                    $u \cdot v = ||u|| ||v|| \cos(\theta)$ <br>
+                    Si le produit est grand, les vecteurs pointent dans la même direction (ils sont "d'accord").
+                </p>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-500">
+                <strong>Notation :</strong> Un vecteur colonne $\begin{pmatrix} x \\ y \end{pmatrix}$ est standard en
+                algèbre.
+            </div>
+
+        </div>
+    </div>
+</div>

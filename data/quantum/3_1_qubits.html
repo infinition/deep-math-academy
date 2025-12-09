@@ -1,0 +1,63 @@
+<div class="space-y-6">
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold text-indigo-700 mb-4">3.1 Qubits & Superposition</h2>
+        <p class="text-gray-700 mb-4">
+            Le <strong>Qubit</strong> est l'unité fondamentale de l'information quantique. Contrairement au bit
+            classique qui est soit 0 soit 1, le qubit peut être dans une <strong>superposition</strong> des deux.
+        </p>
+
+        <div class="flex flex-col md:flex-row gap-8 items-center justify-center my-8">
+            <div class="text-center">
+                <div
+                    class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center text-4xl font-mono border-4 border-gray-400">
+                    0
+                </div>
+                <p class="mt-2 font-bold text-gray-600">Bit Classique</p>
+                <p class="text-xs text-gray-500">0 OU 1</p>
+            </div>
+            <div class="text-4xl text-gray-300">vs</div>
+            <div class="text-center">
+                <div class="relative w-32 h-32">
+                    <!-- Placeholder for Bloch Sphere or Qubit Viz -->
+                    <div
+                        class="absolute inset-0 bg-indigo-100 rounded-full border-4 border-indigo-500 opacity-50 animate-pulse">
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-indigo-800">
+                        $\alpha|0\rangle + \beta|1\rangle$
+                    </div>
+                </div>
+                <p class="mt-2 font-bold text-indigo-600">Qubit Quantique</p>
+                <p class="text-xs text-gray-500">Superposition infinie</p>
+            </div>
+        </div>
+
+        <div class="bg-indigo-50 p-4 rounded border-l-4 border-indigo-500">
+            <h3 class="font-bold text-indigo-800">La Sphère de Bloch</h3>
+            <p class="text-gray-700 mb-2">
+                On peut visualiser l'état d'un qubit pur comme un point sur la surface d'une sphère.
+            <ul>
+                <li>Pôle Nord : $|0\rangle$</li>
+                <li>Pôle Sud : $|1\rangle$</li>
+                <li>Équateur : Superpositions équilibrées (ex: $|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}}$)
+                </li>
+            </ul>
+            </p>
+            <!-- Interactive Bloch Sphere Placeholder -->
+            <div id="bloch-sphere-container"
+                class="h-64 bg-white border border-gray-200 rounded mt-4 flex items-center justify-center">
+                <p class="text-gray-400 italic">Visualisation interactive de la Sphère de Bloch (à venir)</p>
+            </div>
+        </div>
+
+        <div class="mt-6">
+            <h3 class="font-bold text-lg mb-2">Intrication (Entanglement)</h3>
+            <p class="text-gray-700">
+                Lorsque deux qubits interagissent, ils peuvent devenir <strong>intriqués</strong>. Leur état ne peut
+                plus être décrit séparément.
+                $$|\Phi^+\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}}$$
+                Si on mesure le premier qubit et qu'on trouve 0, le second qubit s'effondre <em>instantanément</em> sur
+                0, même s'il est à l'autre bout de l'univers !
+            </p>
+        </div>
+    </div>
+</div>

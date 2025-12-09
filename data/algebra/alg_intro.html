@@ -1,0 +1,80 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-blue-600 to-indigo-700 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">L'Algèbre Linéaire : Le Code Source de l'IA</h2>
+            <p class="text-lg text-blue-100 leading-relaxed">
+                C'est le système d'exploitation de l'Univers des Données. <br>
+                Que ce soit pour tourner un objet 3D, compresser un fichier MP3, ou entraîner ChatGPT, tout repose sur
+                les opérations matricielles.
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>🧠 Le Neurone Artificiel (Matriciel)</span>
+                </h3>
+                <div class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-gray-900 min-h-[300px]" id="introAlgCanvasContainer">
+                <canvas id="introAlgCanvas" width="600" height="350" class="w-full h-full block"></canvas>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 space-y-4">
+                <p class="text-sm text-gray-600">
+                    Modifiez les <strong>Entrées ($x$)</strong> et les <strong>Poids ($W$)</strong> pour voir comment
+                    l'information se propage.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-bold text-gray-500 uppercase">Entrée 1 ($x_1$)</label>
+                        <input type="range" id="inpX1" min="0" max="10" step="0.1" value="2"
+                            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                            oninput="drawIntroAlg()">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-500 uppercase">Poids 1 ($w_1$)</label>
+                        <input type="range" id="inpW1" min="-2" max="2" step="0.1" value="0.5"
+                            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                            oninput="drawIntroAlg()">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-indigo-500">
+                <h4 class="font-bold text-gray-800 mb-2">En Data Science</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Chaque ligne d'un tableau Excel est un vecteur. Le tableau entier est une matrice.
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-purple-500">
+                <h4 class="font-bold text-gray-800 mb-2">En Deep Learning</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Les "neurones" multiplient des entrées (vecteurs) par des poids (matrices). C'est le calcul :
+                </p>
+                <div class="bg-gray-50 p-2 rounded text-center font-mono text-purple-700 font-bold">
+                    $Output = W \cdot x + b$
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

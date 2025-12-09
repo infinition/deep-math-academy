@@ -1,0 +1,100 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-amber-500 to-orange-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">L'Intégrale : L'Art d'Accumuler</h2>
+            <p class="text-lg text-amber-100 leading-relaxed">
+                Si la dérivée est la vitesse instantanée, l'intégrale est la distance totale parcourue. <br>
+                C'est la somme d'une infinité de tranches infiniment fines. <br>
+                En IA, on s'en sert pour calculer des probabilités (densité) ou l'aire sous la courbe ROC.
+            </p>
+            <div
+                class="mt-4 inline-block bg-white/20 backdrop-blur px-4 py-2 rounded-lg border border-white/30 font-mono text-sm">
+                $\int_{a}^{b} f(x) dx = \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i) \Delta x$
+            </div>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>📊 Visualisation des Sommes de Riemann</span>
+                </h3>
+                <div
+                    class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-white min-h-[300px]" id="integralCanvasContainer">
+                <canvas id="integralCanvas" width="600" height="350" class="w-full h-full block"></canvas>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 space-y-6">
+
+                <!-- Rectangles Slider -->
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <label class="font-bold text-gray-700 text-sm">Nombre de Rectangles ($N$)</label>
+                        <span id="nbRectDisplay"
+                            class="bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded text-xs font-mono font-bold">10</span>
+                    </div>
+                    <input type="range" id="rectSlider" min="2" max="100" step="1" value="10"
+                        class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-600"
+                        oninput="drawIntegral()">
+                    <p class="text-xs text-gray-400 mt-2">Plus $N$ est grand, plus l'approximation est précise.</p>
+                </div>
+
+                <!-- Metrics -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-3 rounded border border-gray-200 text-center">
+                        <div class="text-xs text-gray-500 uppercase font-bold">Aire Estimée (Rectangles)</div>
+                        <div class="text-2xl font-bold text-amber-600 font-mono" id="areaEst">0.00</div>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded border border-gray-200 text-center">
+                        <div class="text-xs text-gray-500 uppercase font-bold">Aire Exacte (Intégrale)</div>
+                        <div class="text-2xl font-bold text-green-600 font-mono" id="areaExact">0.33</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-blue-500">
+                <h4 class="font-bold text-gray-800 mb-2">L'Approximation</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    On découpe l'aire complexe en rectangles simples (Largeur $\times$ Hauteur).
+                </p>
+                <ul class="text-xs space-y-2 text-gray-500">
+                    <li class="flex gap-2">
+                        <span>🟩</span> <span><strong>Largeur ($dx$) :</strong> Devient minuscule quand $N$
+                            augmente.</span>
+                    </li>
+                    <li class="flex gap-2">
+                        <span>🟦</span> <span><strong>Hauteur ($f(x)$) :</strong> La valeur de la fonction.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-purple-500">
+                <h4 class="font-bold text-gray-800 mb-2">Application : Probabilités</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    La "courbe en cloche" (Loi Normale) ne donne pas une probabilité directe.
+                    Pour savoir la probabilité d'avoir un QI entre 100 et 110, on doit <strong>intégrer</strong> l'aire
+                    sous la courbe entre 100 et 110.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>

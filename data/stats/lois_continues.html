@@ -1,0 +1,85 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-blue-700 to-indigo-800 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">Lois Continues & Loi Normale</h2>
+            <p class="text-lg text-blue-100 leading-relaxed">
+                La nature déteste le vide... et adore la moyenne. <br>
+                Taille, QI, Erreurs de mesure : tout finit par suivre une <strong>Courbe de Gauss</strong>.
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>🔔 La Courbe en Cloche (Gaussienne)</span>
+                </h3>
+                <div
+                    class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-white min-h-[300px] p-4">
+                <canvas id="normalChart"></canvas>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 grid grid-cols-2 gap-8">
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <label class="text-xs font-bold uppercase text-gray-500">Moyenne ($\mu$)</label>
+                        <span id="muVal" class="text-xs font-bold text-indigo-600">0</span>
+                    </div>
+                    <input type="range" id="muRange" min="-5" max="5" step="0.5" value="0"
+                        class="w-full accent-indigo-600 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                        oninput="updateNormalChart()">
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <label class="text-xs font-bold uppercase text-gray-500">Écart-Type ($\sigma$)</label>
+                        <span id="sigmaVal" class="text-xs font-bold text-purple-600">1</span>
+                    </div>
+                    <input type="range" id="sigmaRange" min="0.5" max="3" step="0.1" value="1"
+                        class="w-full accent-purple-600 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                        oninput="updateNormalChart()">
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-green-500">
+                <h4 class="font-bold text-gray-800 mb-2">Théorème Central Limite (TCL)</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Si vous additionnez n'importe quoi (même des dés pipés), la somme finira toujours par ressembler à
+                    une Loi Normale. <br>
+                    C'est la loi universelle des grands nombres.
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-indigo-500">
+                <h4 class="font-bold text-gray-800 mb-2">Règle des 68-95-99.7</h4>
+                <ul class="text-xs text-gray-600 space-y-1 mt-2">
+                    <li><strong>68%</strong> des données sont à $\pm 1\sigma$.</li>
+                    <li><strong>95%</strong> des données sont à $\pm 2\sigma$.</li>
+                    <li><strong>99.7%</strong> des données sont à $\pm 3\sigma$.</li>
+                </ul>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-500">
+                <strong>Autres Lois :</strong> Exponentielle (Temps d'attente), Uniforme (Random), Beta (Probabilités).
+            </div>
+
+        </div>
+    </div>
+</div>

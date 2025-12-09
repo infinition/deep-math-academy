@@ -1,0 +1,85 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-pink-600 to-fuchsia-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">Eigenvalues & Eigenvectors : Les Piliers</h2>
+            <p class="text-lg text-pink-100 leading-relaxed">
+                Quand une matrice transforme l'espace, tout bouge... sauf certains vecteurs spéciaux. <br>
+                Les <strong>Vecteurs Propres</strong> ($\vec{v}$) gardent leur direction. <br>
+                Les <strong>Valeurs Propres</strong> ($\lambda$) disent de combien ils sont étirés.
+            </p>
+            <div
+                class="mt-4 inline-block bg-white/20 backdrop-blur px-4 py-2 rounded-lg border border-white/30 font-mono text-sm">
+                $A \vec{v} = \lambda \vec{v}$
+            </div>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>🌀 Visualiseur de Vecteurs Propres</span>
+                </h3>
+                <div class="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-gray-50 min-h-[350px]" id="eigenCanvasContainer">
+                <canvas id="eigenCanvas" width="600" height="350" class="w-full h-full block"></canvas>
+                <div
+                    class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-2 rounded shadow text-xs text-gray-500">
+                    <span class="inline-block w-3 h-3 rounded-full bg-yellow-400 mr-1"></span> Vecteurs Propres
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 space-y-4">
+                <p class="text-sm text-gray-600">
+                    Appliquez une transformation (Matrice A) et observez quels vecteurs ne tournent pas.
+                </p>
+                <div class="flex justify-center gap-4">
+                    <button onclick="setEigenMatrix(1)"
+                        class="px-4 py-2 border rounded hover:bg-gray-50 text-sm font-bold">Étirement X</button>
+                    <button onclick="setEigenMatrix(2)"
+                        class="px-4 py-2 border rounded hover:bg-gray-50 text-sm font-bold">Cisaillement</button>
+                    <button onclick="setEigenMatrix(3)"
+                        class="px-4 py-2 border rounded hover:bg-gray-50 text-sm font-bold">Rotation</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-blue-500">
+                <h4 class="font-bold text-gray-800 mb-2">Pourquoi c'est magique ?</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Une matrice compliquée devient une simple multiplication scalaire sur ses vecteurs propres. <br>
+                    C'est la base de la compression et de l'analyse de données.
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-green-500">
+                <h4 class="font-bold text-gray-800 mb-2">Google PageRank</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Le web est une matrice géante de liens. <br>
+                    Le vecteur propre principal de cette matrice donne le "score d'importance" de chaque page web.
+                </p>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-500">
+                <strong>PCA (Analyse en Composantes Principales) :</strong> On garde uniquement les vecteurs propres
+                avec les plus grandes valeurs propres ($\lambda$) pour résumer les données.
+            </div>
+
+        </div>
+    </div>
+</div>

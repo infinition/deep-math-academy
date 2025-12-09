@@ -1,0 +1,145 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header Section -->
+    <div
+        class="bg-gradient-to-r from-blue-600 to-cyan-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">La Géométrie de l'Intelligence</h2>
+            <p class="text-lg text-blue-100 leading-relaxed">
+                En IA, "proche" ne veut pas toujours dire "à côté". <br>
+                Comment savoir si deux images se ressemblent ? Si deux mots ont le même sens ? <br>
+                Tout dépend de la <strong>règle</strong> que l'on utilise pour mesurer la distance.
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Playground -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Column -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>🎯 Laboratoire de Distances</span>
+                </h3>
+                <div class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-gray-50 cursor-crosshair group" id="distCanvasContainer">
+                <canvas id="distancesCanvas" width="600" height="400" class="w-full h-full block"></canvas>
+                <div
+                    class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-2 rounded shadow text-xs text-gray-500 pointer-events-none">
+                    Déplace les points <span class="font-bold text-blue-600">A</span> et <span
+                        class="font-bold text-red-600">B</span>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-4 bg-white border-t border-gray-100 flex flex-wrap gap-3 justify-center">
+                <label
+                    class="flex items-center gap-2 text-sm cursor-pointer bg-gray-100 px-3 py-1.5 rounded-lg hover:bg-gray-200 transition">
+                    <input type="checkbox" id="showL2" checked class="accent-blue-600" onchange="drawDistances()">
+                    <span class="font-bold text-blue-700">Euclidienne (L2)</span>
+                </label>
+                <label
+                    class="flex items-center gap-2 text-sm cursor-pointer bg-gray-100 px-3 py-1.5 rounded-lg hover:bg-gray-200 transition">
+                    <input type="checkbox" id="showL1" checked class="accent-green-600" onchange="drawDistances()">
+                    <span class="font-bold text-green-700">Manhattan (L1)</span>
+                </label>
+                <label
+                    class="flex items-center gap-2 text-sm cursor-pointer bg-gray-100 px-3 py-1.5 rounded-lg hover:bg-gray-200 transition">
+                    <input type="checkbox" id="showCos" checked class="accent-purple-600" onchange="drawDistances()">
+                    <span class="font-bold text-purple-700">Cosinus (Angle)</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Metrics Column -->
+        <div class="space-y-4">
+
+            <!-- Euclidean Card -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-blue-500 hover:shadow-md transition group">
+                <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-bold text-gray-800">Distance Euclidienne</h4>
+                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-mono">L2 Norm</span>
+                </div>
+                <div class="text-3xl font-bold text-blue-600 font-mono mb-1" id="valL2">0.00</div>
+                <p class="text-xs text-gray-500 mb-3">Le chemin le plus court (vol d'oiseau).</p>
+                <div class="text-xs bg-gray-50 p-2 rounded font-mono text-gray-600">
+                    $\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$
+                </div>
+            </div>
+
+            <!-- Manhattan Card -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-green-500 hover:shadow-md transition group">
+                <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-bold text-gray-800">Distance Manhattan</h4>
+                    <span class="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded font-mono">L1 Norm</span>
+                </div>
+                <div class="text-3xl font-bold text-green-600 font-mono mb-1" id="valL1">0.00</div>
+                <p class="text-xs text-gray-500 mb-3">Comme un taxi dans New York (grille).</p>
+                <div class="text-xs bg-gray-50 p-2 rounded font-mono text-gray-600">
+                    $|x_2-x_1| + |y_2-y_1|$
+                </div>
+            </div>
+
+            <!-- Cosine Card -->
+            <div
+                class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-purple-500 hover:shadow-md transition group">
+                <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-bold text-gray-800">Similarité Cosinus</h4>
+                    <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-mono">NLP</span>
+                </div>
+                <div class="text-3xl font-bold text-purple-600 font-mono mb-1" id="valCos">0.00</div>
+                <p class="text-xs text-gray-500 mb-3">L'angle entre les vecteurs (1 = identique, 0 = 90°).</p>
+                <div class="text-xs bg-gray-50 p-2 rounded font-mono text-gray-600">
+                    $\cos(\theta) = \frac{A \cdot B}{||A|| ||B||}$
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Explanation Section -->
+    <div class="grid md:grid-cols-2 gap-8 mt-8">
+        <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
+            <h3 class="font-bold text-indigo-900 mb-3 flex items-center gap-2">
+                <span>🧠 Pourquoi c'est important ?</span>
+            </h3>
+            <ul class="space-y-3 text-sm text-indigo-800">
+                <li class="flex gap-2">
+                    <span class="text-xl">📸</span>
+                    <span><strong>Reconnaissance d'image :</strong> Deux visages sont "proches" si la distance
+                        Euclidienne entre leurs pixels est faible.</span>
+                </li>
+                <li class="flex gap-2">
+                    <span class="text-xl">💬</span>
+                    <span><strong>ChatGPT / NLP :</strong> Les mots sont transformés en vecteurs. "Roi" et "Reine" ont
+                        une <strong>Similarité Cosinus</strong> très élevée (proche de 1).</span>
+                </li>
+                <li class="flex gap-2">
+                    <span class="text-xl">🏠</span>
+                    <span><strong>Immobilier :</strong> Pour estimer un prix, on cherche les maisons "voisines"
+                        (K-Nearest Neighbors) en utilisant souvent Manhattan ou Euclidienne.</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="bg-amber-50 p-6 rounded-xl border border-amber-100">
+            <h3 class="font-bold text-amber-900 mb-3 flex items-center gap-2">
+                <span>⚠️ Le Piège de la Dimension</span>
+            </h3>
+            <p class="text-sm text-amber-800 mb-4">
+                Plus on ajoute de dimensions (3D, 4D, 1000D...), plus l'espace devient vide.
+                La distance Euclidienne perd de son sens car tous les points finissent par être à la même distance les
+                uns des autres.
+            </p>
+            <div class="bg-white/60 p-3 rounded text-center">
+                <span class="font-bold text-amber-700">C'est la "Malédiction de la Dimensionnalité"</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="space-y-8 fade-in max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div
+        class="bg-gradient-to-r from-pink-500 to-rose-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">Corrélation & Causalité</h2>
+            <p class="text-lg text-pink-100 leading-relaxed">
+                Deux variables bougent-elles ensemble ? <br>
+                Le coefficient de corrélation ($r$) mesure la force du lien linéaire. <br>
+                Mais attention : <strong>Corrélation $\neq$ Causalité</strong> !
+            </p>
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Canvas Area -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>📈 Nuage de Points (Scatter Plot)</span>
+                </h3>
+                <div class="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Interactif
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-white min-h-[350px]" id="corrCanvasContainer">
+                <canvas id="corrCanvas" width="600" height="350" class="w-full h-full block cursor-crosshair"></canvas>
+                <div
+                    class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-2 rounded shadow text-xs text-gray-500 pointer-events-none">
+                    Cliquez pour ajouter des points.
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="p-6 bg-white border-t border-gray-100 flex justify-between items-center">
+                <div class="flex gap-2">
+                    <button onclick="setCorrelationData(1)"
+                        class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded text-xs font-bold">Positive
+                        (r≈1)</button>
+                    <button onclick="setCorrelationData(0)"
+                        class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded text-xs font-bold">Nulle (r≈0)</button>
+                    <button onclick="setCorrelationData(-1)"
+                        class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded text-xs font-bold">Négative
+                        (r≈-1)</button>
+                    <button onclick="resetCorrelation()"
+                        class="px-3 py-1 text-red-500 hover:bg-red-50 rounded text-xs font-bold ml-2">Reset</button>
+                </div>
+
+                <div class="text-right">
+                    <div class="text-xs uppercase font-bold text-gray-500">Pearson ($r$)</div>
+                    <div id="corrValDisplay" class="text-4xl font-bold text-indigo-600 font-mono">0.00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanations Column -->
+        <div class="space-y-4">
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-indigo-500">
+                <h4 class="font-bold text-gray-800 mb-2">Interprétation de $r$</h4>
+                <ul class="text-sm text-gray-600 space-y-2">
+                    <li><span class="font-bold text-green-600">+1</span> : Alignement parfait (Montée).</li>
+                    <li><span class="font-bold text-red-600">-1</span> : Alignement parfait (Descente).</li>
+                    <li><span class="font-bold text-gray-400">0</span> : Aucun lien linéaire (Nuage).</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-red-500">
+                <h4 class="font-bold text-gray-800 mb-2">Le Piège</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Il y a une forte corrélation entre "Vente de glaces" et "Attaques de requins". <br>
+                    <strong>Pourquoi ?</strong> À cause d'une variable cachée : l'Été (Chaleur). <br>
+                    Manger une glace ne cause pas d'attaque de requin !
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
