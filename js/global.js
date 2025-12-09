@@ -130,20 +130,85 @@ async function init() {
 }
 
 function renderCourseSelector() {
-    const selector = document.getElementById('courseSelector');
-    if (!selector) return;
+    const wrapper = document.getElementById('courseSelectorWrapper');
+    if (!wrapper) return;
 
-    selector.innerHTML = '';
+    // Get current course info
+    const currentCourseData = coursesData[currentCourse] || { title: "Sélectionner", icon: "📚" };
+    // Extract icon if title has one, or use default
+    // Our titles in JSON often have icons, e.g. "📉 Analyse & Calcul"
+    // Let's just use the title as is for the button text
 
-    for (const courseId in coursesData) {
-        const courseTitle = coursesData[courseId].title;
-        const option = document.createElement('option');
-        option.value = courseId;
-        option.textContent = courseTitle;
-        selector.appendChild(option);
-    }
-    selector.value = currentCourse;
+    let html = `
+        <button onclick="toggleCourseMenu()" 
+            class="w-full mt-2 bg-indigo-700/50 hover:bg-indigo-700 border border-indigo-600 rounded-lg text-white p-3 flex items-center justify-between transition-all duration-300 group">
+            <span class="font-bold text-sm truncate mr-2">${currentCourseData.title}</span>
+            <svg id="course-chevron" class="w-4 h-4 text-indigo-300 transition-transform duration-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
+
+        <div id="course-menu" 
+            class="hidden absolute top-full left-0 w-full mt-2 bg-indigo-800/95 backdrop-blur-md border border-indigo-600 rounded-xl shadow-2xl overflow-hidden transform origin-top transition-all duration-200 z-50">
+            <div class="py-1 max-h-64 overflow-y-auto custom-scrollbar">
+    `;
+
+    // Add options
+    // Order: bases, analysis, algebra, stats, quantum
+    const order = ['bases', 'analysis', 'algebra', 'stats', 'quantum'];
+
+    order.forEach(courseId => {
+        if (coursesData[courseId]) {
+            const course = coursesData[courseId];
+            const isSelected = courseId === currentCourse;
+            const bgClass = isSelected ? 'bg-indigo-600' : 'hover:bg-indigo-700/50';
+
+            html += `
+                <button onclick="switchCourse('${courseId}')" 
+                    class="w-full text-left px-4 py-3 text-sm font-medium text-white transition-colors flex items-center gap-3 ${bgClass}">
+                    <span>${course.title}</span>
+                    ${isSelected ? '<span class="ml-auto text-indigo-300">✓</span>' : ''}
+                </button>
+            `;
+        }
+    });
+
+    html += `
+            </div>
+        </div>
+    `;
+
+    wrapper.innerHTML = html;
 }
+
+function toggleCourseMenu() {
+    const menu = document.getElementById('course-menu');
+    const chevron = document.getElementById('course-chevron');
+
+    if (menu) {
+        menu.classList.toggle('hidden');
+        if (!menu.classList.contains('hidden')) {
+            // Open animation
+            menu.classList.add('animate-fade-in-down');
+        }
+    }
+
+    if (chevron) {
+        chevron.classList.toggle('rotate-180');
+    }
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    const wrapper = document.getElementById('courseSelectorWrapper');
+    const menu = document.getElementById('course-menu');
+    const chevron = document.getElementById('course-chevron');
+
+    if (wrapper && !wrapper.contains(e.target) && menu && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+    }
+});
 
 function switchCourse(courseId) {
     if (!coursesData[courseId]) return;
