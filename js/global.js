@@ -337,3 +337,24 @@ window.addEventListener('load', () => {
         }
     }, { passive: false });
 });
+
+// ==========================================
+// QUIZ LOGIC
+// ==========================================
+function startQuizSession(quizId) {
+    console.log(`Starting quiz session for: ${quizId}`);
+
+    // Check if we have a toast notification system
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-msg');
+
+    if (toast && toastMsg) {
+        toastMsg.innerText = "Quiz functionality coming soon! 🚀";
+        toast.classList.remove('translate-y-32');
+        setTimeout(() => {
+            toast.classList.add('translate-y-32');
+        }, 3000);
+    } else {
+        alert("Quiz functionality coming soon! 🚀");
+    }
+}
