@@ -1,102 +1,60 @@
-<div class="space-y-8">
-    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-blue-600">
-        <h2 class="text-3xl font-extrabold text-blue-800 mb-6">3.2 Les Portes Quantiques (Gates)</h2>
-        <p class="text-lg text-gray-700 leading-relaxed">
-            Les instructions de base de l'ordinateur quantique. Ce sont des opérations unitaires qui font tourner les
-            qubits.
-        </p>
+onclick="applyGate('S')">
+<div class="flex justify-between items-center mb-2">
+    <span class="font-bold text-green-700">Phase (S)</span>
+    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Z/2</span>
+</div>
+<div class="font-mono text-xs bg-gray-50 p-2 rounded text-center">
+    $\begin{pmatrix} 1 & 0 \\ 0 & i \end{pmatrix}$
+</div>
+<p class="text-xs text-gray-500 mt-2">Rotation Z de 90°</p>
+</div>
+
+<!-- T Gate -->
+<div class="border border-gray-200 p-4 rounded-lg hover:bg-yellow-50 transition cursor-pointer"
+    onclick="applyGate('T')">
+    <div class="flex justify-between items-center mb-2">
+        <span class="font-bold text-yellow-700">T Gate</span>
+        <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Magic</span>
     </div>
-
-    <!-- Single Qubit Gates -->
-    <div class="bg-white p-6 rounded-xl shadow-md">
-        <h3 class="text-xl font-bold text-gray-800 mb-6">Portes à 1 Qubit</h3>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <!-- Hadamard -->
-            <div class="border border-gray-200 p-4 rounded-lg hover:bg-blue-50 transition cursor-pointer"
-                onclick="applyGate('H')">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="font-bold text-blue-700">Hadamard (H)</span>
-                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Superposition</span>
-                </div>
-                <div class="font-mono text-xs bg-gray-50 p-2 rounded text-center">
-                    $\frac{1}{\sqrt{2}}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$
-                </div>
-                <p class="text-xs text-gray-500 mt-2">Transforme |0⟩ en |+⟩</p>
-            </div>
-
-            <!-- Pauli X -->
-            <div class="border border-gray-200 p-4 rounded-lg hover:bg-red-50 transition cursor-pointer"
-                onclick="applyGate('X')">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="font-bold text-red-700">Pauli-X</span>
-                    <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">NOT</span>
-                </div>
-                <div class="font-mono text-xs bg-gray-50 p-2 rounded text-center">
-                    $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$
-                </div>
-                <p class="text-xs text-gray-500 mt-2">Inverse 0 et 1</p>
-            </div>
-
-            <!-- Phase S -->
-            <div class="border border-gray-200 p-4 rounded-lg hover:bg-green-50 transition cursor-pointer"
-                onclick="applyGate('S')">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="font-bold text-green-700">Phase (S)</span>
-                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Z/2</span>
-                </div>
-                <div class="font-mono text-xs bg-gray-50 p-2 rounded text-center">
-                    $\begin{pmatrix} 1 & 0 \\ 0 & i \end{pmatrix}$
-                </div>
-                <p class="text-xs text-gray-500 mt-2">Rotation Z de 90°</p>
-            </div>
-
-            <!-- T Gate -->
-            <div class="border border-gray-200 p-4 rounded-lg hover:bg-yellow-50 transition cursor-pointer"
-                onclick="applyGate('T')">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="font-bold text-yellow-700">T Gate</span>
-                    <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Magic</span>
-                </div>
-                <div class="font-mono text-xs bg-gray-50 p-2 rounded text-center">
-                    $\begin{pmatrix} 1 & 0 \\ 0 & e^{i\pi/4} \end{pmatrix}$
-                </div>
-                <p class="text-xs text-gray-500 mt-2">Rotation Z de 45°</p>
-            </div>
-        </div>
-
-        <div id="gate-viz-container" class="mt-6 h-48 bg-gray-900 rounded flex items-center justify-center">
-            <!-- Viz injected by initQuantumGates -->
-            <p class="text-gray-400">Visualisation Action Porte</p>
-        </div>
+    <div class="font-mono text-xs bg-gray-50 p-2 rounded text-center">
+        $\begin{pmatrix} 1 & 0 \\ 0 & e^{i\pi/4} \end{pmatrix}$
     </div>
+    <p class="text-xs text-gray-500 mt-2">Rotation Z de 45°</p>
+</div>
+</div>
 
-    <!-- Multi Qubit Gates -->
-    <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-md border border-gray-200">
-        <h3 class="text-2xl font-bold text-gray-800 mb-6">Portes Multi-Qubits (Intrication)</h3>
+<div id="gate-viz-container" class="mt-6 h-48 bg-gray-900 rounded flex items-center justify-center">
+    <!-- Viz injected by initQuantumGates -->
+    <p class="text-gray-400">Visualisation Action Porte</p>
+</div>
+</div>
 
-        <div class="grid md:grid-cols-2 gap-8">
+<!-- Multi Qubit Gates -->
+<div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-md border border-gray-200">
+    <h3 class="text-2xl font-bold text-gray-800 mb-6">Portes Multi-Qubits (Intrication)</h3>
+
+    <div class="grid md:grid-cols-2 gap-8">
+        <div>
+            <h4 class="font-bold text-indigo-600 mb-2">CNOT (Controlled-NOT)</h4>
+            <p class="text-gray-700 text-sm mb-4">
+                Inverse le qubit cible SI le qubit de contrôle est à |1⟩.
+            </p>
+            <div class="bg-gray-800 p-4 rounded text-white font-mono text-sm overflow-x-auto">
+                CNOT |00⟩ = |00⟩<br>
+                CNOT |01⟩ = |01⟩<br>
+                CNOT |10⟩ = |11⟩ <-- Flip !<br>
+                    CNOT |11⟩ = |10⟩ <-- Flip ! </div>
+            </div>
+
             <div>
-                <h4 class="font-bold text-indigo-600 mb-2">CNOT (Controlled-NOT)</h4>
+                <h4 class="font-bold text-indigo-600 mb-2">Toffoli (CCNOT)</h4>
                 <p class="text-gray-700 text-sm mb-4">
-                    Inverse le qubit cible SI le qubit de contrôle est à |1⟩.
+                    Inverse la cible SI les deux contrôles sont à |1⟩.
                 </p>
-                <div class="bg-gray-800 p-4 rounded text-white font-mono text-sm overflow-x-auto">
-                    CNOT |00⟩ = |00⟩<br>
-                    CNOT |01⟩ = |01⟩<br>
-                    CNOT |10⟩ = |11⟩ <-- Flip !<br>
-                        CNOT |11⟩ = |10⟩ <-- Flip ! </div>
-                </div>
-
-                <div>
-                    <h4 class="font-bold text-indigo-600 mb-2">Toffoli (CCNOT)</h4>
-                    <p class="text-gray-700 text-sm mb-4">
-                        Inverse la cible SI les deux contrôles sont à |1⟩.
-                    </p>
-                    <p class="text-xs text-gray-500 italic">
-                        C'est une porte universelle pour le calcul classique réversible !
-                    </p>
-                </div>
+                <p class="text-xs text-gray-500 italic">
+                    C'est une porte universelle pour le calcul classique réversible !
+                </p>
             </div>
         </div>
     </div>
+</div>

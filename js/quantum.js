@@ -36,6 +36,106 @@ function drawArrow(ctx, fromX, fromY, toX, toY, color = '#4f46e5') {
     ctx.fill();
 }
 
+// --- 1.0 Dualité Onde-Corpuscule ---
+let slitMode = 'particles'; // 'particles' or 'waves'
+
+function initDualSlit() {
+    const setup = createQuantumCanvas('dual-slit-viz');
+    if (!setup) return;
+    const { ctx, width, height } = setup;
+
+    let particles = [];
+    let t = 0;
+
+    function draw() {
+        if (!document.getElementById('dual-slit-viz')) return;
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw Slits
+        ctx.fillStyle = '#333';
+        ctx.fillRect(width / 2 - 5, 0, 10, height); // Wall
+        ctx.clearRect(width / 2 - 5, height / 3 - 10, 10, 20); // Slit 1
+        ctx.clearRect(width / 2 - 5, 2 * height / 3 - 10, 10, 20); // Slit 2
+
+        if (slitMode === 'particles') {
+            // Particle Simulation
+            if (Math.random() < 0.1) {
+                particles.push({ x: 0, y: height / 2 + (Math.random() - 0.5) * 50, vx: 2, vy: (Math.random() - 0.5) * 0.5 });
+            }
+
+            particles.forEach((p, i) => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // Hit wall?
+                if (p.x > width / 2 - 5 && p.x < width / 2 + 5) {
+                    if (!((p.y > height / 3 - 10 && p.y < height / 3 + 10) || (p.y > 2 * height / 3 - 10 && p.y < 2 * height / 3 + 10))) {
+                        p.vx = 0; // Stop at wall
+                    }
+                }
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+                ctx.fillStyle = '#fff';
+                ctx.fill();
+
+                if (p.x > width) particles.splice(i, 1);
+            });
+
+            // Screen accumulation (fake)
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.fillRect(width - 10, height / 3 - 20, 5, 40);
+            ctx.fillRect(width - 10, 2 * height / 3 - 20, 5, 40);
+
+        } else {
+            // Wave Simulation (Interference Pattern)
+            const imgData = ctx.createImageData(width, height);
+            const data = imgData.data;
+
+            for (let x = width / 2; x < width; x += 2) {
+                for (let y = 0; y < height; y += 2) {
+                    // Distance from slits
+                    const d1 = Math.sqrt((x - width / 2) ** 2 + (y - height / 3) ** 2);
+                    const d2 = Math.sqrt((x - width / 2) ** 2 + (y - 2 * height / 3) ** 2);
+
+                    const phase = (d1 - d2) * 0.5; // Interference term
+                    const intensity = (1 + Math.cos(phase - t * 0.2)) * 100;
+
+                    const idx = (y * width + x) * 4;
+                    // Fill 2x2
+                    for (let dy = 0; dy < 2; dy++) {
+                        for (let dx = 0; dx < 2; dx++) {
+                            if (x + dx < width && y + dy < height) {
+                                const i = ((y + dy) * width + (x + dx)) * 4;
+                                data[i] = 79; data[i + 1] = 70; data[i + 2] = 229; // Indigo
+                                data[i + 3] = intensity;
+                            }
+                        }
+                    }
+                }
+            }
+            ctx.putImageData(imgData, 0, 0);
+
+            // Source waves
+            ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+            for (let r = 0; r < width / 2; r += 20) {
+                ctx.beginPath();
+                ctx.arc(0, height / 2, (r + t * 2) % width / 2, -0.5, 0.5);
+                ctx.stroke();
+            }
+
+            t++;
+        }
+
+        requestAnimationFrame(draw);
+    }
+    draw();
+}
+
+window.setSlitMode = function (mode) {
+    slitMode = mode;
+}
+
 // --- 1.1 Postulats & États ---
 function initQuantumPostulates() {
     const setup = createQuantumCanvas('quantum-state-viz');
@@ -234,9 +334,62 @@ function applyOperator(op) {
 
 
 // --- 2.1 Algèbre Linéaire Complexe ---
+// --- 2.1 Algèbre Linéaire Complexe ---
+let complexAngle = 0;
+
 function initComplexAlgebra() {
-    // Placeholder: Complex plane rotation
-    initQuantumPostulates(); // Reuse rotation for now
+    const setup = createQuantumCanvas('complex-plane-viz');
+    if (!setup) return;
+    const { ctx, width, height } = setup;
+
+    function draw() {
+        if (!document.getElementById('complex-plane-viz')) return;
+        ctx.clearRect(0, 0, width, height);
+        const cx = width / 2;
+        const cy = height / 2;
+        const r = 80;
+
+        // Grid
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, height); ctx.stroke(); // Im
+        ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(width, cy); ctx.stroke(); // Re
+
+        // Circle
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.strokeStyle = '#444';
+        ctx.setLineDash([5, 5]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Vector z
+        const vx = cx + r * Math.cos(complexAngle * Math.PI / 180);
+        const vy = cy - r * Math.sin(complexAngle * Math.PI / 180); // Y inverted
+
+        drawArrow(ctx, cx, cy, vx, vy, '#facc15'); // Yellow
+
+        // Projection lines
+        ctx.strokeStyle = '#666';
+        ctx.setLineDash([2, 2]);
+        ctx.beginPath(); ctx.moveTo(vx, vy); ctx.lineTo(vx, cy); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(vx, vy); ctx.lineTo(cx, vy); ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Labels
+        ctx.fillStyle = '#fff';
+        ctx.fillText('Re', width - 20, cy + 15);
+        ctx.fillText('Im', cx + 10, 20);
+        ctx.fillStyle = '#facc15';
+        ctx.fillText(`z = e^(i${complexAngle}°)`, vx + 10, vy);
+
+        requestAnimationFrame(draw);
+    }
+    draw();
+}
+
+window.rotateComplex = function (deg) {
+    complexAngle = (complexAngle + deg) % 360;
 }
 
 // --- 2.2 Théorie des Groupes ---
@@ -490,27 +643,81 @@ function initSchrodinger() {
 }
 
 // --- 4.1 Circuits ---
+// --- 4.1 Circuits ---
+let circuitState = [[], []]; // 2 qubits, list of gates
+
 function initQuantumCircuits() {
     const container = document.getElementById('circuit-builder');
     if (!container) return;
-    container.innerHTML = `
-        <div class="flex flex-col gap-4">
-            <div class="flex items-center gap-2 bg-gray-100 p-2 rounded">
-                <span>q0</span>
-                <div class="h-0.5 w-full bg-gray-400 relative flex items-center px-2 gap-2" id="q0-line">
-                    <button class="w-8 h-8 bg-white border border-black hover:bg-blue-100">H</button>
-                    <button class="w-8 h-8 bg-white border border-black hover:bg-blue-100">X</button>
+
+    function renderCircuit() {
+        container.innerHTML = `
+            <div class="bg-white p-4 rounded shadow border border-gray-200">
+                <div class="flex flex-col gap-6">
+                    ${[0, 1].map(q => `
+                        <div class="flex items-center gap-4">
+                            <span class="font-mono font-bold text-gray-600">q${q} |0⟩</span>
+                            <div class="flex-1 h-0.5 bg-gray-300 relative flex items-center px-2 gap-1 overflow-x-auto min-h-[40px]">
+                                ${circuitState[q].map((gate, i) => `
+                                    <div class="w-10 h-10 flex items-center justify-center bg-indigo-100 border border-indigo-300 text-indigo-800 font-bold rounded cursor-pointer hover:bg-red-100 hover:text-red-600 transition"
+                                         onclick="removeGate(${q}, ${i})" title="Cliquez pour supprimer">
+                                        ${gate}
+                                    </div>
+                                `).join('')}
+                                <div class="w-full h-full absolute top-0 left-0 -z-10"></div>
+                            </div>
+                            <div class="flex gap-1">
+                                <button onclick="addGate(${q}, 'H')" class="w-8 h-8 bg-gray-100 hover:bg-indigo-100 border border-gray-300 rounded text-xs font-bold">H</button>
+                                <button onclick="addGate(${q}, 'X')" class="w-8 h-8 bg-gray-100 hover:bg-indigo-100 border border-gray-300 rounded text-xs font-bold">X</button>
+                                <button onclick="addGate(${q}, 'Z')" class="w-8 h-8 bg-gray-100 hover:bg-indigo-100 border border-gray-300 rounded text-xs font-bold">Z</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="mt-6 pt-4 border-t border-gray-100">
+                    <h4 class="font-bold text-gray-700 mb-2">Résultat (Simulation) :</h4>
+                    <div class="bg-gray-900 text-green-400 font-mono p-3 rounded text-sm">
+                        ${simulateCircuit()}
+                    </div>
                 </div>
             </div>
-            <div class="flex items-center gap-2 bg-gray-100 p-2 rounded">
-                <span>q1</span>
-                <div class="h-0.5 w-full bg-gray-400 relative flex items-center px-2 gap-2" id="q1-line">
-                    <button class="w-8 h-8 bg-white border border-black hover:bg-blue-100">H</button>
-                </div>
-            </div>
-        </div>
-        <p class="text-xs text-gray-500 mt-2">Cliquez pour ajouter (Simulation UI)</p>
-    `;
+        `;
+    }
+
+    window.addGate = function (q, gate) {
+        if (circuitState[q].length < 8) {
+            circuitState[q].push(gate);
+            renderCircuit();
+        }
+    };
+
+    window.removeGate = function (q, index) {
+        circuitState[q].splice(index, 1);
+        renderCircuit();
+    };
+
+    function simulateCircuit() {
+        // Very simple simulation for display purposes
+        // Assuming start at |00>
+        let state = ["0", "0"];
+
+        [0, 1].forEach(q => {
+            circuitState[q].forEach(gate => {
+                if (gate === 'X') {
+                    state[q] = state[q] === '0' ? '1' : '0';
+                } else if (gate === 'H') {
+                    state[q] = '+'; // Simplified superposition
+                } else if (gate === 'Z') {
+                    if (state[q] === '+') state[q] = '-';
+                }
+            });
+        });
+
+        return `État Final : |${state[0]}${state[1]}⟩`;
+    }
+
+    renderCircuit();
 }
 
 // --- 4.2 Algorithms (Grover) ---
@@ -550,29 +757,117 @@ function initQuantumAlgorithms() {
 }
 
 // --- 4.3 QML ---
+// --- 4.3 QML ---
+let qmlPoints = [];
+let qmlEpoch = 0;
+let isTraining = false;
+
 function initQML() {
     const setup = createQuantumCanvas('qml-viz');
     if (!setup) return;
     const { ctx, width, height } = setup;
 
-    // Draw scatter plot
-    for (let i = 0; i < 50; i++) {
-        const x = Math.random() * width;
-        const y = Math.random() * height;
-        const isClassA = (x - width / 2) ** 2 + (y - height / 2) ** 2 < 3000; // Circle boundary
-
-        ctx.beginPath();
-        ctx.arc(x, y, 3, 0, Math.PI * 2);
-        ctx.fillStyle = isClassA ? '#ec4899' : '#3b82f6';
-        ctx.fill();
+    // Initialize points if empty
+    if (qmlPoints.length === 0) {
+        for (let i = 0; i < 50; i++) {
+            const x = Math.random() * width;
+            const y = Math.random() * height;
+            // Ground truth: Circle in center
+            const isClassA = (x - width / 2) ** 2 + (y - height / 2) ** 2 < (width / 4) ** 2;
+            qmlPoints.push({ x, y, isClassA });
+        }
     }
 
-    // Draw boundary
-    ctx.beginPath();
-    ctx.arc(width / 2, height / 2, Math.sqrt(3000), 0, Math.PI * 2);
-    ctx.strokeStyle = '#fff';
-    ctx.setLineDash([5, 5]);
-    ctx.stroke();
+    function draw() {
+        if (!document.getElementById('qml-viz')) return;
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw Decision Boundary (Background)
+        // Simulate a changing boundary based on epoch
+        const imageData = ctx.createImageData(width, height);
+        const data = imageData.data;
+
+        // Simple decision function simulation
+        // Epoch 0: Random line
+        // Epoch 10: Circle
+
+        const cx = width / 2;
+        const cy = height / 2;
+        const rTarget = width / 4;
+
+        for (let x = 0; x < width; x += 4) { // Low res for perf
+            for (let y = 0; y < height; y += 4) {
+                let prediction = 0;
+
+                if (qmlEpoch === 0) {
+                    prediction = (x + y) / (width + height); // Linear gradient
+                } else {
+                    // Evolve towards circle
+                    const dist = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
+                    const circleProp = Math.min(1, qmlEpoch / 20);
+                    const linearProp = 1 - circleProp;
+
+                    const linearPred = (x + y) / (width + height);
+                    const circlePred = dist < rTarget ? 1 : 0; // 1 is Class A (Pink)
+
+                    // Smooth transition
+                    prediction = linearProp * linearPred + circleProp * (dist < rTarget ? 0.8 : 0.2);
+                }
+
+                // Colorize
+                // 0 -> Blue, 1 -> Pink
+                const i = (y * width + x) * 4;
+                // Fill 4x4 block
+                for (let dy = 0; dy < 4; dy++) {
+                    for (let dx = 0; dx < 4; dx++) {
+                        if (x + dx < width && y + dy < height) {
+                            const idx = ((y + dy) * width + (x + dx)) * 4;
+                            data[idx] = prediction > 0.5 ? 236 : 59; // R
+                            data[idx + 1] = prediction > 0.5 ? 72 : 130; // G
+                            data[idx + 2] = prediction > 0.5 ? 153 : 246; // B
+                            data[idx + 3] = 50; // Alpha (faint)
+                        }
+                    }
+                }
+            }
+        }
+        ctx.putImageData(imageData, 0, 0);
+
+        // Draw Points
+        qmlPoints.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+            ctx.fillStyle = p.isClassA ? '#ec4899' : '#3b82f6';
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 1;
+            ctx.fill();
+            ctx.stroke();
+        });
+
+        if (isTraining) {
+            ctx.fillStyle = '#fff';
+            ctx.fillText(`Epoch: ${qmlEpoch}/20`, 10, 20);
+            ctx.fillText(`Loss: ${(1 / (qmlEpoch + 1)).toFixed(3)}`, 10, 35);
+        }
+    }
+    draw();
+
+    window.trainQML = function () {
+        if (isTraining) return;
+        isTraining = true;
+        qmlEpoch = 0;
+
+        function step() {
+            if (qmlEpoch < 20) {
+                qmlEpoch++;
+                draw();
+                setTimeout(step, 100);
+            } else {
+                isTraining = false;
+            }
+        }
+        step();
+    }
 }
 
 // --- 4.4 Hybrid Models ---
