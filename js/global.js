@@ -212,12 +212,24 @@ document.addEventListener('click', (e) => {
 
 function switchCourse(courseId) {
     if (!coursesData[courseId]) return;
+
+    // Close the menu if it's open
+    const menu = document.getElementById('course-menu');
+    const chevron = document.getElementById('course-chevron');
+    if (menu && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+    }
+
     currentCourse = courseId;
-    const selector = document.getElementById('courseSelector');
-    if (selector) selector.value = courseId;
+    renderCourseSelector(); // Re-render to update the selected item in the UI
     renderNav();
-    const mods = getModules();
-    if (mods.length > 0) loadModule(mods[0].id, false); // Don't close sidebar on course switch
+
+    // Load the first module of the new course
+    const modules = coursesData[courseId].modules;
+    if (modules.length > 0) {
+        loadModule(modules[0].id, false); // Keep sidebar open on mobile so user can choose a module
+    }
 }
 
 function getModules() {
