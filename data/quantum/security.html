@@ -1,18 +1,69 @@
 <div class="space-y-8">
     <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-red-700">
-        <h2 class="text-3xl font-extrabold text-red-900 mb-6">7.4 Sécurité & Attaques</h2>
+        <h2 class="text-3xl font-extrabold text-red-900 mb-6">Sécurité & Attaques</h2>
         <p class="text-lg text-gray-700 leading-relaxed">
-            Même si la théorie est parfaite, le matériel ne l'est pas.
-            Les hackers attaquent les détecteurs (aveuglement) ou utilisent les fuites d'information (side-channels).
+            L'ordinateur quantique est une arme à double tranchant. Il permet de créer une cryptographie inviolable
+            (QKD),
+            mais il menace aussi de détruire toute la sécurité actuelle d'Internet (RSA, ECC).
         </p>
     </div>
 
-    <!-- Viz -->
-    <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
-        <h3 class="text-white font-bold mb-4">Simulation : Attaque Side-Channel</h3>
-        <div id="security-viz" class="h-64 bg-black rounded border border-gray-700 relative overflow-hidden">
-            <!-- Viz injected by initSecurityAttacks -->
+    <!-- Menaces -->
+    <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-red-50 p-6 rounded-xl border border-red-200">
+            <h3 class="text-xl font-bold text-red-800 mb-2">L'Apocalypse RSA (Shor)</h3>
+            <p class="text-gray-700 text-sm mb-4">
+                L'algorithme de Shor peut factoriser les grands nombres exponentiellement plus vite que n'importe quel
+                ordinateur classique.
+                <br><br>
+                <strong>Conséquence :</strong> RSA, Diffie-Hellman, et les Courbes Elliptiques (utilisés pour HTTPS,
+                Bitcoin, Cartes Bancaires) seront cassés instantanément par un ordinateur quantique assez puissant.
+            </p>
         </div>
-        <p class="text-xs text-gray-400 mt-4">Eve écoute les fuites d'énergie du laser.</p>
+
+        <div class="bg-orange-50 p-6 rounded-xl border border-orange-200">
+            <h3 class="text-xl font-bold text-orange-800 mb-2">L'Affaiblissement AES (Grover)</h3>
+            <p class="text-gray-700 text-sm mb-4">
+                L'algorithme de Grover divise par deux la taille effective des clés symétriques.
+                <br><br>
+                <strong>Solution :</strong> Doubler la taille des clés. Passer de AES-128 à AES-256 suffit pour
+                résister.
+            </p>
+        </div>
+    </div>
+
+    <!-- Interactive Viz: Side Channel -->
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+        <h3 class="text-white font-bold mb-4">Simulation : Attaque Side-Channel (Hacking Quantique)</h3>
+        <p class="text-xs text-gray-400 mb-6">
+            Même si le protocole est sûr, l'implémentation physique peut fuiter.
+            Ici, Eve écoute la consommation électrique du laser d'Alice pour deviner la base.
+        </p>
+
+        <div class="relative w-full h-48 bg-black rounded border border-gray-700 overflow-hidden mb-4">
+            <canvas id="security-viz" class="absolute inset-0 w-full h-full"></canvas>
+
+            <!-- Overlay Info -->
+            <div class="absolute top-2 right-2 bg-gray-800 bg-opacity-80 p-2 rounded text-xs text-green-400 font-mono">
+                Fuite détectée : <span id="leak-value">0%</span>
+            </div>
+        </div>
+
+        <button onclick="triggerLaserPulse()"
+            class="px-6 py-2 bg-red-600 hover:bg-red-500 text-white rounded font-bold shadow-lg active:scale-95 transition-all">
+            Tirer Laser (Alice) 🔫
+        </button>
+    </div>
+
+    <!-- Post-Quantum Crypto -->
+    <div class="bg-green-50 p-6 rounded-xl border-l-4 border-green-500">
+        <h3 class="text-lg font-bold text-green-800 mb-2">La Solution : Cryptographie Post-Quantique (PQC)</h3>
+        <p class="text-gray-700 text-sm">
+            Le NIST a déjà standardisé de nouveaux algorithmes (ex: <strong>Kyber</strong>, <strong>Dilithium</strong>)
+            basés sur des réseaux euclidiens (Lattices).
+            Ces problèmes mathématiques sont supposés difficiles même pour un ordinateur quantique.
+            <br>
+            <em>Mettez à jour vos navigateurs ! Chrome et Signal l'utilisent déjà.</em>
+        </p>
     </div>
 </div>

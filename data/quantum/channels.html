@@ -1,9 +1,79 @@
+<!-- Types de Bruit -->
+<div class="grid md:grid-cols-3 gap-6">
+    <div class="bg-red-50 p-4 rounded-xl border border-red-200 hover:shadow-md transition-shadow">
+        <div class="text-2xl mb-2">🔄</div>
+        <h3 class="font-bold text-red-800 mb-2">Bit Flip (X)</h3>
+        <p class="text-xs text-gray-600">
+            L'équivalent classique. Le 0 devient 1 et vice-versa.
+            <br>
+            $|0\rangle \to |1\rangle$
+        </p>
+    </div>
+
+    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200 hover:shadow-md transition-shadow">
+        <div class="text-2xl mb-2">🌀</div>
+        <h3 class="font-bold text-blue-800 mb-2">Phase Flip (Z)</h3>
+        <p class="text-xs text-gray-600">
+            Purement quantique. Le signe de la superposition change.
+            <br>
+            $|+\rangle \to |-\rangle$
+        </p>
+    </div>
+
+    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 hover:shadow-md transition-shadow">
+        <div class="text-2xl mb-2">🌫️</div>
+        <h3 class="font-bold text-gray-800 mb-2">Dépolarisant</h3>
+        <p class="text-xs text-gray-600">
+            Le pire. Le qubit rétrécit vers le centre de la sphère de Bloch (état mixte maximal).
+        </p>
+    </div>
 </div>
-<div class="flex justify-center gap-4 mt-4">
-    <button onclick="applyNoise('amplitude')" class="px-3 py-1 bg-blue-600 text-white rounded text-sm">Amplitude
-        Damping (Froid)</button>
-    <button onclick="applyNoise('phase')" class="px-3 py-1 bg-red-600 text-white rounded text-sm">Phase Damping
-        (Flou)</button>
+
+<!-- Interactive Viz -->
+<div class="bg-gray-900 p-6 rounded-xl shadow-inner">
+    <h3 class="text-white font-bold mb-4 text-center">Simulateur de Canal Bruité</h3>
+
+    <div class="flex flex-col md:flex-row gap-8 items-center justify-center">
+        <div id="bloch-channel-viz" class="h-64 w-64 bg-black rounded-full border border-gray-700 relative">
+            <!-- Viz injected by initQuantumChannels -->
+        </div>
+
+        <div class="flex flex-col gap-4 w-full md:w-1/3">
+            <div class="bg-gray-800 p-4 rounded-lg">
+                <p class="text-gray-300 text-sm mb-3">Appliquer du bruit :</p>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="applyChannelNoise('bitflip')"
+                        class="px-3 py-2 bg-red-600 hover:bg-red-500 text-white rounded text-xs font-bold transition-colors">
+                        Bit Flip (X)
+                    </button>
+                    <button onclick="applyChannelNoise('phaseflip')"
+                        class="px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded text-xs font-bold transition-colors">
+                        Phase Flip (Z)
+                    </button>
+                    <button onclick="applyChannelNoise('depolarize')"
+                        class="px-3 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded text-xs font-bold transition-colors col-span-2">
+                        Canal Dépolarisant
+                    </button>
+                </div>
+            </div>
+
+            <button onclick="resetChannelBloch()" class="text-gray-400 text-xs hover:text-white underline">
+                Réinitialiser l'État Pur
+            </button>
+        </div>
+    </div>
 </div>
+
+<!-- Représentation Mathématique -->
+<div class="bg-orange-50 p-6 rounded-xl border-l-4 border-orange-400">
+    <h3 class="text-lg font-bold text-orange-800 mb-2">Représentation de Kraus</h3>
+    <p class="text-gray-700 text-sm">
+        Mathématiquement, un canal n'est pas unitaire (pas réversible). On utilise des <strong>opérateurs de
+            Kraus</strong> $\{E_k\}$ :
+        <br><br>
+        <span class="font-mono bg-white px-2 py-1 rounded shadow-sm">$\rho' = \sum_k E_k \rho E_k^\dagger$</span>
+        <br><br>
+        C'est la forme la plus générale d'évolution physique autorisée par la mécanique quantique.
+    </p>
 </div>
 </div>

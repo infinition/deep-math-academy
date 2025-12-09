@@ -1,60 +1,60 @@
-onclick="applyGate('S')">
-<div class="flex justify-between items-center mb-2">
-    <span class="font-bold text-green-700">Phase (S)</span>
-    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Z/2</span>
-</div>
-<div class="font-mono text-xs bg-gray-50 p-2 rounded text-center">
-    $\begin{pmatrix} 1 & 0 \\ 0 & i \end{pmatrix}$
-</div>
-<p class="text-xs text-gray-500 mt-2">Rotation Z de 90°</p>
-</div>
-
-<!-- T Gate -->
-<div class="border border-gray-200 p-4 rounded-lg hover:bg-yellow-50 transition cursor-pointer"
-    onclick="applyGate('T')">
-    <div class="flex justify-between items-center mb-2">
-        <span class="font-bold text-yellow-700">T Gate</span>
-        <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Magic</span>
+<div class="space-y-8">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-blue-600">
+        <h2 class="text-3xl font-extrabold text-blue-900 mb-6">Opérations (Gates)</h2>
+        <p class="text-lg text-gray-700 leading-relaxed">
+            Un ordinateur classique utilise des portes logiques (AND, OR, NOT).
+            Un ordinateur quantique utilise des <strong>Portes Quantiques</strong>. Ce sont des rotations dans l'espace
+            de Hilbert.
+        </p>
     </div>
-    <div class="font-mono text-xs bg-gray-50 p-2 rounded text-center">
-        $\begin{pmatrix} 1 & 0 \\ 0 & e^{i\pi/4} \end{pmatrix}$
+
+    <!-- Analogie -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Analogie : Le Rubik's Cube (Encore) 🎲</h3>
+        <p class="text-gray-600 mb-4">
+            Appliquer une porte, c'est tourner une face du cube.
+            Le but de l'algorithme est d'aligner les couleurs (l'information) correctement à la fin.
+        </p>
     </div>
-    <p class="text-xs text-gray-500 mt-2">Rotation Z de 45°</p>
-</div>
-</div>
 
-<div id="gate-viz-container" class="mt-6 h-48 bg-gray-900 rounded flex items-center justify-center">
-    <!-- Viz injected by initQuantumGates -->
-    <p class="text-gray-400">Visualisation Action Porte</p>
-</div>
-</div>
+    <!-- Interactive Viz -->
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+        <h3 class="text-white font-bold mb-4">Visualisation : Action des Portes</h3>
+        <p class="text-gray-400 text-sm mb-6">
+            Voyez comment chaque porte transforme l'état du Qubit.
+        </p>
 
-<!-- Multi Qubit Gates -->
-<div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-md border border-gray-200">
-    <h3 class="text-2xl font-bold text-gray-800 mb-6">Portes Multi-Qubits (Intrication)</h3>
-
-    <div class="grid md:grid-cols-2 gap-8">
-        <div>
-            <h4 class="font-bold text-indigo-600 mb-2">CNOT (Controlled-NOT)</h4>
-            <p class="text-gray-700 text-sm mb-4">
-                Inverse le qubit cible SI le qubit de contrôle est à |1⟩.
-            </p>
-            <div class="bg-gray-800 p-4 rounded text-white font-mono text-sm overflow-x-auto">
-                CNOT |00⟩ = |00⟩<br>
-                CNOT |01⟩ = |01⟩<br>
-                CNOT |10⟩ = |11⟩ <-- Flip !<br>
-                    CNOT |11⟩ = |10⟩ <-- Flip ! </div>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+            <div id="gate-viz-container"
+                class="w-64 h-64 bg-black rounded-full border border-gray-700 relative shadow-[0_0_30px_rgba(37,99,235,0.3)]">
+                <!-- Viz injected by initQuantumGates -->
             </div>
 
-            <div>
-                <h4 class="font-bold text-indigo-600 mb-2">Toffoli (CCNOT)</h4>
-                <p class="text-gray-700 text-sm mb-4">
-                    Inverse la cible SI les deux contrôles sont à |1⟩.
-                </p>
-                <p class="text-xs text-gray-500 italic">
-                    C'est une porte universelle pour le calcul classique réversible !
-                </p>
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="applyGate('X')"
+                    class="p-3 bg-blue-600 text-white rounded hover:bg-blue-500 font-bold">Porte X (NOT)</button>
+                <button onclick="applyGate('Z')"
+                    class="p-3 bg-green-600 text-white rounded hover:bg-green-500 font-bold">Porte Z (Phase)</button>
+                <button onclick="applyGate('H')"
+                    class="p-3 bg-purple-600 text-white rounded hover:bg-purple-500 font-bold col-span-2">Porte H
+                    (Hadamard)</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Table of Gates -->
+    <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-gray-50 p-4 rounded border border-gray-200 text-center">
+            <div class="text-2xl font-bold text-blue-600 mb-2">X</div>
+            <div class="text-xs text-gray-500">Inverse 0 ↔ 1</div>
+        </div>
+        <div class="bg-gray-50 p-4 rounded border border-gray-200 text-center">
+            <div class="text-2xl font-bold text-green-600 mb-2">Z</div>
+            <div class="text-xs text-gray-500">Change la phase (+ ↔ -)</div>
+        </div>
+        <div class="bg-gray-50 p-4 rounded border border-gray-200 text-center">
+            <div class="text-2xl font-bold text-purple-600 mb-2">H</div>
+            <div class="text-xs text-gray-500">Crée la Superposition</div>
         </div>
     </div>
 </div>

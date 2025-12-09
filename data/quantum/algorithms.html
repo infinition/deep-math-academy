@@ -1,31 +1,40 @@
-<!-- Shor -->
-<div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-red-500">
-    <h3 class="text-xl font-bold text-red-800 mb-4">Algorithme de Shor (Factorisation)</h3>
-    <p class="text-gray-600 mb-4">
-        Casser le chiffrement RSA. Factoriser un grand nombre entier $N = p \times q$.
-    </p>
-    <ul class="space-y-2 text-sm text-gray-600">
-        <li>• <strong>Classique :</strong> Exponentiel (impossible pour de grands nombres).</li>
-        <li>• <strong>Quantique :</strong> Polynomial (faisable !).</li>
-    </ul>
-    <div class="bg-red-50 p-3 rounded mt-4 border border-red-100">
-        <p class="text-red-900 text-xs font-bold">
-            ⚠️ C'est l'algorithme qui menace la cybersécurité mondiale (mais il faut des millions de qubits
-            parfaits).
+<div class="space-y-8">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-red-600">
+        <h2 class="text-3xl font-extrabold text-red-800 mb-6">Algorithmes Quantiques</h2>
+        <p class="text-lg text-gray-700 leading-relaxed">
+            C'est ici que la magie opère. Comment résoudre des problèmes impossibles pour les supercalculateurs ?
+            En utilisant l'interférence pour annuler les mauvaises réponses et amplifier la bonne.
         </p>
     </div>
-</div>
 
-<!-- Viz Grover -->
-<div class="bg-gray-900 p-6 rounded-xl shadow-inner">
-    <h3 class="text-white font-bold mb-4">Visualisation : Amplification d'Amplitude (Grover)</h3>
-    <div id="grover-viz" class="h-64 bg-black rounded border border-gray-700 flex items-center justify-center">
-        <!-- Viz injected by initQuantumAlgorithms -->
-        <p class="text-gray-500">Simulation Grover</p>
+    <!-- Analogie Maze -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Analogie : Le Labyrinthe 🌀</h3>
+        <p class="text-gray-600 mb-4">
+            <strong>Classique :</strong> Vous envoyez une souris. Elle essaie un chemin, se trompe, revient, essaie un
+            autre... (Long).
+            <br>
+            <strong>Quantique :</strong> Vous versez de l'eau à l'entrée. L'eau explore <strong>tous les chemins en même
+                temps</strong>. Elle sort instantanément par la sortie.
+        </p>
     </div>
-    <div class="flex justify-center mt-4">
-        <button onclick="stepGrover()" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500">Étape
-            Suivante</button>
+
+    <!-- Grover Viz -->
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+        <h3 class="text-white font-bold mb-4">Grover : L'Amplification d'Amplitude</h3>
+        <p class="text-gray-400 text-sm mb-6">
+            On cherche la barre verte (la solution).
+            Au début, toutes les barres sont égales (superposition).
+            À chaque étape, la solution grandit et les autres rétrécissent.
+        </p>
+
+        <div id="grover-viz" class="w-full h-64 bg-black rounded border border-gray-700 relative mb-4">
+            <!-- Viz injected by initQuantumAlgorithms -->
+        </div>
+
+        <button onclick="stepGrover()"
+            class="px-6 py-2 bg-blue-600 text-white font-bold rounded hover:bg-blue-500 transition">
+            Étape Suivante (Oracle + Diffusion)
+        </button>
     </div>
-</div>
 </div>

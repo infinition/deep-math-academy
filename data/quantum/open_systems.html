@@ -1,17 +1,51 @@
-<div class="space-y-8">
-    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-gray-500">
-        <h2 class="text-3xl font-extrabold text-gray-800 mb-6">8.1 Systèmes Ouverts</h2>
-        <p class="text-lg text-gray-700 leading-relaxed">
-            Un système quantique n'est jamais seul. Il interagit avec son environnement (chaleur, champs magnétiques).
-            C'est ce qu'on appelle un <strong>Système Ouvert</strong>.
-        </p>
+<!-- Hamiltonien -->
+<div class="bg-gray-100 p-6 rounded-xl border border-gray-300">
+    <h3 class="text-xl font-bold text-gray-800 mb-4">L'Hamiltonien Total</h3>
+    <div class="flex justify-center my-4">
+        <span class="text-2xl font-mono bg-white px-4 py-2 rounded shadow">
+            $H_{tot} = \textcolor{#3b82f6}{H_S} + \textcolor{#ef4444}{H_E} + \textcolor{#a855f7}{H_{int}}$
+        </span>
+    </div>
+    <ul class="grid md:grid-cols-3 gap-4 text-sm text-center">
+        <li class="p-2 bg-blue-50 rounded text-blue-800 font-bold">Système ($H_S$)</li>
+        <li class="p-2 bg-red-50 rounded text-red-800 font-bold">Environnement ($H_E$)</li>
+        <li class="p-2 bg-purple-50 rounded text-purple-800 font-bold">Interaction ($H_{int}$)</li>
+    </ul>
+</div>
+
+<!-- Interactive Viz -->
+<div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+    <h3 class="text-white font-bold mb-4">Simulation : Le Bain Thermique</h3>
+    <p class="text-xs text-gray-400 mb-6">
+        Le gros point bleu est votre qubit. Les petits points rouges sont l'environnement.
+        Regardez comment les collisions (interactions) perturbent la trajectoire parfaite du qubit.
+    </p>
+
+    <div class="relative w-full h-64 bg-black rounded border border-gray-700 overflow-hidden mb-4">
+        <canvas id="open-systems-viz" class="absolute inset-0 w-full h-full"></canvas>
     </div>
 
-    <!-- Viz -->
-    <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
-        <h3 class="text-white font-bold mb-4">Visualisation : Système vs Environnement</h3>
-        <div id="open-systems-viz" class="h-64 bg-black rounded border border-gray-700 relative overflow-hidden">
-            <!-- Viz injected by initOpenSystems -->
+    <div class="flex justify-center gap-4">
+        <div class="flex flex-col items-center">
+            <label class="text-gray-400 text-xs mb-1">Température (Agitation)</label>
+            <input type="range" id="temp-slider" min="0" max="100" value="20" class="w-32 accent-red-500">
+        </div>
+        <div class="flex flex-col items-center">
+            <label class="text-gray-400 text-xs mb-1">Couplage (Force)</label>
+            <input type="range" id="coupling-slider" min="0" max="100" value="50" class="w-32 accent-purple-500">
         </div>
     </div>
+</div>
+
+<!-- Trace Partielle -->
+<div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+    <h3 class="text-lg font-bold text-gray-800 mb-2">La Trace Partielle</h3>
+    <p class="text-gray-700 text-sm">
+        Comme on ne peut pas suivre les milliards d'atomes de l'environnement, on les "oublie" mathématiquement en
+        faisant une <strong>trace partielle</strong>.
+        <br>
+        Cela transforme notre état pur $|\psi\rangle$ en une matrice densité mixte $\rho_S = Tr_E(\rho_{tot})$.
+        C'est là que l'information est perdue (entropie augmente).
+    </p>
+</div>
 </div>

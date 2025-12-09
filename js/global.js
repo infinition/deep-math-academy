@@ -90,9 +90,10 @@ function updateDarkModeIcon() {
 // APP INIT / NAV
 // ==========================================
 async function init() {
-    // Initialize Dark Mode
-    if (localStorage.getItem('darkMode') === 'true') {
+    // Initialize Dark Mode (Default to TRUE if not set)
+    if (localStorage.getItem('darkMode') === null || localStorage.getItem('darkMode') === 'true') {
         document.body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'true'); // Ensure it's set
     }
     updateDarkModeIcon();
 
@@ -111,13 +112,8 @@ async function init() {
         // 3. Remplir le sélecteur de cours HTML dynamiquement
         renderCourseSelector();
 
-        // 4. Lancer l'application avec le cours actuel
-        if (coursesData[currentCourse]) {
-            const initialModules = coursesData[currentCourse].modules;
-            if (initialModules.length > 0) {
-                loadModule(initialModules[0].id, false); // Don't close sidebar on init
-            }
-        }
+        // 4. Charger la page de bienvenue
+        loadWelcome();
 
     } catch (error) {
         console.error("Échec de l'initialisation de l'application :", error);
@@ -295,6 +291,33 @@ async function loadModule(id, closeSidebar = true) {
     }, 50);
 }
 
+async function loadWelcome() {
+    // Mobile toggle logic (ensure sidebar is closed on mobile if needed, or open)
+    // For welcome, we might want to keep sidebar open on desktop
+
+    // Render Nav for the current course (default Analysis)
+    renderNav();
+
+    const chapterTitle = document.getElementById('chapter-title');
+    if (chapterTitle) {
+        chapterTitle.innerHTML = `<span class="text-2xl mr-2">👋</span> Bienvenue`;
+    }
+
+    try {
+        const response = await fetch('data/welcome.html');
+        if (!response.ok) throw new Error("Erreur chargement welcome.html");
+        const html = await response.text();
+
+        const contentArea = document.getElementById('content-area');
+        if (contentArea) {
+            contentArea.innerHTML = html;
+            contentArea.scrollTop = 0;
+        }
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 function resetCurrentProgress() {
     if (visitedModules[currentCourse]) {
         visitedModules[currentCourse].clear();
@@ -358,3 +381,100 @@ function startQuizSession(quizId) {
         alert("Quiz functionality coming soon! 🚀");
     }
 }
+
+// ==========================================
+// HOME SCREEN LOGIC
+// ==========================================
+function enterApp() {
+    const home = document.getElementById('home-screen');
+    if (home) {
+        home.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+            home.style.display = 'none';
+        }, 1000);
+    }
+}
+
+// Dynamic Background Animation
+window.addEventListener('load', () => {
+    const canvas = document.getElementById('home-bg-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    let particles = [];
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+
+        reset() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.size = Math.random() * 2 + 1;
+            this.color = `rgba(${100 + Math.random() * 100}, ${100 + Math.random() * 100}, 255, ${Math.random() * 0.5})`;
+        }
+
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+                this.reset();
+            }
+        }
+
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    // Init Particles
+    for (let i = 0; i < 100; i++) {
+        particles.push(new Particle());
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw connections
+        ctx.strokeStyle = 'rgba(100, 100, 255, 0.05)';
+        ctx.lineWidth = 1;
+
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 150) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+});

@@ -1,18 +1,63 @@
-<div class="space-y-8">
-    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-orange-600">
-        <h2 class="text-3xl font-extrabold text-orange-900 mb-6">7.2 Coin-Flipping & Commitment</h2>
-        <p class="text-lg text-gray-700 leading-relaxed">
-            Comment jouer à pile ou face au téléphone sans tricher ?
-            Le quantique permet de s'engager sur une valeur (Commitment) sans la révéler tout de suite.
-        </p>
-    </div>
+<!-- Le Protocole -->
+<div class="bg-orange-50 p-6 rounded-xl border border-orange-200">
+    <h3 class="text-xl font-bold text-orange-800 mb-4">Le Protocole de Bit Commitment</h3>
+    <ul class="space-y-3 text-gray-700 text-sm">
+        <li class="flex items-start gap-2">
+            <span class="bg-orange-200 text-orange-800 font-bold px-2 rounded">1</span>
+            <span><strong>Commitment (Coffre) :</strong> Alice choisit un bit $b$ (0 ou 1). Elle l'encode dans un
+                état quantique (ex: $|0\rangle$ ou $|+\rangle$) et l'envoie à Bob.</span>
+        </li>
+        <li class="flex items-start gap-2">
+            <span class="bg-orange-200 text-orange-800 font-bold px-2 rounded">2</span>
+            <span><strong>Attente :</strong> Bob a le qubit mais ne sait pas comment le mesurer (il ne connaît pas
+                la base). Il le garde dans sa mémoire quantique.</span>
+        </li>
+        <li class="flex items-start gap-2">
+            <span class="bg-orange-200 text-orange-800 font-bold px-2 rounded">3</span>
+            <span><strong>Unveil (Clé) :</strong> Alice révèle sa base et son bit.</span>
+        </li>
+        <li class="flex items-start gap-2">
+            <span class="bg-orange-200 text-orange-800 font-bold px-2 rounded">4</span>
+            <span><strong>Vérification :</strong> Bob mesure maintenant dans la bonne base. Si le résultat ne
+                correspond pas, Alice a triché !</span>
+        </li>
+    </ul>
+</div>
 
-    <!-- Viz -->
-    <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
-        <h3 class="text-white font-bold mb-4">Visualisation : Pile ou Face Quantique</h3>
-        <div id="coin-viz" class="h-64 bg-black rounded border border-gray-700 relative overflow-hidden">
-            <!-- Viz injected by initCoinFlipping -->
+<!-- Interactive Viz -->
+<div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+    <h3 class="text-white font-bold mb-4">Jeu : Pile ou Face Quantique</h3>
+
+    <div class="flex flex-col items-center gap-6">
+        <div id="coin-viz"
+            class="w-48 h-48 bg-black rounded-full border-4 border-orange-500 relative flex items-center justify-center shadow-[0_0_30px_rgba(249,115,22,0.3)]">
+            <div id="coin-content" class="text-6xl animate-pulse">❓</div>
         </div>
-        <p class="text-xs text-gray-400 mt-4">Alice prépare un état, Bob devine la base.</p>
+
+        <div class="flex gap-4">
+            <div class="flex flex-col gap-2">
+                <span class="text-gray-400 text-xs">Alice (Vous)</span>
+                <button onclick="commitCoin('0')"
+                    class="px-4 py-2 bg-gray-700 hover:bg-orange-600 text-white rounded transition-colors">Choisir
+                    Pile (0)</button>
+                <button onclick="commitCoin('1')"
+                    class="px-4 py-2 bg-gray-700 hover:bg-orange-600 text-white rounded transition-colors">Choisir
+                    Face (1)</button>
+            </div>
+
+            <div class="w-px bg-gray-700 mx-4"></div>
+
+            <div class="flex flex-col gap-2 justify-center">
+                <span class="text-gray-400 text-xs">Bob</span>
+                <button onclick="verifyCoin()" id="verify-btn"
+                    class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled>
+                    Vérifier
+                </button>
+            </div>
+        </div>
+
+        <p id="coin-status" class="text-orange-400 font-mono text-sm h-6">En attente du choix d'Alice...</p>
     </div>
+</div>
 </div>

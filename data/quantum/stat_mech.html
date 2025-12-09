@@ -1,58 +1,33 @@
 <div class="space-y-8">
     <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-orange-600">
-        <h2 class="text-3xl font-extrabold text-orange-800 mb-6">5.2 Physique Statistique Quantique</h2>
+        <h2 class="text-3xl font-extrabold text-orange-800 mb-6">Physique Statistique Quantique</h2>
         <p class="text-lg text-gray-700 leading-relaxed">
-            Quand le quantique rencontre la chaleur. Comment décrire un système à température $T > 0$ ?
+            Quand on a des milliards de particules quantiques, on ne suit plus chaque fonction d'onde.
+            On regarde la moyenne. C'est la thermodynamique.
         </p>
     </div>
 
-    <!-- État Thermique -->
+    <!-- Analogie Crowd -->
     <div class="bg-white p-6 rounded-xl shadow-md">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">L'État de Gibbs (Thermique)</h3>
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Analogie : La Foule dans un Stade 🏟️</h3>
         <p class="text-gray-600 mb-4">
-            À l'équilibre thermique, un système n'est pas dans un état pur, mais dans un mélange statistique pondéré par
-            l'énergie (Facteur de Boltzmann).
-        </p>
-        <div class="bg-orange-50 p-4 rounded text-center font-mono text-xl text-orange-900 mb-4">
-            $\rho = \frac{e^{-\beta H}}{Z}$
-        </div>
-        <p class="text-sm text-gray-600 text-center">
-            Avec $\beta = 1/k_B T$ et $Z = Tr(e^{-\beta H})$ (Fonction de partition).
+            <strong>Fermions (Matière) :</strong> Chacun veut son propre siège. Personne ne s'assoit sur les genoux de
+            l'autre. (Exclusion).
+            <br>
+            <strong>Bosons (Lumière) :</strong> Tout le monde veut s'empiler au même endroit pour faire la fête. (Laser,
+            Condensat de Bose-Einstein).
         </p>
     </div>
 
-    <!-- Entropie -->
-    <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-md border border-gray-200">
-        <h3 class="text-2xl font-bold text-gray-800 mb-4">Entropie de Von Neumann</h3>
-        <p class="text-gray-700 mb-4">
-            La mesure de l'ignorance (ou de l'information manquante) sur l'état quantique.
+    <!-- Interactive Viz -->
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+        <h3 class="text-white font-bold mb-4">Distribution de Fermi-Dirac vs Bose-Einstein</h3>
+        <p class="text-gray-400 text-sm mb-6">
+            Voyez comment la température change la répartition des particules.
         </p>
-        <p class="font-mono text-center text-lg bg-white p-2 rounded shadow-sm mb-4">
-            $S(\rho) = -Tr(\rho \ln \rho)$
-        </p>
-        <ul class="space-y-2 text-sm text-gray-600">
-            <li>• <strong>État Pur :</strong> $S = 0$ (On sait tout).</li>
-            <li>• <strong>État Maximale Mixte :</strong> $S = \ln N$ (Ignorance totale).</li>
-        </ul>
-    </div>
 
-    <!-- Transitions de Phase -->
-    <div class="bg-blue-50 p-6 rounded-xl border-t-4 border-blue-500">
-        <h3 class="text-xl font-bold text-blue-800 mb-3">Transitions de Phase Quantiques</h3>
-        <p class="text-gray-700 text-sm">
-            À $T=0$ (zéro absolu), les fluctuations thermiques disparaissent. Mais il reste les <strong>fluctuations
-                quantiques</strong> !
-            En changeant un paramètre (champ magnétique, pression), le système peut changer brutalement d'état
-            fondamental (ex: Isolant -> Supraconducteur).
-        </p>
-    </div>
-
-    <!-- Viz -->
-    <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
-        <h3 class="text-white font-bold mb-4">Visualisation : Entropie vs Température</h3>
-        <div id="stat-mech-viz" class="h-64 bg-black rounded border border-gray-700 flex items-center justify-center">
+        <div id="stat-mech-viz" class="w-full h-64 bg-black rounded border border-gray-700 relative">
             <!-- Viz injected by initStatMech -->
-            <p class="text-gray-500">Graphique S(T)</p>
         </div>
     </div>
 </div>

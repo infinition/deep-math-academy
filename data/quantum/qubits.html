@@ -1,34 +1,59 @@
-<button onclick="setQubitState('+')"
-    class="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 text-xs">|+⟩</button>
-<button onclick="setQubitState('-')"
-    class="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 text-xs">|-⟩</button>
-</div>
-</div>
-</div>
+<div class="space-y-8">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <h2 class="text-3xl font-extrabold text-indigo-800 mb-6">Qubits & Multi-qubits</h2>
+        <p class="text-lg text-gray-700 leading-relaxed">
+            Le bit classique est un interrupteur (0 ou 1).
+            Le <strong>Qubit</strong> est une sphère. Il peut pointer vers le Nord (0), le Sud (1), ou n'importe où
+            entre les deux.
+        </p>
+    </div>
 
-<!-- Multi-Qubits & Intrication -->
-<div class="bg-gradient-to-br from-purple-50 to-white p-8 rounded-2xl shadow-md border border-purple-100">
-    <h3 class="text-2xl font-bold text-purple-900 mb-6">Multi-Qubits & Intrication</h3>
-    <p class="text-gray-700 mb-6">
-        La puissance du calcul quantique vient de l'espace exponentiel des états.
-        Pour $N$ qubits, on a $2^N$ amplitudes complexes.
-    </p>
+    <!-- Analogie Coin -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Analogie : La Pièce en Rotation 🪙</h3>
+        <p class="text-gray-600 mb-4">
+            Une pièce posée sur la table est un Bit (Pile ou Face).
+            Une pièce qui tourne sur elle-même est un Qubit (Un mélange dynamique des deux).
+        </p>
+    </div>
 
-    <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-white p-4 rounded border border-purple-200">
-            <h4 class="font-bold text-purple-700 mb-2">2 Qubits</h4>
-            <p class="font-mono text-sm bg-gray-50 p-2 rounded">
-                $|\psi\rangle = c_{00}|00\rangle + c_{01}|01\rangle + c_{10}|10\rangle + c_{11}|11\rangle$
-            </p>
-            <p class="text-xs text-gray-500 mt-2">4 coefficients complexes.</p>
-        </div>
-        <div class="bg-white p-4 rounded border border-purple-200">
-            <h4 class="font-bold text-purple-700 mb-2">300 Qubits</h4>
-            <p class="text-sm text-gray-600">
-                $2^{300}$ coefficients. C'est plus que le nombre d'atomes dans l'univers observable !
-                Impossible à simuler classiquement.
-            </p>
+    <!-- Bloch Sphere Viz -->
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+        <h3 class="text-white font-bold mb-4">La Sphère de Bloch</h3>
+        <p class="text-gray-400 text-sm mb-6">
+            La carte du monde d'un Qubit.
+            <br>
+            Pôle Nord = |0⟩, Pôle Sud = |1⟩, Équateur = Superposition.
+        </p>
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+            <div id="bloch-sphere-container"
+                class="w-64 h-64 bg-black rounded-full border border-gray-700 relative shadow-[0_0_30px_rgba(79,70,229,0.3)]">
+                <!-- Viz injected by initQubits -->
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <button onclick="setQubitState('0')"
+                    class="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600">État |0⟩ (Nord)</button>
+                <button onclick="setQubitState('1')"
+                    class="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600">État |1⟩ (Sud)</button>
+                <button onclick="setQubitState('+')"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500">État |+⟩ (Équateur)</button>
+                <button onclick="setQubitState('-')"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500">État |-⟩ (Équateur)</button>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- Multi Qubits -->
+    <div class="bg-indigo-50 p-6 rounded-xl border-t-4 border-indigo-500">
+        <h3 class="text-xl font-bold text-indigo-900 mb-3">Et avec plusieurs Qubits ?</h3>
+        <p class="text-gray-700 mb-2">
+            Avec 2 qubits, on n'a pas 2 sphères. On a une "hypersphère" à 4 dimensions ($2^2$).
+            Avec 300 qubits, on a plus d'états que d'atomes dans l'univers visible ($2^{300}$).
+        </p>
+        <p class="text-sm font-bold text-indigo-800 mt-2">
+            C'est la puissance exponentielle du quantique.
+        </p>
+    </div>
 </div>

@@ -1,3 +1,73 @@
+<!-- T1 vs T2 -->
+<div class="grid md:grid-cols-2 gap-8">
+    <div class="bg-blue-50 p-6 rounded-xl border border-blue-200">
+        <h3 class="text-xl font-bold text-blue-800 mb-2">T1 : Relaxation (Énergie)</h3>
+        <p class="text-gray-700 text-sm mb-4">
+            Le temps qu'il faut pour que le qubit retombe de l'état excité $|1\rangle$ vers l'état fondamental
+            $|0\rangle$.
+            <br>
+            <em>Analogie : Une tasse de café chaud qui refroidit.</em>
+        </p>
+        <div class="h-2 bg-blue-200 rounded-full overflow-hidden">
+            <div class="h-full bg-blue-600 w-3/4"></div>
+        </div>
+    </div>
+
+    <div class="bg-purple-50 p-6 rounded-xl border border-purple-200">
+        <h3 class="text-xl font-bold text-purple-800 mb-2">T2 : Déphasage (Phase)</h3>
+        <p class="text-gray-700 text-sm mb-4">
+            Le temps qu'il faut pour que la superposition $|0\rangle + |1\rangle$ perde sa relation de phase
+            précise.
+            <br>
+            <em>Analogie : Des danseurs qui perdent le rythme.</em>
+        </p>
+        <div class="h-2 bg-purple-200 rounded-full overflow-hidden">
+            <div class="h-full bg-purple-600 w-1/2"></div>
+        </div>
+    </div>
 </div>
+
+<!-- Interactive Viz -->
+<div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+    <h3 class="text-white font-bold mb-4">Simulation : La Mort du Qubit</h3>
+
+    <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+        <div id="decoherence-viz"
+            class="w-64 h-64 bg-black rounded-full border border-gray-700 relative shadow-[0_0_30px_rgba(147,51,234,0.2)]">
+            <!-- Viz injected by initDecoherence -->
+        </div>
+
+        <div class="flex flex-col gap-6 w-full max-w-xs">
+            <div>
+                <div class="flex justify-between text-xs text-blue-400 mb-1">
+                    <span>T1 (Relaxation)</span>
+                    <span id="t1-val">Long</span>
+                </div>
+                <input type="range" id="t1-slider" min="10" max="500" value="300" class="w-full accent-blue-500">
+            </div>
+
+            <div>
+                <div class="flex justify-between text-xs text-purple-400 mb-1">
+                    <span>T2 (Déphasage)</span>
+                    <span id="t2-val">Moyen</span>
+                </div>
+                <input type="range" id="t2-slider" min="10" max="500" value="150" class="w-full accent-purple-500">
+            </div>
+
+            <button onclick="resetDecoherence()"
+                class="px-4 py-2 bg-gray-700 hover:bg-white hover:text-black text-white rounded transition-colors text-sm font-bold">
+                Réinitialiser à |+⟩
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Équation de Lindblad -->
+<div class="bg-gray-100 p-4 rounded-lg text-center">
+    <p class="text-xs text-gray-500 font-mono">
+        $\dot{\rho} = -i[H, \rho] + \sum_k \left( L_k \rho L_k^\dagger - \frac{1}{2} \{L_k^\dagger L_k, \rho\}
+        \right)$
+    </p>
+    <p class="text-xs text-gray-400 mt-1">(Équation maîtresse de Lindblad pour la dynamique dissipative)</p>
 </div>
 </div>

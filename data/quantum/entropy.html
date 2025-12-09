@@ -1,15 +1,83 @@
-<br>
-• <strong>État Mixte (Entropie > 0) :</strong> Un cocktail mélangé. On a perdu l'information sur les
-ingrédients exacts.
-</p>
+<!-- Shannon vs Von Neumann -->
+<div class="grid md:grid-cols-2 gap-8">
+    <div class="bg-blue-50 p-6 rounded-xl border-t-4 border-blue-500">
+        <h3 class="text-xl font-bold text-blue-800 mb-3">Entropie de Shannon (Classique)</h3>
+        <p class="text-gray-700 text-sm mb-4">
+            Mesure l'incertitude d'une variable aléatoire classique.
+            <br>
+            $H(X) = - \sum p_i \log p_i$
+        </p>
+        <ul class="text-sm text-blue-900 space-y-2">
+            <li>• 0 bit : Certitude absolue (pile ou face truqué).</li>
+            <li>• 1 bit : Incertitude maximale (pile ou face équitable).</li>
+        </ul>
+    </div>
+
+    <div class="bg-purple-50 p-6 rounded-xl border-t-4 border-purple-500">
+        <h3 class="text-xl font-bold text-purple-800 mb-3">Entropie de Von Neumann (Quantique)</h3>
+        <p class="text-gray-700 text-sm mb-4">
+            Mesure l'intrication ou le mélange d'un état quantique.
+            <br>
+            $S(\rho) = - Tr(\rho \log \rho)$
+        </p>
+        <ul class="text-sm text-purple-900 space-y-2">
+            <li>• <strong>État Pur :</strong> $S=0$ (On sait tout).</li>
+            <li>• <strong>État Mixte :</strong> $S>0$ (Bruit ou Intrication cachée).</li>
+        </ul>
+    </div>
 </div>
 
-<!-- Viz -->
-<div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
-    <h3 class="text-white font-bold mb-4">Visualisation : Entropie de Von Neumann</h3>
-    <div id="entropy-viz" class="h-64 bg-black rounded border border-gray-700 relative overflow-hidden">
-        <!-- Viz injected by initQuantumEntropy -->
+<!-- Interactive Viz -->
+<div class="bg-gray-900 p-6 rounded-xl shadow-inner">
+    <div class="flex justify-between items-center mb-4">
+        <h3 class="text-white font-bold">Visualisation : Pureté vs Entropie</h3>
+        <div class="bg-gray-800 px-3 py-1 rounded text-xs text-gray-300">
+            Entropie Actuelle : <span id="entropy-value" class="text-green-400 font-mono font-bold">0.00</span> bits
+        </div>
     </div>
-    <p class="text-xs text-gray-400 mt-4">Mélangez les états pour voir l'entropie augmenter.</p>
+
+    <div class="flex flex-col md:flex-row gap-6 items-center">
+        <div id="entropy-viz"
+            class="h-64 w-64 bg-black rounded-full border-4 border-gray-700 relative overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.2)]">
+            <!-- Viz injected by initQuantumEntropy -->
+        </div>
+
+        <div class="flex-1 space-y-6">
+            <div>
+                <label class="block text-gray-400 text-sm mb-2">Niveau de Mélange (Bruit)</label>
+                <input type="range" id="mix-slider" min="0" max="100" value="0"
+                    class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-500">
+                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>État Pur (|ψ⟩)</span>
+                    <span>État Mixte (ρ)</span>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                <p class="text-sm text-gray-300">
+                    <span class="text-purple-400 font-bold">Interprétation :</span>
+                    Si l'entropie est nulle, le système est dans un état parfaitement défini.
+                    Si elle est maximale, c'est le chaos total (bruit blanc), ou alors... le système est
+                    <strong>parfaitement intriqué</strong> avec un autre système que l'on ne regarde pas !
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Information Mutuelle -->
+<div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+    <h3 class="text-xl font-bold text-gray-800 mb-4">Information Mutuelle Quantique</h3>
+    <p class="text-gray-700 mb-4">
+        Combien d'information Alice et Bob partagent-ils ?
+        En classique, $I(A:B) \le H(A) + H(B)$.
+        En quantique, grâce à l'intrication, les corrélations peuvent être plus fortes que tout ce qui est classique
+        !
+    </p>
+    <div class="flex justify-center">
+        <div class="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-lg font-mono text-sm">
+            $S(A:B) = S(A) + S(B) - S(AB)$
+        </div>
+    </div>
 </div>
 </div>

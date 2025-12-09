@@ -1,4 +1,73 @@
+<!-- Le Problème de la Distance -->
+<div class="bg-cyan-50 p-6 rounded-xl border border-cyan-200">
+    <h3 class="text-xl font-bold text-cyan-900 mb-4">Le Défi : Pas d'Amplificateur</h3>
+    <p class="text-gray-700 text-sm mb-4">
+        Dans la fibre optique, on perd 95% des photons tous les 50km. En classique, on met un amplificateur qui
+        copie le signal.
+        En quantique, le <strong>Théorème de Non-Clonage</strong> interdit de copier ! On ne peut pas amplifier.
+    </p>
+    <p class="text-sm font-bold text-cyan-700">
+        Solution : Le Répéteur Quantique (Quantum Repeater).
+    </p>
 </div>
-<p class="text-xs text-gray-400 mt-4">Alice et Bob sont trop loin. Ils s'intriquent via un relais au milieu.</p>
+
+<!-- Interactive Viz -->
+<div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+    <h3 class="text-white font-bold mb-6">Visualisation : Entanglement Swapping</h3>
+
+    <div class="relative h-48 flex items-center justify-between px-12">
+        <!-- Alice -->
+        <div class="flex flex-col items-center z-10">
+            <div class="text-white font-bold mb-2">Alice (A)</div>
+            <div
+                class="w-12 h-12 bg-blue-500 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.8)] flex items-center justify-center text-white">
+                A</div>
+        </div>
+
+        <!-- Repeater -->
+        <div class="flex flex-col items-center z-10">
+            <div class="text-gray-400 text-xs mb-2">Répéteur (R)</div>
+            <div class="w-16 h-10 bg-gray-700 rounded border border-gray-500 flex items-center justify-center gap-2">
+                <div class="w-3 h-3 bg-blue-400 rounded-full opacity-50"></div>
+                <div class="w-3 h-3 bg-red-400 rounded-full opacity-50"></div>
+            </div>
+        </div>
+
+        <!-- Bob -->
+        <div class="flex flex-col items-center z-10">
+            <div class="text-white font-bold mb-2">Bob (B)</div>
+            <div
+                class="w-12 h-12 bg-red-500 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.8)] flex items-center justify-center text-white">
+                B</div>
+        </div>
+
+        <!-- Links (Canvas overlay) -->
+        <canvas id="network-canvas" class="absolute top-0 left-0 w-full h-full pointer-events-none"></canvas>
+    </div>
+
+    <div class="mt-8">
+        <button onclick="performEntanglementSwap()" id="swap-btn"
+            class="px-6 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg shadow-lg transition-all">
+            Activer le Répéteur (Swap) 🔗
+        </button>
+        <p id="network-status" class="text-sm text-gray-400 mt-4 h-6">État : Liens locaux établis (A-R et R-B)</p>
+    </div>
+</div>
+
+<!-- Applications -->
+<div class="grid md:grid-cols-2 gap-6">
+    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+        <h4 class="font-bold text-gray-800 mb-2">🔐 QKD Longue Distance</h4>
+        <p class="text-xs text-gray-600">
+            Échange de clés secrètes entre Paris et New York avec une sécurité absolue.
+        </p>
+    </div>
+    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+        <h4 class="font-bold text-gray-800 mb-2">☁️ Blind Quantum Computing</h4>
+        <p class="text-xs text-gray-600">
+            Utiliser un ordinateur quantique dans le cloud sans que le serveur ne sache ce qu'il calcule (le calcul
+            est chiffré).
+        </p>
+    </div>
 </div>
 </div>

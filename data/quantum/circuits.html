@@ -1,55 +1,34 @@
 <div class="space-y-8">
     <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-purple-600">
-        <h2 class="text-3xl font-extrabold text-purple-800 mb-6">4.1 Les Circuits Quantiques</h2>
+        <h2 class="text-3xl font-extrabold text-purple-800 mb-6">Les Circuits Quantiques</h2>
         <p class="text-lg text-gray-700 leading-relaxed">
-            La partition de musique du calcul quantique. On lit de gauche à droite (le temps avance).
+            Un programme quantique n'est pas une suite de code (if/else), c'est une <strong>partition de
+                musique</strong>.
+            Le temps avance de gauche à droite, et les portes sont les notes jouées sur les lignes (qubits).
         </p>
     </div>
 
-    <!-- Analogie -->
-    <div class="bg-purple-50 p-6 rounded-xl border border-purple-100">
-        <h3 class="text-xl font-bold text-purple-800 mb-3">💡 Analogie : La Partition Musicale</h3>
-        <p class="text-gray-700">
-            • <strong>Lignes (Portée) :</strong> Les Qubits.
-            <br>
-            • <strong>Notes :</strong> Les Portes (H, X, CNOT).
-            <br>
-            • <strong>Accords :</strong> Opérations simultanées ou intriquées.
-            <br>
-            L'ordinateur joue cette partition pour produire un résultat final (la mesure).
-        </p>
-    </div>
-
-    <!-- Anatomie -->
+    <!-- Analogie Music -->
     <div class="bg-white p-6 rounded-xl shadow-md">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Anatomie d'un Circuit</h3>
-        <div class="space-y-4">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-1 bg-gray-300 rounded"></div>
-                <div class="text-gray-700"><strong>Lignes horizontales :</strong> Les Qubits (fils quantiques).</div>
-            </div>
-            <div class="flex items-center gap-4">
-                <div
-                    class="w-8 h-8 bg-blue-100 border border-blue-500 flex items-center justify-center font-bold text-blue-700 rounded">
-                    H</div>
-                <div class="text-gray-700"><strong>Boîtes :</strong> Les Portes (opérations unitaires).</div>
-            </div>
-            <div class="flex items-center gap-4">
-                <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center text-white text-xs">●</div>
-                <div class="text-gray-700"><strong>Points noirs :</strong> Contrôles (pour CNOT, etc.).</div>
-            </div>
-        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Analogie : La Symphonie 🎼</h3>
+        <p class="text-gray-600 mb-4">
+            Chaque qubit est un instrument.
+            Les portes à 1 qubit (H, X) sont des solos.
+            Les portes à 2 qubits (CNOT) sont des harmonies (intrication).
+            À la fin, on écoute (mesure) le résultat.
+        </p>
     </div>
 
-    <!-- Interactive Builder -->
-    <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
-        <h3 class="text-white font-bold mb-4">Constructeur de Circuit Interactif</h3>
-        <p class="text-gray-400 text-sm mb-4">
-            Ajoutez des portes H (Superposition), X (NOT) ou Z (Phase) pour voir comment l'état évolue.
+    <!-- Interactive Viz: Circuit Builder -->
+    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Compositeur de Circuit</h3>
+        <p class="text-sm text-gray-600 mb-4">
+            Ajoutez des portes sur les lignes q0 et q1.
+            Essayez de créer un état intriqué (Bell State) : H sur q0, puis CNOT (simulé ici par l'état final).
         </p>
-        <div id="circuit-builder" class="min-h-[200px] bg-white rounded border border-gray-700 p-4">
+
+        <div id="circuit-builder" class="w-full">
             <!-- Viz injected by initQuantumCircuits -->
-            <p class="text-gray-400 text-center mt-10">Chargement du constructeur...</p>
         </div>
     </div>
 </div>

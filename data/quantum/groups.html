@@ -1,79 +1,71 @@
 <div class="space-y-8">
     <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-orange-500">
-        <h2 class="text-3xl font-extrabold text-orange-700 mb-6">2.2 Théorie des Groupes & Symétries</h2>
+        <h2 class="text-3xl font-extrabold text-orange-700 mb-6">Théorie des Groupes & Symétries</h2>
         <p class="text-lg text-gray-700 leading-relaxed">
-            La physique est une histoire de symétries. En quantique, ces symétries sont décrites par la <strong>Théorie
-                des Groupes</strong>.
-            Les portes quantiques forment des groupes.
+            Pourquoi la physique est-elle si belle ? Parce qu'elle est symétrique.
+            La <strong>Théorie des Groupes</strong> est l'outil mathématique pour décrire ces symétries.
         </p>
     </div>
 
-    <!-- Groupes Unitaires -->
-    <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-white p-6 rounded-xl shadow-md">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Le Groupe U(n)</h3>
-            <p class="text-gray-600 mb-4">
-                L'ensemble des matrices unitaires $n \times n$.
-            </p>
-            <ul class="space-y-2 text-sm text-gray-600">
-                <li>• Préserve le produit scalaire (et donc les probabilités).</li>
-                <li>• Représente toutes les opérations quantiques réversibles sur un système de dimension $n$.</li>
-            </ul>
-        </div>
+    <!-- Analogie Rubik's Cube -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Analogie : Le Rubik's Cube 🧩</h3>
+        <p class="text-gray-600 mb-4">
+            Un Rubik's Cube a un ensemble fini de mouvements possibles.
+            Si vous faites une rotation, puis son inverse, vous revenez au départ. C'est un <strong>Groupe</strong>.
+        </p>
+        <ul class="space-y-2 text-sm text-gray-600">
+            <li>• <strong>Élément neutre :</strong> Ne rien faire.</li>
+            <li>• <strong>Inverse :</strong> Tourner dans l'autre sens.</li>
+            <li>• <strong>Composition :</strong> Tourner Haut puis Droite.</li>
+        </ul>
+    </div>
 
-        <div class="bg-white p-6 rounded-xl shadow-md">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Le Groupe SU(2)</h3>
-            <p class="text-gray-600 mb-4">
-                Matrices unitaires $2 \times 2$ avec déterminant 1.
-            </p>
-            <div class="bg-orange-50 p-3 rounded border border-orange-100 text-center">
-                <span class="font-bold text-orange-800">C'est le groupe des Qubits !</span>
+    <!-- Interactive Viz: SU(2) Sphere -->
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+        <h3 class="text-white font-bold mb-4">Le Groupe SU(2) : La Sphère Magique</h3>
+        <p class="text-gray-400 text-sm mb-6">
+            C'est le groupe des rotations quantiques (Qubits).
+            Contrairement au Rubik's Cube, les rotations sont continues et fluides.
+        </p>
+
+        <div class="flex flex-col items-center gap-6">
+            <div id="su2-viz"
+                class="w-64 h-64 bg-black rounded-full border border-gray-700 relative shadow-[0_0_30px_rgba(249,115,22,0.3)]">
+                <!-- Viz injected by initGroupTheory -->
             </div>
-            <p class="text-xs text-gray-500 mt-2">
-                Il est isomorphe aux rotations dans l'espace 3D (double recouvrement de SO(3)). C'est pour ça qu'on
-                utilise la Sphère de Bloch.
-            </p>
+
+            <div class="flex gap-4">
+                <button onclick="rotateSU2('x')"
+                    class="px-4 py-2 bg-orange-600 text-white rounded font-bold hover:bg-orange-500">Rotation X</button>
+                <button onclick="rotateSU2('y')"
+                    class="px-4 py-2 bg-orange-600 text-white rounded font-bold hover:bg-orange-500">Rotation Y</button>
+                <button onclick="rotateSU2('z')"
+                    class="px-4 py-2 bg-orange-600 text-white rounded font-bold hover:bg-orange-500">Rotation Z</button>
+            </div>
         </div>
     </div>
 
-    <!-- Algèbre de Lie -->
-    <div class="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-8 rounded-2xl shadow-lg">
+    <!-- Lie Algebra -->
+    <div class="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-8 rounded-2xl shadow-lg mt-8">
         <h3 class="text-2xl font-bold mb-6">Générateurs & Algèbre de Lie</h3>
         <p class="text-gray-300 mb-6">
-            Tout élément d'un groupe de Lie continu (comme une rotation) peut être généré par une exponentielle d'un
-            élément de son algèbre.
+            Pas besoin de connaître toutes les rotations infinies. Il suffit de connaître les "directions" de base : les
+            <strong>Générateurs</strong>.
         </p>
-
-        <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+        <div class="flex justify-center gap-8 font-mono text-xl">
             <div class="text-center">
-                <p class="font-mono text-xl text-green-400 mb-2">
-                    $U(\theta) = e^{-i \frac{\theta}{2} \vec{n} \cdot \vec{\sigma}}$
-                </p>
-                <p class="text-sm text-gray-400">Rotation d'angle $\theta$ autour de l'axe $\vec{n}$</p>
+                <div class="text-orange-400">$\sigma_x$</div>
+                <div class="text-xs text-gray-500">Pauli X</div>
             </div>
-
-            <div class="text-4xl text-gray-600">→</div>
-
             <div class="text-center">
-                <p class="font-bold text-indigo-400 mb-2">Générateurs : Matrices de Pauli</p>
-                <div class="flex gap-4 font-mono text-sm">
-                    <span class="bg-gray-700 px-2 py-1 rounded">$\sigma_x$</span>
-                    <span class="bg-gray-700 px-2 py-1 rounded">$\sigma_y$</span>
-                    <span class="bg-gray-700 px-2 py-1 rounded">$\sigma_z$</span>
-                </div>
+                <div class="text-orange-400">$\sigma_y$</div>
+                <div class="text-xs text-gray-500">Pauli Y</div>
             </div>
-        </div>
-    </div>
-
-    <!-- Visualisation SU(2) -->
-    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Visualisation : Rotation SU(2)</h3>
-        <p class="text-gray-600 mb-4">
-            Une porte quantique est une rotation continue sur la sphère de Bloch.
-        </p>
-        <div id="su2-viz" class="h-64 bg-gray-50 rounded flex items-center justify-center">
-            <!-- Viz injected by initGroupTheory -->
-            <p class="text-gray-400">Visualisation Rotation Bloch</p>
+            <div class="text-center">
+                <div class="text-orange-400">$\sigma_z$</div>
+                <div class="text-xs text-gray-500">Pauli Z</div>
+            </div>
         </div>
     </div>
 </div>

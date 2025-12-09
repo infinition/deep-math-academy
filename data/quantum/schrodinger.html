@@ -1,59 +1,54 @@
 <div class="space-y-8">
     <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-green-500">
-        <h2 class="text-3xl font-extrabold text-green-700 mb-6">3.4 L'Équation de Schrödinger</h2>
+        <h2 class="text-3xl font-extrabold text-green-700 mb-6">L'Équation de Schrödinger</h2>
         <p class="text-lg text-gray-700 leading-relaxed">
-            L'équation fondamentale qui régit la dynamique de tout système quantique.
+            $i\hbar \frac{\partial}{\partial t}|\psi\rangle = \hat{H}|\psi\rangle$
+            <br><br>
+            Ne fuyez pas ! Cette équation dit juste une chose : <strong>L'énergie totale ($\hat{H}$) pilote le
+                changement dans le temps.</strong>
         </p>
     </div>
 
-    <!-- L'Équation -->
-    <div class="bg-gray-900 text-white p-8 rounded-2xl shadow-lg text-center">
-        <h3 class="text-2xl font-bold mb-6 text-green-400">Forme Dépendante du Temps</h3>
-        <div class="font-mono text-3xl md:text-4xl mb-6 overflow-x-auto py-4">
-            $i\hbar \frac{d}{dt}|\psi(t)\rangle = \hat{H}|\psi(t)\rangle$
-        </div>
-        <p class="text-gray-400 text-sm">
-            $\hat{H}$ est l'<strong>Hamiltonien</strong> (l'opérateur Énergie).
-            <br>
-            Si $\hat{H}$ est constant, la solution est simple :
+    <!-- Analogie Wave -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Analogie : La Vague sur l'Eau 🌊</h3>
+        <p class="text-gray-600 mb-4">
+            L'équation de Schrödinger est l'équivalent de l'équation des ondes pour l'eau.
+            Elle décrit comment la "vague de probabilité" se propage, rebondit et interfère.
         </p>
-        <div class="font-mono text-xl text-yellow-400 mt-4">
-            $|\psi(t)\rangle = e^{-i\hat{H}t/\hbar} |\psi(0)\rangle$
-        </div>
     </div>
 
-    <!-- Hamiltonien -->
-    <div class="grid md:grid-cols-2 gap-8">
+    <!-- Interactive Viz -->
+    <div class="space-y-8">
+        <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-green-500">
+            <h2 class="text-3xl font-extrabold text-green-700 mb-6">L'Équation de Schrödinger</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                $i\hbar \frac{\partial}{\partial t}|\psi\rangle = \hat{H}|\psi\rangle$
+                <br><br>
+                Ne fuyez pas ! Cette équation dit juste une chose : <strong>L'énergie totale ($\hat{H}$) pilote le
+                    changement dans le temps.</strong>
+            </p>
+        </div>
+
+        <!-- Analogie Wave -->
         <div class="bg-white p-6 rounded-xl shadow-md">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">L'Opérateur d'Évolution</h3>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Analogie : La Vague sur l'Eau 🌊</h3>
             <p class="text-gray-600 mb-4">
-                L'opérateur $U(t) = e^{-i\hat{H}t/\hbar}$ est <strong>Unitaire</strong>.
+                L'équation de Schrödinger est l'équivalent de l'équation des ondes pour l'eau.
+                Elle décrit comment la "vague de probabilité" se propage, rebondit et interfère.
             </p>
-            <ul class="space-y-2 text-sm text-gray-600">
-                <li>• Il préserve la norme du vecteur d'état (la probabilité totale reste 1).</li>
-                <li>• C'est une rotation continue dans l'espace de Hilbert.</li>
-                <li>• Les portes quantiques sont juste des évolutions de Schrödinger contrôlées !</li>
-            </ul>
         </div>
 
-        <div class="bg-white p-6 rounded-xl shadow-md">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Exemple : Précession</h3>
-            <p class="text-gray-600 mb-4">
-                Un qubit dans un champ magnétique $B$ selon Z.
-                Hamiltonien : $H \propto \sigma_z$.
+        <!-- Interactive Viz -->
+        <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+            <h3 class="text-white font-bold mb-4">Simulation : Paquet d'Onde</h3>
+            <p class="text-gray-400 text-sm mb-6">
+                Regardez la particule (la vague) se déplacer. Plus la vague est étalée, moins on sait où est la
+                particule.
             </p>
-            <p class="text-sm text-gray-500">
-                L'état tourne autour de l'axe Z à une fréquence proportionnelle à l'énergie.
-            </p>
-        </div>
-    </div>
 
-    <!-- Viz -->
-    <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
-        <h3 class="text-white font-bold mb-4">Visualisation : Évolution Temporelle</h3>
-        <div id="schrodinger-viz" class="h-64 bg-black rounded border border-gray-700 flex items-center justify-center">
-            <!-- Viz injected by initSchrodinger -->
-            <p class="text-gray-500">Simulation Évolution</p>
+            <div id="schrodinger-viz" class="w-full h-64 bg-black rounded border border-gray-700 relative">
+                <!-- Viz injected by initSchrodinger -->
+            </div>
         </div>
     </div>
-</div>

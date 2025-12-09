@@ -1,63 +1,32 @@
 <div class="space-y-8">
     <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-teal-500">
-        <h2 class="text-3xl font-extrabold text-teal-700 mb-6">2.3 Analyse Fonctionnelle</h2>
+        <h2 class="text-3xl font-extrabold text-teal-700 mb-6">Analyse Fonctionnelle</h2>
         <p class="text-lg text-gray-700 leading-relaxed">
-            Quand on passe à la dimension infinie (fonctions d'onde continues), l'algèbre linéaire ne suffit plus.
-            Bienvenue dans l'analyse fonctionnelle.
+            Quand l'espace des vecteurs devient infini, on entre dans le royaume des <strong>Fonctions d'Onde</strong>.
+            C'est ici que vit l'équation de Schrödinger pour les atomes.
         </p>
     </div>
 
-    <!-- Espaces -->
-    <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-gray-400">
-            <h3 class="text-xl font-bold text-gray-800 mb-3">Espace de Banach</h3>
-            <p class="text-gray-600 text-sm mb-2">
-                Espace vectoriel normé complet.
-            </p>
-            <p class="text-xs text-gray-500">
-                On peut mesurer des longueurs, mais pas forcément des angles (pas de produit scalaire).
-            </p>
-        </div>
-
-        <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-teal-500">
-            <h3 class="text-xl font-bold text-teal-800 mb-3">Espace de Hilbert</h3>
-            <p class="text-gray-600 text-sm mb-2">
-                Un Banach spécial avec un <strong>produit scalaire</strong>.
-            </p>
-            <p class="text-xs text-gray-500">
-                C'est le seul cadre où la mécanique quantique "fonctionne" (probabilités, orthogonalité).
-            </p>
-        </div>
-    </div>
-
-    <!-- Spectre -->
-    <div class="bg-gradient-to-br from-teal-50 to-white p-8 rounded-2xl shadow-md">
-        <h3 class="text-2xl font-bold text-teal-900 mb-6">Le Spectre d'un Opérateur</h3>
-        <p class="text-gray-700 mb-4">
-            En dimension finie, le spectre est l'ensemble des valeurs propres (discret).
-            En dimension infinie, ça se complique.
+    <!-- Analogie Guitar -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Analogie : La Corde de Guitare 🎸</h3>
+        <p class="text-gray-600 mb-4">
+            Une corde de guitare peut vibrer de plein de façons différentes.
+            Mais toutes ces vibrations sont composées de "modes fondamentaux" (harmoniques).
         </p>
-
-        <div class="flex flex-col gap-4">
-            <div class="flex items-center gap-4 bg-white p-4 rounded shadow-sm">
-                <div class="bg-teal-100 text-teal-800 font-bold px-3 py-1 rounded">Spectre Ponctuel</div>
-                <div class="text-gray-600 text-sm">Les vraies valeurs propres (états liés, énergies quantifiées).</div>
-            </div>
-            <div class="flex items-center gap-4 bg-white p-4 rounded shadow-sm">
-                <div class="bg-orange-100 text-orange-800 font-bold px-3 py-1 rounded">Spectre Continu</div>
-                <div class="text-gray-600 text-sm">Pas de vecteurs propres dans l'espace de Hilbert (états de diffusion,
-                    particule libre).</div>
-            </div>
-            <div class="flex items-center gap-4 bg-white p-4 rounded shadow-sm">
-                <div class="bg-red-100 text-red-800 font-bold px-3 py-1 rounded">Spectre Résiduel</div>
-                <div class="text-gray-600 text-sm">Une bizarrerie mathématique qui n'apparaît pas pour les opérateurs
-                    Hermitiens (ouf !).</div>
-            </div>
-        </div>
+        <ul class="space-y-2 text-sm text-gray-600">
+            <li>• <strong>Vecteur :</strong> La forme de la corde à un instant t.</li>
+            <li>• <strong>Base :</strong> Les harmoniques (sinusoïdes).</li>
+            <li>• <strong>Opérateur :</strong> Pincer la corde.</li>
+        </ul>
     </div>
 
-    <div id="spectrum-viz" class="h-48 bg-gray-100 rounded flex items-center justify-center text-gray-400">
-        <!-- Viz injected by initFunctionalAnalysis -->
-        [Visualisation Spectre Discret vs Continu]
-    </div>
+    <!-- Interactive Viz -->
+    class="px-3 py-1 bg-teal-600 text-white rounded hover:bg-teal-500 text-xs">+ Mode 2</button>
+    <button onclick="addHarmonic(3)" class="px-3 py-1 bg-teal-600 text-white rounded hover:bg-teal-500 text-xs">+ Mode
+        3</button>
+    <button onclick="resetHarmonics()"
+        class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-500 text-xs">Reset</button>
+</div>
+</div>
 </div>

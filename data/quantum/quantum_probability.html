@@ -1,68 +1,46 @@
 <div class="space-y-8">
     <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-indigo-900">
-        <h2 class="text-3xl font-extrabold text-indigo-900 mb-6">2.4 Probabilités Quantiques Avancées</h2>
+        <h2 class="text-3xl font-extrabold text-indigo-900 mb-6">Probabilités Quantiques Avancées</h2>
         <p class="text-lg text-gray-700 leading-relaxed">
-            Jusqu'à présent, nous avons supposé des états purs ($|\psi\rangle$). Mais dans la vraie vie (bruit,
-            décohérence), nous avons besoin de plus : la <strong>Matrice Densité</strong>.
+            En classique, l'incertitude vient de notre ignorance (on ne sait pas où est la bille).
+            En quantique, l'incertitude est <strong>intrinsèque</strong> à la nature.
         </p>
     </div>
 
-    <!-- Matrice Densité -->
-    <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-md border border-gray-200">
-        <h3 class="text-2xl font-bold text-gray-800 mb-4">L'Opérateur Densité ($\rho$)</h3>
-        <p class="text-gray-700 mb-6">
-            C'est l'outil ultime pour décrire un système quantique, qu'il soit pur ou mélangé (statistique classique +
-            quantique).
-        </p>
-
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-white p-4 rounded border border-indigo-100">
-                <h4 class="font-bold text-indigo-700 mb-2">Définition</h4>
-                <p class="font-mono text-lg text-center bg-gray-50 p-2 rounded mb-2">
-                    $\rho = \sum_i p_i |\psi_i\rangle \langle \psi_i|$
-                </p>
-                <p class="text-sm text-gray-600">
-                    Où $p_i$ est la probabilité classique d'être dans l'état $|\psi_i\rangle$.
-                </p>
-            </div>
-
-            <div class="bg-white p-4 rounded border border-indigo-100">
-                <h4 class="font-bold text-indigo-700 mb-2">Propriétés</h4>
-                <ul class="text-sm space-y-2 text-gray-600">
-                    <li>• $Tr(\rho) = 1$ (Somme des probas = 1)</li>
-                    <li>• $\rho = \rho^\dagger$ (Hermitienne)</li>
-                    <li>• $\rho \geq 0$ (Positive)</li>
-                    <li>• <strong>État Pur :</strong> $Tr(\rho^2) = 1$ ($\rho = |\psi\rangle\langle\psi|$)</li>
-                    <li>• <strong>État Mixte :</strong> $Tr(\rho^2) < 1$</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- POVM -->
-    <div class="bg-yellow-50 p-8 rounded-2xl shadow-md border-l-8 border-yellow-500">
-        <h3 class="text-2xl font-bold text-yellow-800 mb-4">Mesures Généralisées (POVM)</h3>
-        <p class="text-gray-700 mb-4">
-            Les mesures projectives (von Neumann) sont idéales. En pratique, les détecteurs sont imparfaits.
-            Les <strong>POVM</strong> (Positive Operator-Valued Measures) décrivent ces mesures réalistes.
-        </p>
-        <p class="text-sm text-gray-600 italic">
-            Indispensable pour la correction d'erreurs et le Quantum Machine Learning.
+    <!-- Analogie -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Analogie : Le Brouillard Quantique 🌫️</h3>
+        <p class="text-gray-600 mb-4">
+            Imaginez un objet qui n'a pas de couleur définie, mais une "propension" à être rouge ou bleu.
+            Ce n'est pas que vous ne voyez pas bien la couleur, c'est que la couleur <strong>n'existe pas
+                encore</strong>.
         </p>
     </div>
 
-    <!-- Viz -->
-    <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
-        <h3 class="text-white font-bold mb-4">Visualisation : État Mixte sur la Sphère de Bloch</h3>
-        <div class="flex flex-col md:flex-row gap-4 items-center">
-            <div id="density-viz" class="flex-1 h-64 w-full bg-black rounded border border-gray-700 relative">
+    <!-- Density Matrix Viz -->
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+        <h3 class="text-white font-bold mb-4">Matrice Densité : Pur vs Mixte</h3>
+        <p class="text-gray-400 text-sm mb-6">
+            Un état pur est sur la surface de la sphère (certitude maximale).
+            Un état mixte (bruit) est à l'intérieur (incertitude classique + quantique).
+        </p>
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+            <div id="density-viz"
+                class="w-64 h-64 bg-black rounded-full border border-gray-700 relative shadow-[0_0_30px_rgba(99,102,241,0.3)]">
                 <!-- Viz injected by initQuantumProbability -->
             </div>
-            <div class="text-gray-400 text-sm w-full md:w-1/3">
-                <p>Un état pur est SUR la surface ($r=1$).</p>
-                <p class="mt-2">Un état mixte est À L'INTÉRIEUR ($r<1$).< /p>
-                        <p class="mt-2 text-center font-mono text-yellow-400">Le centre = Bruit blanc total (Maximally
-                            Mixed).</p>
+
+            <div class="flex flex-col gap-4 w-full max-w-xs">
+                <div>
+                    <label class="text-gray-400 text-xs">Pureté (Rayon)</label>
+                    <input type="range" id="purity-slider" min="0" max="100" value="100"
+                        class="w-full accent-indigo-500">
+                </div>
+                <p class="text-xs text-gray-500">
+                    100% = État Pur (Cohérent)<br>
+                    0% = Bruit Total (Maximale Mixte)
+                </p>
             </div>
         </div>
     </div>

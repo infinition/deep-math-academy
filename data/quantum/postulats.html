@@ -1,142 +1,79 @@
 <div class="space-y-8">
     <!-- Introduction -->
     <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
-        <h2 class="text-3xl font-extrabold text-indigo-800 mb-6">1.1 Les 4 Piliers de la Mécanique Quantique</h2>
+        <h2 class="text-3xl font-extrabold text-indigo-800 mb-6">Les 4 Piliers de la Mécanique Quantique</h2>
         <p class="text-lg text-gray-700 leading-relaxed mb-4">
-            Bienvenue dans l'univers quantique. Ici, nos intuitions classiques s'effondrent.
-            Pour naviguer dans ce monde, nous avons besoin de nouvelles règles : ce sont les <strong>Postulats</strong>.
-        </p>
-        <p class="text-gray-600 italic">
-            Imaginez ces postulats comme les règles d'un jeu d'échecs cosmique. Si vous les acceptez, tout le reste
-            (superposition, intrication, calcul quantique) en découle logiquement.
+            Bienvenue dans le <strong>Casino Quantique</strong>. Ici, les règles du jeu sont fondamentalement
+            différentes de notre monde classique.
+            Oubliez vos certitudes. Ici, une pièce peut être pile ET face en même temps.
         </p>
     </div>
 
-    <!-- Postulat 1 : L'État -->
-    <div class="bg-gradient-to-br from-indigo-50 to-white p-8 rounded-2xl shadow-md relative overflow-hidden">
-        <div class="absolute top-0 right-0 bg-indigo-100 text-indigo-800 px-4 py-1 rounded-bl-xl font-bold text-sm">
-            POSTULAT #1</div>
-        <h3 class="text-2xl font-bold text-indigo-900 mb-4 flex items-center gap-3">
-            <span
-                class="bg-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center text-lg">1</span>
-            L'État Quantique
-        </h3>
-
-        <div class="grid md:grid-cols-2 gap-8">
-            <div>
-                <p class="text-gray-700 mb-4">
-                    <strong>En classique :</strong> Un objet a une position $(x, y, z)$ et une vitesse précises.
-                    <br>
-                    <strong>En quantique :</strong> Tout ce que l'on peut savoir sur un système est contenu dans un
-                    vecteur $|\psi\rangle$ (appelé "ket") vivant dans un espace vectoriel complexe (Espace de Hilbert).
-                </p>
-                <div class="bg-white p-4 rounded-lg border border-indigo-100 shadow-sm">
-                    <p class="font-mono text-indigo-700 text-center text-lg">
-                        $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$
-                    </p>
-                    <p class="text-center text-sm text-gray-500 mt-2">
-                        $\alpha$ et $\beta$ sont des nombres complexes.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Interactive Viz Container -->
-            <div class="flex flex-col items-center justify-center bg-gray-900 rounded-xl p-4 shadow-inner relative">
-                <div id="quantum-state-viz" class="w-full h-48 flex items-center justify-center">
-                    <!-- Canvas injected by initQuantumPostulates -->
-                </div>
-                <p class="text-xs text-gray-400 mt-2 text-center">Visualisation d'un état (Qubit) sur la sphère de Bloch
-                    (projection 2D)</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Postulat 2 : Les Mesures -->
-    <div class="bg-gradient-to-br from-purple-50 to-white p-8 rounded-2xl shadow-md relative overflow-hidden">
-        <div class="absolute top-0 right-0 bg-purple-100 text-purple-800 px-4 py-1 rounded-bl-xl font-bold text-sm">
-            POSTULAT #2</div>
-        <h3 class="text-2xl font-bold text-purple-900 mb-4 flex items-center gap-3">
-            <span
-                class="bg-purple-600 text-white rounded-full w-10 h-10 flex items-center justify-center text-lg">2</span>
-            Les Observables (Mesures)
-        </h3>
-
-        <p class="text-gray-700 mb-4">
-            On ne "regarde" pas simplement un système quantique. On lui pose une question.
-            Mathématiquement, chaque grandeur physique (énergie, spin, position) est associée à un <strong>Opérateur
-                Hermitien</strong> $\hat{A}$.
+    <!-- Postulat 1: Superposition -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">1. La Superposition (L'État)</h3>
+        <p class="text-gray-600 mb-4">
+            Dans le monde classique, une pièce est soit Pile, soit Face.
+            En quantique, tant qu'on ne regarde pas, elle est dans une <strong>superposition</strong> des deux.
         </p>
-
-        <div class="bg-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
-            <p class="text-purple-900 font-medium">
-                Le résultat d'une mesure ne peut être qu'une des <strong>valeurs propres</strong> de cet opérateur.
+        <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-200 text-center">
+            <p class="font-mono text-xl text-indigo-900">
+                $|\psi\rangle = \alpha|Pile\rangle + \beta|Face\rangle$
+            </p>
+            <p class="text-xs text-gray-500 mt-2">
+                $\alpha$ et $\beta$ sont des nombres complexes (amplitudes).
             </p>
         </div>
     </div>
 
-    <!-- Postulat 3 : Probabilités -->
-    <div class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl shadow-md relative overflow-hidden">
-        <div class="absolute top-0 right-0 bg-blue-100 text-blue-800 px-4 py-1 rounded-bl-xl font-bold text-sm">POSTULAT
-            #3</div>
-        <h3 class="text-2xl font-bold text-blue-900 mb-4 flex items-center gap-3">
-            <span
-                class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center text-lg">3</span>
-            La Règle de Born (Probabilités)
-        </h3>
+    <!-- Interactive Viz: Quantum Casino -->
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+        <h3 class="text-white font-bold mb-4">Le Casino Quantique 🎰</h3>
+        <p class="text-gray-400 text-sm mb-6">
+            La roue tourne infiniment vite (superposition). Cliquez sur "Mesurer" pour forcer le destin.
+        </p>
 
-        <div class="flex flex-col md:flex-row gap-6 items-center">
-            <div class="flex-1">
-                <p class="text-gray-700 mb-4">
-                    Dieu joue-t-il aux dés ? En quantique, oui.
-                    Si un état est $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$, la probabilité de mesurer l'état
-                    $|0\rangle$ est :
-                </p>
-                <div class="text-center py-2">
-                    <span class="text-2xl font-bold text-blue-700">$$P(0) = |\alpha|^2$$</span>
-                </div>
-                <p class="text-sm text-gray-500 mt-2">
-                    Condition de normalisation : $|\alpha|^2 + |\beta|^2 = 1$ (La somme des probabilités vaut 100%).
-                </p>
-            </div>
-            <div class="w-full md:w-1/3 bg-white p-4 rounded-xl shadow-sm border border-blue-100">
-                <div id="born-rule-viz" class="h-32 flex items-center justify-center text-gray-400 text-sm">
-                    <!-- Interactive probability bar chart could go here -->
-                    [Graphique Probabilités]
+        <div class="flex flex-col items-center gap-6">
+            <div class="relative w-48 h-48">
+                <canvas id="quantum-casino-viz" class="w-full h-full"></canvas>
+                <!-- Overlay for result -->
+                <div id="casino-result"
+                    class="absolute inset-0 flex items-center justify-center text-4xl font-bold text-white drop-shadow-md hidden">
+                    ?
                 </div>
             </div>
+
+            <div class="flex items-center gap-4 w-full max-w-md">
+                <span class="text-blue-400 text-xs font-bold">Probabilité Bleu</span>
+                <input type="range" id="casino-slider" min="0" max="100" value="50" class="flex-1 accent-indigo-500">
+                <span class="text-red-400 text-xs font-bold">Probabilité Rouge</span>
+            </div>
+
+            <button onclick="spinCasino()" id="casino-btn"
+                class="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-full shadow-lg hover:scale-105 transition transform">
+                Mesurer l'État 🎲
+            </button>
         </div>
     </div>
 
-    <!-- Postulat 4 : Évolution -->
-    <div class="bg-gradient-to-br from-green-50 to-white p-8 rounded-2xl shadow-md relative overflow-hidden">
-        <div class="absolute top-0 right-0 bg-green-100 text-green-800 px-4 py-1 rounded-bl-xl font-bold text-sm">
-            POSTULAT #4</div>
-        <h3 class="text-2xl font-bold text-green-900 mb-4 flex items-center gap-3">
-            <span
-                class="bg-green-600 text-white rounded-full w-10 h-10 flex items-center justify-center text-lg">4</span>
-            L'Équation de Schrödinger
-        </h3>
-
-        <p class="text-gray-700 mb-4">
-            Comment l'état change-t-il quand on ne le regarde pas ? Il évolue de manière fluide et déterministe selon
-            cette équation célèbre :
+    <!-- Postulat 2: Mesure -->
+    <div class="bg-red-50 p-6 rounded-xl border-t-4 border-red-500">
+        <h3 class="text-xl font-bold text-red-900 mb-3">2. La Mesure (L'Effondrement)</h3>
+        <p class="text-gray-700 mb-2">
+            C'est l'acte de regarder qui force la nature à choisir.
+            L'état se "réduit" brutalement à une seule possibilité.
         </p>
-
-        <div
-            class="bg-gray-900 text-green-400 p-6 rounded-xl font-mono text-center text-xl shadow-inner overflow-x-auto">
-            $$ i\hbar \frac{d}{dt}|\psi(t)\rangle = \hat{H}|\psi(t)\rangle $$
-        </div>
-
-        <p class="text-sm text-gray-600 mt-4 text-center">
-            $\hat{H}$ est l'Hamiltonien (l'opérateur énergie totale). C'est le moteur de l'évolution temporelle.
+        <p class="text-sm font-bold text-red-800">
+            Probabilité = $|\alpha|^2$
         </p>
     </div>
 
-    <!-- Interactive Summary / Quiz Trigger -->
-    <div class="text-center mt-12">
-        <button onclick="startQuizSession('quantum_postulates')"
-            class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:scale-105 flex items-center gap-2 mx-auto">
-            <span>🧠</span> Tester ma compréhension
-        </button>
+    <!-- Postulat 3: Évolution -->
+    <div class="bg-green-50 p-6 rounded-xl border-t-4 border-green-500">
+        <h3 class="text-xl font-bold text-green-900 mb-3">3. L'Évolution (Schrödinger)</h3>
+        <p class="text-gray-700 mb-2">
+            Entre deux mesures, l'état évolue de manière fluide et déterministe, comme une vague, guidé par l'équation
+            de Schrödinger.
+        </p>
     </div>
 </div>

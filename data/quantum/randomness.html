@@ -1,18 +1,56 @@
-<div class="space-y-8">
-    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-teal-600">
-        <h2 class="text-3xl font-extrabold text-teal-900 mb-6">7.3 Aléa Quantique (QRNG)</h2>
-        <p class="text-lg text-gray-700 leading-relaxed">
-            Le hasard classique n'existe pas (c'est du pseudo-aléatoire).
-            Le hasard quantique est <strong>fondamentalement imprévisible</strong>. C'est la seule source de vrai hasard
-            dans l'univers.
-        </p>
-    </div>
-
-    <!-- Viz -->
-    <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
-        <h3 class="text-white font-bold mb-4">Générateur : Classique vs Quantique</h3>
-        <div id="qrng-viz" class="h-64 bg-black rounded border border-gray-700 relative overflow-hidden">
-            <!-- Viz injected by initQRNG -->
+<!-- QRNG vs PRNG -->
+<div class="grid md:grid-cols-2 gap-6">
+    <div class="bg-gray-100 p-6 rounded-xl border border-gray-300">
+        <h3 class="font-bold text-gray-700 mb-2">PRNG (Pseudo-Random)</h3>
+        <p class="text-xs text-gray-600 mb-2">Algorithme déterministe.</p>
+        <div
+            class="font-mono text-xs bg-white p-2 rounded border border-gray-200 overflow-hidden whitespace-nowrap text-gray-400">
+            011010101101... (Répétitif après $2^{19937}$ ans)
         </div>
     </div>
+
+    <div class="bg-teal-50 p-6 rounded-xl border border-teal-300 shadow-md">
+        <h3 class="font-bold text-teal-800 mb-2">QRNG (True Random)</h3>
+        <p class="text-xs text-teal-700 mb-2">Effondrement de la fonction d'onde.</p>
+        <div
+            class="font-mono text-xs bg-white p-2 rounded border border-teal-200 overflow-hidden whitespace-nowrap text-teal-600">
+            100111010010... (Jamais prévisible)
+        </div>
+    </div>
+</div>
+
+<!-- Interactive Viz -->
+<div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+    <h3 class="text-white font-bold mb-4">Générateur de Nombres Aléatoires Quantiques</h3>
+
+    <div class="flex flex-col items-center gap-6">
+        <div
+            class="relative w-full h-32 bg-black rounded border border-gray-700 overflow-hidden flex items-center px-4">
+            <canvas id="qrng-viz" class="absolute inset-0 w-full h-full"></canvas>
+            <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent z-10"></div>
+        </div>
+
+        <div class="flex gap-4 items-center">
+            <button onclick="startQRNG()" id="qrng-btn"
+                class="px-6 py-3 bg-teal-600 hover:bg-teal-500 text-white font-bold rounded-full shadow-[0_0_15px_rgba(20,184,166,0.5)] transition-all active:scale-95">
+                Générer du Chaos 🎲
+            </button>
+            <div class="flex flex-col text-left">
+                <span class="text-gray-400 text-xs">Dernier octet :</span>
+                <span id="qrng-value" class="text-2xl font-mono text-teal-400 font-bold">--</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Certifié par Bell -->
+<div class="bg-indigo-50 p-6 rounded-xl border-l-4 border-indigo-500">
+    <h3 class="text-lg font-bold text-indigo-800 mb-2">Aléa Certifié par l'Inégalité de Bell</h3>
+    <p class="text-gray-700 text-sm">
+        Comment être sûr que votre appareil QRNG n'est pas truqué ?
+        On peut utiliser un test de Bell. Si la corrélation dépasse la limite classique ($S > 2$), alors les
+        résultats sont garantis
+        provenir d'un processus quantique, et donc être imprévisibles (même pour le constructeur de l'appareil !).
+    </p>
+</div>
 </div>

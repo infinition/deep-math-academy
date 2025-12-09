@@ -1,17 +1,55 @@
 <div class="space-y-8">
     <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-yellow-400">
-        <h2 class="text-3xl font-extrabold text-yellow-900 mb-6">9.3 Photonique (PsiQuantum)</h2>
+        <h2 class="text-3xl font-extrabold text-yellow-900 mb-6">Photonique (PsiQuantum, Xanadu)</h2>
         <p class="text-lg text-gray-700 leading-relaxed">
-            Utiliser la lumière comme qubit. Ça marche à température ambiante !
-            Mais la lumière ne veut pas interagir avec elle-même, ce qui rend les portes logiques difficiles.
+            L'ordinateur quantique qui marche à température ambiante ! (Ou presque).
+            Le qubit est un photon (particule de lumière). L'information est codée dans sa polarisation ou son chemin.
         </p>
     </div>
 
-    <!-- Viz -->
+    <!-- Avantages / Inconvénients -->
+    <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-green-50 p-6 rounded-xl border border-green-200">
+            <h3 class="text-xl font-bold text-green-800 mb-2">Les Plus 👍</h3>
+            <ul class="list-disc list-inside text-gray-700 text-sm space-y-2">
+                <li>Pas besoin de frigo à 0 Kelvin (pour le transport).</li>
+                <li>Pas de décohérence (le photon n'interagit avec rien).</li>
+                <li>S'intègre aux fibres optiques existantes.</li>
+            </ul>
+        </div>
+
+        <div class="bg-red-50 p-6 rounded-xl border border-red-200">
+            <h3 class="text-xl font-bold text-red-800 mb-2">Les Moins 👎</h3>
+            <ul class="list-disc list-inside text-gray-700 text-sm space-y-2">
+                <li>Les photons n'interagissent PAS entre eux.</li>
+                <li>Difficile de faire une porte CNOT (il faut ruser avec des mesures probabilistes).</li>
+                <li>Perte de photons = Erreur fatale.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Interactive Viz -->
     <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
-        <h3 class="text-white font-bold mb-4">Visualisation : Interféromètre</h3>
-        <div id="photonic-viz" class="h-64 bg-black rounded border border-gray-700 relative overflow-hidden">
-            <!-- Viz injected by initPhotonic -->
+        <h3 class="text-white font-bold mb-4">Simulation : Interféromètre de Mach-Zehnder</h3>
+        <p class="text-xs text-gray-400 mb-6">
+            Le photon emprunte les deux chemins à la fois (superposition).
+            En changeant la phase d'un bras, on contrôle la sortie (Interférence).
+        </p>
+
+        <div class="relative w-full h-64 bg-black rounded border border-gray-700 overflow-hidden mb-4">
+            <canvas id="photonic-viz" class="absolute inset-0 w-full h-full"></canvas>
+        </div>
+
+        <div class="flex justify-center gap-4 items-center">
+            <button onclick="firePhoton()"
+                class="px-6 py-2 bg-yellow-500 hover:bg-yellow-400 text-black rounded font-bold shadow-lg active:scale-95 transition-all">
+                Tirer Photon 🔫
+            </button>
+
+            <div class="flex flex-col">
+                <label class="text-gray-400 text-xs">Déphasage $\phi$</label>
+                <input type="range" id="phase-slider" min="0" max="360" value="0" class="w-32 accent-yellow-500">
+            </div>
         </div>
     </div>
 </div>

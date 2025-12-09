@@ -385,3 +385,421 @@ function drawActivation() {
     // Output Display
     document.getElementById('outputValDisplay').innerText = f(inputVal).toFixed(3);
 }
+
+// ==========================================
+// LOGIC: NEURON SIMULATOR (INTRO)
+// ==========================================
+window.updateNeuroSim = function () {
+    const slider = document.getElementById('weightSlider');
+    if (!slider) return;
+
+    const w = parseFloat(slider.value);
+    const x = 2.0;
+    const target = 4.0;
+    const y = x * w;
+    const loss = Math.pow(target - y, 2);
+
+    // Update Text
+    const wVal = document.getElementById('weightValue');
+    if (wVal) wVal.innerText = w.toFixed(2);
+    const cW = document.getElementById('calcW');
+    if (cW) cW.innerText = w.toFixed(2);
+    const oVal = document.getElementById('outputVal');
+    if (oVal) oVal.innerText = y.toFixed(2);
+    const lVal = document.getElementById('lossVal');
+    if (lVal) lVal.innerText = loss.toFixed(2);
+
+    // Update Bar
+    const maxVal = 8.0;
+    const pct = Math.min(100, Math.max(0, (y / maxVal) * 100));
+    const bar = document.getElementById('barFill');
+    const label = document.getElementById('barLabel');
+
+    if (bar && label) {
+        bar.style.height = `${pct}%`;
+        label.innerText = y.toFixed(1);
+
+        // Color change based on error
+        if (loss < 0.1) {
+            bar.classList.remove('bg-indigo-500', 'bg-red-500');
+            bar.classList.add('bg-green-500');
+        } else if (y > target) {
+            bar.classList.remove('bg-indigo-500', 'bg-green-500');
+            bar.classList.add('bg-red-500'); // Overshoot
+        } else {
+            bar.classList.remove('bg-red-500', 'bg-green-500');
+            bar.classList.add('bg-indigo-500');
+        }
+    }
+
+    // Success Message
+    const successMsg = document.getElementById('successMsg');
+    if (successMsg) {
+        if (loss < 0.01) {
+            successMsg.classList.remove('hidden');
+        } else {
+            successMsg.classList.add('hidden');
+        }
+    }
+}
+
+
+// ==========================================
+// LOGIC: DERIVATIVES (TANGENT)
+// ==========================================
+let derivCanvas = null;
+let derivCtx = null;
+let derivX = 1.0;
+let derivAnimId = null;
+
+window.initDerivativeCanvas = function () {
+    derivCanvas = document.getElementById('derivativeCanvas');
+    if (!derivCanvas) return;
+    derivCtx = derivCanvas.getContext('2d');
+
+    // Listeners
+    const slider = document.getElementById('derivX');
+    if (slider) {
+        slider.addEventListener('input', (e) => {
+            derivX = parseFloat(e.target.value);
+            stopDerivAnim();
+            drawDerivative();
+        });
+    }
+
+    const btn = document.getElementById('toggleAnimBtn');
+    if (btn) {
+        btn.onclick = toggleDerivAnim;
+    }
+
+    drawDerivative();
+}
+// Alias for config compatibility
+window.initDerivativeGraph = window.initDerivativeCanvas;
+
+function drawDerivative() {
+    if (!derivCtx || !derivCanvas) return;
+    const ctx = derivCtx;
+    const w = derivCanvas.width;
+    const h = derivCanvas.height;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Coordinate System
+    // x: -3 to 3
+    // y: -1 to 9
+    const scaleX = w / 6;
+    const scaleY = h / 10;
+
+    const ox = w / 2;
+    const oy = h - 50;
+
+    // Draw Axes
+    ctx.strokeStyle = '#e5e7eb';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(w, oy); ctx.stroke(); // X axis
+    ctx.beginPath(); ctx.moveTo(ox, 0); ctx.lineTo(ox, h); ctx.stroke(); // Y axis
+
+    // Function f(x) = x^2
+    ctx.beginPath();
+    ctx.strokeStyle = '#2563eb'; // Blue-600
+    ctx.lineWidth = 3;
+    for (let px = 0; px <= w; px++) {
+        const x = (px - ox) / scaleX;
+        const y = x * x;
+        const py = oy - y * scaleY;
+        if (px === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    // Point P(x0, y0)
+    const y0 = derivX * derivX;
+    const px0 = ox + derivX * scaleX;
+    const py0 = oy - y0 * scaleY;
+
+    // Tangent Line: y - y0 = f'(x0)(x - x0)
+    // y = 2*x0 * (x - x0) + y0
+    const slope = 2 * derivX;
+
+    // Draw Tangent (long line)
+    ctx.beginPath();
+    ctx.strokeStyle = '#dc2626'; // Red-600
+    ctx.lineWidth = 2;
+    // Calculate two points far away
+    const xStart = -3;
+    const yStart = slope * (xStart - derivX) + y0;
+    const xEnd = 3;
+    const yEnd = slope * (xEnd - derivX) + y0;
+
+    ctx.moveTo(ox + xStart * scaleX, oy - yStart * scaleY);
+    ctx.lineTo(ox + xEnd * scaleX, oy - yEnd * scaleY);
+    ctx.stroke();
+
+    // Draw Point
+    ctx.fillStyle = '#2563eb';
+    ctx.beginPath(); ctx.arc(px0, py0, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'white';
+    ctx.beginPath(); ctx.arc(px0, py0, 3, 0, Math.PI * 2); ctx.fill();
+
+    // Draw Triangle for Slope
+    if (Math.abs(slope) > 0.1) {
+        ctx.fillStyle = 'rgba(220, 38, 38, 0.1)';
+        ctx.beginPath();
+        ctx.moveTo(px0, py0);
+        ctx.lineTo(px0 + scaleX, py0); // Right 1 unit
+        ctx.lineTo(px0 + scaleX, py0 - slope * scaleY); // Up/Down slope units
+        ctx.closePath();
+        ctx.fill();
+        ctx.strokeStyle = '#dc2626';
+        ctx.setLineDash([2, 2]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+    }
+
+    // Update UI
+    const xDisp = document.getElementById('xValDisplay');
+    if (xDisp) xDisp.innerText = derivX.toFixed(2);
+    const yDisp = document.getElementById('yValDisplay');
+    if (yDisp) yDisp.innerText = y0.toFixed(2);
+    const sDisp = document.getElementById('slopeVal');
+    if (sDisp) sDisp.innerText = slope.toFixed(2);
+}
+
+function toggleDerivAnim() {
+    if (derivAnimId) {
+        stopDerivAnim();
+    } else {
+        loopDerivAnim();
+        const btn = document.getElementById('toggleAnimBtn');
+        if (btn) btn.innerHTML = "<span>⏸️</span> Stop";
+    }
+}
+
+function stopDerivAnim() {
+    if (derivAnimId) cancelAnimationFrame(derivAnimId);
+    derivAnimId = null;
+    const btn = document.getElementById('toggleAnimBtn');
+    if (btn) btn.innerHTML = "<span>▶️</span> Animation Auto";
+}
+
+function loopDerivAnim() {
+    derivX += 0.02;
+    if (derivX > 2.5) derivX = -2.5;
+
+    const slider = document.getElementById('derivX');
+    if (slider) slider.value = derivX;
+
+    drawDerivative();
+    derivAnimId = requestAnimationFrame(loopDerivAnim);
+}
+
+
+// ==========================================
+// LOGIC: DISTANCES
+// ==========================================
+let distCanvas = null;
+let distCtx = null;
+let distA = { x: -2, y: -1 };
+let distB = { x: 2, y: 2 };
+let isDraggingA = false;
+let isDraggingB = false;
+
+window.initDistancesCanvas = function () {
+    distCanvas = document.getElementById('distancesCanvas');
+    if (!distCanvas) return;
+    distCtx = distCanvas.getContext('2d');
+
+    // Mouse Events
+    distCanvas.addEventListener('mousedown', handleDistMouseDown);
+    distCanvas.addEventListener('mousemove', handleDistMouseMove);
+    distCanvas.addEventListener('mouseup', () => { isDraggingA = false; isDraggingB = false; });
+    distCanvas.addEventListener('mouseleave', () => { isDraggingA = false; isDraggingB = false; });
+
+    // Touch Events
+    distCanvas.addEventListener('touchstart', handleDistTouchStart, { passive: false });
+    distCanvas.addEventListener('touchmove', handleDistTouchMove, { passive: false });
+    distCanvas.addEventListener('touchend', () => { isDraggingA = false; isDraggingB = false; });
+
+    drawDistances();
+}
+
+function getDistMousePos(evt) {
+    const rect = distCanvas.getBoundingClientRect();
+    const scaleX = distCanvas.width / rect.width;
+    const scaleY = distCanvas.height / rect.height;
+
+    const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
+    const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
+
+    return {
+        x: (clientX - rect.left) * scaleX,
+        y: (clientY - rect.top) * scaleY
+    };
+}
+
+function toGraphCoords(px, py, w, h) {
+    const scale = w / 10; // -5 to 5
+    const cx = w / 2;
+    const cy = h / 2;
+    return {
+        x: (px - cx) / scale,
+        y: -(py - cy) / scale
+    };
+}
+
+function toPixelCoords(gx, gy, w, h) {
+    const scale = w / 10;
+    const cx = w / 2;
+    const cy = h / 2;
+    return {
+        x: cx + gx * scale,
+        y: cy - gy * scale
+    };
+}
+
+function handleDistMouseDown(e) {
+    const pos = getDistMousePos(e);
+    const w = distCanvas.width;
+    const h = distCanvas.height;
+    const pA = toPixelCoords(distA.x, distA.y, w, h);
+    const pB = toPixelCoords(distB.x, distB.y, w, h);
+
+    const dA = Math.hypot(pos.x - pA.x, pos.y - pA.y);
+    const dB = Math.hypot(pos.x - pB.x, pos.y - pB.y);
+
+    if (dA < 20) isDraggingA = true;
+    else if (dB < 20) isDraggingB = true;
+}
+
+function handleDistMouseMove(e) {
+    if (!isDraggingA && !isDraggingB) return;
+    const pos = getDistMousePos(e);
+    const w = distCanvas.width;
+    const h = distCanvas.height;
+    const gPos = toGraphCoords(pos.x, pos.y, w, h);
+
+    if (isDraggingA) distA = gPos;
+    if (isDraggingB) distB = gPos;
+
+    drawDistances();
+}
+
+function handleDistTouchStart(e) {
+    e.preventDefault();
+    handleDistMouseDown(e);
+}
+
+function handleDistTouchMove(e) {
+    e.preventDefault();
+    handleDistMouseMove(e);
+}
+
+window.drawDistances = function () {
+    if (!distCtx || !distCanvas) return;
+    const ctx = distCtx;
+    const w = distCanvas.width;
+    const h = distCanvas.height;
+
+    const chkL2 = document.getElementById('showL2');
+    const showL2 = chkL2 ? chkL2.checked : true;
+    const chkL1 = document.getElementById('showL1');
+    const showL1 = chkL1 ? chkL1.checked : true;
+    const chkCos = document.getElementById('showCos');
+    const showCos = chkCos ? chkCos.checked : true;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Grid & Axes
+    const scale = w / 10;
+    const cx = w / 2;
+    const cy = h / 2;
+
+    ctx.strokeStyle = '#f3f4f6';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= w; i += scale) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, h); ctx.stroke(); }
+    for (let i = 0; i <= h; i += scale) { ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(w, i); ctx.stroke(); }
+
+    ctx.strokeStyle = '#d1d5db';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, h); ctx.stroke();
+
+    const pA = toPixelCoords(distA.x, distA.y, w, h);
+    const pB = toPixelCoords(distB.x, distB.y, w, h);
+
+    // L1 (Manhattan)
+    if (showL1) {
+        ctx.strokeStyle = '#22c55e'; // Green
+        ctx.lineWidth = 3;
+        ctx.setLineDash([5, 5]);
+        ctx.beginPath();
+        ctx.moveTo(pA.x, pA.y);
+        ctx.lineTo(pB.x, pA.y); // Horizontal leg
+        ctx.lineTo(pB.x, pB.y); // Vertical leg
+        ctx.stroke();
+        ctx.setLineDash([]);
+    }
+
+    // L2 (Euclidean)
+    if (showL2) {
+        ctx.strokeStyle = '#2563eb'; // Blue
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(pA.x, pA.y);
+        ctx.lineTo(pB.x, pB.y);
+        ctx.stroke();
+    }
+
+    // Cosine (Vectors from Origin)
+    if (showCos) {
+        // Draw vectors from origin
+        if (typeof drawArrow === 'function') {
+            drawArrow(ctx, cx, cy, pA.x, pA.y, 'rgba(147, 51, 234, 0.3)', '');
+            drawArrow(ctx, cx, cy, pB.x, pB.y, 'rgba(147, 51, 234, 0.3)', '');
+        } else {
+            // Fallback if drawArrow not available
+            ctx.strokeStyle = 'rgba(147, 51, 234, 0.3)';
+            ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(pA.x, pA.y); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(pB.x, pB.y); ctx.stroke();
+        }
+
+        // Angle Arc
+        const angA = Math.atan2(-distA.y, distA.x); // Graph coords y is inverted
+        const angB = Math.atan2(-distB.y, distB.x);
+
+        ctx.beginPath();
+        ctx.strokeStyle = '#9333ea';
+        ctx.lineWidth = 2;
+        ctx.arc(cx, cy, 40, Math.min(angA, angB), Math.max(angA, angB)); // Simplified arc
+        ctx.stroke();
+    }
+
+    // Points
+    ctx.fillStyle = '#2563eb';
+    ctx.beginPath(); ctx.arc(pA.x, pA.y, 8, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'white'; ctx.fillText("A", pA.x - 4, pA.y + 4);
+
+    ctx.fillStyle = '#dc2626';
+    ctx.beginPath(); ctx.arc(pB.x, pB.y, 8, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'white'; ctx.fillText("B", pB.x - 4, pB.y + 4);
+
+    // Calculations
+    const dx = distB.x - distA.x;
+    const dy = distB.y - distA.y;
+
+    const l2 = Math.sqrt(dx * dx + dy * dy);
+    const l1 = Math.abs(dx) + Math.abs(dy);
+
+    // Cosine Similarity
+    const dot = distA.x * distB.x + distA.y * distB.y;
+    const magA = Math.sqrt(distA.x * distA.x + distA.y * distA.y);
+    const magB = Math.sqrt(distB.x * distB.x + distB.y * distB.y);
+    const cosSim = (magA * magB) === 0 ? 0 : dot / (magA * magB);
+
+    const vL2 = document.getElementById('valL2');
+    if (vL2) vL2.innerText = l2.toFixed(2);
+    const vL1 = document.getElementById('valL1');
+    if (vL1) vL1.innerText = l1.toFixed(2);
+    const vCos = document.getElementById('valCos');
+    if (vCos) vCos.innerText = cosSim.toFixed(3);
+}
