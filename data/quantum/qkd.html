@@ -1,0 +1,51 @@
+<div class="space-y-8">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-yellow-600">
+        <h2 class="text-3xl font-extrabold text-yellow-900 mb-6">7.1 Protocoles QKD (BB84)</h2>
+        <div class="space-y-6">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-2xl font-bold text-indigo-700 mb-4">Distribution Quantique de Clés (QKD)</h2>
+                <p class="text-gray-700 mb-4">
+                    Le protocole BB84 permet à deux parties (Alice et Bob) de générer une clé secrète partagée. La
+                    sécurité repose sur les lois de la physique quantique : toute tentative d'espionnage perturbe l'état
+                    du système.
+                </p>
+
+                <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500 mb-4">
+                    <h3 class="font-bold text-green-800 mb-2">🔐 Analogie : Les Coffres-Forts Fragiles</h3>
+                    <p class="text-sm text-green-700">
+                        Alice envoie des coffres-forts (photons) à Bob.
+                        <br>
+                        Si Eve (l'espionne) essaie d'ouvrir un coffre pour voir ce qu'il y a dedans, le mécanisme
+                        quantique fragile se brise et change la couleur du contenu.
+                        <br>
+                        Bob et Alice peuvent alors comparer un échantillon de leurs clés. S'ils voient trop d'erreurs,
+                        ils savent qu'Eve a écouté !
+                    </p>
+                </div>
+
+                <div class="bg-gray-900 p-6 rounded-lg shadow-inner flex flex-col items-center">
+                    <div id="qkd-viz" class="w-full h-64 bg-gray-800 rounded relative"></div>
+                    <div class="flex gap-4 mt-4">
+                        <button onclick="window.sendQubit()"
+                            class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500 font-bold">Envoyer
+                            Qubit</button>
+                        <button onclick="window.toggleEve()"
+                            class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-500 font-bold">Activer/Désactiver
+                            Eve 🕵️‍♀️</button>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-2">Cliquez pour simuler l'envoi et l'interception.</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Le Protocole BB84</h3>
+                <ol class="list-decimal list-inside text-gray-700 space-y-2">
+                    <li>Alice choisit aléatoirement une base (+ ou x) et un bit (0 ou 1).</li>
+                    <li>Elle envoie le photon polarisé correspondant.</li>
+                    <li>Bob choisit aléatoirement une base de mesure.</li>
+                    <li>S'ils ont choisi la même base, leurs bits sont corrélés. Sinon, c'est aléatoire (50%).</li>
+                    <li>Ils comparent publiquement leurs bases (pas les bits !) et gardent ceux où les bases concordent.
+                    </li>
+                </ol>
+            </div>
+        </div>

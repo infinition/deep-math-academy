@@ -2,7 +2,7 @@
 
 https://infinition.github.io/deep-math-academy/
 
-> Une plateforme web interactive pour maîtriser l'Algèbre Linéaire, l'Analyse (Calcul) et les Statistiques, les trois piliers essentiels du Machine Learning et du Deep Learning.## ✨ Pourquoi ce Projet ?
+> Une plateforme web interactive pour maîtriser l'Algèbre Linéaire, l'Analyse (Calcul), les Statistiques et la Physique Quantique, les piliers essentiels de l'IA moderne et future.## ✨ Pourquoi ce Projet ?
 
 L'Intelligence Artificielle repose entièrement sur les mathématiques. Ce projet vise à démystifier ces concepts en les rendant :
 
@@ -25,6 +25,11 @@ Le projet est divisé en trois cours principaux, chacun structuré en modules pr
 ### 📊 Statistiques & Probabilités (La Logique de la Donnée)
 * **Concepts Clés :** Statistique Descriptive, Corrélation, Lois de Probabilité (Normale, Binomiale).
 * **Applications IA :** Théorème de Bayes, Inférence, Théorème Central Limite, Mesures de Dispersion.
+
+### ⚛️ Physique Quantique & Quantum Computing (Le Futur du Calcul)
+* **Concepts Clés :** Superposition, Intrication, Qubits, Portes Quantiques, Algorithmes (Shor, Grover).
+* **Mathématiques :** Espaces de Hilbert, Notation Bra-Ket, Produit Tensoriel, Opérateurs Unitaires.
+* **Applications IA :** Quantum Machine Learning (QML), Réseaux de Neurones Quantiques, Optimisation Quantique.
 
 ## ⚙️ Technologies Utilisées
 

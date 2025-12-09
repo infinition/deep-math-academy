@@ -47,9 +47,9 @@ function toggleSidebar() {
     const overlay = document.getElementById('sidebar-overlay');
 
     if (sidebar) {
-        sidebar.classList.toggle('mobile-hidden');
+        sidebar.classList.toggle('-translate-x-full');
         if (overlay) {
-            if (sidebar.classList.contains('mobile-hidden')) {
+            if (sidebar.classList.contains('-translate-x-full')) {
                 overlay.classList.add('hidden');
             } else {
                 overlay.classList.remove('hidden');
@@ -68,7 +68,34 @@ let visitedModules = {};
 // ==========================================
 // APP INIT / NAV
 // ==========================================
+// ==========================================
+// DARK MODE LOGIC
+// ==========================================
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+    updateDarkModeIcon();
+}
+
+function updateDarkModeIcon() {
+    const btn = document.getElementById('darkModeBtn');
+    if (btn) {
+        const isDark = document.body.classList.contains('dark-mode');
+        btn.innerText = isDark ? '☀️' : '🌙';
+    }
+}
+
+// ==========================================
+// APP INIT / NAV
+// ==========================================
 async function init() {
+    // Initialize Dark Mode
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+    updateDarkModeIcon();
+
     // 1. Charger la configuration JSON
     try {
         const response = await fetch('data/courses_config.json');
@@ -88,7 +115,7 @@ async function init() {
         if (coursesData[currentCourse]) {
             const initialModules = coursesData[currentCourse].modules;
             if (initialModules.length > 0) {
-                loadModule(initialModules[0].id);
+                loadModule(initialModules[0].id, false); // Don't close sidebar on init
             }
         }
 
@@ -129,7 +156,7 @@ function switchCourse(courseId) {
     if (selector) selector.value = courseId;
     renderNav();
     const mods = getModules();
-    if (mods.length > 0) loadModule(mods[0].id);
+    if (mods.length > 0) loadModule(mods[0].id, false); // Don't close sidebar on course switch
 }
 
 function getModules() {
@@ -144,14 +171,22 @@ function renderNav() {
     if (!visitedModules[currentCourse]) visitedModules[currentCourse] = new Set();
     const progressSet = visitedModules[currentCourse];
 
-    container.innerHTML = mods.map(m => `
+    let lastCategory = null;
+    container.innerHTML = mods.map(m => {
+        let html = '';
+        if (m.category && m.category !== lastCategory) {
+            html += `<div class="text-xs font-bold text-indigo-300 uppercase tracking-wider mt-6 mb-2 px-2 border-b border-indigo-700 pb-1">${m.category}</div>`;
+            lastCategory = m.category;
+        }
+        html += `
         <button onclick="loadModule('${m.id}')" 
             class="w-full text-left px-4 py-3 rounded-lg hover:bg-indigo-800 transition flex items-center gap-3 mb-1 ${progressSet.has(m.id) ? 'bg-indigo-800 border-l-4 border-green-400 font-bold shadow-lg transform scale-[1.02]' : 'text-indigo-100 opacity-80 hover:opacity-100'}">
             <span class="text-xl filter drop-shadow-md w-6 text-center">${m.icon}</span>
             <span class="text-sm tracking-wide truncate flex-1">${m.title}</span>
             ${progressSet.has(m.id) ? '<span class="text-green-400 text-xs">✓</span>' : ''}
-        </button>
-    `).join('');
+        </button>`;
+        return html;
+    }).join('');
 
     const pct = mods.length > 0 ? Math.round((progressSet.size / mods.length) * 100) : 0;
     const progEl = document.getElementById('course-progress');
@@ -161,14 +196,14 @@ function renderNav() {
     }
 }
 
-async function loadModule(id) {
+async function loadModule(id, closeSidebar = true) {
     const mods = getModules();
     const module = mods.find(m => m.id === id);
     if (!module) return;
 
     // Mobile toggle logic
     const sidebar = document.getElementById('sidebar');
-    if (sidebar && !sidebar.classList.contains('mobile-hidden') && window.innerWidth < 768) {
+    if (closeSidebar && sidebar && !sidebar.classList.contains('-translate-x-full') && window.innerWidth < 768) {
         toggleSidebar();
     }
 
@@ -208,8 +243,12 @@ async function loadModule(id) {
 
     // Retrigger MathJax (après injection)
     if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetClear();
-        MathJax.typesetPromise([document.getElementById('content-area')]);
+        try {
+            MathJax.typesetClear();
+            MathJax.typesetPromise([document.getElementById('content-area')]).catch(err => console.warn('MathJax error:', err));
+        } catch (e) {
+            console.warn('MathJax synchronous error:', e);
+        }
     }
 
 
@@ -268,8 +307,33 @@ function resetCurrentProgress() {
 // Start
 window.addEventListener('load', () => {
     init();
-    if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetClear();
-        MathJax.typesetPromise();
-    }
+    // Removed redundant initial MathJax call to prevent race conditions
+
+    // Swipe to open sidebar logic
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    document.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: false });
+
+    document.addEventListener('touchend', e => {
+        const touchEndX = e.changedTouches[0].screenX;
+        const touchEndY = e.changedTouches[0].screenY;
+
+        // Only trigger if swipe starts from the left edge (0-200px)
+        if (touchStartX < 200) {
+            const diffX = touchEndX - touchStartX;
+            const diffY = Math.abs(touchEndY - touchStartY);
+
+            // Check for horizontal swipe (right) with minimal vertical movement
+            if (diffX > 50 && diffY < 50) {
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar && sidebar.classList.contains('-translate-x-full')) {
+                    toggleSidebar();
+                }
+            }
+        }
+    }, { passive: false });
 });

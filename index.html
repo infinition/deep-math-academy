@@ -41,7 +41,7 @@
 
     <!-- Sidebar Navigation -->
     <nav id="sidebar"
-        class="fixed md:relative inset-y-0 left-0 w-80 bg-indigo-900 text-white flex flex-col flex-shrink-0 shadow-2xl z-20 transform md:transform-none mobile-hidden transition-transform duration-300 flex flex-col h-full">
+        class="fixed md:relative inset-y-0 left-0 w-80 bg-indigo-900 text-white flex flex-col flex-shrink-0 shadow-2xl z-40 transform transition-transform duration-300 -translate-x-full md:translate-x-0 h-full">
         <div class="p-4 bg-indigo-800 font-bold text-xl hidden md:flex items-center justify-between shadow-lg shrink-0">
             <span>🚀 Deep Math Academy</span>
         </div>
@@ -54,11 +54,7 @@
                 <option value="analysis">📉 Analyse & Calcul</option>
                 <option value="algebra">📐 Algèbre Linéaire</option>
                 <option value="stats">📊 Stats & Proba</option>
-                <option value="quantum_fund">⚛️ Quantique : Fondamentaux</option>
-                <option value="quantum_math">🧮 Quantique : Maths</option>
-                <option value="quantum_compute">💻 Quantique : Computing</option>
-                <option value="quantum_ml">🧠 Quantique : Machine Learning</option>
-                <option value="quantum_advanced">🌌 Quantique : Avancé</option>
+                <option value="quantum">⚛️ Physique Quantique</option>
             </select>
         </div>
 
@@ -85,6 +81,8 @@
                 <!-- Title injected here -->
             </h1>
             <div class="flex gap-2 shrink-0">
+                <button id="darkModeBtn" onclick="toggleDarkMode()"
+                    class="text-xl px-2 py-1 rounded hover:bg-gray-100 transition">🌙</button>
                 <button onclick="resetCurrentProgress()"
                     class="text-xs px-2 py-1 md:px-3 md:py-1 rounded border border-red-200 text-red-400 hover:bg-red-50 hover:text-red-600 transition">Reset
                     Module</button>

@@ -2782,6 +2782,54 @@ const SYMBOL_DATA = {
         meaning: "Une flèche qui a une direction et une longueur. <br> En code, c'est juste une liste de nombres.",
         code: "v = [1.5, 2.0, -0.5]",
         anim: 'vec'
+    },
+    'ket': {
+        title: "Ket (Vecteur État)",
+        pronounce: "Ket Psi",
+        display: "$| \\psi \\rangle$",
+        meaning: "Un vecteur colonne qui décrit l'état quantique d'un système. <br> C'est la brique de base du calcul quantique.",
+        code: "psi = np.array([[1], [0]]) # |0>",
+        anim: 'ket'
+    },
+    'bra': {
+        title: "Bra (Vecteur Dual)",
+        pronounce: "Bra Psi",
+        display: "$\\langle \\psi |$",
+        meaning: "L'inverse du Ket (transposé et conjugué). <br> Utilisé pour calculer des probabilités (produit scalaire).",
+        code: "bra = psi.conj().T",
+        anim: 'bra'
+    },
+    'hbar': {
+        title: "Constante de Planck Réduite",
+        pronounce: "H barre",
+        display: "$\\hbar$",
+        meaning: "La constante fondamentale de la mécanique quantique. <br> Elle définit l'échelle à laquelle les effets quantiques apparaissent.",
+        code: "hbar = 1.054e-34",
+        anim: 'hbar'
+    },
+    'tensor': {
+        title: "Produit Tensoriel",
+        pronounce: "Tensoriel",
+        display: "$\\otimes$",
+        meaning: "Permet de combiner deux systèmes quantiques. <br> Si on a 2 qubits, leur état total est le produit tensoriel des deux.",
+        code: "state = np.kron(q1, q2)",
+        anim: 'tensor'
+    },
+    'dagger': {
+        title: "Dague (Adjoint)",
+        pronounce: "A dague",
+        display: "$A^\\dagger$",
+        meaning: "Transposée + Conjuguée complexe. <br> Crucial pour garantir que les probabilités restent réelles et positives.",
+        code: "adj = matrix.conj().T",
+        anim: 'dagger'
+    },
+    'psi': {
+        title: "Psi (Fonction d'Onde)",
+        pronounce: "Psi",
+        display: "$\\psi$",
+        meaning: "La lettre grecque standard pour représenter un état quantique. <br> Elle contient toute l'information sur le système.",
+        code: "def psi(x): return ...",
+        anim: 'psi'
     }
 };
 
@@ -3325,6 +3373,138 @@ function playSymbolAnim(type) {
             const ey = cy + Math.sin(angle) * len;
 
             drawArrow(ctx, cx, cy, ex, ey, "#4f46e5", "v");
+        }
+        else if (type === 'ket') {
+            // Column Vector Visualization
+            ctx.font = "30px serif";
+            ctx.fillStyle = "#4f46e5";
+            ctx.fillText("| ψ ⟩", w / 2 - 40, h / 2);
+
+            // Draw vector brackets
+            const bx = w / 2 + 20;
+            const by = h / 2 - 40;
+            ctx.beginPath();
+            ctx.moveTo(bx, by); ctx.lineTo(bx - 10, by); ctx.lineTo(bx - 10, by + 80); ctx.lineTo(bx, by + 80);
+            ctx.moveTo(bx + 40, by); ctx.lineTo(bx + 50, by); ctx.lineTo(bx + 50, by + 80); ctx.lineTo(bx + 40, by + 80);
+            ctx.strokeStyle = "#374151";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Values
+            const alpha = Math.cos(frame * 0.05).toFixed(2);
+            const beta = Math.sin(frame * 0.05).toFixed(2);
+            ctx.font = "16px monospace";
+            ctx.fillStyle = "#111827";
+            ctx.fillText(alpha, bx + 20, by + 25);
+            ctx.fillText(beta, bx + 20, by + 55);
+        }
+        else if (type === 'bra') {
+            // Row Vector Visualization
+            ctx.font = "30px serif";
+            ctx.fillStyle = "#4f46e5";
+            ctx.fillText("⟨ ψ |", w / 2 - 60, h / 2);
+
+            // Draw vector brackets
+            const bx = w / 2;
+            const by = h / 2 - 15;
+            ctx.beginPath();
+            ctx.moveTo(bx, by); ctx.lineTo(bx, by - 10); ctx.lineTo(bx + 100, by - 10); ctx.lineTo(bx + 100, by);
+            ctx.moveTo(bx, by + 30); ctx.lineTo(bx, by + 40); ctx.lineTo(bx + 100, by + 40); ctx.lineTo(bx + 100, by + 30);
+            ctx.strokeStyle = "#374151";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Values
+            const alpha = Math.cos(frame * 0.05).toFixed(2);
+            const beta = Math.sin(frame * 0.05).toFixed(2);
+            ctx.font = "16px monospace";
+            ctx.fillStyle = "#111827";
+            ctx.fillText(alpha, bx + 25, by + 15);
+            ctx.fillText(beta, bx + 75, by + 15);
+        }
+        else if (type === 'hbar') {
+            // Atom model with hbar
+            const cx = w / 2;
+            const cy = h / 2;
+
+            // Nucleus
+            ctx.beginPath(); ctx.arc(cx, cy, 10, 0, Math.PI * 2); ctx.fillStyle = "#ef4444"; ctx.fill();
+
+            // Electron Orbit
+            const r = 60;
+            ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.strokeStyle = "#e5e7eb"; ctx.stroke();
+
+            // Electron
+            const angle = frame * 0.1;
+            const ex = cx + Math.cos(angle) * r;
+            const ey = cy + Math.sin(angle) * r;
+            ctx.beginPath(); ctx.arc(ex, ey, 5, 0, Math.PI * 2); ctx.fillStyle = "#4f46e5"; ctx.fill();
+
+            // H-bar text
+            ctx.font = "40px serif";
+            ctx.fillStyle = "rgba(79, 70, 229, 0.2)";
+            ctx.fillText("ℏ", cx, cy);
+        }
+        else if (type === 'tensor') {
+            // Two squares merging
+            const t = (frame % 200) / 100;
+            const cx = w / 2;
+            const cy = h / 2;
+
+            if (t < 1) {
+                // Separate
+                ctx.fillStyle = "#93c5fd";
+                ctx.fillRect(cx - 60 + t * 20, cy - 20, 40, 40);
+                ctx.fillStyle = "#fca5a5";
+                ctx.fillRect(cx + 20 - t * 20, cy - 20, 40, 40);
+
+                ctx.fillStyle = "#111827";
+                ctx.font = "20px Arial";
+                ctx.fillText("⊗", cx, cy);
+            } else {
+                // Merged
+                ctx.fillStyle = "#c084fc";
+                ctx.fillRect(cx - 40, cy - 40, 80, 80);
+                ctx.fillStyle = "white";
+                ctx.fillText("Combined", cx, cy);
+            }
+        }
+        else if (type === 'dagger') {
+            // Matrix A -> A dagger
+            const cx = w / 2;
+            const cy = h / 2;
+
+            ctx.font = "40px serif";
+            if (frame % 200 < 100) {
+                ctx.fillStyle = "#4f46e5";
+                ctx.fillText("A", cx, cy);
+                ctx.font = "14px Arial";
+                ctx.fillStyle = "#6b7280";
+                ctx.fillText("Original", cx, cy + 30);
+            } else {
+                ctx.fillStyle = "#db2777";
+                ctx.fillText("A†", cx, cy);
+                ctx.font = "14px Arial";
+                ctx.fillStyle = "#6b7280";
+                ctx.fillText("Adjoint", cx, cy + 30);
+            }
+        }
+        else if (type === 'psi') {
+            // Wave function
+            ctx.beginPath();
+            const cy = h / 2;
+            for (let x = 0; x < w; x++) {
+                const y = cy - Math.sin((x + frame * 5) * 0.05) * 40 * Math.exp(-Math.pow((x - w / 2) / 100, 2));
+                if (x === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = "#4f46e5";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            ctx.fillStyle = "#4f46e5";
+            ctx.font = "24px serif";
+            ctx.fillText("ψ(x)", w / 2, h / 2 - 50);
         }
         else {
             // Generic Text Animation for others

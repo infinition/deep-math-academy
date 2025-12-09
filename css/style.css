@@ -107,3 +107,70 @@ canvas {
 ::-webkit-scrollbar-thumb:hover {
     background: #a0a0a0;
 }
+
+/* DARK MODE */
+body.dark-mode {
+    background-color: #111827; /* gray-900 */
+    color: #f3f4f6; /* gray-100 */
+}
+
+body.dark-mode main {
+    background-color: #111827;
+}
+
+body.dark-mode header {
+    background-color: #1f2937; /* gray-800 */
+    border-bottom-color: #374151; /* gray-700 */
+}
+
+body.dark-mode #chapter-title {
+    color: #818cf8; /* indigo-400 */
+}
+
+body.dark-mode .bg-white {
+    background-color: #1f2937;
+    color: #f3f4f6;
+}
+
+body.dark-mode .bg-gray-50 {
+    background-color: #111827;
+    color: #f3f4f6;
+}
+
+body.dark-mode .text-gray-600,
+body.dark-mode .text-gray-700,
+body.dark-mode .text-gray-800 {
+    color: #d1d5db; /* gray-300 */
+}
+
+body.dark-mode .text-indigo-700,
+body.dark-mode .text-indigo-800 {
+    color: #a5b4fc; /* indigo-300 */
+}
+
+body.dark-mode .bg-indigo-50,
+body.dark-mode .bg-indigo-100 {
+    background-color: #312e81; /* indigo-900 */
+    color: #e0e7ff; /* indigo-100 */
+}
+
+body.dark-mode canvas {
+    filter: invert(0.9) hue-rotate(180deg);
+}
+
+body.dark-mode .card-front {
+    background-color: #1f2937;
+    border-color: #6366f1;
+}
+
+body.dark-mode .card-front span {
+    color: #e0e7ff;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #4b5563;
+}
