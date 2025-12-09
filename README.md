@@ -1,5 +1,7 @@
 # 🚀 Deep Math Academy : Les Fondamentaux Mathématiques pour l'IA
 
+https://infinition.github.io/deep-math-academy/
+
 > Une plateforme web interactive pour maîtriser l'Algèbre Linéaire, l'Analyse (Calcul) et les Statistiques, les trois piliers essentiels du Machine Learning et du Deep Learning.## ✨ Pourquoi ce Projet ?
 
 L'Intelligence Artificielle repose entièrement sur les mathématiques. Ce projet vise à démystifier ces concepts en les rendant :
