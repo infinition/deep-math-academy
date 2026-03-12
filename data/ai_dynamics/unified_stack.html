@@ -1,0 +1,52 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <div class="bg-gradient-to-r from-indigo-700 to-slate-800 p-8 rounded-2xl shadow-xl text-white">
+        <h2 class="text-3xl font-extrabold mb-4">Architecture Unifiée en 5 Couches</h2>
+        <p class="text-lg text-indigo-100 leading-relaxed">
+            Substrat émergent -> perception continue -> dynamiques physiques -> inférence active -> action optimale.
+            Ici, tout le contexte que tu as donné est relié dans une carte logique unique.
+        </p>
+    </div>
+
+    <div class="grid md:grid-cols-5 gap-3 text-xs">
+        <div class="bg-white rounded-lg p-3 border border-gray-200"><strong>0. Substrat</strong><br>Hypergraphe évolutif</div>
+        <div class="bg-white rounded-lg p-3 border border-gray-200"><strong>1. Perception</strong><br>RD + Neural ODE + Géométrie</div>
+        <div class="bg-white rounded-lg p-3 border border-gray-200"><strong>2. Dynamiques</strong><br>Fluides + Attracteurs</div>
+        <div class="bg-white rounded-lg p-3 border border-gray-200"><strong>3. Inférence</strong><br>Énergie libre + Action</div>
+        <div class="bg-white rounded-lg p-3 border border-gray-200"><strong>4. Action</strong><br>Flow matching contraint</div>
+    </div>
+
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
+        <h3 class="text-white font-bold mb-4">Radar d'architecture (impact pédagogique)</h3>
+        <div class="grid lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-black rounded border border-gray-700 p-3">
+                <canvas id="unifiedStackCanvas" width="720" height="340" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="text-gray-300">Scénario</label>
+                <select id="stackScenario" class="w-full rounded bg-gray-800 text-white p-2 border border-gray-700">
+                    <option value="robot">Robotique 3D</option>
+                    <option value="video">Génération vidéo</option>
+                    <option value="science">Modélisation scientifique</option>
+                </select>
+                <div class="text-gray-300">Incertitude monde: <span id="stackUncLabel" class="font-bold text-cyan-300">0.45</span></div>
+                <input id="stackUnc" type="range" min="0" max="1" step="0.01" value="0.45" class="w-full accent-cyan-500">
+                <button onclick="updateUnifiedStack()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white rounded px-3 py-2 font-bold">Mettre à jour</button>
+                <div class="bg-gray-800 p-3 rounded text-xs text-gray-200 space-y-1">
+                    <div>Compute épargné: <span id="stackCompute" class="font-bold text-emerald-300">0%</span></div>
+                    <div>Futurs plausibles: <span id="stackFutures" class="font-bold text-emerald-300">0</span></div>
+                    <div>Cohérence physique: <span id="stackPhys" class="font-bold text-emerald-300">0%</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-5">
+        <h3 class="font-bold text-indigo-900 mb-2">Pourquoi c'est plus fort qu'un Transformer pur (version simple)</h3>
+        <ul class="space-y-2 text-sm text-indigo-900">
+            <li>• Monde continu au lieu de tokens figés.</li>
+            <li>• Causalité native via EDP/ODE, pas un masque artificiel.</li>
+            <li>• Symétries 3D codées dans l'architecture (moins de data gaspillée).</li>
+            <li>• Motivation intrinsèque via énergie libre (réduction de surprise).</li>
+        </ul>
+    </div>
+</div>

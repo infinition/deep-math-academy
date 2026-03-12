@@ -1,0 +1,67 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-cyan-600">
+        <h2 class="text-3xl font-extrabold text-cyan-900 mb-3">Q-Learning: chapitre dedie</h2>
+        <p class="text-gray-700">Ici on voit concretement comment une table \(Q(s,a)\) se met a jour dans un petit monde grille.</p>
+    </section>
+
+    <section class="bg-cyan-50 border border-cyan-200 rounded-xl p-5 space-y-3">
+        <h3 class="font-bold text-cyan-900">Equation coeur</h3>
+        <div class="text-cyan-900">$$Q(s,a)\leftarrow Q(s,a)+\alpha\Big[r+\gamma\max_{a'}Q(s',a')-Q(s,a)\Big]$$</div>
+        <ul class="text-sm text-cyan-900 space-y-1">
+            <li><strong>\(\alpha\)</strong>: vitesse d apprentissage (combien on corrige)</li>
+            <li><strong>\(\gamma\)</strong>: importance du futur</li>
+            <li><strong>\(\epsilon\)</strong>: part d exploration aleatoire</li>
+            <li><strong>TD error</strong>: ecart entre attendu et observe</li>
+        </ul>
+    </section>
+
+    <section class="bg-gray-900 p-6 rounded-xl shadow-inner">
+        <h3 class="text-white font-bold mb-3">Laboratoire interactif</h3>
+        <p class="text-gray-300 text-sm mb-4">S = depart, G = but, cases noires = obstacles. La fleche dans chaque case represente l action jugee la meilleure.</p>
+
+        <div class="grid lg:grid-cols-3 gap-5">
+            <div class="lg:col-span-2 bg-black rounded border border-gray-700 p-3">
+                <canvas id="qLearningCanvas" width="760" height="360" class="w-full h-auto"></canvas>
+            </div>
+
+            <div class="space-y-4 text-sm">
+                <div class="bg-gray-800 rounded p-3 border border-gray-700">
+                    <div class="text-gray-300 mb-1">Alpha <span id="qlAlphaVal" class="font-bold text-cyan-300">0.20</span></div>
+                    <input id="qlAlpha" type="range" min="0.05" max="0.8" step="0.01" value="0.2" class="w-full accent-cyan-500">
+                </div>
+
+                <div class="bg-gray-800 rounded p-3 border border-gray-700">
+                    <div class="text-gray-300 mb-1">Gamma <span id="qlGammaVal" class="font-bold text-cyan-300">0.95</span></div>
+                    <input id="qlGamma" type="range" min="0.50" max="0.99" step="0.01" value="0.95" class="w-full accent-cyan-500">
+                </div>
+
+                <div class="bg-gray-800 rounded p-3 border border-gray-700">
+                    <div class="text-gray-300 mb-1">Epsilon <span id="qlEpsilonVal" class="font-bold text-cyan-300">0.20</span></div>
+                    <input id="qlEpsilon" type="range" min="0.00" max="0.90" step="0.01" value="0.2" class="w-full accent-cyan-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="qLearningStart()" class="px-3 py-2 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-bold">Start</button>
+                    <button onclick="qLearningPause()" class="px-3 py-2 rounded bg-slate-600 hover:bg-slate-500 text-white font-bold">Pause</button>
+                    <button onclick="qLearningStep()" class="px-3 py-2 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-bold">1 Step</button>
+                    <button onclick="qLearningReset()" class="px-3 py-2 rounded bg-rose-600 hover:bg-rose-500 text-white font-bold">Reset</button>
+                </div>
+
+                <div class="bg-gray-800 rounded p-3 border border-gray-700 text-gray-200 text-xs space-y-1">
+                    <div>Episodes: <span id="qlEpisode" class="font-bold text-cyan-300">0</span></div>
+                    <div>TD error: <span id="qlTd" class="font-bold text-cyan-300">0.000</span></div>
+                    <div>Best Q: <span id="qlBestQ" class="font-bold text-cyan-300">0.000</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white border border-gray-200 rounded-xl p-6">
+        <h3 class="font-bold text-gray-900 mb-2">Lecture pedagogique rapide</h3>
+        <ul class="text-sm text-gray-700 space-y-1">
+            <li>Si <strong>epsilon</strong> est haut: beaucoup d exploration, apprentissage plus lent mais plus robuste.</li>
+            <li>Si <strong>alpha</strong> est trop haut: apprentissage instable.</li>
+            <li>Si <strong>gamma</strong> est faible: agent myope (favorise le court terme).</li>
+        </ul>
+    </section>
+</div>

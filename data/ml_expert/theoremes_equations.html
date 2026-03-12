@@ -1,0 +1,105 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+        <h2 class="text-3xl font-extrabold text-slate-900">12. Theoremes / principes / equations a connaitre</h2>
+        <p class="mt-3 text-slate-700">Le but est de reconnaitre rapidement quelle equation gouverne quel comportement en ML/DL/IA.</p>
+        <div class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-900">
+            Statut: base active avec repertoire d equations + 2 labs pedagogiques.
+        </div>
+    </section>
+
+    <section class="bg-amber-50 border border-amber-200 rounded-xl p-5">
+        <h3 class="text-lg font-bold text-amber-900">Analogie + decorticage rapide</h3>
+        <p class="text-sm text-amber-900 mt-2">Analogie: ces theoremes sont les lois de la circulation. Si tu les respectes, ton modele roule; sinon, il derape.</p>
+        <div class="mt-3 rounded-lg bg-white border border-amber-200 p-3 text-sm text-amber-900">
+            $$\text{Erreur generale}=\text{Biais}^2+\text{Variance}+\text{Bruit}$$
+        </div>
+        <ul class="mt-3 list-disc pl-5 space-y-1 text-sm text-amber-900">
+            <li><strong>Biais:</strong> modele trop simple, il rate la structure.</li>
+            <li><strong>Variance:</strong> modele trop sensible, il memorise le bruit.</li>
+            <li><strong>Bruit:</strong> limite incompressible des donnees reelles.</li>
+        </ul>
+        <p class="text-sm text-amber-900 mt-2"><strong>Exemple IA:</strong> pour un classifieur medical, on reduit la variance (regularisation) avant d augmenter la complexite.</p>
+    </section>
+
+    <section class="grid lg:grid-cols-2 gap-4">
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Probabilites et stats</h3>
+            <div class="mt-3 p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-900 text-sm">
+                $$P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)},\quad \mathbb{E}[X]=\sum_x xP(x)$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">Bayes, LLN, TCL, Jensen, Markov/Chebyshev/Hoeffding</li>
+                <li class="text-sm text-slate-700">MLE, cross-entropy, KL divergence</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Optimisation et apprentissage</h3>
+            <div class="mt-3 p-3 rounded-lg bg-cyan-50 border border-cyan-200 text-cyan-900 text-sm">
+                $$\theta_{t+1}=\theta_t-\eta\nabla_\theta\mathcal{L},\quad \text{Err}=\text{Biais}^2+\text{Variance}+\text{Bruit}$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">Regle de chaine, equation normale, Bellman</li>
+                <li class="text-sm text-slate-700">Theoreme approximation universelle</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5 lg:col-span-2">
+            <h3 class="text-lg font-bold text-slate-900">Equations modernes IA</h3>
+            <div class="mt-3 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900 text-sm">
+                $$\mathrm{softmax}(z_i)=\frac{e^{z_i}}{\sum_j e^{z_j}},\quad \mathrm{Attention}(Q,K,V)=\mathrm{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">ELBO (VAE), convolution discrete, diffusion / score / flow matching</li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="bg-slate-900 rounded-2xl p-6 border border-slate-700">
+        <h3 class="text-xl font-bold text-white">Labo interactif A: biais-variance tradeoff</h3>
+        <p class="text-sm text-slate-300 mt-2">Complexite modele vs bruit: on visualise comment evoluent biais, variance et erreur totale.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-black border border-slate-700 rounded-xl p-3">
+                <canvas id="thmBiasVarCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-200">Complexite <span id="thmCompVal" class="font-bold text-cyan-300">0.50</span>
+                    <input id="thmComp" type="range" min="0" max="1" step="0.01" value="0.5" class="w-full accent-cyan-500">
+                </label>
+                <label class="block text-slate-200">Niveau bruit <span id="thmNoiseVal" class="font-bold text-cyan-300">0.18</span>
+                    <input id="thmNoise" type="range" min="0.02" max="0.45" step="0.01" value="0.18" class="w-full accent-cyan-500">
+                </label>
+                <div class="rounded-lg bg-slate-800 border border-slate-700 p-3 text-xs text-slate-200 space-y-1">
+                    <div>Biais^2: <span id="thmBiasVal" class="font-bold text-cyan-300">0.000</span></div>
+                    <div>Variance: <span id="thmVarVal" class="font-bold text-cyan-300">0.000</span></div>
+                    <div>Erreur totale: <span id="thmErrVal" class="font-bold text-cyan-300">0.000</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-xl font-bold text-slate-900">Labo interactif B: mini attention calculator</h3>
+        <p class="text-sm text-slate-700 mt-2">On manipule les scores QK et la temperature implicite via sqrt(dk) pour voir l effet softmax.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-700 rounded-xl p-3">
+                <canvas id="thmAttnCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-800">Score s1 <span id="thmS1Val" class="font-bold text-indigo-600">1.20</span>
+                    <input id="thmS1" type="range" min="-2" max="4" step="0.05" value="1.2" class="w-full accent-indigo-600">
+                </label>
+                <label class="block text-slate-800">Score s2 <span id="thmS2Val" class="font-bold text-indigo-600">0.40</span>
+                    <input id="thmS2" type="range" min="-2" max="4" step="0.05" value="0.4" class="w-full accent-indigo-600">
+                </label>
+                <label class="block text-slate-800">d_k <span id="thmDkVal" class="font-bold text-indigo-600">64</span>
+                    <input id="thmDk" type="range" min="4" max="256" step="1" value="64" class="w-full accent-indigo-600">
+                </label>
+                <div class="rounded-lg bg-slate-100 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                    <div>softmax(s1): <span id="thmP1" class="font-bold">0.000</span></div>
+                    <div>softmax(s2): <span id="thmP2" class="font-bold">0.000</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

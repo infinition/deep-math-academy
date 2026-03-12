@@ -1,27 +1,62 @@
-<div class="space-y-8">
+﻿<div class="space-y-8">
     <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
         <h2 class="text-3xl font-extrabold text-indigo-900 mb-6">La Dualité Onde-Corpuscule</h2>
         <p class="text-lg text-gray-700 leading-relaxed">
-            C'est le début de tout. La lumière est-elle une bille ou une vague ?
-            La réponse quantique : <strong>Les deux à la fois.</strong>
+            En physique quantique, une même entité (photon, électron) peut se comporter comme une <strong>onde</strong>
+            ou comme une <strong>particule</strong> selon l'expérience qu'on lui fait passer.
+            Ce n'est pas un bug: c'est la règle du jeu.
         </p>
     </div>
 
-    <!-- Analogie -->
     <div class="bg-white p-6 rounded-xl shadow-md">
         <h3 class="text-xl font-bold text-gray-800 mb-4">Analogie : Le Cylindre 🔦</h3>
         <p class="text-gray-600 mb-4">
-            Imaginez un cylindre.
-            Si vous l'éclairez de face, l'ombre est un <strong>Cercle</strong>.
-            Si vous l'éclairez de côté, l'ombre est un <strong>Rectangle</strong>.
-            L'objet réel (le cylindre) n'est ni l'un ni l'autre, mais il projette les deux propriétés selon comment on
-            le regarde.
+            Un cylindre projette une ombre ronde vu de face, et une ombre rectangulaire vu de côté.
+            L'objet est le même, c'est l'<strong>angle d'observation</strong> qui change le résultat.
+            En quantique, l'appareil de mesure joue ce rôle.
         </p>
+        <div class="bg-indigo-50 border border-indigo-100 rounded-lg p-3 text-sm text-indigo-900">
+            <strong>En bref :</strong> ce n'est pas "soit onde soit particule", c'est "le comportement dépend du test".
+        </div>
     </div>
 
-    <!-- Interactive Viz -->
-    class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500 font-bold">Mode Onde
-    (Interférences)</button>
-</div>
-</div>
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner text-center">
+        <h3 class="text-white font-bold mb-3">Expérience des Deux Fentes</h3>
+        <p class="text-gray-400 text-sm mb-6">
+            Mode particules: deux bandes principales.
+            Mode ondes: franges d'interférences (alternance clair/sombre).
+        </p>
+
+        <div id="dual-slit-viz" class="w-full h-64 bg-black rounded border border-gray-700 relative mb-4">
+            <!-- Viz injected by initDualSlit -->
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3">
+            <button onclick="setSlitMode('particles')"
+                class="px-4 py-2 bg-indigo-700 text-white rounded hover:bg-indigo-600 font-bold transition">
+                Mode Particules
+            </button>
+            <button onclick="setSlitMode('waves')"
+                class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-500 font-bold transition">
+                Mode Ondes (Interférences)
+            </button>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-200">
+            <h4 class="font-bold text-indigo-800 mb-2">Pourquoi c'est important en informatique quantique ?</h4>
+            <p class="text-sm text-indigo-900">
+                Les algorithmes quantiques exploitent justement ces interférences: on renforce les bonnes réponses,
+                on annule les mauvaises.
+            </p>
+        </div>
+        <div class="bg-amber-50 p-4 rounded-xl border border-amber-200">
+            <h4 class="font-bold text-amber-800 mb-2">Erreur fréquente</h4>
+            <p class="text-sm text-amber-900">
+                "La particule choisit une fente secrète". Non: tant qu'on ne mesure pas, le modèle utile est une
+                superposition des chemins.
+            </p>
+        </div>
+    </div>
 </div>

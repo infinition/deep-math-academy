@@ -1,0 +1,126 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+        <h2 class="text-3xl font-extrabold text-slate-900">1. Mathematiques fondamentales</h2>
+        <p class="mt-3 text-slate-700">Objectif: rendre lisibles les equations qui pilotent vraiment le ML/DL/IA. Ici, on privilegie intuition + analogie + usage concret.</p>
+        <div class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-900">
+            Statut: base pedagogique active. Le chapitre couvre tous les blocs demandes et fournit des interactifs concrets.
+        </div>
+    </section>
+
+    <section class="grid lg:grid-cols-2 gap-4">
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Algebre lineaire</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: les vecteurs sont des fleches, les matrices sont des machines qui deforment l espace.</p>
+            <div class="mt-3 p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-900 text-sm">
+                $$\mathbf{y}=W\mathbf{x}+\mathbf{b},\quad \|\mathbf{x}\|_2=\sqrt{\sum_i x_i^2},\quad \mathbf{u}\cdot\mathbf{v}=\|u\|\|v\|\cos\theta$$
+            </div>
+            <ul class="mt-3 space-y-1 list-disc pl-5">
+                <li class="text-sm text-slate-700">Scalaire, vecteur, matrice, tenseur</li>
+                <li class="text-sm text-slate-700">Produit scalaire, produit matriciel</li>
+                <li class="text-sm text-slate-700">Normes L1/L2, rang, trace, determinant</li>
+                <li class="text-sm text-slate-700">Valeurs propres, SVD/QR/Cholesky, projections</li>
+                <li class="text-sm text-slate-700">Espace latent / embeddings</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Calcul differentiel</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: la derivee est un compteur de pente instantanee; le gradient est la boussole de l optimisation.</p>
+            <div class="mt-3 p-3 rounded-lg bg-cyan-50 border border-cyan-200 text-cyan-900 text-sm">
+                $$\nabla_\theta\mathcal{L}(\theta)=\left[\frac{\partial \mathcal{L}}{\partial \theta_1},...,\frac{\partial \mathcal{L}}{\partial \theta_n}\right],\quad \theta_{t+1}=\theta_t-\eta\nabla_\theta\mathcal{L}(\theta_t)$$
+            </div>
+            <ul class="mt-3 space-y-1 list-disc pl-5">
+                <li class="text-sm text-slate-700">Derivee, derivee partielle, Jacobienne, Hessienne</li>
+                <li class="text-sm text-slate-700">Regle de chaine et developpement de Taylor</li>
+                <li class="text-sm text-slate-700">Optimisation contrainte et multiplicateurs de Lagrange</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Probabilites et statistiques</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: ce sont les compteurs de fiabilite d un modele dans un monde incertain.</p>
+            <div class="mt-3 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900 text-sm">
+                $$\mathbb{E}[X]=\sum_x xP(X=x),\quad \mathrm{Var}(X)=\mathbb{E}[(X-\mu)^2],\quad P(y\mid x)=\frac{P(x\mid y)P(y)}{P(x)}$$
+            </div>
+            <ul class="mt-3 space-y-1 list-disc pl-5">
+                <li class="text-sm text-slate-700">Variables aleatoires, covariance, correlation</li>
+                <li class="text-sm text-slate-700">Lois: Gauss, Bernoulli, Binomiale, Poisson, Exponentielle</li>
+                <li class="text-sm text-slate-700">MLE, Bayesian, prior/posterior/likelihood</li>
+                <li class="text-sm text-slate-700">Entropie, cross-entropy, KL, information mutuelle</li>
+                <li class="text-sm text-slate-700">Tests d hypothese, IC, bootstrap</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Optimisation et analyse numerique</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: optimiser, c est descendre une montagne dans le brouillard sans tomber dans les ravins numeriques.</p>
+            <div class="mt-3 p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900 text-sm">
+                $$\theta_{t+1}=\theta_t-\eta g_t,\quad g_t=\nabla_\theta\mathcal{L},\quad \kappa(A)=\|A\|\|A^{-1}\|$$
+            </div>
+            <ul class="mt-3 space-y-1 list-disc pl-5">
+                <li class="text-sm text-slate-700">Convexite, SGD, Adam/AdamW/RMSProp/Adagrad</li>
+                <li class="text-sm text-slate-700">Momentum, Nesterov, regularisation</li>
+                <li class="text-sm text-slate-700">Stabilite numerique, conditionnement, methodes iteratives</li>
+                <li class="text-sm text-slate-700">EDO/EDP, Monte Carlo</li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="bg-slate-900 rounded-2xl p-6 border border-slate-700">
+        <h3 class="text-xl font-bold text-white">Labo interactif A: projection vectorielle et produit scalaire</h3>
+        <p class="text-sm text-slate-300 mt-2">Bouge les composantes de <strong>u</strong> et <strong>v</strong>. Observe l angle, le produit scalaire et la projection.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-black border border-slate-700 rounded-xl p-3">
+                <canvas id="mathFoundProjCanvas" width="680" height="280" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-200">u_x <span id="mfUxVal" class="font-bold text-cyan-300">2.0</span>
+                    <input id="mfUx" type="range" min="-4" max="4" step="0.1" value="2" class="w-full accent-cyan-500">
+                </label>
+                <label class="block text-slate-200">u_y <span id="mfUyVal" class="font-bold text-cyan-300">1.5</span>
+                    <input id="mfUy" type="range" min="-4" max="4" step="0.1" value="1.5" class="w-full accent-cyan-500">
+                </label>
+                <label class="block text-slate-200">v_x <span id="mfVxVal" class="font-bold text-violet-300">3.0</span>
+                    <input id="mfVx" type="range" min="-4" max="4" step="0.1" value="3" class="w-full accent-violet-500">
+                </label>
+                <label class="block text-slate-200">v_y <span id="mfVyVal" class="font-bold text-violet-300">0.8</span>
+                    <input id="mfVy" type="range" min="-4" max="4" step="0.1" value="0.8" class="w-full accent-violet-500">
+                </label>
+                <div class="rounded-lg bg-slate-800 border border-slate-700 p-3 text-slate-200 text-xs space-y-1">
+                    <div>u.v = <span id="mfDot" class="font-bold text-cyan-300">0.00</span></div>
+                    <div>cos(theta) = <span id="mfCos" class="font-bold text-cyan-300">0.00</span></div>
+                    <div>proj_u(v) = <span id="mfProj" class="font-bold text-cyan-300">0.00</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-xl font-bold text-slate-900">Labo interactif B: descente de gradient 1D</h3>
+        <p class="text-sm text-slate-700 mt-2">On optimise $f(x)=\frac{x^4}{4}-x^2$ avec $x_{t+1}=x_t-\eta f'(x_t)$. Tu vois la stabilite selon le learning rate.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-700 rounded-xl p-3">
+                <canvas id="mathFoundGradCanvas" width="680" height="280" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-800">Learning rate eta <span id="mfLrVal" class="font-bold text-indigo-600">0.12</span>
+                    <input id="mfLr" type="range" min="0.01" max="0.45" step="0.01" value="0.12" class="w-full accent-indigo-600">
+                </label>
+                <label class="block text-slate-800">Point initial x0 <span id="mfX0Val" class="font-bold text-indigo-600">1.80</span>
+                    <input id="mfX0" type="range" min="-2.5" max="2.5" step="0.05" value="1.8" class="w-full accent-indigo-600">
+                </label>
+                <div class="grid grid-cols-2 gap-2">
+                    <button id="mfGradStep" class="px-3 py-2 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-semibold">1 step</button>
+                    <button id="mfGradRun" class="px-3 py-2 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-semibold">Auto</button>
+                    <button id="mfGradPause" class="px-3 py-2 rounded bg-slate-600 hover:bg-slate-500 text-white font-semibold">Pause</button>
+                    <button id="mfGradReset" class="px-3 py-2 rounded bg-rose-600 hover:bg-rose-500 text-white font-semibold">Reset</button>
+                </div>
+                <div class="rounded-lg bg-slate-100 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                    <div>Etape: <span id="mfIter" class="font-bold">0</span></div>
+                    <div>x: <span id="mfX" class="font-bold">1.800</span></div>
+                    <div>f(x): <span id="mfFx" class="font-bold">0.000</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

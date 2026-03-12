@@ -1,0 +1,55 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-fuchsia-600">
+        <h2 class="text-3xl font-extrabold text-fuchsia-900 mb-3">Algorithmes Deep Learning (du socle au moderne)</h2>
+        <p class="text-gray-700">Priorite: Feed-forward -> CNN -> RNN/LSTM -> Transformers, puis ecosysteme TensorFlow/PyTorch/GAN/Auto-encodeurs.</p>
+    </section>
+
+    <section class="bg-fuchsia-50 border border-fuchsia-200 rounded-xl p-5">
+        <h3 class="font-bold text-fuchsia-900 mb-2">Equation de base d un reseau</h3>
+        <div class="text-fuchsia-900">$$h^{(l+1)}=\sigma\left(W^{(l)}h^{(l)}+b^{(l)}\right),\quad \theta\leftarrow\theta-\eta\nabla_\theta\mathcal{L}$$</div>
+        <p class="text-sm text-fuchsia-900 mt-2">Analogie: chaque couche est un filtre de plus en plus abstrait.</p>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">4.1 Feed-Forward / MLP</h3>
+            <p class="text-sm text-gray-700 mt-1">Bon point d entree pour classification/regression tabulaire.</p>
+            <div class="text-sm mt-2">$$\hat{y}=\mathrm{softmax}(W_2\,\phi(W_1x+b_1)+b_2)$$</div>
+        </article>
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">4.2 CNN</h3>
+            <p class="text-sm text-gray-700 mt-1">Analogie: scanner visuel local qui detecte bords, textures, formes.</p>
+            <div class="text-sm mt-2">$$(f*g)(t)=\sum_\tau f(\tau)g(t-\tau)$$</div>
+        </article>
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">4.3 RNN / LSTM / GRU</h3>
+            <p class="text-sm text-gray-700 mt-1">Analogie: lecture mot par mot avec memoire et oubli controle.</p>
+            <div class="text-sm mt-2">$$h_t=\phi(W_xx_t+W_hh_{t-1}+b)$$</div>
+        </article>
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">4.7 Transformers</h3>
+            <p class="text-sm text-gray-700 mt-1">Dominants pour LLM et multimodal grace a l attention.</p>
+            <div class="text-sm mt-2">$$\mathrm{Attention}(Q,K,V)=\mathrm{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$</div>
+        </article>
+    </section>
+
+    <section class="bg-white border border-gray-200 rounded-xl p-6 space-y-4">
+        <h3 class="font-bold text-gray-900">Outils et familles complementaires</h3>
+        <div class="grid md:grid-cols-2 gap-3 text-sm text-gray-700">
+            <div class="bg-gray-50 border border-gray-200 rounded p-3"><strong>4.4 TensorFlow/Keras:</strong> production rapide, API haut niveau.</div>
+            <div class="bg-gray-50 border border-gray-200 rounded p-3"><strong>4.5 PyTorch:</strong> recherche/experimentation flexible.</div>
+            <div class="bg-gray-50 border border-gray-200 rounded p-3"><strong>4.6 GANs:</strong> generation adversariale (G + D).</div>
+            <div class="bg-gray-50 border border-gray-200 rounded p-3"><strong>4.8 Auto-encodeurs:</strong> compression, denoising, representations latentes.</div>
+        </div>
+    </section>
+
+    <section class="bg-gradient-to-r from-indigo-50 to-cyan-50 border border-indigo-200 rounded-xl p-6">
+        <h3 class="font-bold text-indigo-900 mb-2">Regles d entrainement a connaitre</h3>
+        <ul class="text-sm text-indigo-900 space-y-1">
+            <li>Optimizers: SGD, AdamW, RMSProp</li>
+            <li>Regularisation: dropout, weight decay, early stopping</li>
+            <li>Stabilite: normalisation, gradient clipping, warmup</li>
+            <li>Efficience: mixed precision, quantization, distillation</li>
+        </ul>
+    </section>
+</div>

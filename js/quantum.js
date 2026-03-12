@@ -1,4 +1,4 @@
-
+﻿
 // quantum.js - Logic for Quantum Physics & Computing Modules
 // Handles interactive visualizations using HTML5 Canvas
 
@@ -41,70 +41,171 @@ let slitMode = 'particles';
 window.initDualSlit = function () {
     const setup = createQuantumCanvas('dual-slit-viz');
     if (!setup) return;
-    const { ctx, width, height } = setup;
+    const { canvas, ctx, width, height } = setup;
 
-    let particles = [];
+    const sourceX = 24;
+    const barrierX = Math.round(width * 0.45);
+    const screenX = width - 18;
+    const slitHalf = 12;
+    const slitGap = Math.max(46, Math.round(height * 0.24));
+    const centerY = height * 0.5;
+    const topY = centerY - slitGap * 0.5;
+    const bottomY = centerY + slitGap * 0.5;
+
+    const particles = [];
+    const impacts = [];
     let t = 0;
 
-    function draw() {
-        if (!document.getElementById('dual-slit-viz')) return;
-        ctx.clearRect(0, 0, width, height);
+    function interference(y) {
+        const d1 = Math.hypot(screenX - barrierX, y - topY);
+        const d2 = Math.hypot(screenX - barrierX, y - bottomY);
+        const envelope = Math.exp(-Math.pow((y - centerY) / (height * 0.34), 2));
+        const phase = 0.26 * (d1 - d2) - t * 0.045;
+        const fringes = 0.5 + 0.5 * Math.cos(phase);
+        return envelope * fringes * fringes;
+    }
 
-        // Draw Slits
-        ctx.fillStyle = '#333';
-        ctx.fillRect(width / 2 - 5, 0, 10, height); // Wall
-        ctx.clearRect(width / 2 - 5, height / 3 - 10, 10, 20); // Slit 1
-        ctx.clearRect(width / 2 - 5, 2 * height / 3 - 10, 10, 20); // Slit 2
+    function spawnParticle() {
+        const useTop = Math.random() < 0.5;
+        const slitY = (useTop ? topY : bottomY) + (Math.random() - 0.5) * slitHalf * 0.6;
+        const direction = (slitY - centerY) / Math.max(1, screenX - barrierX);
+
+        particles.push({
+            x: sourceX,
+            y: centerY + (Math.random() - 0.5) * 5,
+            slitY,
+            drift: direction * 5.2
+        });
+    }
+
+    function drawStaticFrame() {
+        const bg = ctx.createLinearGradient(0, 0, width, height);
+        bg.addColorStop(0, '#020617');
+        bg.addColorStop(1, '#0f172a');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, width, height);
+
+        // Source
+        ctx.fillStyle = '#22d3ee';
+        ctx.beginPath();
+        ctx.arc(sourceX, centerY, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Barrier and slits
+        ctx.fillStyle = '#334155';
+        ctx.fillRect(barrierX - 4, 0, 8, height);
+        ctx.clearRect(barrierX - 4, topY - slitHalf, 8, slitHalf * 2);
+        ctx.clearRect(barrierX - 4, bottomY - slitHalf, 8, slitHalf * 2);
+
+        // Detection screen
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(screenX, 0, 4, height);
+
+        ctx.fillStyle = 'rgba(203, 213, 225, 0.75)';
+        ctx.font = '11px Arial';
+        ctx.fillText('source', 4, 16);
+        ctx.fillText('fentes', barrierX - 16, 16);
+        ctx.fillText('ecran', screenX - 12, 16);
+    }
+
+    function drawParticlesMode() {
+        if (Math.random() < 0.35) {
+            spawnParticle();
+        }
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+
+            if (p.x < barrierX - 5) {
+                p.x += 2.8;
+                p.y += (p.slitY - p.y) * 0.08;
+            } else if (p.x < barrierX + 2) {
+                p.x += 1.6;
+                p.y += (p.slitY - p.y) * 0.22;
+            } else {
+                p.x += 3.1;
+                p.y += p.drift + (Math.random() - 0.5) * 0.25;
+            }
+
+            ctx.fillStyle = '#e2e8f0';
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 1.8, 0, Math.PI * 2);
+            ctx.fill();
+
+            if (p.x >= screenX) {
+                impacts.push({ y: p.y, life: 1 });
+                particles.splice(i, 1);
+            }
+        }
+
+        for (let i = impacts.length - 1; i >= 0; i--) {
+            const hit = impacts[i];
+            hit.life -= 0.014;
+
+            ctx.strokeStyle = `rgba(125, 211, 252, ${Math.max(0, hit.life)})`;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(screenX + 1, hit.y);
+            ctx.lineTo(screenX + 9, hit.y);
+            ctx.stroke();
+
+            if (hit.life <= 0) impacts.splice(i, 1);
+        }
+
+        // Expected two-bands hint
+        ctx.strokeStyle = 'rgba(45, 212, 191, 0.35)';
+        ctx.setLineDash([5, 5]);
+        ctx.beginPath();
+        ctx.moveTo(screenX - 14, topY);
+        ctx.lineTo(screenX + 10, topY);
+        ctx.moveTo(screenX - 14, bottomY);
+        ctx.lineTo(screenX + 10, bottomY);
+        ctx.stroke();
+        ctx.setLineDash([]);
+    }
+
+    function drawWavesMode() {
+        // Field between slits and screen
+        for (let y = 0; y < height; y += 2) {
+            const intensity = interference(y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.05 + intensity * 0.5})`;
+            ctx.beginPath();
+            ctx.moveTo(barrierX + 4, y);
+            ctx.lineTo(screenX, y);
+            ctx.stroke();
+        }
+
+        // Interference pattern on detection screen
+        for (let y = 0; y < height; y += 2) {
+            const intensity = interference(y);
+            const alpha = 0.15 + intensity * 0.85;
+            ctx.strokeStyle = `rgba(45, 212, 191, ${alpha})`;
+            ctx.beginPath();
+            ctx.moveTo(screenX + 1, y);
+            ctx.lineTo(screenX + 11, y);
+            ctx.stroke();
+        }
+    }
+
+    function draw() {
+        if (!canvas.isConnected) return;
+        drawStaticFrame();
 
         if (slitMode === 'particles') {
-            if (Math.random() < 0.1) {
-                particles.push({ x: 0, y: height / 2 + (Math.random() - 0.5) * 50, vx: 2, vy: (Math.random() - 0.5) * 0.5 });
-            }
-            particles.forEach((p, i) => {
-                p.x += p.vx; p.y += p.vy;
-                if (p.x > width / 2 - 5 && p.x < width / 2 + 5) {
-                    if (!((p.y > height / 3 - 10 && p.y < height / 3 + 10) || (p.y > 2 * height / 3 - 10 && p.y < 2 * height / 3 + 10))) {
-                        p.vx = 0;
-                    }
-                }
-                ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI * 2); ctx.fillStyle = '#fff'; ctx.fill();
-                if (p.x > width) particles.splice(i, 1);
-            });
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-            ctx.fillRect(width - 10, height / 3 - 20, 5, 40);
-            ctx.fillRect(width - 10, 2 * height / 3 - 20, 5, 40);
+            drawParticlesMode();
         } else {
-            const imgData = ctx.createImageData(width, height);
-            const data = imgData.data;
-            for (let x = width / 2; x < width; x += 2) {
-                for (let y = 0; y < height; y += 2) {
-                    const d1 = Math.sqrt((x - width / 2) ** 2 + (y - height / 3) ** 2);
-                    const d2 = Math.sqrt((x - width / 2) ** 2 + (y - 2 * height / 3) ** 2);
-                    const phase = (d1 - d2) * 0.5;
-                    const intensity = (1 + Math.cos(phase - t * 0.2)) * 100;
-                    const idx = (y * width + x) * 4;
-                    for (let dy = 0; dy < 2; dy++) {
-                        for (let dx = 0; dx < 2; dx++) {
-                            if (x + dx < width && y + dy < height) {
-                                const i = ((y + dy) * width + (x + dx)) * 4;
-                                data[i] = 79; data[i + 1] = 70; data[i + 2] = 229; data[i + 3] = intensity;
-                            }
-                        }
-                    }
-                }
-            }
-            ctx.putImageData(imgData, 0, 0);
-            ctx.strokeStyle = 'rgba(255,255,255,0.2)';
-            for (let r = 0; r < width / 2; r += 20) {
-                ctx.beginPath(); ctx.arc(0, height / 2, (r + t * 2) % width / 2, -0.5, 0.5); ctx.stroke();
-            }
-            t++;
+            drawWavesMode();
         }
+
+        t += 1;
         requestAnimationFrame(draw);
     }
+
     draw();
 }
-window.setSlitMode = function (mode) { slitMode = mode; }
+window.setSlitMode = function (mode) {
+    slitMode = mode === 'waves' ? 'waves' : 'particles';
+}
 
 // --- 1.1 Postulats & États (Quantum Casino) ---
 window.initQuantumPostulates = function () {
@@ -1821,3 +1922,7 @@ window.firePhoton = function () {
         passedBS2: false
     });
 }
+
+
+
+

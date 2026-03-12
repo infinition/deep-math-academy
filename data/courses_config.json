@@ -1,432 +1,746 @@
 {
-  "bases": {
-    "title": "🏛️ Bases Mathématiques",
-    "modules": [
-      {
-        "id": "math_symbols",
-        "title": "Le Langage (Symboles)",
-        "icon": "🔣",
-        "interactive": true,
-        "initFunction": "initSymbolExplorer"
-      }
-    ]
-  },
-  "analysis": {
-    "title": "📉 Analyse & Calcul",
-    "modules": [
-      {
-        "id": "ana_intro",
-        "title": "Introduction",
-        "icon": "👋",
-        "interactive": false
-      },
-      {
-        "id": "functions",
-        "title": "Les Fonctions",
-        "icon": "📈",
-        "interactive": false
-      },
-      {
-        "id": "derivatives",
-        "title": "Les Dérivées",
-        "icon": "📉",
-        "interactive": true,
-        "initFunction": "initDerivativeGraph"
-      },
-      {
-        "id": "gradient",
-        "title": "Le Gradient",
-        "icon": "⛷️",
-        "interactive": true,
-        "initFunction": "drawGradient"
-      },
-      {
-        "id": "integrals",
-        "title": "Intégrales",
-        "icon": "∫",
-        "interactive": false
-      },
-      {
-        "id": "sequences",
-        "title": "Suites & Séries",
-        "icon": "🔢",
-        "interactive": false
-      },
-      {
-        "id": "distances",
-        "title": "Distances & Similarité",
-        "icon": "📏",
-        "interactive": false
-      }
-    ]
-  },
-  "algebra": {
-    "title": "📐 Algèbre Linéaire",
-    "modules": [
-      {
-        "id": "alg_intro",
-        "title": "Introduction",
-        "icon": "👋",
-        "interactive": false
-      },
-      {
-        "id": "sets",
-        "title": "Théorie des Ensembles",
-        "icon": "📦",
-        "interactive": true
-      },
-      {
-        "id": "vectors",
-        "title": "Les Vecteurs",
-        "icon": "➹",
-        "interactive": true
-      },
-      {
-        "id": "matrices",
-        "title": "Les Matrices",
-        "icon": "▦",
-        "interactive": false
-      },
-      {
-        "id": "spaces",
-        "title": "Espaces Vectoriels",
-        "icon": "🌌",
-        "interactive": false
-      },
-      {
-        "id": "linear_map",
-        "title": "Applications Linéaires",
-        "icon": "⚙️",
-        "interactive": false
-      },
-      {
-        "id": "det_inv",
-        "title": "Déterminant & Inverse",
-        "icon": "🔍",
-        "interactive": true
-      },
-      {
-        "id": "eigen",
-        "title": "Valeurs Propres",
-        "icon": "💎",
-        "interactive": false
-      },
-      {
-        "id": "svd",
-        "title": "SVD & Décompositions",
-        "icon": "🎓",
-        "interactive": false
-      }
-    ]
-  },
-  "stats": {
-    "title": "📊 Stats & Proba",
-    "modules": [
-      {
-        "id": "stat_intro",
-        "title": "Introduction",
-        "icon": "👋",
-        "interactive": false
-      },
-      {
-        "id": "descrip",
-        "title": "Stats Descriptives",
-        "icon": "bm",
-        "interactive": true
-      },
-      {
-        "id": "correlation",
-        "title": "Corrélation & Covariance",
-        "icon": "🔗",
-        "interactive": false
-      },
-      {
-        "id": "proba_fond",
-        "title": "Probas Fondamentales",
-        "icon": "🎲",
-        "interactive": false
-      },
-      {
-        "id": "lois_discretes",
-        "title": "Lois Discrètes",
-        "icon": "🔢",
-        "interactive": false
-      },
-      {
-        "id": "lois_continues",
-        "title": "Lois Continues",
-        "icon": "🌊",
-        "interactive": true
-      }
-    ]
-  },
-  "quantum": {
-    "title": "⚛️ Physique Quantique",
-    "modules": [
-      {
-        "id": "duality",
-        "title": "Dualité Onde-Corpuscule",
-        "icon": "🌊",
-        "interactive": true,
-        "initFunction": "initDualSlit",
-        "category": "Fondamentaux"
-      },
-      {
-        "id": "postulats",
-        "title": "Postulats & États",
-        "icon": "⚛️",
-        "interactive": true,
-        "initFunction": "initQuantumPostulates",
-        "category": "Fondamentaux"
-      },
-      {
-        "id": "hilbert",
-        "title": "Espaces de Hilbert",
-        "icon": "📐",
-        "interactive": true,
-        "initFunction": "initHilbertSpace",
-        "category": "Fondamentaux"
-      },
-      {
-        "id": "operators",
-        "title": "Opérateurs & Observables",
-        "icon": "👁️",
-        "interactive": true,
-        "initFunction": "initOperators",
-        "category": "Fondamentaux"
-      },
-      {
-        "id": "linear_algebra",
-        "title": "Algèbre Linéaire Complexe",
-        "icon": "ℂ",
-        "interactive": true,
-        "initFunction": "initComplexAlgebra",
-        "category": "Maths du Quantique"
-      },
-      {
-        "id": "groups",
-        "title": "Théorie des Groupes",
-        "icon": "🔄",
-        "interactive": true,
-        "initFunction": "initGroupTheory",
-        "category": "Maths du Quantique"
-      },
-      {
-        "id": "functional_analysis",
-        "title": "Analyse Fonctionnelle",
-        "icon": "📈",
-        "interactive": true,
-        "initFunction": "initFunctionalAnalysis",
-        "category": "Maths du Quantique"
-      },
-      {
-        "id": "quantum_probability",
-        "title": "Probabilités Quantiques",
-        "icon": "🎲",
-        "interactive": true,
-        "initFunction": "initQuantumProbability",
-        "category": "Maths du Quantique"
-      },
-      {
-        "id": "qubits",
-        "title": "Qubits & Multi-qubits",
-        "icon": "0️⃣1️⃣",
-        "interactive": true,
-        "initFunction": "initQubits",
-        "category": "Quantum Computing"
-      },
-      {
-        "id": "gates",
-        "title": "Opérations (Gates)",
-        "icon": "⛩️",
-        "interactive": true,
-        "initFunction": "initQuantumGates",
-        "category": "Quantum Computing"
-      },
-      {
-        "id": "measurement",
-        "title": "Mesure & Décohérence",
-        "icon": "📉",
-        "interactive": true,
-        "initFunction": "initMeasurement",
-        "category": "Quantum Computing"
-      },
-      {
-        "id": "schrodinger",
-        "title": "Équation de Schrödinger",
-        "icon": "🌊",
-        "interactive": true,
-        "initFunction": "initSchrodinger",
-        "category": "Quantum Computing"
-      },
-      {
-        "id": "circuits",
-        "title": "Circuits Quantiques",
-        "icon": "🔌",
-        "interactive": true,
-        "initFunction": "initQuantumCircuits",
-        "category": "Quantum Computing"
-      },
-      {
-        "id": "algorithms",
-        "title": "Algorithmes Quantiques",
-        "icon": "🚀",
-        "interactive": true,
-        "initFunction": "initQuantumAlgorithms",
-        "category": "Quantum Computing"
-      },
-      {
-        "id": "qml",
-        "title": "QML & VQC",
-        "icon": "🤖",
-        "interactive": true,
-        "initFunction": "initQML",
-        "category": "Quantum Machine Learning"
-      },
-      {
-        "id": "hybrid_models",
-        "title": "Modèles Hybrides",
-        "icon": "🧬",
-        "interactive": true,
-        "initFunction": "initHybridModels",
-        "category": "Quantum Machine Learning"
-      },
-      {
-        "id": "qft",
-        "title": "Théorie Quantique des Champs",
-        "icon": "〰️",
-        "interactive": true,
-        "initFunction": "initQFT",
-        "category": "Physique Avancée"
-      },
-      {
-        "id": "stat_mech",
-        "title": "Mécanique Statistique Quantique",
-        "icon": "🌡️",
-        "interactive": true,
-        "initFunction": "initStatMech",
-        "category": "Physique Avancée"
-      },
-      {
-        "id": "spin_su2",
-        "title": "Spin & SU(2)",
-        "icon": "🔄",
-        "interactive": true,
-        "initFunction": "initSpinSU2",
-        "category": "Physique Avancée"
-      },
-      {
-        "id": "entropy",
-        "title": "Entropie & Information",
-        "icon": "📉",
-        "interactive": true,
-        "initFunction": "initQuantumEntropy",
-        "category": "Information Quantique"
-      },
-      {
-        "id": "channels",
-        "title": "Canaux Quantiques",
-        "icon": "📡",
-        "interactive": true,
-        "initFunction": "initQuantumChannels",
-        "category": "Information Quantique"
-      },
-      {
-        "id": "theorems",
-        "title": "Théorèmes Fondamentaux",
-        "icon": "📜",
-        "interactive": true,
-        "initFunction": "initQuantumTheorems",
-        "category": "Information Quantique"
-      },
-      {
-        "id": "qec",
-        "title": "Correction d'Erreurs (QEC)",
-        "icon": "🛡️",
-        "interactive": true,
-        "initFunction": "initQEC",
-        "category": "Information Quantique"
-      },
-      {
-        "id": "networks",
-        "title": "Réseaux Quantiques",
-        "icon": "🌐",
-        "interactive": true,
-        "initFunction": "initQuantumNetworks",
-        "category": "Information Quantique"
-      },
-      {
-        "id": "qkd",
-        "title": "Protocoles QKD",
-        "icon": "🗝️",
-        "interactive": true,
-        "initFunction": "initQKD",
-        "category": "Cryptographie Quantique"
-      },
-      {
-        "id": "commitment",
-        "title": "Coin-Flipping & Commitment",
-        "icon": "🪙",
-        "interactive": true,
-        "initFunction": "initCoinFlipping",
-        "category": "Cryptographie Quantique"
-      },
-      {
-        "id": "randomness",
-        "title": "Aléa Quantique (QRNG)",
-        "icon": "🎲",
-        "interactive": true,
-        "initFunction": "initQRNG",
-        "category": "Cryptographie Quantique"
-      },
-      {
-        "id": "security",
-        "title": "Sécurité & Attaques",
-        "icon": "🕵️",
-        "interactive": true,
-        "initFunction": "initSecurityAttacks",
-        "category": "Cryptographie Quantique"
-      },
-      {
-        "id": "open_systems",
-        "title": "Systèmes Ouverts",
-        "icon": "🌫️",
-        "interactive": true,
-        "initFunction": "initOpenSystems",
-        "category": "Bruit & Systèmes Ouverts"
-      },
-      {
-        "id": "decoherence",
-        "title": "Décohérence & Lindblad",
-        "icon": "⏳",
-        "interactive": true,
-        "initFunction": "initDecoherence",
-        "category": "Bruit & Systèmes Ouverts"
-      },
-      {
-        "id": "superconducting",
-        "title": "Supraconducteurs",
-        "icon": "❄️",
-        "interactive": true,
-        "initFunction": "initSuperconducting",
-        "category": "Hardware Quantique"
-      },
-      {
-        "id": "trapped_ions",
-        "title": "Ions Piégés",
-        "icon": "⚡",
-        "interactive": true,
-        "initFunction": "initTrappedIons",
-        "category": "Hardware Quantique"
-      },
-      {
-        "id": "photonic",
-        "title": "Photonique",
-        "icon": "💡",
-        "interactive": true,
-        "initFunction": "initPhotonic",
-        "category": "Hardware Quantique"
-      }
-    ]
-  }
+    "bases":  {
+                  "title":  "🏛️ Bases Mathématiques",
+                  "modules":  [
+                                  {
+                                      "id":  "math_symbols",
+                                      "title":  "Le Langage (Symboles)",
+                                      "icon":  "🔣",
+                                      "interactive":  true,
+                                      "initFunction":  "initSymbolExplorer"
+                                  }
+                              ]
+              },
+    "analysis":  {
+                     "title":  "📉 Analyse \u0026 Calcul",
+                     "modules":  [
+                                     {
+                                         "id":  "ana_intro",
+                                         "title":  "Introduction",
+                                         "icon":  "👋",
+                                         "interactive":  false
+                                     },
+                                     {
+                                         "id":  "functions",
+                                         "title":  "Les Fonctions",
+                                         "icon":  "📈",
+                                         "interactive":  false
+                                     },
+                                     {
+                                         "id":  "derivatives",
+                                         "title":  "Les Dérivées",
+                                         "icon":  "📉",
+                                         "interactive":  true,
+                                         "initFunction":  "initDerivativeCanvas"
+                                     },
+                                     {
+                                         "id":  "gradient",
+                                         "title":  "Le Gradient",
+                                         "icon":  "⛷️",
+                                         "interactive":  true,
+                                         "initFunction":  "initGradientCanvas"
+                                     },
+                                     {
+                                         "id":  "integrals",
+                                         "title":  "Intégrales",
+                                         "icon":  "∫",
+                                         "interactive":  false
+                                     },
+                                     {
+                                         "id":  "sequences",
+                                         "title":  "Suites \u0026 Séries",
+                                         "icon":  "🔢",
+                                         "interactive":  false
+                                     },
+                                     {
+                                         "id":  "distances",
+                                         "title":  "Distances \u0026 Similarité",
+                                         "icon":  "📏",
+                                         "interactive":  false
+                                     }
+                                 ]
+                 },
+    "algebra":  {
+                    "title":  "📐 Algèbre Linéaire",
+                    "modules":  [
+                                    {
+                                        "id":  "alg_intro",
+                                        "title":  "Introduction",
+                                        "icon":  "👋",
+                                        "interactive":  false
+                                    },
+                                    {
+                                        "id":  "sets",
+                                        "title":  "Théorie des Ensembles",
+                                        "icon":  "📦",
+                                        "interactive":  true
+                                    },
+                                    {
+                                        "id":  "vectors",
+                                        "title":  "Les Vecteurs",
+                                        "icon":  "➹",
+                                        "interactive":  true
+                                    },
+                                    {
+                                        "id":  "matrices",
+                                        "title":  "Les Matrices",
+                                        "icon":  "▦",
+                                        "interactive":  false
+                                    },
+                                    {
+                                        "id":  "spaces",
+                                        "title":  "Espaces Vectoriels",
+                                        "icon":  "🌌",
+                                        "interactive":  false
+                                    },
+                                    {
+                                        "id":  "linear_map",
+                                        "title":  "Applications Linéaires",
+                                        "icon":  "⚙️",
+                                        "interactive":  false
+                                    },
+                                    {
+                                        "id":  "det_inv",
+                                        "title":  "Déterminant \u0026 Inverse",
+                                        "icon":  "🔍",
+                                        "interactive":  true
+                                    },
+                                    {
+                                        "id":  "eigen",
+                                        "title":  "Valeurs Propres",
+                                        "icon":  "💎",
+                                        "interactive":  false
+                                    },
+                                    {
+                                        "id":  "svd",
+                                        "title":  "SVD \u0026 Décompositions",
+                                        "icon":  "🎓",
+                                        "interactive":  false
+                                    }
+                                ]
+                },
+    "stats":  {
+                  "title":  "📊 Stats \u0026 Proba",
+                  "modules":  [
+                                  {
+                                      "id":  "stat_intro",
+                                      "title":  "Introduction",
+                                      "icon":  "👋",
+                                      "interactive":  false
+                                  },
+                                  {
+                                      "id":  "descrip",
+                                      "title":  "Stats Descriptives",
+                                      "icon":  "📐",
+                                      "interactive":  true
+                                  },
+                                  {
+                                      "id":  "correlation",
+                                      "title":  "Corrélation \u0026 Covariance",
+                                      "icon":  "🔗",
+                                      "interactive":  false
+                                  },
+                                  {
+                                      "id":  "proba_fond",
+                                      "title":  "Probas Fondamentales",
+                                      "icon":  "🎲",
+                                      "interactive":  false
+                                  },
+                                  {
+                                      "id":  "lois_discretes",
+                                      "title":  "Lois Discrètes",
+                                      "icon":  "🔢",
+                                      "interactive":  false
+                                  },
+                                  {
+                                      "id":  "lois_continues",
+                                      "title":  "Lois Continues",
+                                      "icon":  "🌊",
+                                      "interactive":  true
+                                  }
+                              ]
+              },
+    "ml_expert":  {
+                      "title":  "ML Expert - Couverture Complete",
+                      "modules":  [
+                                      {
+                                          "id":  "coverage_global",
+                                          "title":  "Couverture Globale (Chantier)",
+                                          "icon":  "IDX",
+                                          "interactive":  true,
+                                          "initFunction":  "initCoverageGlobalHub",
+                                          "category":  "Suivi"
+                                      },
+                                      {
+                                          "id":  "lexique_math_annotations",
+                                          "title":  "Lexique Notations Mathematiques",
+                                          "icon":  "LEX",
+                                          "interactive":  false,
+                                          "category":  "Suivi"
+                                      },
+                                      {
+                                          "id":  "math_fondamentales",
+                                          "title":  "1. Mathematiques fondamentales",
+                                          "icon":  "01",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initMathFondamentalesLab"
+                                      },
+                                      {
+                                          "id":  "data_science_classique",
+                                          "title":  "2. Concepts statistiques / data science classiques",
+                                          "icon":  "02",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initDataScienceClassiqueLab"
+                                      },
+                                      {
+                                          "id":  "deep_learning_base",
+                                          "title":  "3. Deep Learning de base",
+                                          "icon":  "03",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initDeepLearningBaseLab"
+                                      },
+                                      {
+                                          "id":  "vision_par_ordinateur",
+                                          "title":  "4. Vision par ordinateur",
+                                          "icon":  "04",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initVisionParOrdinateurLab"
+                                      },
+                                      {
+                                          "id":  "nlp_langage",
+                                          "title":  "5. NLP / langage",
+                                          "icon":  "05",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initNlpLangageLab"
+                                      },
+                                      {
+                                          "id":  "modeles_generatifs",
+                                          "title":  "6. Modeles generatifs",
+                                          "icon":  "06",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initModelesGeneratifsLab"
+                                      },
+                                      {
+                                          "id":  "architectures_recherche_chaude",
+                                          "title":  "7. Architectures chaudes en recherche actuelle",
+                                          "icon":  "07",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initArchitecturesRechercheChaudeLab"
+                                      },
+                                      {
+                                          "id":  "rl_robotique_controle",
+                                          "title":  "8. Reinforcement Learning / robotique / controle",
+                                          "icon":  "08",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initRlRobotiqueControleLab"
+                                      },
+                                      {
+                                          "id":  "graphes",
+                                          "title":  "9. Graphes",
+                                          "icon":  "09",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initGraphesLab"
+                                      },
+                                      {
+                                          "id":  "auto_supervise_representation",
+                                          "title":  "10. Apprentissage auto-supervise / representation",
+                                          "icon":  "10",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initAutoSuperviseRepresentationLab"
+                                      },
+                                      {
+                                          "id":  "inference_probabiliste_structures",
+                                          "title":  "11. Inference probabiliste / modeles structures",
+                                          "icon":  "11",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initInferenceProbabilisteStructuresLab"
+                                      },
+                                      {
+                                          "id":  "theoremes_equations",
+                                          "title":  "12. Theoremes / principes / equations a connaitre",
+                                          "icon":  "12",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initTheoremesEquationsLab"
+                                      },
+                                      {
+                                          "id":  "pertes_metriques_objectifs",
+                                          "title":  "13. Pertes / metriques / objectifs",
+                                          "icon":  "13",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initPertesMetriquesObjectifsLab"
+                                      },
+                                      {
+                                          "id":  "entrainement_gros_modeles",
+                                          "title":  "14. Entrainement moderne des gros modeles",
+                                          "icon":  "14",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initEntrainementGrosModelesLab"
+                                      },
+                                      {
+                                          "id":  "donnees_systemes_mlops",
+                                          "title":  "15. Donnees / systemes / MLOps",
+                                          "icon":  "15",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initDonneesSystemesMlopsLab"
+                                      },
+                                      {
+                                          "id":  "multimodal",
+                                          "title":  "16. Multimodal",
+                                          "icon":  "16",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initMultimodalLab"
+                                      },
+                                      {
+                                          "id":  "buzzwords_ia",
+                                          "title":  "17. Buzzwords IA du moment",
+                                          "icon":  "17",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initBuzzwordsIaLab"
+                                      },
+                                      {
+                                          "id":  "socle_ultra_court",
+                                          "title":  "18. Version ultra courte: socle a connaitre",
+                                          "icon":  "18",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initSocleUltraCourtLab"
+                                      },
+                                      {
+                                          "id":  "recherche_active",
+                                          "title":  "19. Recherche active aujourd hui",
+                                          "icon":  "19",
+                                          "interactive":  true,
+                                          "category":  "Chapitres",
+                                          "initFunction":  "initRechercheActiveLab"
+                                      },
+                                      {
+                                          "id":  "q_learning",
+                                          "title":  "Q-Learning (Lab Interactif)",
+                                          "icon":  "QL",
+                                          "interactive":  true,
+                                          "initFunction":  "initQLearningLab",
+                                          "category":  "Chapitres"
+                                      },
+                                      {
+                                          "id":  "ml_algorithms",
+                                          "title":  "Algo ML: modeles lineaires, arbres, SVM, ensembles",
+                                          "icon":  "ML",
+                                          "interactive":  true,
+                                          "category":  "Chapitres bonus"
+                                      },
+                                      {
+                                          "id":  "dl_algorithms",
+                                          "title":  "Algo DL: MLP, CNN, RNN, Transformers, GAN",
+                                          "icon":  "DL",
+                                          "interactive":  true,
+                                          "category":  "Chapitres bonus"
+                                      },
+                                      {
+                                          "id":  "rl_intro",
+                                          "title":  "RL complet: policy/value/genetic",
+                                          "icon":  "RL",
+                                          "interactive":  true,
+                                          "category":  "Chapitres bonus"
+                                      },
+                                      {
+                                          "id":  "genai",
+                                          "title":  "IA Generative: LLM, image, RAG",
+                                          "icon":  "G",
+                                          "interactive":  true,
+                                          "category":  "Chapitres bonus"
+                                      },
+                                      {
+                                          "id":  "world_models",
+                                          "title":  "VLM / VLA / World Models",
+                                          "icon":  "WM",
+                                          "interactive":  true,
+                                          "category":  "Chapitres bonus"
+                                      },
+                                      {
+                                          "id":  "expert_missing",
+                                          "title":  "Checklist expert: concepts manquants",
+                                          "icon":  "EX",
+                                          "interactive":  true,
+                                          "category":  "Chapitres bonus"
+                                      }
+                                  ]
+                  },
+    "ai_dynamics":  {
+                        "title":  "🧠 IA Moderne \u0026 Dynamique",
+                        "modules":  [
+                                        {
+                                            "id":  "ai_intro",
+                                            "title":  "Vision d\u0027Ensemble",
+                                            "icon":  "🧭",
+                                            "interactive":  false,
+                                            "category":  "Fondations"
+                                        },
+                                        {
+                                            "id":  "transformers",
+                                            "title":  "Équations des Transformers",
+                                            "icon":  "🧩",
+                                            "interactive":  true,
+                                            "initFunction":  "initTransformerExplorer",
+                                            "category":  "Fondations"
+                                        },
+                                        {
+                                            "id":  "backprop",
+                                            "title":  "Backpropagation (Rétroprop)",
+                                            "icon":  "🔁",
+                                            "interactive":  true,
+                                            "initFunction":  "initBackpropPlayground",
+                                            "category":  "Fondations"
+                                        },
+                                        {
+                                            "id":  "ml_foundations",
+                                            "title":  "Machine Learning Essentiel",
+                                            "icon":  "🎯",
+                                            "interactive":  true,
+                                            "initFunction":  "initMLSandbox",
+                                            "category":  "Fondations"
+                                        },
+                                        {
+                                            "id":  "neural_pde",
+                                            "title":  "Réaction-Diffusion + Neural ODE",
+                                            "icon":  "🌊",
+                                            "interactive":  true,
+                                            "initFunction":  "initNeuralPDELab",
+                                            "category":  "IA Physique"
+                                        },
+                                        {
+                                            "id":  "free_energy",
+                                            "title":  "Énergie Libre (Friston)",
+                                            "icon":  "⚡",
+                                            "interactive":  true,
+                                            "initFunction":  "initFreeEnergyLab",
+                                            "category":  "IA Physique"
+                                        },
+                                        {
+                                            "id":  "action_flow",
+                                            "title":  "Moindre Action \u0026 Flow Matching",
+                                            "icon":  "🌀",
+                                            "interactive":  true,
+                                            "initFunction":  "initActionFlowLab",
+                                            "category":  "IA Physique"
+                                        },
+                                        {
+                                            "id":  "equivariance",
+                                            "title":  "Géométrie Équivariante (Noether)",
+                                            "icon":  "🔮",
+                                            "interactive":  true,
+                                            "initFunction":  "initEquivarianceLab",
+                                            "category":  "Géométrie \u0026 Symétries"
+                                        },
+                                        {
+                                            "id":  "attractors",
+                                            "title":  "Attracteurs \u0026 Chaos",
+                                            "icon":  "🕸️",
+                                            "interactive":  true,
+                                            "initFunction":  "initAttractorLab",
+                                            "category":  "Émergence"
+                                        },
+                                        {
+                                            "id":  "hypergraphs",
+                                            "title":  "Hypergraphes Émergents",
+                                            "icon":  "🧬",
+                                            "interactive":  true,
+                                            "initFunction":  "initHypergraphLab",
+                                            "category":  "Émergence"
+                                        },
+                                        {
+                                            "id":  "unified_stack",
+                                            "title":  "Architecture 5 Couches",
+                                            "icon":  "🏗️",
+                                            "interactive":  true,
+                                            "initFunction":  "initUnifiedArchitectureLab",
+                                            "category":  "Synthèse"
+                                        }
+                                    ]
+                    },
+    "quantum":  {
+                    "title":  "⚛️ Physique Quantique",
+                    "modules":  [
+                                    {
+                                        "id":  "duality",
+                                        "title":  "Dualité Onde-Corpuscule",
+                                        "icon":  "🌊",
+                                        "interactive":  true,
+                                        "initFunction":  "initDualSlit",
+                                        "category":  "Fondamentaux"
+                                    },
+                                    {
+                                        "id":  "postulats",
+                                        "title":  "Postulats \u0026 États",
+                                        "icon":  "⚛️",
+                                        "interactive":  true,
+                                        "initFunction":  "initQuantumPostulates",
+                                        "category":  "Fondamentaux"
+                                    },
+                                    {
+                                        "id":  "hilbert",
+                                        "title":  "Espaces de Hilbert",
+                                        "icon":  "📐",
+                                        "interactive":  true,
+                                        "initFunction":  "initHilbertSpace",
+                                        "category":  "Fondamentaux"
+                                    },
+                                    {
+                                        "id":  "operators",
+                                        "title":  "Opérateurs \u0026 Observables",
+                                        "icon":  "👁️",
+                                        "interactive":  true,
+                                        "initFunction":  "initOperators",
+                                        "category":  "Fondamentaux"
+                                    },
+                                    {
+                                        "id":  "linear_algebra",
+                                        "title":  "Algèbre Linéaire Complexe",
+                                        "icon":  "ℂ",
+                                        "interactive":  true,
+                                        "initFunction":  "initComplexAlgebra",
+                                        "category":  "Maths du Quantique"
+                                    },
+                                    {
+                                        "id":  "groups",
+                                        "title":  "Théorie des Groupes",
+                                        "icon":  "🔄",
+                                        "interactive":  true,
+                                        "initFunction":  "initGroupTheory",
+                                        "category":  "Maths du Quantique"
+                                    },
+                                    {
+                                        "id":  "functional_analysis",
+                                        "title":  "Analyse Fonctionnelle",
+                                        "icon":  "📈",
+                                        "interactive":  true,
+                                        "initFunction":  "initFunctionalAnalysis",
+                                        "category":  "Maths du Quantique"
+                                    },
+                                    {
+                                        "id":  "quantum_probability",
+                                        "title":  "Probabilités Quantiques",
+                                        "icon":  "🎲",
+                                        "interactive":  true,
+                                        "initFunction":  "initQuantumProbability",
+                                        "category":  "Maths du Quantique"
+                                    },
+                                    {
+                                        "id":  "qubits",
+                                        "title":  "Qubits \u0026 Multi-qubits",
+                                        "icon":  "0️⃣1️⃣",
+                                        "interactive":  true,
+                                        "initFunction":  "initQubits",
+                                        "category":  "Quantum Computing"
+                                    },
+                                    {
+                                        "id":  "gates",
+                                        "title":  "Opérations (Gates)",
+                                        "icon":  "⛩️",
+                                        "interactive":  true,
+                                        "initFunction":  "initQuantumGates",
+                                        "category":  "Quantum Computing"
+                                    },
+                                    {
+                                        "id":  "measurement",
+                                        "title":  "Mesure \u0026 Décohérence",
+                                        "icon":  "📉",
+                                        "interactive":  true,
+                                        "initFunction":  "initMeasurement",
+                                        "category":  "Quantum Computing"
+                                    },
+                                    {
+                                        "id":  "schrodinger",
+                                        "title":  "Équation de Schrödinger",
+                                        "icon":  "🌊",
+                                        "interactive":  true,
+                                        "initFunction":  "initSchrodinger",
+                                        "category":  "Quantum Computing"
+                                    },
+                                    {
+                                        "id":  "circuits",
+                                        "title":  "Circuits Quantiques",
+                                        "icon":  "🔌",
+                                        "interactive":  true,
+                                        "initFunction":  "initQuantumCircuits",
+                                        "category":  "Quantum Computing"
+                                    },
+                                    {
+                                        "id":  "algorithms",
+                                        "title":  "Algorithmes Quantiques",
+                                        "icon":  "🚀",
+                                        "interactive":  true,
+                                        "initFunction":  "initQuantumAlgorithms",
+                                        "category":  "Quantum Computing"
+                                    },
+                                    {
+                                        "id":  "qml",
+                                        "title":  "QML \u0026 VQC",
+                                        "icon":  "🤖",
+                                        "interactive":  true,
+                                        "initFunction":  "initQML",
+                                        "category":  "Quantum Machine Learning"
+                                    },
+                                    {
+                                        "id":  "hybrid_models",
+                                        "title":  "Modèles Hybrides",
+                                        "icon":  "🧬",
+                                        "interactive":  true,
+                                        "initFunction":  "initHybridModels",
+                                        "category":  "Quantum Machine Learning"
+                                    },
+                                    {
+                                        "id":  "qft",
+                                        "title":  "Théorie Quantique des Champs",
+                                        "icon":  "〰️",
+                                        "interactive":  true,
+                                        "initFunction":  "initQFT",
+                                        "category":  "Physique Avancée"
+                                    },
+                                    {
+                                        "id":  "stat_mech",
+                                        "title":  "Mécanique Statistique Quantique",
+                                        "icon":  "🌡️",
+                                        "interactive":  true,
+                                        "initFunction":  "initStatMech",
+                                        "category":  "Physique Avancée"
+                                    },
+                                    {
+                                        "id":  "spin_su2",
+                                        "title":  "Spin \u0026 SU(2)",
+                                        "icon":  "🔄",
+                                        "interactive":  true,
+                                        "initFunction":  "initSpinSU2",
+                                        "category":  "Physique Avancée"
+                                    },
+                                    {
+                                        "id":  "entropy",
+                                        "title":  "Entropie \u0026 Information",
+                                        "icon":  "📉",
+                                        "interactive":  true,
+                                        "initFunction":  "initQuantumEntropy",
+                                        "category":  "Information Quantique"
+                                    },
+                                    {
+                                        "id":  "channels",
+                                        "title":  "Canaux Quantiques",
+                                        "icon":  "📡",
+                                        "interactive":  true,
+                                        "initFunction":  "initQuantumChannels",
+                                        "category":  "Information Quantique"
+                                    },
+                                    {
+                                        "id":  "theorems",
+                                        "title":  "Théorèmes Fondamentaux",
+                                        "icon":  "📜",
+                                        "interactive":  true,
+                                        "initFunction":  "initQuantumTheorems",
+                                        "category":  "Information Quantique"
+                                    },
+                                    {
+                                        "id":  "qec",
+                                        "title":  "Correction d\u0027Erreurs (QEC)",
+                                        "icon":  "🛡️",
+                                        "interactive":  true,
+                                        "initFunction":  "initQEC",
+                                        "category":  "Information Quantique"
+                                    },
+                                    {
+                                        "id":  "networks",
+                                        "title":  "Réseaux Quantiques",
+                                        "icon":  "🌐",
+                                        "interactive":  true,
+                                        "initFunction":  "initQuantumNetworks",
+                                        "category":  "Information Quantique"
+                                    },
+                                    {
+                                        "id":  "qkd",
+                                        "title":  "Protocoles QKD",
+                                        "icon":  "🗝️",
+                                        "interactive":  true,
+                                        "initFunction":  "initQKD",
+                                        "category":  "Cryptographie Quantique"
+                                    },
+                                    {
+                                        "id":  "commitment",
+                                        "title":  "Coin-Flipping \u0026 Commitment",
+                                        "icon":  "🪙",
+                                        "interactive":  true,
+                                        "initFunction":  "initCoinFlipping",
+                                        "category":  "Cryptographie Quantique"
+                                    },
+                                    {
+                                        "id":  "randomness",
+                                        "title":  "Aléa Quantique (QRNG)",
+                                        "icon":  "🎲",
+                                        "interactive":  true,
+                                        "initFunction":  "initQRNG",
+                                        "category":  "Cryptographie Quantique"
+                                    },
+                                    {
+                                        "id":  "security",
+                                        "title":  "Sécurité \u0026 Attaques",
+                                        "icon":  "🕵️",
+                                        "interactive":  true,
+                                        "initFunction":  "initSecurityAttacks",
+                                        "category":  "Cryptographie Quantique"
+                                    },
+                                    {
+                                        "id":  "open_systems",
+                                        "title":  "Systèmes Ouverts",
+                                        "icon":  "🌫️",
+                                        "interactive":  true,
+                                        "initFunction":  "initOpenSystems",
+                                        "category":  "Bruit \u0026 Systèmes Ouverts"
+                                    },
+                                    {
+                                        "id":  "decoherence",
+                                        "title":  "Décohérence \u0026 Lindblad",
+                                        "icon":  "⏳",
+                                        "interactive":  true,
+                                        "initFunction":  "initDecoherence",
+                                        "category":  "Bruit \u0026 Systèmes Ouverts"
+                                    },
+                                    {
+                                        "id":  "superconducting",
+                                        "title":  "Supraconducteurs",
+                                        "icon":  "❄️",
+                                        "interactive":  true,
+                                        "initFunction":  "initSuperconducting",
+                                        "category":  "Hardware Quantique"
+                                    },
+                                    {
+                                        "id":  "trapped_ions",
+                                        "title":  "Ions Piégés",
+                                        "icon":  "⚡",
+                                        "interactive":  true,
+                                        "initFunction":  "initTrappedIons",
+                                        "category":  "Hardware Quantique"
+                                    },
+                                    {
+                                        "id":  "photonic",
+                                        "title":  "Photonique",
+                                        "icon":  "💡",
+                                        "interactive":  true,
+                                        "initFunction":  "initPhotonic",
+                                        "category":  "Hardware Quantique"
+                                    }
+                                ]
+                }
 }

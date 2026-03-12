@@ -1,0 +1,56 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <h2 class="text-3xl font-extrabold text-indigo-900 mb-4">Transformers: l'équation qui écoute le bon contexte</h2>
+        <p class="text-gray-700 text-lg leading-relaxed">
+            Un Transformer ne "lit" pas mot par mot: il regarde <strong>tous les tokens</strong> et décide lesquels sont
+            importants pour le token courant.
+            C'est l'attention.
+        </p>
+        <div class="mt-4 bg-indigo-50 p-3 rounded text-sm font-mono text-indigo-900 overflow-x-auto">
+            Attention(Q,K,V) = softmax(QK^T / sqrt(d_k)) V
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+            <h3 class="font-bold text-gray-800 mb-2">Analogie</h3>
+            <p class="text-sm text-gray-700">
+                Imagine une phrase comme une réunion. Chaque mot pose une question (Q),
+                compare les badges des autres (K), puis récupère l'info utile (V).
+            </p>
+        </div>
+        <div class="bg-amber-50 p-6 rounded-xl border border-amber-200">
+            <h3 class="font-bold text-amber-800 mb-2">Pourquoi c'est puissant ?</h3>
+            <p class="text-sm text-amber-900">
+                Le modèle peut connecter des mots lointains dans la phrase.
+                C'est ce qui donne de la cohérence sur de longs contextes.
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
+        <h3 class="text-white font-bold mb-4">Laboratoire d'Attention</h3>
+        <p class="text-gray-400 text-sm mb-4">Choisis un token cible et observe sa carte d'attention.</p>
+        <div class="grid lg:grid-cols-3 gap-6 items-start">
+            <div class="lg:col-span-2 bg-black rounded border border-gray-700 p-3">
+                <canvas id="transformerCanvas" width="720" height="320" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-xs text-gray-300">Token cible: <span id="transTokenLabel" class="font-bold text-cyan-300">3</span></label>
+                    <input id="transTokenSlider" type="range" min="0" max="7" value="3" class="w-full accent-cyan-500">
+                </div>
+                <div>
+                    <label class="text-xs text-gray-300">Température (focus): <span id="transTempLabel" class="font-bold text-cyan-300">1.0</span></label>
+                    <input id="transTempSlider" type="range" min="0.4" max="2.0" step="0.1" value="1.0" class="w-full accent-cyan-500">
+                </div>
+                <button onclick="shuffleTransformerAttention()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white rounded px-3 py-2 text-sm font-bold">
+                    Nouveau contexte
+                </button>
+                <div class="bg-gray-800 p-3 rounded text-xs text-gray-200">
+                    Entropie d'attention: <span id="transEntropyVal" class="font-bold text-emerald-300">0.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

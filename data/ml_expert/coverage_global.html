@@ -1,0 +1,317 @@
+﻿<div class="space-y-8 max-w-7xl mx-auto" data-coverage-hub="1">
+    <section class="rounded-2xl border border-indigo-200 bg-gradient-to-br from-white to-indigo-50 dark:from-slate-900 dark:to-slate-800 dark:border-indigo-800 p-7 shadow-lg">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+            <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">Couverture IA Complete - Version Enrichie</h2>
+            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200">19 themes + modules bonus</span>
+        </div>
+        <p class="mt-3 text-slate-700 dark:text-slate-200 leading-relaxed">
+            Oui: les 19 sujets sont bien couverts dans le parcours, avec equations, analogies, explications vulgarisees et labs interactifs.
+            Cette page sert de cockpit de verification + navigation rapide.
+        </p>
+
+        <div class="mt-5 grid lg:grid-cols-3 gap-4">
+            <label class="block lg:col-span-2">
+                <span class="text-xs font-bold uppercase tracking-wide text-slate-600 dark:text-slate-300">Rechercher un concept</span>
+                <input id="coverageSearch" type="search" placeholder="Ex: Hessienne, PPO, RAG multimodal, Bellman, LoRA..." class="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm">
+            </label>
+            <div class="rounded-lg border border-cyan-200 dark:border-cyan-800 bg-cyan-50 dark:bg-cyan-950/30 p-3">
+                <div class="text-xs uppercase tracking-wide font-bold text-cyan-700 dark:text-cyan-300">Themes visibles</div>
+                <div class="text-3xl font-extrabold text-cyan-900 dark:text-cyan-100" id="coverageVisibleCount">0</div>
+                <div class="text-xs text-cyan-800 dark:text-cyan-200">/ 19 themes coeur</div>
+            </div>
+        </div>
+
+        <div class="mt-4 flex flex-wrap gap-2" id="coverageScopeFilters">
+            <button data-coverage-scope="all" class="coverage-scope-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-indigo-300 bg-indigo-600 text-white">Tout</button>
+            <button data-coverage-scope="math" class="coverage-scope-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-indigo-300 bg-white dark:bg-slate-900">Maths</button>
+            <button data-coverage-scope="classic" class="coverage-scope-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-indigo-300 bg-white dark:bg-slate-900">ML classique</button>
+            <button data-coverage-scope="dl" class="coverage-scope-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-indigo-300 bg-white dark:bg-slate-900">Deep Learning</button>
+            <button data-coverage-scope="gen" class="coverage-scope-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-indigo-300 bg-white dark:bg-slate-900">Generatif</button>
+            <button data-coverage-scope="rl" class="coverage-scope-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-indigo-300 bg-white dark:bg-slate-900">RL / Robotique</button>
+            <button data-coverage-scope="ops" class="coverage-scope-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-indigo-300 bg-white dark:bg-slate-900">MLOps</button>
+            <button data-coverage-scope="research" class="coverage-scope-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-indigo-300 bg-white dark:bg-slate-900">Recherche active</button>
+        </div>
+    </section>
+
+    <section class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-6">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Acces rapide aux chapitres</h3>
+        <div class="mt-4 grid md:grid-cols-2 xl:grid-cols-4 gap-3 text-sm">
+            <button onclick="loadModule('math_fondamentales', true)" class="text-left rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-3 hover:bg-indigo-50 dark:hover:bg-slate-800"><strong>01</strong> Maths fondamentales</button>
+            <button onclick="loadModule('data_science_classique', true)" class="text-left rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-3 hover:bg-indigo-50 dark:hover:bg-slate-800"><strong>02</strong> Data science classique</button>
+            <button onclick="loadModule('deep_learning_base', true)" class="text-left rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-3 hover:bg-indigo-50 dark:hover:bg-slate-800"><strong>03</strong> Deep Learning base</button>
+            <button onclick="loadModule('vision_par_ordinateur', true)" class="text-left rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-3 hover:bg-indigo-50 dark:hover:bg-slate-800"><strong>04</strong> Vision</button>
+            <button onclick="loadModule('nlp_langage', true)" class="text-left rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-3 hover:bg-indigo-50 dark:hover:bg-slate-800"><strong>05</strong> NLP</button>
+            <button onclick="loadModule('modeles_generatifs', true)" class="text-left rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-3 hover:bg-indigo-50 dark:hover:bg-slate-800"><strong>06</strong> Generatif</button>
+            <button onclick="loadModule('architectures_recherche_chaude', true)" class="text-left rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-3 hover:bg-indigo-50 dark:hover:bg-slate-800"><strong>07</strong> Architectures chaudes</button>
+            <button onclick="loadModule('rl_robotique_controle', true)" class="text-left rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-3 hover:bg-indigo-50 dark:hover:bg-slate-800"><strong>08</strong> RL/robotique</button>
+            <button onclick="loadModule('graphes', true)" class="text-left rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-3 hover:bg-indigo-50 dark:hover:bg-slate-800"><strong>09</strong> Graphes</button>
+            <button onclick="loadModule('inference_probabiliste_structures', true)" class="text-left rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-3 hover:bg-indigo-50 dark:hover:bg-slate-800"><strong>11</strong> Inference</button>
+            <button onclick="loadModule('donnees_systemes_mlops', true)" class="text-left rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-3 hover:bg-indigo-50 dark:hover:bg-slate-800"><strong>15</strong> MLOps</button>
+            <button onclick="loadModule('multimodal', true)" class="text-left rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-3 hover:bg-indigo-50 dark:hover:bg-slate-800"><strong>16</strong> Multimodal</button>
+        </div>
+    </section>
+
+    <section id="coverageTopics" class="space-y-4">
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="math" data-keywords="algebre lineaire scalaire vecteur matrice tenseur norme svd qr cholesky projection orthogonalite latent gradient jacobienne hessienne taylor monte carlo optimisation">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">1) Mathematiques fondamentales</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> algebre lineaire (scalaire, vecteur, matrice, tenseur, produit scalaire/matriciel, normes L1/L2, rang, trace, determinant, valeurs propres, SVD/QR/Cholesky, projection, orthogonalite, latent space), calcul diff (derivees, gradient, jacobienne, hessienne, chaine, taylor, contraintes), proba/stats, optimisation, analyse numerique.</p>
+                <p><strong>Analogie IA:</strong> c'est le moteur + volant + tableau de bord de tous les modeles.</p>
+                <p>$$\theta_{t+1}=\theta_t-\eta\nabla_\theta\mathcal{L}(\theta_t)$$</p>
+                <ul class="list-disc pl-5">
+                    <li>\(\theta\): parametres du modele</li>
+                    <li>\(\eta\): taille du pas</li>
+                    <li>\(\nabla\mathcal{L}\): direction a corriger</li>
+                </ul>
+                <p><strong>Exemple:</strong> regler un modele tabulaire quand la loss diverge (stabilite numerique + conditionnement).</p>
+                <button onclick="loadModule('math_fondamentales', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 1</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="classic" data-keywords="pretraitement nettoyage imputation normalisation one hot feature scaling selection pca outliers regression logistique ridge lasso elastic net naive bayes knn svm arbre random forest boosting xgboost lightgbm catboost clustering dbscan hdbscan gmm tsne umap mds ica series temporelles arima kalman hmm prophet">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">2) Data science classique</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> pretraitement, regression/classification, clustering, reduction de dimension, series temporelles (ARIMA, Kalman, HMM, Prophet).</p>
+                <p><strong>Analogie IA:</strong> avant de choisir un moteur de F1, il faut preparer la piste et les pneus.</p>
+                <p>$$\hat{y}=f_\theta(x),\quad \theta^*=\arg\min_\theta\mathcal{L}(y,\hat{y})$$</p>
+                <p><strong>Exemple:</strong> comparer RandomForest vs XGBoost avec donnees bruites et features manquantes.</p>
+                <button onclick="loadModule('data_science_classique', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 2</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="dl" data-keywords="perceptron mlp relu gelu silu sigmoid softmax batchnorm layernorm rmsnorm dropout residual embedding backprop warmup early stopping mixed precision curriculum">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">3) Deep Learning de base</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> perceptron/MLP, activations, normalisations, dropout, residuals, embeddings, apprentissage (forward/backprop, clipping, schedules, warmup, early stopping, weight decay, mixed precision).</p>
+                <p>$$h^{(l+1)}=\sigma\left(W^{(l)}h^{(l)}+b^{(l)}\right)$$</p>
+                <p><strong>Exemple:</strong> stabiliser l'entrainement d'un MLP avec BatchNorm + scheduler + early stopping.</p>
+                <button onclick="loadModule('deep_learning_base', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 3</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="dl" data-keywords="cnn yolo detr unet segmentation detection keypoint pose depth optical flow clip sam dino vit swin">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">4) Vision par ordinateur</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> CNN 1D/2D/3D, pooling/stride/padding/dilation, ResNet/U-Net/EfficientNet/FPN, detection/segmentation (R-CNN/YOLO/SSD/Mask R-CNN/DETR), ViT/Swin/MAE/CLIP/SAM/DINO.</p>
+                <p>$$y=\mathrm{Conv}(x;K)$$</p>
+                <p><strong>Exemple:</strong> choisir detection (YOLO) vs segmentation (Mask R-CNN) selon besoin metier.</p>
+                <button onclick="loadModule('vision_par_ordinateur', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 4</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="dl" data-keywords="nlp bow tfidf word2vec glove fasttext ngram crf seq2seq rnn lstm gru transformer bert gpt t5 roberta llama attention">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">5) NLP / langage</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> pre-deep (BoW, TF-IDF, embeddings classiques), RNN/LSTM/GRU, ere Transformer (self/cross-attention, BERT/GPT/T5/RoBERTa/LLaMA-like).</p>
+                <p>$$\mathrm{Attention}(Q,K,V)=\mathrm{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V$$</p>
+                <p><strong>Exemple:</strong> pipeline RAG pour support client avec citations de sources.</p>
+                <button onclick="loadModule('nlp_langage', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 5</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="gen" data-keywords="autoencoder vae beta vae vqvae gan dcgan wgan cyclegan stylegan ddpm ddim diffusion latent diffusion flow matching consistency">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">6) Modeles generatifs</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> Autoencoders (AE/DAE/VAE/beta-VAE/VQ-VAE), GAN family, diffusion family (DDPM/DDIM/Latent Diffusion/Flow Matching/Rectified Flow/Consistency).</p>
+                <p>$$\theta^*=\arg\max_\theta\sum_i\log p_\theta(x_i)$$</p>
+                <p><strong>Exemple:</strong> generation d'images produit + variation de style controllee.</p>
+                <button onclick="loadModule('modeles_generatifs', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 6</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="research" data-keywords="llm vlm mllm rag agentic react function calling ssm mamba world model peft lora qlora rlhf dpo rlaif">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">7) Architectures chaudes en recherche</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> foundation models, RAG, agents, state-space models, world models, graph AI, PEFT, alignement (RLHF/DPO/RLAIF).</p>
+                <p>$$\text{Impact}=f(\text{qualite},\text{latence},\text{cout},\text{robustesse})$$</p>
+                <p><strong>Exemple:</strong> comparer un stack Transformer pur vs hybride SSM pour reduire la latence.</p>
+                <button onclick="loadModule('architectures_recherche_chaude', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 7</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="rl" data-keywords="mdp q learning bellman dqn ppo sac td3 ddpg behavior cloning offline rl diffusion policy sim2real">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">8) RL / robotique / controle</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> RL classique (MDP, Bellman, TD, Monte Carlo, SARSA, DQN variants), policy gradient/actor-critic (PPO/TRPO/A2C/A3C/SAC/TD3/DDPG), imitation/preferences/offline RL, robotique moderne.</p>
+                <p>$$Q(s,a)\leftarrow Q(s,a)+\alpha[r+\gamma\max_{a'}Q(s',a')-Q(s,a)]$$</p>
+                <p><strong>Exemple:</strong> apprentissage d'une politique de navigation robuste au bruit capteur.</p>
+                <button onclick="loadModule('rl_robotique_controle', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 8</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="research" data-keywords="graph gnn gcn graphsage gat graph transformer dynamic graph temporal graph explainability">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">9) Graphes</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> graphes orientes/non-orientes, adjacency/laplacian, message passing, node/link/graph tasks, hetero/temporal/dynamic, graph transformers, explainability.</p>
+                <p>$$h_v^{(k+1)}=\phi\left(h_v^{(k)},\square_{u\in\mathcal{N}(v)}\psi(h_u^{(k)})\right)$$</p>
+                <p><strong>Exemple:</strong> recommandation sur graphe utilisateur-produit avec prediction de liens.</p>
+                <button onclick="loadModule('graphes', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 9</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="dl" data-keywords="self supervised contrastive simclr moco byol dino masked modeling mae triplet siamese representation">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">10) Auto-supervise / representation</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> SSL, contrastive learning, SimCLR/MoCo/BYOL/DINO, masked modeling MAE, metric learning/triplet/siamese.</p>
+                <p>$$\mathcal{L}_{contrastive}=-\log\frac{\exp(\mathrm{sim}(z_i,z_i^+)/\tau)}{\sum_j\exp(\mathrm{sim}(z_i,z_j)/\tau)}$$</p>
+                <button onclick="loadModule('auto_supervise_representation', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 10</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="math" data-keywords="graphical model bayesian network mrf hmm crf variational inference mcmc em gaussian process">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">11) Inference probabiliste / modeles structures</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> graphical models, Bayesian networks, MRF, HMM, CRF, variational inference, MCMC, importance sampling, belief propagation, EM, Gaussian processes.</p>
+                <p>$$p(z\mid x)=\frac{p(x\mid z)p(z)}{p(x)}$$</p>
+                <button onclick="loadModule('inference_probabiliste_structures', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 11</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="math" data-keywords="bayes jensen markov chebyshev hoeffding bellman elbo kl cross entropy softmax theorem">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">12) Theoremes / principes / equations</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> Bayes, LLN, CLT, Jensen/Markov/Chebyshev/Hoeffding, biais-variance, equation normale, Bellman, chain rule, approximation universelle, MLE, ELBO, cross-entropy, KL, softmax, attention, convolution discrete.</p>
+                <p>$$\mathrm{Attention}(Q,K,V)=\mathrm{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V$$</p>
+                <button onclick="loadModule('theoremes_equations', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 12</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="classic" data-keywords="mse mae huber focal dice iou auc bleu rouge perplexity ndcg mrr calibration">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">13) Pertes / metriques / objectifs</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> losses (MSE/MAE/Huber/CE/Focal/Triplet/KL/Dice/IoU/PPO/DPO) et metriques (AUC/F1/BLEU/ROUGE/Perplexity/mAP/NDCG/MRR/calibration).</p>
+                <p>$$\mathcal{L}_{CE}(y,\hat y)=-\sum_i y_i\log \hat y_i$$</p>
+                <button onclick="loadModule('pertes_metriques_objectifs', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 13</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="ops" data-keywords="pretraining finetuning instruction tuning rlhf dpo distillation quantization pruning moe speculative decoding kv cache long context">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">14) Entrainement moderne des gros modeles</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> pretraining/finetuning/instruction tuning/SFT/RLHF/DPO, distillation, quantization, pruning, MoE, speculative decoding, KV cache, long-context, continual learning.</p>
+                <p>$$\theta_{t+1}=\theta_t-\eta_t\frac{\hat m_t}{\sqrt{\hat v_t}+\epsilon}$$</p>
+                <button onclick="loadModule('entrainement_gros_modeles', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 14</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="ops" data-keywords="mlops pipeline etl reproducibility experiment tracking serving monitoring drift privacy federated">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">15) Donnees / systemes / MLOps</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> data pipeline, ETL/ELT, augmentation, label noise, split/cv, hparam search, tracking, reproducibility, serving, monitoring, drift, active/federated/privacy.</p>
+                <p>$$\text{Valeur ML}=\text{Modele}\times\text{Donnees}\times\text{Ops}$$</p>
+                <button onclick="loadModule('donnees_systemes_mlops', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 15</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="gen" data-keywords="multimodal clip vlm mllm vla multimodal rag grounding document ai table chart">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">16) Multimodal</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> text-image alignment, CLIP training, VLM/MLLM/VLA, audio/video-language, multimodal RAG, document AI, grounding.</p>
+                <p>$$\mathcal{L}=\mathcal{L}_{text}+\mathcal{L}_{image}+\mathcal{L}_{align}$$</p>
+                <button onclick="loadModule('multimodal', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 16</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="research" data-keywords="buzzword llm rag agent diffusion mamba peft lora qlora rlhf dpo">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">17) Buzzwords IA</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> les mots cles chauds sont ranges, relies a leur mecanisme et impact reel.</p>
+                <p>$$\text{Impact reel}=\text{idee}\times\text{execution}\times\text{evaluation}$$</p>
+                <button onclick="loadModule('buzzwords_ia', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 17</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="math" data-keywords="socle moderne ia priorite transformer rag lora rlhf gnn world models">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">18) Socle ultra court</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> les blocs incontournables sont priorises pour apprendre vite sans perdre la structure globale.</p>
+                <p>$$\text{Socle}=\text{Maths}+\text{ML}+\text{DL}+\text{RL}+\text{MLOps}$$</p>
+                <button onclick="loadModule('socle_ultra_court', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 18</button>
+            </div>
+        </details>
+
+        <details class="coverage-topic rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 p-4" data-scope="research" data-keywords="recherche active ssm mamba rag multimodal agent world models peft rlhf graph transformer">
+            <summary class="cursor-pointer font-bold text-slate-900 dark:text-white">19) Recherche active</summary>
+            <div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <p><strong>Couverture:</strong> axes tres actifs: SSM/Mamba, diffusion hors image, RAG multimodal, agents MLLM, world models robotique, PEFT/continual, alignement preferences, dynamic graph transformers.</p>
+                <p>$$\Delta\text{SOTA}=f(\text{donnees},\text{archi},\text{compute},\text{eval})$$</p>
+                <button onclick="loadModule('recherche_active', true)" class="px-3 py-1.5 rounded bg-indigo-600 text-white font-semibold">Ouvrir chapitre 19</button>
+            </div>
+        </details>
+    </section>
+
+    <section class="rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/30 p-5">
+        <h3 class="font-bold text-emerald-900 dark:text-emerald-200">Modules bonus qui renforcent encore la couverture</h3>
+        <div class="mt-3 flex flex-wrap gap-2 text-sm">
+            <button onclick="loadModule('ml_algorithms', true)" class="px-3 py-1.5 rounded bg-white dark:bg-slate-900 border border-emerald-300">ML Algorithms</button>
+            <button onclick="loadModule('dl_algorithms', true)" class="px-3 py-1.5 rounded bg-white dark:bg-slate-900 border border-emerald-300">DL Algorithms</button>
+            <button onclick="loadModule('rl_intro', true)" class="px-3 py-1.5 rounded bg-white dark:bg-slate-900 border border-emerald-300">RL Intro complet</button>
+            <button onclick="loadModule('genai', true)" class="px-3 py-1.5 rounded bg-white dark:bg-slate-900 border border-emerald-300">GenAI pratique</button>
+            <button onclick="loadModule('world_models', true)" class="px-3 py-1.5 rounded bg-white dark:bg-slate-900 border border-emerald-300">VLM / VLA / World Models</button>
+            <button onclick="loadModule('expert_missing', true)" class="px-3 py-1.5 rounded bg-white dark:bg-slate-900 border border-emerald-300">Checklist expert</button>
+            <button onclick="loadModule('q_learning', true)" class="px-3 py-1.5 rounded bg-white dark:bg-slate-900 border border-emerald-300">Q-Learning Lab</button>
+        </div>
+    </section>
+
+    <section class="rounded-xl border border-cyan-200 dark:border-cyan-800 bg-white dark:bg-slate-900/60 p-6">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Exemples IA concrets (ultra-pratiques)</h3>
+        <p class="mt-2 text-sm text-slate-700 dark:text-slate-200">
+            Chaque bloc ci-dessous te donne un pont direct entre theorie, equation, analogie et decision metier.
+        </p>
+        <div class="mt-4 grid md:grid-cols-2 xl:grid-cols-3 gap-3 text-sm">
+            <article class="rounded-lg border border-slate-200 dark:border-slate-700 p-3">
+                <p class="font-semibold text-slate-900 dark:text-white">Detection de fraude</p>
+                <p class="mt-1 text-slate-700 dark:text-slate-200">Probabilites + calibration + ROC/PR-AUC pour ajuster le seuil risque.</p>
+                <p class="mt-2 text-cyan-700 dark:text-cyan-300">Equation cle: $$P(y=1\mid x)$$</p>
+            </article>
+            <article class="rounded-lg border border-slate-200 dark:border-slate-700 p-3">
+                <p class="font-semibold text-slate-900 dark:text-white">Reco e-commerce</p>
+                <p class="mt-1 text-slate-700 dark:text-slate-200">Graphes + embeddings pour proposer des produits voisins utiles.</p>
+                <p class="mt-2 text-cyan-700 dark:text-cyan-300">Equation cle: $$\mathrm{sim}(u,v)=\frac{u^\top v}{\|u\|\,\|v\|}$$</p>
+            </article>
+            <article class="rounded-lg border border-slate-200 dark:border-slate-700 p-3">
+                <p class="font-semibold text-slate-900 dark:text-white">Vision qualite usine</p>
+                <p class="mt-1 text-slate-700 dark:text-slate-200">CNN/ViT + segmentation pour detecter des defauts fins sur ligne.</p>
+                <p class="mt-2 text-cyan-700 dark:text-cyan-300">Equation cle: $$y=\mathrm{Conv}(x;K)$$</p>
+            </article>
+            <article class="rounded-lg border border-slate-200 dark:border-slate-700 p-3">
+                <p class="font-semibold text-slate-900 dark:text-white">Chatbot fiable RAG</p>
+                <p class="mt-1 text-slate-700 dark:text-slate-200">RAG + reranking + citations pour baisser les hallucinations.</p>
+                <p class="mt-2 text-cyan-700 dark:text-cyan-300">Equation cle: $$\text{Prompt final}=\text{Question}+\text{Contexte recupere}$$</p>
+            </article>
+            <article class="rounded-lg border border-slate-200 dark:border-slate-700 p-3">
+                <p class="font-semibold text-slate-900 dark:text-white">Robot navigation</p>
+                <p class="mt-1 text-slate-700 dark:text-slate-200">RL + world model pour tester plusieurs plans avant action reelle.</p>
+                <p class="mt-2 text-cyan-700 dark:text-cyan-300">Equation cle: $$Q(s,a)\leftarrow Q(s,a)+\alpha\delta$$</p>
+            </article>
+            <article class="rounded-lg border border-slate-200 dark:border-slate-700 p-3">
+                <p class="font-semibold text-slate-900 dark:text-white">MLOps production</p>
+                <p class="mt-1 text-slate-700 dark:text-slate-200">Monitoring de drift + alerting + retrain pour garder la qualite.</p>
+                <p class="mt-2 text-cyan-700 dark:text-cyan-300">Equation cle: $$\Delta P(X)\Rightarrow \Delta P(Y\mid X)$$</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30 p-6">
+        <h3 class="text-xl font-bold text-amber-900 dark:text-amber-200">Tips "Le saviez-vous ?" + mini-defis</h3>
+        <div class="mt-4 grid lg:grid-cols-2 gap-3 text-sm">
+            <div class="rounded-lg border border-amber-200/70 dark:border-amber-800 p-3 bg-white/80 dark:bg-slate-900/60">
+                <p class="font-semibold text-amber-900 dark:text-amber-200">Le saviez-vous ?</p>
+                <ul class="mt-2 list-disc pl-5 text-amber-900 dark:text-amber-100 space-y-1">
+                    <li>Un modele "plus grand" sans bonne evaluation peut etre moins utile qu'un modele plus petit bien monitoré.</li>
+                    <li>Une bonne normalisation peut faire gagner plus qu'un changement d'architecture.</li>
+                    <li>En RL, la forme de la recompense decide souvent plus que l'algo lui-meme.</li>
+                </ul>
+            </div>
+            <div class="rounded-lg border border-amber-200/70 dark:border-amber-800 p-3 bg-white/80 dark:bg-slate-900/60">
+                <p class="font-semibold text-amber-900 dark:text-amber-200">Mini-defis rapides</p>
+                <ol class="mt-2 list-decimal pl-5 text-amber-900 dark:text-amber-100 space-y-1">
+                    <li>Choisis 1 dataset tabulaire et compare Ridge vs XGBoost avec la meme split.</li>
+                    <li>Construis un mini-RAG avec 20 docs et mesure l'impact du reranking sur la precision.</li>
+                    <li>Lance le labo Q-learning puis reduis epsilon progressivement pour observer exploitation vs exploration.</li>
+                </ol>
+                <button onclick="loadModule('q_learning', true)" class="mt-3 px-3 py-1.5 rounded bg-amber-600 hover:bg-amber-500 text-white font-semibold">Demarrer un mini-defi RL</button>
+            </div>
+        </div>
+    </section>
+</div>

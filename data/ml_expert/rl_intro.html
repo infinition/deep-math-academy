@@ -1,0 +1,46 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-teal-600">
+        <h2 class="text-3xl font-extrabold text-teal-900 mb-3">Apprentissage par renforcement (RL)</h2>
+        <p class="text-gray-700">Un agent agit dans un environnement, recoit des recompenses, puis ajuste sa strategie pour maximiser le gain cumule.</p>
+    </section>
+
+    <section class="bg-teal-50 border border-teal-200 rounded-xl p-5 space-y-3">
+        <h3 class="font-bold text-teal-900">Cadre MDP</h3>
+        <div class="text-sm text-teal-900">$$\mathcal{M}=(\mathcal{S},\mathcal{A},P,R,\gamma)$$</div>
+        <ul class="text-sm text-teal-900 space-y-1">
+            <li><strong>\(\mathcal{S}\)</strong>: etats</li>
+            <li><strong>\(\mathcal{A}\)</strong>: actions</li>
+            <li><strong>\(P\)</strong>: dynamique (ou l on va)</li>
+            <li><strong>\(R\)</strong>: reward (qualite locale)</li>
+            <li><strong>\(\gamma\)</strong>: poids du futur</li>
+        </ul>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">8.1 RL de base</h3>
+            <p class="text-sm text-gray-700 mt-1">Value function, Bellman, TD learning, Monte Carlo, SARSA, DQN.</p>
+            <div class="text-sm mt-2">$$V^\pi(s)=\mathbb{E}_\pi\left[\sum_{t=0}^{\infty}\gamma^t r_{t+1}\mid s_0=s\right]$$</div>
+        </article>
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">8.2 Methodes policy-based</h3>
+            <p class="text-sm text-gray-700 mt-1">REINFORCE, PPO, TRPO, Actor-Critic: on optimise directement la politique.</p>
+            <div class="text-sm mt-2">$$\nabla_\theta J(\theta)=\mathbb{E}[\nabla_\theta\log\pi_\theta(a\mid s)\,\hat{A}]$$</div>
+        </article>
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">8.3 Methodes value-based</h3>
+            <p class="text-sm text-gray-700 mt-1">Q-learning, DQN, Double DQN, Dueling DQN: on apprend la valeur des actions.</p>
+            <div class="text-sm mt-2">$$Q^*(s,a)=\mathbb{E}[r+\gamma\max_{a'}Q^*(s',a')]$$</div>
+        </article>
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">8.4 Algorithmes genetiques</h3>
+            <p class="text-sm text-gray-700 mt-1">Alternative sans gradient: selection, croisement, mutation.</p>
+            <div class="text-sm mt-2">$$\text{Population}_{t+1}=\text{Select}\circ\text{Crossover}\circ\text{Mutate}(\text{Population}_t)$$</div>
+        </article>
+    </section>
+
+    <section class="bg-white border border-gray-200 rounded-xl p-6">
+        <h3 class="font-bold text-gray-900 mb-2">Analogie simple</h3>
+        <p class="text-sm text-gray-700">Comme apprendre un jeu video: au debut on essaie au hasard, puis on memorise les coups qui augmentent le score, et on affine.</p>
+    </section>
+</div>

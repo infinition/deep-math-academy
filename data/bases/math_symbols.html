@@ -1,174 +1,78 @@
 <div class="space-y-8 fade-in max-w-6xl mx-auto">
-
-    <!-- Header -->
-    <div
-        class="bg-gradient-to-r from-slate-700 to-slate-900 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
+    <section class="bg-gradient-to-r from-slate-700 to-slate-900 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden">
         <div class="relative z-10">
-            <h2 class="text-3xl font-bold mb-4">Le Langage des Hiéroglyphes</h2>
+            <h2 class="text-3xl font-bold mb-3">Le Langage des Symboles</h2>
             <p class="text-lg text-slate-200 leading-relaxed">
-                Les maths ne sont pas difficiles, c'est juste une langue étrangère. <br>
-                Voici votre <strong>Pierre de Rosette</strong> pour décoder les symboles bizarres ($\sum, \int, \nabla,
-                \partial$) que vous verrez partout en IA.
+                Ici on traduit les notations mathematiques en langage simple.
+                Clique un symbole pour voir sa signification, une analogie code et une mini animation.
             </p>
         </div>
         <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl"></div>
-    </div>
+    </section>
 
-    <!-- Interactive Explorer -->
-    <div class="grid lg:grid-cols-3 gap-8">
-
-        <!-- Symbol Grid -->
-        <div class="lg:col-span-1 space-y-4">
-            <div class="bg-white p-4 rounded-xl shadow border border-gray-200">
-                <h3 class="font-bold text-gray-700 mb-3 text-sm uppercase tracking-wide">Sélectionnez un Symbole</h3>
-                <div class="grid grid-cols-4 gap-2">
-                    <button onclick="selectSymbol('sum')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="sum">$\sum$</button>
-                    <button onclick="selectSymbol('prod')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="prod">$\prod$</button>
-                    <button onclick="selectSymbol('int')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="int">$\int$</button>
-                    <button onclick="selectSymbol('partial')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="partial">$\partial$</button>
-                    <button onclick="selectSymbol('nabla')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="nabla">$\nabla$</button>
-                    <button onclick="selectSymbol('in')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="in">$\in$</button>
-                    <button onclick="selectSymbol('forall')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="forall">$\forall$</button>
-                    <button onclick="selectSymbol('exists')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="exists">$\exists$</button>
-                    <button onclick="selectSymbol('R')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="R">$\mathbb{R}$</button>
-                    <button onclick="selectSymbol('norm')"
-                        class="aspect-square flex items-center justify-center text-xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="norm">$||\cdot||$</button>
-                    <button onclick="selectSymbol('hat')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="hat">$\hat{y}$</button>
-                    <button onclick="selectSymbol('theta')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="theta">$\theta$</button>
-                    <button onclick="selectSymbol('matrix')"
-                        class="aspect-square flex items-center justify-center text-xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="matrix">$A_{ij}$</button>
-                    <button onclick="selectSymbol('transpose')"
-                        class="aspect-square flex items-center justify-center text-xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="transpose">$A^T$</button>
-                    <button onclick="selectSymbol('log')"
-                        class="aspect-square flex items-center justify-center text-xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="log">$\ln$</button>
-                    <button onclick="selectSymbol('exp')"
-                        class="aspect-square flex items-center justify-center text-xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="exp">$e^x$</button>
-                    <button onclick="selectSymbol('inf')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="inf">$\infty$</button>
-                    <button onclick="selectSymbol('approx')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="approx">$\approx$</button>
-                    <button onclick="selectSymbol('prop')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="prop">$\propto$</button>
-                    <button onclick="selectSymbol('vec')"
-                        class="aspect-square flex items-center justify-center text-xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="vec">$\vec{v}$</button>
-                    <button onclick="selectSymbol('ket')"
-                        class="aspect-square flex items-center justify-center text-xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="ket">$| \psi \rangle$</button>
-                    <button onclick="selectSymbol('bra')"
-                        class="aspect-square flex items-center justify-center text-xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="bra">$\langle \psi |$</button>
-                    <button onclick="selectSymbol('hbar')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="hbar">$\hbar$</button>
-                    <button onclick="selectSymbol('tensor')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="tensor">$\otimes$</button>
-                    <button onclick="selectSymbol('dagger')"
-                        class="aspect-square flex items-center justify-center text-xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="dagger">$A^\dagger$</button>
-                    <button onclick="selectSymbol('psi')"
-                        class="aspect-square flex items-center justify-center text-2xl font-serif hover:bg-indigo-50 hover:text-indigo-600 rounded border border-gray-100 transition symbol-btn"
-                        data-id="psi">$\psi$</button>
-                </div>
-            </div>
-
-            <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 text-xs text-indigo-800">
-                <strong>Astuce :</strong> En IA, les lettres grecques sont souvent des paramètres (poids) à apprendre,
-                et les lettres latines ($x, y$) sont les données.
-            </div>
+    <section class="bg-white p-4 rounded-xl shadow border border-gray-200">
+        <div class="flex items-center justify-between mb-3">
+            <h3 class="font-bold text-gray-700 text-sm uppercase tracking-wide">Selectionnez un symbole</h3>
+            <span class="text-xs text-gray-500">Scroll horizontal</span>
         </div>
 
-        <!-- Detail View -->
-        <div
-            class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col relative">
-
-            <!-- Default State -->
-            <div id="symbol-placeholder"
-                class="absolute inset-0 flex flex-col items-center justify-center text-gray-400 p-8 text-center">
-                <div class="text-6xl mb-4 opacity-20">?</div>
-                <p>Cliquez sur un symbole à gauche pour voir sa signification, sa prononciation et une animation.</p>
+        <div class="overflow-x-auto pb-2">
+            <div class="flex gap-3 min-w-max">
+                <button onclick="selectSymbol('sum')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="sum"><div class="text-3xl font-serif">&sum;</div><div class="text-[11px] text-gray-500 mt-1">Somme</div></button>
+                <button onclick="selectSymbol('prod')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="prod"><div class="text-3xl font-serif">&prod;</div><div class="text-[11px] text-gray-500 mt-1">Produit</div></button>
+                <button onclick="selectSymbol('int')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="int"><div class="text-3xl font-serif">&int;</div><div class="text-[11px] text-gray-500 mt-1">Integrale</div></button>
+                <button onclick="selectSymbol('partial')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="partial"><div class="text-3xl font-serif">&part;</div><div class="text-[11px] text-gray-500 mt-1">Partielle</div></button>
+                <button onclick="selectSymbol('nabla')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="nabla"><div class="text-3xl font-serif">&nabla;</div><div class="text-[11px] text-gray-500 mt-1">Gradient</div></button>
+                <button onclick="selectSymbol('in')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="in"><div class="text-3xl font-serif">&isin;</div><div class="text-[11px] text-gray-500 mt-1">Appartient</div></button>
+                <button onclick="selectSymbol('forall')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="forall"><div class="text-3xl font-serif">&forall;</div><div class="text-[11px] text-gray-500 mt-1">Pour tout</div></button>
+                <button onclick="selectSymbol('exists')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="exists"><div class="text-3xl font-serif">&exist;</div><div class="text-[11px] text-gray-500 mt-1">Il existe</div></button>
+                <button onclick="selectSymbol('R')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="R"><div class="text-3xl font-serif">&#8477;</div><div class="text-[11px] text-gray-500 mt-1">Reels</div></button>
+                <button onclick="selectSymbol('norm')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="norm"><div class="text-2xl font-serif">&#8741;&middot;&#8741;</div><div class="text-[11px] text-gray-500 mt-1">Norme</div></button>
+                <button onclick="selectSymbol('hat')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="hat"><div class="text-3xl font-serif">y&#770;</div><div class="text-[11px] text-gray-500 mt-1">Prediction</div></button>
+                <button onclick="selectSymbol('theta')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="theta"><div class="text-3xl font-serif">&theta;</div><div class="text-[11px] text-gray-500 mt-1">Parametre</div></button>
+                <button onclick="selectSymbol('matrix')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="matrix"><div class="text-2xl font-serif">A<sub>ij</sub></div><div class="text-[11px] text-gray-500 mt-1">Matrice</div></button>
+                <button onclick="selectSymbol('transpose')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="transpose"><div class="text-2xl font-serif">A<sup>T</sup></div><div class="text-[11px] text-gray-500 mt-1">Transposee</div></button>
+                <button onclick="selectSymbol('log')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="log"><div class="text-2xl font-serif">ln</div><div class="text-[11px] text-gray-500 mt-1">Log</div></button>
+                <button onclick="selectSymbol('exp')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="exp"><div class="text-2xl font-serif">e<sup>x</sup></div><div class="text-[11px] text-gray-500 mt-1">Expo</div></button>
+                <button onclick="selectSymbol('inf')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="inf"><div class="text-3xl font-serif">&infin;</div><div class="text-[11px] text-gray-500 mt-1">Infini</div></button>
+                <button onclick="selectSymbol('approx')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="approx"><div class="text-3xl font-serif">&asymp;</div><div class="text-[11px] text-gray-500 mt-1">Approx</div></button>
+                <button onclick="selectSymbol('prop')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="prop"><div class="text-3xl font-serif">&prop;</div><div class="text-[11px] text-gray-500 mt-1">Proportionnel</div></button>
+                <button onclick="selectSymbol('vec')" class="symbol-btn min-w-[92px] px-3 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition" data-id="vec"><div class="text-2xl font-serif">v&#8407;</div><div class="text-[11px] text-gray-500 mt-1">Vecteur</div></button>
             </div>
-
-            <!-- Active State (Hidden by default) -->
-            <div id="symbol-detail" class="hidden flex-1 flex flex-col h-full">
-                <!-- Header -->
-                <div class="bg-gray-50 p-6 border-b border-gray-100 flex justify-between items-start">
-                    <div>
-                        <h3 id="sym-title" class="text-3xl font-bold text-gray-800 font-serif mb-1">Sigma</h3>
-                        <p id="sym-pronounce" class="text-sm text-gray-500 italic">Prononciation : "Sig-ma"</p>
-                    </div>
-                    <div id="sym-display"
-                        class="text-5xl text-indigo-600 font-serif bg-white px-4 py-2 rounded shadow-sm border border-gray-100">
-                        $\sum$
-                    </div>
-                </div>
-
-                <!-- Content -->
-                <div class="p-6 space-y-6 flex-1 overflow-y-auto">
-
-                    <!-- Meaning -->
-                    <div>
-                        <h4 class="font-bold text-gray-700 text-sm uppercase mb-2">Ça veut dire quoi ?</h4>
-                        <p id="sym-meaning" class="text-gray-800 text-lg leading-relaxed">
-                            C'est juste une boucle <strong>FOR</strong> en programmation. <br>
-                            Ça veut dire "Additionne tout ce qui suit".
-                        </p>
-                    </div>
-
-                    <!-- Code Analogy -->
-                    <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm text-green-400 overflow-x-auto">
-                        <div class="text-gray-500 mb-1">// En Python</div>
-                        <div id="sym-code">
-                            total = 0
-                            for i in range(n):
-                            total += x[i]
-                        </div>
-                    </div>
-
-                    <!-- Interactive Animation Container -->
-                    <div
-                        class="bg-gray-50 rounded-xl border border-gray-200 p-4 relative min-h-[200px] flex items-center justify-center overflow-hidden">
-                        <canvas id="symbolCanvas" width="500" height="200"></canvas>
-                        <button id="anim-trigger"
-                            class="absolute bottom-4 right-4 bg-white shadow text-indigo-600 px-3 py-1 rounded-full text-xs font-bold border border-indigo-100 hover:bg-indigo-50 transition">
-                            Rejouer l'animation
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
-    </div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col relative">
+        <div id="symbol-placeholder" class="absolute inset-0 flex flex-col items-center justify-center text-gray-400 p-8 text-center">
+            <div class="text-6xl mb-4 opacity-20">?</div>
+            <p>Cliquez sur un symbole dans la barre horizontale pour voir sa fiche complete.</p>
+        </div>
+
+        <div id="symbol-detail" class="hidden flex-1 flex flex-col h-full">
+            <div class="bg-gray-50 p-6 border-b border-gray-100 flex justify-between items-start gap-4">
+                <div>
+                    <h3 id="sym-title" class="text-3xl font-bold text-gray-800 font-serif mb-1">Sigma</h3>
+                    <p id="sym-pronounce" class="text-sm text-gray-500 italic">Prononciation : Sig-ma</p>
+                </div>
+                <div id="sym-display" class="text-5xl text-indigo-600 font-serif bg-white px-4 py-2 rounded shadow-sm border border-gray-100">$\sum$</div>
+            </div>
+
+            <div class="p-6 space-y-6 flex-1 overflow-y-auto">
+                <div>
+                    <h4 class="font-bold text-gray-700 text-sm uppercase mb-2">Ca veut dire quoi ?</h4>
+                    <p id="sym-meaning" class="text-gray-800 text-lg leading-relaxed">Explication du symbole...</p>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg p-4 font-mono text-sm text-green-400 overflow-x-auto">
+                    <div class="text-gray-500 mb-1">// Analogie code</div>
+                    <div id="sym-code">total = 0</div>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl border border-gray-200 p-4 relative min-h-[220px] flex items-center justify-center overflow-hidden">
+                    <canvas id="symbolCanvas" width="560" height="220"></canvas>
+                    <button id="anim-trigger" class="absolute bottom-4 right-4 bg-white shadow text-indigo-600 px-3 py-1 rounded-full text-xs font-bold border border-indigo-100 hover:bg-indigo-50 transition">Rejouer l'animation</button>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

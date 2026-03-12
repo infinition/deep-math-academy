@@ -2,7 +2,9 @@
 
 https://infinition.github.io/deep-math-academy/
 
-> Une plateforme web interactive pour maîtriser l'Algèbre Linéaire, l'Analyse (Calcul), les Statistiques et la Physique Quantique, les piliers essentiels de l'IA moderne et future.## ✨ Pourquoi ce Projet ?
+> Une plateforme web interactive pour maîtriser l'Algèbre Linéaire, l'Analyse (Calcul), les Statistiques et la Physique Quantique, les piliers essentiels de l'IA moderne et future.
+
+## ✨ Pourquoi ce Projet ?
 
 <img width="805" height="437" alt="image" src="https://github.com/user-attachments/assets/b85d75bc-b470-41af-b4b0-8cfdff3ab797" />
 
@@ -17,7 +19,7 @@ L'Intelligence Artificielle repose entièrement sur les mathématiques. Ce proje
 
 ## 📚 Modules d'Apprentissage
 
-Le projet est divisé en trois cours principaux, chacun structuré en modules progressifs :
+Le projet est divisé en plusieurs cours, chacun structuré en modules progressifs :
 
 ### 📐 Algèbre Linéaire (Le Squelette de l'IA)
 * **Concepts Clés :** Théorie des Ensembles, Vecteurs, Matrices.

@@ -1,0 +1,87 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+        <h2 class="text-3xl font-extrabold text-slate-900">9. Graphes</h2>
+        <p class="mt-3 text-slate-700">Quand les relations comptent plus que les features brutes, le formalisme graphe devient le bon langage.</p>
+        <div class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-900">
+            Statut: chapitre enrichi avec equation de message passing et 2 labs interactifs.
+        </div>
+    </section>
+
+    <section class="grid lg:grid-cols-2 gap-4">
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Bases mathematiques</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: un graphe est une ville (noeuds) et des routes (aretes).</p>
+            <div class="mt-3 p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-900 text-sm">
+                $$A\in\{0,1\}^{n\times n},\quad L=D-A$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">Graphes orientes/non orientes, adjacency, degree, laplacian</li>
+                <li class="text-sm text-slate-700">Heterogeneous, temporal, dynamic graphs</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Message passing et GNN</h3>
+            <p class="text-sm text-slate-700 mt-2">Chaque noeud agrege l information de ses voisins pour mettre a jour son etat.</p>
+            <div class="mt-3 p-3 rounded-lg bg-cyan-50 border border-cyan-200 text-cyan-900 text-sm">
+                $$h_v^{(k+1)}=\phi\left(h_v^{(k)},\square_{u\in\mathcal{N}(v)}\psi(h_v^{(k)},h_u^{(k)})\right)$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">GCN, GraphSAGE, GAT, Graph Transformer</li>
+                <li class="text-sm text-slate-700">Node classification, link prediction, graph classification</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5 lg:col-span-2">
+            <h3 class="text-lg font-bold text-slate-900">Usages et recherche active</h3>
+            <p class="text-sm text-slate-700 mt-2">Recommandation, fraude, bioinformatique, trafic, molecules; la tendance forte va vers les graphes dynamiques et explicables.</p>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">Dynamic GNN, Graph Mamba, explainability for GNNs</li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="bg-slate-900 rounded-2xl p-6 border border-slate-700">
+        <h3 class="text-xl font-bold text-white">Labo interactif A: propagation de message</h3>
+        <p class="text-sm text-slate-300 mt-2">Tu choisis le noeud source et le nombre de steps. La couleur se propage dans le graphe.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-black border border-slate-700 rounded-xl p-3">
+                <canvas id="graphPropCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-200">Noeud source <span id="graphSrcVal" class="font-bold text-cyan-300">0</span>
+                    <input id="graphSrc" type="range" min="0" max="7" step="1" value="0" class="w-full accent-cyan-500">
+                </label>
+                <label class="block text-slate-200">Steps propagation <span id="graphStepsVal" class="font-bold text-cyan-300">2</span>
+                    <input id="graphSteps" type="range" min="0" max="6" step="1" value="2" class="w-full accent-cyan-500">
+                </label>
+                <button id="graphPropRefresh" class="w-full px-3 py-2 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-semibold">Recalculer</button>
+                <div class="rounded-lg bg-slate-800 border border-slate-700 p-3 text-xs text-slate-200">
+                    Intensite = information recue depuis les voisins.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-xl font-bold text-slate-900">Labo interactif B: link prediction (heuristique)</h3>
+        <p class="text-sm text-slate-700 mt-2">On estime les liens probables avec les voisins communs (Jaccard-like).</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-700 rounded-xl p-3">
+                <canvas id="graphLinkCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-800">Noeud A <span id="graphAVal" class="font-bold text-indigo-600">1</span>
+                    <input id="graphA" type="range" min="0" max="7" step="1" value="1" class="w-full accent-indigo-600">
+                </label>
+                <label class="block text-slate-800">Noeud B <span id="graphBVal" class="font-bold text-indigo-600">6</span>
+                    <input id="graphB" type="range" min="0" max="7" step="1" value="6" class="w-full accent-indigo-600">
+                </label>
+                <div class="rounded-lg bg-slate-100 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                    <div>Score lien: <span id="graphLinkScore" class="font-bold">0.000</span></div>
+                    <div>Voisins communs: <span id="graphCommon" class="font-bold">0</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

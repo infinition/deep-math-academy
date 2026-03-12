@@ -1,0 +1,107 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+        <h2 class="text-3xl font-extrabold text-slate-900">8. Reinforcement Learning / robotique / controle</h2>
+        <p class="mt-3 text-slate-700">Apprendre par essai-erreur, optimiser une politique, puis passer du simulateur au monde physique.</p>
+        <div class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-900">
+            Statut: version active avec equations centrales et 2 labs RL dedies.
+        </div>
+    </section>
+
+    <section class="grid lg:grid-cols-2 gap-4">
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">RL classique</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: un joueur apprend une carte de decisions en maximisant son score cumule.</p>
+            <div class="mt-3 p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-900 text-sm">
+                $$Q(s,a)\leftarrow Q(s,a)+\alpha\left[r+\gamma\max_{a'}Q(s',a')-Q(s,a)\right]$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">MDP, policy, value function, Bellman, TD, Monte Carlo</li>
+                <li class="text-sm text-slate-700">Q-learning, SARSA, DQN, Double DQN, Dueling DQN</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Policy gradient et actor-critic</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: au lieu de noter chaque action, on apprend directement une strategie probabiliste.</p>
+            <div class="mt-3 p-3 rounded-lg bg-cyan-50 border border-cyan-200 text-cyan-900 text-sm">
+                $$\nabla_\theta J(\theta)=\mathbb{E}\big[\nabla_\theta\log\pi_\theta(a\mid s)\,\hat{A}(s,a)\big]$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">REINFORCE, PPO, TRPO, A2C/A3C, SAC, TD3, DDPG</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Imitation et preferences</h3>
+            <p class="text-sm text-slate-700 mt-2">Behavior cloning et preference learning accelerent l apprentissage quand les rewards sont difficiles a coder.</p>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">Behavior cloning, inverse RL, preference learning, RLHF, offline RL</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Robotique moderne</h3>
+            <p class="text-sm text-slate-700 mt-2">World models + diffusion policy + Sim2Real font le pont entre simulation et monde reel.</p>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">Diffusion policy, world models, visual servoing</li>
+                <li class="text-sm text-slate-700">Domain randomization, latent planning, hierarchical RL</li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="bg-slate-900 rounded-2xl p-6 border border-slate-700">
+        <h3 class="text-xl font-bold text-white">Labo interactif A: Bellman backup (value iteration)</h3>
+        <p class="text-sm text-slate-300 mt-2">Mini MDP a 4 etats. Observe comment V(s) converge quand gamma change.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-black border border-slate-700 rounded-xl p-3">
+                <canvas id="rlBellmanCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-200">Gamma <span id="rlGammaVal" class="font-bold text-cyan-300">0.90</span>
+                    <input id="rlGamma" type="range" min="0.10" max="0.99" step="0.01" value="0.9" class="w-full accent-cyan-500">
+                </label>
+                <label class="block text-slate-200">Reward terminal <span id="rlRewardVal" class="font-bold text-cyan-300">1.00</span>
+                    <input id="rlReward" type="range" min="0.2" max="3.0" step="0.05" value="1" class="w-full accent-cyan-500">
+                </label>
+                <div class="grid grid-cols-2 gap-2">
+                    <button id="rlBellmanStep" class="px-3 py-2 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-semibold">1 iter</button>
+                    <button id="rlBellmanAuto" class="px-3 py-2 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-semibold">Auto</button>
+                    <button id="rlBellmanPause" class="px-3 py-2 rounded bg-slate-600 hover:bg-slate-500 text-white font-semibold">Pause</button>
+                    <button id="rlBellmanReset" class="px-3 py-2 rounded bg-rose-600 hover:bg-rose-500 text-white font-semibold">Reset</button>
+                </div>
+                <div class="rounded-lg bg-slate-800 border border-slate-700 p-3 text-xs text-slate-200">
+                    Iteration: <span id="rlIterVal" class="font-bold text-cyan-300">0</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-xl font-bold text-slate-900">Labo interactif B: policy gradient sur bandit</h3>
+        <p class="text-sm text-slate-700 mt-2">Bandit a 2 actions. La politique apprend la meilleure action via gradient stochastique.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-700 rounded-xl p-3">
+                <canvas id="rlPolicyCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-800">Learning rate <span id="rlPgLrVal" class="font-bold text-indigo-600">0.080</span>
+                    <input id="rlPgLr" type="range" min="0.005" max="0.30" step="0.005" value="0.08" class="w-full accent-indigo-600">
+                </label>
+                <label class="block text-slate-800">Exploration bonus <span id="rlExplVal" class="font-bold text-indigo-600">0.05</span>
+                    <input id="rlExpl" type="range" min="0" max="0.30" step="0.01" value="0.05" class="w-full accent-indigo-600">
+                </label>
+                <div class="grid grid-cols-2 gap-2">
+                    <button id="rlPgStep" class="px-3 py-2 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-semibold">1 step</button>
+                    <button id="rlPgAuto" class="px-3 py-2 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-semibold">Auto</button>
+                    <button id="rlPgPause" class="px-3 py-2 rounded bg-slate-600 hover:bg-slate-500 text-white font-semibold">Pause</button>
+                    <button id="rlPgReset" class="px-3 py-2 rounded bg-rose-600 hover:bg-rose-500 text-white font-semibold">Reset</button>
+                </div>
+                <div class="rounded-lg bg-slate-100 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                    <div>pi(a0): <span id="rlPi0" class="font-bold">0.500</span></div>
+                    <div>pi(a1): <span id="rlPi1" class="font-bold">0.500</span></div>
+                    <div>Reward moyen: <span id="rlAvgR" class="font-bold">0.000</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

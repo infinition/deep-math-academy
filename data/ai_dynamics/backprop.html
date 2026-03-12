@@ -1,0 +1,51 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-rose-600">
+        <h2 class="text-3xl font-extrabold text-rose-900 mb-4">Backpropagation: apprendre de ses erreurs</h2>
+        <p class="text-gray-700 text-lg leading-relaxed">
+            La rétropropagation applique la règle de la chaîne pour savoir comment chaque poids a contribué à l'erreur.
+            Ensuite, on ajuste chaque poids pour réduire la loss.
+        </p>
+        <div class="mt-4 bg-rose-50 p-3 rounded text-sm font-mono text-rose-900 overflow-x-auto">
+            w <- w - eta * dLoss/dw
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+            <h3 class="font-bold text-gray-800 mb-2">Analogie</h3>
+            <p class="text-sm text-gray-700">Tu rates un tir. Tu regardes tout le geste en arrière et corriges chaque micro-mouvement.</p>
+        </div>
+        <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-200">
+            <h3 class="font-bold text-emerald-800 mb-2">Ce que calcule la backprop</h3>
+            <p class="text-sm text-emerald-900">Des gradients locaux, composés entre eux, pour distribuer la responsabilité de l'erreur.</p>
+        </div>
+    </div>
+
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
+        <h3 class="text-white font-bold mb-4">Playground 2 couches (1 neurone caché)</h3>
+        <div class="grid lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-black rounded border border-gray-700 p-3">
+                <canvas id="backpropCanvas" width="720" height="320" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <div class="text-gray-300">Entrée x = <span id="bpInputVal" class="font-bold text-cyan-300">1.0</span>, cible y = <span id="bpTargetVal" class="font-bold text-cyan-300">1.0</span></div>
+                <div class="text-gray-300">w1: <span id="bpW1Label" class="font-bold text-rose-300">0.50</span></div>
+                <input id="bpW1" type="range" min="-2" max="2" step="0.01" value="0.5" class="w-full accent-rose-500">
+                <div class="text-gray-300">w2: <span id="bpW2Label" class="font-bold text-rose-300">0.70</span></div>
+                <input id="bpW2" type="range" min="-2" max="2" step="0.01" value="0.7" class="w-full accent-rose-500">
+                <div class="text-gray-300">lr eta: <span id="bpLrLabel" class="font-bold text-cyan-300">0.10</span></div>
+                <input id="bpLr" type="range" min="0.01" max="0.5" step="0.01" value="0.1" class="w-full accent-cyan-500">
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="stepBackprop()" class="bg-rose-600 hover:bg-rose-500 text-white rounded px-3 py-2 font-bold">1 pas</button>
+                    <button onclick="resetBackprop()" class="bg-gray-700 hover:bg-gray-600 text-white rounded px-3 py-2 font-bold">Reset</button>
+                </div>
+                <div class="bg-gray-800 p-3 rounded text-xs text-gray-200 space-y-1">
+                    <div>yhat: <span id="bpPred" class="font-bold text-emerald-300">0.00</span></div>
+                    <div>loss: <span id="bpLoss" class="font-bold text-amber-300">0.00</span></div>
+                    <div>dLoss/dw1: <span id="bpDw1" class="font-bold text-cyan-300">0.00</span></div>
+                    <div>dLoss/dw2: <span id="bpDw2" class="font-bold text-cyan-300">0.00</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

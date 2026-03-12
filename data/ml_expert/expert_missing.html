@@ -1,0 +1,65 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-amber-600">
+        <h2 class="text-3xl font-extrabold text-amber-900 mb-3">Concepts manquants pour passer "expert"</h2>
+        <p class="text-gray-700">Voici la liste priorisee des briques a ajouter pour couvrir la pratique moderne ML/DL/IA de bout en bout.</p>
+    </section>
+
+    <section class="bg-amber-50 border border-amber-200 rounded-xl p-5">
+        <h3 class="font-bold text-amber-900 mb-2">Formule de gap</h3>
+        <div class="text-amber-900">$$\text{Niveau expert}=\text{Maths}\times\text{Modeles}\times\text{Systemes}\times\text{Evaluation}\times\text{MLOps}$$</div>
+        <p class="text-sm text-amber-900 mt-2">Si un facteur vaut ~0, le produit global chute: il faut un socle complet.</p>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">P0 - Absolument critiques</h3>
+            <ul class="text-sm text-gray-700 mt-2 space-y-1">
+                <li>Evaluation serieuse: calibration, PR-AUC/ROC-AUC, erreurs par segment</li>
+                <li>Data leakage, validation temporelle, robustesse OOD</li>
+                <li>MLOps: suivi experiments, reproducibilite, monitoring drift</li>
+                <li>Interpretabilite locale/globale et verification metier</li>
+            </ul>
+        </article>
+
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">P1 - Tres importants ensuite</h3>
+            <ul class="text-sm text-gray-700 mt-2 space-y-1">
+                <li>PEFT/LoRA/QLoRA, quantization, distillation</li>
+                <li>RAG robuste: chunking, re-ranking, evaluation factualite</li>
+                <li>Alignement: preference learning, RLHF, DPO, guardrails</li>
+                <li>Security: prompt injection, data poisoning, model exfiltration</li>
+            </ul>
+        </article>
+
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">P2 - Avance / recherche active</h3>
+            <ul class="text-sm text-gray-700 mt-2 space-y-1">
+                <li>State Space Models (Mamba-like) et hybrides Transformer-SSM</li>
+                <li>World models, planning latent, diffusion policy</li>
+                <li>Graph transformers, dynamic GNN, causal representation learning</li>
+                <li>Multimodal agentic systems (texte-image-audio-video-action)</li>
+            </ul>
+        </article>
+
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">Ajouts pedagogiques a prevoir dans la plateforme</h3>
+            <ul class="text-sm text-gray-700 mt-2 space-y-1">
+                <li>Benchmarks interactifs "quand tel algo gagne/perd"</li>
+                <li>Simulateur de biais-variance et calibration</li>
+                <li>Playground RAG eval (hallucination, recall, precision contextuelle)</li>
+                <li>Ateliers MLOps (drift, rollback, canary, A/B tests)</li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="bg-gradient-to-r from-indigo-50 to-emerald-50 border border-indigo-200 rounded-xl p-6">
+        <h3 class="font-bold text-indigo-900 mb-2">Ordre recommande pour gagner du temps</h3>
+        <ol class="text-sm text-indigo-900 list-decimal pl-5 space-y-1">
+            <li>Evaluation + data hygiene + leakage prevention</li>
+            <li>ML tabulaire solide + interpretation</li>
+            <li>DL/Transformers + optimisation moderne</li>
+            <li>RAG/agents + securite + alignement</li>
+            <li>Multimodal/VLA/World models</li>
+        </ol>
+    </section>
+</div>

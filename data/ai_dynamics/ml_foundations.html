@@ -1,0 +1,48 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-emerald-600">
+        <h2 class="text-3xl font-extrabold text-emerald-900 mb-4">Machine Learning: apprendre des motifs</h2>
+        <p class="text-gray-700 text-lg leading-relaxed">
+            Le machine learning cherche une fonction qui transforme des entrées en bonnes prédictions.
+            Le secret: généraliser sans mémoriser bêtement.
+        </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white p-4 rounded-xl border border-gray-200">
+            <h3 class="font-bold text-gray-800 mb-2">Supervisé</h3>
+            <p class="text-sm text-gray-700">On a des exemples + réponses. But: prédire la bonne étiquette.</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-gray-200">
+            <h3 class="font-bold text-gray-800 mb-2">Non supervisé</h3>
+            <p class="text-sm text-gray-700">On cherche des groupes/structures cachées sans réponses.</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-gray-200">
+            <h3 class="font-bold text-gray-800 mb-2">Renforcement</h3>
+            <p class="text-sm text-gray-700">L'agent agit, observe une récompense, ajuste sa stratégie.</p>
+        </div>
+    </div>
+
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
+        <h3 class="text-white font-bold mb-4">Bac à sable classification</h3>
+        <p class="text-gray-400 text-sm mb-4">Compare une frontière linéaire et un k-NN simplifié sur un nuage de points bruité.</p>
+        <div class="grid lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-black rounded border border-gray-700 p-3">
+                <canvas id="mlCanvas" width="720" height="320" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="text-gray-300">Modèle</label>
+                <select id="mlModel" class="w-full rounded bg-gray-800 text-white p-2 border border-gray-700">
+                    <option value="linear">Frontière linéaire</option>
+                    <option value="knn">k-NN (k=5)</option>
+                </select>
+                <div class="text-gray-300">Bruit: <span id="mlNoiseLabel" class="font-bold text-cyan-300">0.20</span></div>
+                <input id="mlNoise" type="range" min="0" max="0.6" step="0.02" value="0.2" class="w-full accent-cyan-500">
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="regenMLData()" class="bg-emerald-600 hover:bg-emerald-500 text-white rounded px-3 py-2 font-bold">Nouv. data</button>
+                    <button onclick="trainMLModel()" class="bg-indigo-600 hover:bg-indigo-500 text-white rounded px-3 py-2 font-bold">Mettre à jour</button>
+                </div>
+                <div class="bg-gray-800 p-3 rounded text-xs text-gray-200">Accuracy approx: <span id="mlAcc" class="font-bold text-emerald-300">0%</span></div>
+            </div>
+        </div>
+    </div>
+</div>

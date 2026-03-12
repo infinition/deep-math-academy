@@ -1,0 +1,45 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-violet-600">
+        <h2 class="text-3xl font-extrabold text-violet-900 mb-3">VLM / VLA / World Models</h2>
+        <p class="text-gray-700">Ce chapitre relie perception multimodale, action et planification en espace latent.</p>
+    </section>
+
+    <section class="bg-violet-50 border border-violet-200 rounded-xl p-5">
+        <h3 class="font-bold text-violet-900 mb-2">Equation de dynamique latente</h3>
+        <div class="text-violet-900">$$z_{t+1}=f_\theta(z_t,a_t),\quad \hat{o}_{t+1}=g_\theta(z_{t+1})$$</div>
+        <p class="text-sm text-violet-900 mt-2">Analogie: simulateur mental interne qui teste des actions avant execution reelle.</p>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">VLM / MLLM</h3>
+            <p class="text-sm text-gray-700 mt-1">Fusion texte + image + parfois audio/video pour raisonner sur des scenes.</p>
+            <div class="text-sm mt-2">$$s=\mathrm{sim}(E_{text}(t),E_{img}(i))$$</div>
+        </article>
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">VLA (Vision-Language-Action)</h3>
+            <p class="text-sm text-gray-700 mt-1">Le modele observe, comprend l instruction et emet une action.</p>
+            <div class="text-sm mt-2">$$a_t\sim\pi_\theta(a\mid o_t,\text{instruction})$$</div>
+        </article>
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">World Models en RL/robotique</h3>
+            <p class="text-sm text-gray-700 mt-1">Dreamer-like, latent planning, model-based RL, diffusion world models.</p>
+            <div class="text-sm mt-2">$$\pi^*=\arg\max_\pi\;\mathbb{E}\left[\sum_t r_t\right] \text{ via planification sur } z_t$$</div>
+        </article>
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">RAG multimodal + agents</h3>
+            <p class="text-sm text-gray-700 mt-1">Recherche d evidences texte/image/tableaux + appels outils + verification.</p>
+            <div class="text-sm mt-2">$$\text{Decision}=f(\text{Reasoning},\text{Retrieved Evidence},\text{Tool Outputs})$$</div>
+        </article>
+    </section>
+
+    <section class="bg-gradient-to-r from-cyan-50 to-violet-50 border border-cyan-200 rounded-xl p-6">
+        <h3 class="font-bold text-cyan-900 mb-2">Applications concretes</h3>
+        <ul class="text-sm text-cyan-900 space-y-1">
+            <li>Robot mobile: navigation et manipulation avec camera + langage</li>
+            <li>Document AI: comprehension de tableaux/charts + extraction fiable</li>
+            <li>Assistant industriel: planification d actions securisees</li>
+            <li>Agent logiciel: lecture interface + action outillee + memoire</li>
+        </ul>
+    </section>
+</div>

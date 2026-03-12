@@ -1,0 +1,112 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+        <h2 class="text-3xl font-extrabold text-slate-900">7. Architectures chaudes en recherche actuelle</h2>
+        <p class="mt-3 text-slate-700">Ce chapitre sert de radar: quelles familles montent, pourquoi elles montent, et quels compromis elles adressent.</p>
+        <div class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-900">
+            Statut: version active avec explications, equations, et 2 labs interactifs metier.
+        </div>
+    </section>
+
+    <section class="grid lg:grid-cols-2 gap-4">
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Foundation models et multimodal</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: un foundation model est une centrale electrique; les applications branchent des adaptateurs.</p>
+            <div class="mt-3 p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-900 text-sm">
+                $$\hat{y}=f_\theta(x_{text},x_{image},x_{audio},...)$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">LLM, VLM, MLLM, multimodal foundation models</li>
+                <li class="text-sm text-slate-700">VLA/VLM: passage perception -> action</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">RAG et agents</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: RAG = bibliotheque externe; agent = operateur qui decide quels outils utiliser.</p>
+            <div class="mt-3 p-3 rounded-lg bg-cyan-50 border border-cyan-200 text-cyan-900 text-sm">
+                $$\text{Answer}=g\big(\text{Query},\;\mathrm{Retrieve}(\text{Corpus})\big)$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">Chunking, dense/hybrid retrieval, reranking</li>
+                <li class="text-sm text-slate-700">Tool use, planning, reflection, memory, ReAct</li>
+                <li class="text-sm text-slate-700">Agentic workflows, multi-agent, multimodal RAG</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">SSM, world models, graph AI</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: SSM compresse la memoire sequentielle; world model simule avant d agir.</p>
+            <div class="mt-3 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900 text-sm">
+                $$z_{t+1}=f_\theta(z_t,a_t),\quad \hat{o}_{t+1}=g_\theta(z_{t+1})$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">S4/S5/Mamba/Jamba, hybrides Transformer-SSM</li>
+                <li class="text-sm text-slate-700">Dreamer-like, diffusion world models, latent planning</li>
+                <li class="text-sm text-slate-700">GNN, Graph Transformer, dynamic GNN, Graph Mamba</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Adaptation et alignement</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: PEFT = changer juste les pieces necessaires; alignement = regler la boussole comportementale.</p>
+            <div class="mt-3 p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900 text-sm">
+                $$\theta=\theta_0+\Delta\theta_{LoRA},\quad \max_\pi\;\mathbb{E}[r_{pref}]$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">PEFT, LoRA, QLoRA, adapters, prompt/prefix tuning</li>
+                <li class="text-sm text-slate-700">RLHF, DPO, RLAIF, constitutional AI, reward models</li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="bg-slate-900 rounded-2xl p-6 border border-slate-700">
+        <h3 class="text-xl font-bold text-white">Labo interactif A: simulateur RAG (qualite vs latence)</h3>
+        <p class="text-sm text-slate-300 mt-2">Tu ajustes chunk size, top-k et reranking pour voir le compromis couverture/precision/latence.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-black border border-slate-700 rounded-xl p-3">
+                <canvas id="hotRagCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-200">Chunk size <span id="hotChunkVal" class="font-bold text-cyan-300">350</span>
+                    <input id="hotChunk" type="range" min="100" max="1200" step="10" value="350" class="w-full accent-cyan-500">
+                </label>
+                <label class="block text-slate-200">Top-k <span id="hotTopKVal" class="font-bold text-cyan-300">6</span>
+                    <input id="hotTopK" type="range" min="1" max="20" step="1" value="6" class="w-full accent-cyan-500">
+                </label>
+                <label class="block text-slate-200">Re-ranking <span id="hotRerankVal" class="font-bold text-cyan-300">0.60</span>
+                    <input id="hotRerank" type="range" min="0" max="1" step="0.01" value="0.6" class="w-full accent-cyan-500">
+                </label>
+                <div class="rounded-lg bg-slate-800 border border-slate-700 p-3 text-xs text-slate-200 space-y-1">
+                    <div>Coverage: <span id="hotCoverage" class="font-bold text-cyan-300">0.00</span></div>
+                    <div>Precision: <span id="hotPrecision" class="font-bold text-cyan-300">0.00</span></div>
+                    <div>Latency score: <span id="hotLatency" class="font-bold text-cyan-300">0.00</span></div>
+                    <div>Global score: <span id="hotGlobal" class="font-bold text-cyan-300">0.00</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-xl font-bold text-slate-900">Labo interactif B: PEFT vs full fine-tuning</h3>
+        <p class="text-sm text-slate-700 mt-2">Visualise le compromis qualite, VRAM et temps selon la strategie d adaptation.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-700 rounded-xl p-3">
+                <canvas id="hotPeftCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-800">Taille modele (B params) <span id="hotModelVal" class="font-bold text-indigo-600">7</span>
+                    <input id="hotModel" type="range" min="3" max="70" step="1" value="7" class="w-full accent-indigo-600">
+                </label>
+                <label class="block text-slate-800">LoRA rank <span id="hotRankVal" class="font-bold text-indigo-600">16</span>
+                    <input id="hotRank" type="range" min="4" max="128" step="1" value="16" class="w-full accent-indigo-600">
+                </label>
+                <label class="block text-slate-800">Budget GPU relatif <span id="hotBudgetVal" class="font-bold text-indigo-600">0.50</span>
+                    <input id="hotBudget" type="range" min="0.1" max="1.0" step="0.01" value="0.5" class="w-full accent-indigo-600">
+                </label>
+                <div class="rounded-lg bg-slate-100 border border-slate-200 p-3 text-xs text-slate-700">
+                    Reco: <span id="hotReco" class="font-bold">-</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

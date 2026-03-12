@@ -1,0 +1,86 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+        <h2 class="text-3xl font-extrabold text-slate-900">16. Multimodal</h2>
+        <p class="mt-3 text-slate-700">Aligner plusieurs modalites (texte, image, audio, video, action) dans un espace commun utile.</p>
+        <div class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-900">
+            Statut: version active avec concepts, equation d alignement et 2 labs.
+        </div>
+    </section>
+
+    <section class="bg-cyan-50 border border-cyan-200 rounded-xl p-5">
+        <h3 class="text-lg font-bold text-cyan-900">Equation decortiquee + exemple IA</h3>
+        <p class="text-sm text-cyan-900 mt-2">Analogie: comme un traducteur simultane entre texte et image, avec un dictionnaire vectoriel partage.</p>
+        <div class="mt-3 rounded-lg bg-white border border-cyan-200 p-3 text-sm text-cyan-900">
+            $$\mathcal{L}=\mathcal{L}_{text}+\mathcal{L}_{image}+\lambda\mathcal{L}_{align}$$
+        </div>
+        <ul class="mt-3 list-disc pl-5 space-y-1 text-sm text-cyan-900">
+            <li><strong>\(\mathcal{L}_{text}\):</strong> qualite linguistique.</li>
+            <li><strong>\(\mathcal{L}_{image}\):</strong> qualite visuelle/perceptive.</li>
+            <li><strong>\(\mathcal{L}_{align}\):</strong> coherence texte-image-action.</li>
+        </ul>
+        <p class="text-sm text-cyan-900 mt-2"><strong>Exemple IA:</strong> agent VLA qui lit une instruction "prends la tasse rouge" et agit sur la bonne zone visuelle.</p>
+    </section>
+
+    <section class="grid lg:grid-cols-2 gap-4">
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Alignement multimodal</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: creer un dictionnaire commun entre "mots", "pixels" et "sons".</p>
+            <div class="mt-3 p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-900 text-sm">
+                $$\mathcal{L}_{contrastive}=-\log\frac{\exp(\mathrm{sim}(z_t,z_i)/\tau)}{\sum_j\exp(\mathrm{sim}(z_t,z_j)/\tau)}$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">CLIP-like text-image alignment, VLM, MLLM, VLA</li>
+                <li class="text-sm text-slate-700">Grounding, referring expression, multimodal reasoning</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Systemes multimodaux</h3>
+            <p class="text-sm text-slate-700 mt-2">Multimodal RAG relie retrieval, perception et generation; Document AI relie texte+table+image.</p>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">Audio-language et video-language models</li>
+                <li class="text-sm text-slate-700">Document AI, chart/table understanding</li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="bg-slate-900 rounded-2xl p-6 border border-slate-700">
+        <h3 class="text-xl font-bold text-white">Labo interactif A: matrice d alignement texte-image</h3>
+        <p class="text-sm text-slate-300 mt-2">Ajuste la temperature et le bruit. La diagonale represente les paires correspondantes.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-black border border-slate-700 rounded-xl p-3">
+                <canvas id="mmAlignCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-200">Temperature tau <span id="mmTauVal" class="font-bold text-cyan-300">0.30</span>
+                    <input id="mmTau" type="range" min="0.05" max="1.20" step="0.01" value="0.3" class="w-full accent-cyan-500">
+                </label>
+                <label class="block text-slate-200">Bruit alignement <span id="mmNoiseVal" class="font-bold text-cyan-300">0.20</span>
+                    <input id="mmNoise" type="range" min="0" max="1" step="0.01" value="0.2" class="w-full accent-cyan-500">
+                </label>
+                <div class="rounded-lg bg-slate-800 border border-slate-700 p-3 text-xs text-slate-200">
+                    Diagonal score: <span id="mmDiagScore" class="font-bold text-cyan-300">0.000</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-xl font-bold text-slate-900">Labo interactif B: grounding (phrase -> zone)</h3>
+        <p class="text-sm text-slate-700 mt-2">Seuil de confiance pour accepter une zone candidate.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-700 rounded-xl p-3">
+                <canvas id="mmGroundCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-800">Seuil confiance <span id="mmThrVal" class="font-bold text-indigo-600">0.55</span>
+                    <input id="mmThr" type="range" min="0.05" max="0.95" step="0.01" value="0.55" class="w-full accent-indigo-600">
+                </label>
+                <button id="mmGroundResample" class="w-full px-3 py-2 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-semibold">Nouvelles candidates</button>
+                <div class="rounded-lg bg-slate-100 border border-slate-200 p-3 text-xs text-slate-700">
+                    Box acceptees: <span id="mmAccepted" class="font-bold">0</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

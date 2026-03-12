@@ -1,0 +1,83 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-emerald-600">
+        <h2 class="text-3xl font-extrabold text-emerald-900 mb-4">Lexique complet: annotations mathematiques (vulgarise)</h2>
+        <p class="text-gray-700 leading-relaxed">
+            Cette page reprend les notations cle du PDF fourni et les traduit en langage operationnel pour le ML/DL/IA.
+            Pensez-y comme un <strong>decodeur</strong>: symbole -> intuition -> usage concret.
+        </p>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+        <article class="bg-white rounded-xl border border-gray-200 p-5">
+            <h3 class="font-bold text-gray-900 mb-2">Alphabet grec (usage frequent)</h3>
+            <p class="text-sm text-gray-700">\(\alpha\): taux d apprentissage, \(\beta\): momentum/regularisation, \(\gamma\): discount RL, \(\lambda\): penalite, \(\mu\): moyenne, \(\sigma\): ecart-type.</p>
+            <p class="text-sm text-gray-700 mt-2">Analogie: ce sont des <strong>etiquettes standard</strong> comme des raccourcis clavier universels.</p>
+        </article>
+        <article class="bg-white rounded-xl border border-gray-200 p-5">
+            <h3 class="font-bold text-gray-900 mb-2">Ensembles et logique</h3>
+            <p class="text-sm text-gray-700">\(\mathbb{N},\mathbb{Z},\mathbb{Q},\mathbb{R},\mathbb{C}\), \(\in\), \(\subseteq\), \(\cup\), \(\cap\), \(\forall\), \(\exists\).</p>
+            <p class="text-sm text-gray-700 mt-2">Analogie: tri de boites. L appartenance dit "dans quelle boite est cet objet?".</p>
+        </article>
+    </section>
+
+    <section class="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <h3 class="font-bold text-gray-900">Vecteurs, matrices, tenseurs</h3>
+        <p class="text-gray-700">Un vecteur est une liste ordonnee de valeurs. Une matrice applique une transformation. Un tenseur generalise aux dimensions superieures.</p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-indigo-900">
+            $$\mathbf{v}=\begin{bmatrix}v_1\\v_2\\v_3\end{bmatrix},\quad W\in\mathbb{R}^{m\times n},\quad \mathbf{y}=W\mathbf{x}+\mathbf{b}$$
+        </div>
+        <ul class="text-sm text-gray-700 space-y-1">
+            <li><strong>\(W\mathbf{x}\)</strong>: combine les features selon des poids appris</li>
+            <li><strong>\(m\times n\)</strong>: m sorties, n entrees</li>
+            <li><strong>\(\mathbf{b}\)</strong>: biais, deplacement de la decision</li>
+        </ul>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+        <article class="bg-white rounded-xl border border-gray-200 p-5">
+            <h3 class="font-bold text-gray-900 mb-2">Operateurs somme/produit</h3>
+            <p class="text-gray-700 text-sm">\(\sum\): addition repetitive. \(\prod\): multiplication repetitive.</p>
+            <div class="mt-2 text-sm text-gray-800">$$\sum_{i=1}^{m}x_i,\quad \prod_{i=1}^{m}x_i$$</div>
+            <p class="text-xs text-gray-600 mt-2">Analogie: sum = compteur de points, prod = effet cumulatif multiplicatif.</p>
+        </article>
+        <article class="bg-white rounded-xl border border-gray-200 p-5">
+            <h3 class="font-bold text-gray-900 mb-2">Derivees et gradient</h3>
+            <p class="text-gray-700 text-sm">La derivee mesure une pente locale, le gradient assemble toutes les pentes partielles.</p>
+            <div class="mt-2 text-sm text-gray-800">$$\frac{\partial f}{\partial x_j},\quad \nabla f(\mathbf{x})=\left[\frac{\partial f}{\partial x_1},...,\frac{\partial f}{\partial x_n}\right]$$</div>
+            <p class="text-xs text-gray-600 mt-2">Analogie: boussole vers la montee la plus rapide.</p>
+        </article>
+    </section>
+
+    <section class="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <h3 class="font-bold text-gray-900">Integrales usuelles</h3>
+        <p class="text-gray-700">Une integrale additionne des micro-contributions pour recuperer un total global.</p>
+        <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <div class="bg-gray-50 border border-gray-200 rounded p-3">$$\int_a^b f(x)\,dx$$</div>
+            <div class="bg-gray-50 border border-gray-200 rounded p-3">$$\int e^x\,dx=e^x+C$$</div>
+            <div class="bg-gray-50 border border-gray-200 rounded p-3">$$\int \frac{1}{x}\,dx=\ln|x|+C$$</div>
+            <div class="bg-gray-50 border border-gray-200 rounded p-3">$$\int_0^x t^n\,dt=\frac{x^{n+1}}{n+1}$$</div>
+        </div>
+    </section>
+
+    <section class="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <h3 class="font-bold text-gray-900">Stats & proba (notation minimale a maitriser)</h3>
+        <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <div class="bg-emerald-50 border border-emerald-200 rounded p-3">$$\mu=\mathbb{E}[X],\quad \sigma^2=\mathrm{Var}(X)$$</div>
+            <div class="bg-emerald-50 border border-emerald-200 rounded p-3">$$\mathrm{Cov}(X,Y)=\mathbb{E}[(X-\mu_X)(Y-\mu_Y)]$$</div>
+            <div class="bg-emerald-50 border border-emerald-200 rounded p-3">$$P(y\mid x)=\frac{P(x\mid y)P(y)}{P(x)}$$</div>
+            <div class="bg-emerald-50 border border-emerald-200 rounded p-3">$$X\sim\mathcal{N}(\mu,\sigma^2)$$</div>
+        </div>
+        <p class="text-sm text-gray-700">Analogie: ces notations sont les capteurs de votre tableau de bord de modelisation.</p>
+    </section>
+
+    <section class="bg-gradient-to-r from-cyan-50 to-indigo-50 border border-cyan-200 rounded-xl p-6">
+        <h3 class="font-bold text-cyan-900 mb-3">Notation ML standard (X, y, y_hat)</h3>
+        <p class="text-cyan-900 text-sm mb-2">Le dataset est souvent ecrit ainsi:</p>
+        <div class="text-sm text-cyan-900">$$X\in\mathbb{R}^{m\times n},\quad y\in\mathbb{R}^{m},\quad \hat{y}=f_\theta(X)$$</div>
+        <ul class="text-sm text-cyan-900 mt-3 space-y-1">
+            <li><strong>m</strong>: nombre d exemples</li>
+            <li><strong>n</strong>: nombre de variables</li>
+            <li><strong>\(\hat{y}\)</strong>: prediction du modele</li>
+        </ul>
+    </section>
+</div>

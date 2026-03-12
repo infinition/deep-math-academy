@@ -1605,3 +1605,350 @@ body.dark-mode .from-sky-50 {
     /* sky-900 */
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
+/* ==========================================
+   Pedagogy + Interactive Visibility Overrides
+   ========================================== */
+body.dark-mode canvas {
+    filter: none !important;
+}
+
+#content-area .dma-interactive-panel {
+    background: radial-gradient(circle at top left, #111827 0%, #030712 60%, #020617 100%) !important;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.35), 0 10px 24px rgba(2, 6, 23, 0.25);
+}
+
+#content-area .dma-viz-host {
+    position: relative;
+    min-height: 220px;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    background: linear-gradient(160deg, #020617 0%, #0f172a 100%);
+    overflow: hidden;
+}
+
+#content-area .dma-viz-canvas {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.6rem;
+    background: linear-gradient(160deg, #020617 0%, #0f172a 100%);
+}
+
+#content-area .dma-toolkit-card {
+    position: relative;
+    overflow: hidden;
+}
+
+#content-area .dma-toolkit-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 15% 0%, rgba(99, 102, 241, 0.12), transparent 45%);
+}
+
+#content-area .dma-toolkit-card mjx-container {
+    color: inherit !important;
+}
+
+body.dark-mode #content-area .dma-toolkit-card {
+    border-color: rgba(99, 102, 241, 0.35);
+}
+
+body.dark-mode #content-area .dma-viz-host,
+body.dark-mode #content-area .dma-viz-canvas {
+    border-color: rgba(125, 211, 252, 0.2);
+    background: linear-gradient(160deg, #020617 0%, #111827 100%);
+}
+#content-area .dma-viz-host canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.6rem;
+    background: linear-gradient(160deg, #020617 0%, #0f172a 100%);
+}
+
+/* ==========================================
+   Global Search + Latex Eye UX
+   ========================================== */
+#globalSearchInput::-webkit-search-cancel-button {
+    display: none;
+}
+
+#nav-container .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.dma-latex-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 0.55rem;
+    padding: 0.2rem 0.35rem;
+    transition: background-color 0.2s ease;
+}
+
+.dma-latex-wrap.dma-latex-display {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0.35rem 0;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid rgba(99, 102, 241, 0.22);
+    background: rgba(238, 242, 255, 0.45);
+}
+
+.dma-latex-wrap .dma-latex-render {
+    min-width: 0;
+}
+
+.dma-latex-wrap .dma-latex-eye {
+    border: 0;
+    border-radius: 0.45rem;
+    padding: 0.2rem 0.35rem;
+    font-size: 0.85rem;
+    line-height: 1;
+    color: #4338ca;
+    background: rgba(99, 102, 241, 0.15);
+    opacity: 0;
+    transform: translateY(2px);
+    transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.dma-latex-wrap.is-hover .dma-latex-eye,
+.dma-latex-wrap:hover .dma-latex-eye,
+.dma-latex-wrap.is-open .dma-latex-eye,
+.dma-latex-wrap:focus-within .dma-latex-eye {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dma-latex-wrap .dma-latex-eye:hover {
+    background: rgba(99, 102, 241, 0.24);
+}
+
+.dma-latex-wrap .dma-latex-source {
+    position: absolute;
+    right: 0.2rem;
+    bottom: calc(100% + 0.25rem);
+    max-width: min(85vw, 560px);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    border-radius: 0.6rem;
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    background: #ffffff;
+    color: #1e1b4b;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    line-height: 1.35;
+    padding: 0.5rem 0.6rem;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 30;
+}
+
+.dma-latex-wrap.is-open .dma-latex-source,
+.dma-latex-wrap:focus-within .dma-latex-source {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+body.dark-mode .dma-latex-wrap.dma-latex-display {
+    border-color: rgba(129, 140, 248, 0.45);
+    background: rgba(30, 41, 59, 0.7);
+}
+
+body.dark-mode .dma-latex-wrap .dma-latex-eye {
+    color: #c7d2fe;
+    background: rgba(99, 102, 241, 0.35);
+}
+
+body.dark-mode .dma-latex-wrap .dma-latex-eye:hover {
+    background: rgba(129, 140, 248, 0.45);
+}
+
+body.dark-mode .dma-latex-wrap .dma-latex-source {
+    border-color: rgba(129, 140, 248, 0.5);
+    background: #0f172a;
+    color: #e2e8f0;
+    box-shadow: 0 14px 30px rgba(2, 6, 23, 0.55);
+}
+
+body.dark-mode #content-area .dma-interactive-panel {
+    color: #e2e8f0;
+}
+
+body.dark-mode #content-area .dma-interactive-panel h3,
+body.dark-mode #content-area .dma-interactive-panel h4,
+body.dark-mode #content-area .dma-interactive-panel p,
+body.dark-mode #content-area .dma-interactive-panel label,
+body.dark-mode #content-area .dma-interactive-panel span,
+body.dark-mode #content-area .dma-interactive-panel div {
+    color: inherit;
+}
+
+body.dark-mode #globalSearchInput {
+    background-color: rgba(2, 6, 23, 0.8);
+    border-color: rgba(129, 140, 248, 0.5);
+}
+
+/* ==========================================
+   Global Dark-Mode Readability Lock
+   ========================================== */
+body.dark-mode #content-area {
+    color: #dbe7ff !important;
+}
+
+body.dark-mode #content-area h1,
+body.dark-mode #content-area h2,
+body.dark-mode #content-area h3,
+body.dark-mode #content-area h4,
+body.dark-mode #content-area h5,
+body.dark-mode #content-area h6 {
+    color: #f8fbff !important;
+}
+
+body.dark-mode #content-area p,
+body.dark-mode #content-area li,
+body.dark-mode #content-area label,
+body.dark-mode #content-area dt,
+body.dark-mode #content-area dd,
+body.dark-mode #content-area small,
+body.dark-mode #content-area span,
+body.dark-mode #content-area strong,
+body.dark-mode #content-area em {
+    color: #d5e2ff !important;
+}
+
+body.dark-mode #content-area .text-slate-900,
+body.dark-mode #content-area .text-slate-800,
+body.dark-mode #content-area .text-slate-700,
+body.dark-mode #content-area .text-slate-600,
+body.dark-mode #content-area .text-slate-500,
+body.dark-mode #content-area .text-gray-900,
+body.dark-mode #content-area .text-gray-800,
+body.dark-mode #content-area .text-gray-700,
+body.dark-mode #content-area .text-gray-600,
+body.dark-mode #content-area .text-gray-500,
+body.dark-mode #content-area .text-indigo-900,
+body.dark-mode #content-area .text-indigo-800,
+body.dark-mode #content-area .text-indigo-700,
+body.dark-mode #content-area .text-cyan-900,
+body.dark-mode #content-area .text-cyan-800,
+body.dark-mode #content-area .text-cyan-700,
+body.dark-mode #content-area .text-emerald-900,
+body.dark-mode #content-area .text-emerald-800,
+body.dark-mode #content-area .text-amber-900,
+body.dark-mode #content-area .text-amber-800,
+body.dark-mode #content-area .text-purple-900,
+body.dark-mode #content-area .text-purple-800,
+body.dark-mode #content-area .text-blue-900,
+body.dark-mode #content-area .text-blue-800,
+body.dark-mode #content-area .text-rose-900,
+body.dark-mode #content-area .text-rose-800 {
+    color: #e3eeff !important;
+}
+
+body.dark-mode #content-area .bg-white,
+body.dark-mode #content-area .bg-gray-50,
+body.dark-mode #content-area .bg-gray-100,
+body.dark-mode #content-area .bg-slate-50,
+body.dark-mode #content-area .bg-slate-100,
+body.dark-mode #content-area .bg-indigo-50,
+body.dark-mode #content-area .bg-indigo-100,
+body.dark-mode #content-area .bg-cyan-50,
+body.dark-mode #content-area .bg-cyan-100,
+body.dark-mode #content-area .bg-blue-50,
+body.dark-mode #content-area .bg-blue-100,
+body.dark-mode #content-area .bg-emerald-50,
+body.dark-mode #content-area .bg-emerald-100,
+body.dark-mode #content-area .bg-amber-50,
+body.dark-mode #content-area .bg-amber-100,
+body.dark-mode #content-area .bg-violet-50,
+body.dark-mode #content-area .bg-violet-100,
+body.dark-mode #content-area .bg-fuchsia-50,
+body.dark-mode #content-area .bg-fuchsia-100,
+body.dark-mode #content-area .bg-rose-50,
+body.dark-mode #content-area .bg-rose-100,
+body.dark-mode #content-area .bg-teal-50,
+body.dark-mode #content-area .bg-teal-100,
+body.dark-mode #content-area .bg-lime-50,
+body.dark-mode #content-area .bg-lime-100,
+body.dark-mode #content-area .bg-yellow-50,
+body.dark-mode #content-area .bg-yellow-100 {
+    background: #152238 !important;
+}
+
+body.dark-mode #content-area .border-gray-100,
+body.dark-mode #content-area .border-gray-200,
+body.dark-mode #content-area .border-slate-200,
+body.dark-mode #content-area .border-indigo-100,
+body.dark-mode #content-area .border-indigo-200,
+body.dark-mode #content-area .border-cyan-100,
+body.dark-mode #content-area .border-cyan-200,
+body.dark-mode #content-area .border-emerald-100,
+body.dark-mode #content-area .border-emerald-200,
+body.dark-mode #content-area .border-amber-100,
+body.dark-mode #content-area .border-amber-200 {
+    border-color: rgba(148, 163, 184, 0.45) !important;
+}
+
+body.dark-mode #content-area .bg-gray-900,
+body.dark-mode #content-area .bg-slate-900,
+body.dark-mode #content-area .bg-black {
+    border-color: rgba(148, 163, 184, 0.35) !important;
+}
+
+body.dark-mode #content-area input,
+body.dark-mode #content-area select,
+body.dark-mode #content-area textarea {
+    background: #0c1627 !important;
+    color: #f8fbff !important;
+    border-color: rgba(129, 140, 248, 0.55) !important;
+}
+
+body.dark-mode #content-area option {
+    background: #0c1627;
+    color: #f8fbff;
+}
+
+body.dark-mode #content-area code,
+body.dark-mode #content-area pre {
+    color: #e2f0ff !important;
+}
+
+body.dark-mode #content-area .dma-latex-wrap .dma-latex-render,
+body.dark-mode #content-area mjx-container {
+    color: #eef5ff !important;
+}
+
+body.dark-mode #content-area .dma-viz-host,
+body.dark-mode #content-area canvas {
+    box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.28) inset;
+}
+
+body.dark-mode #content-area canvas {
+    filter: brightness(1.08) contrast(1.08) saturate(1.06) !important;
+}
+
+body.dark-mode #content-area button,
+body.dark-mode #content-area .btn,
+body.dark-mode #content-area [role="button"] {
+    color: #f8fbff !important;
+}
+
+body.dark-mode #content-area a {
+    color: #7dd3fc !important;
+}

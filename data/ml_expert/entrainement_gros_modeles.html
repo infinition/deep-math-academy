@@ -1,0 +1,95 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+        <h2 class="text-3xl font-extrabold text-slate-900">14. Entrainement moderne des gros modeles</h2>
+        <p class="mt-3 text-slate-700">Objectif: comprendre les compromis compute/memoire/qualite qui pilotent pretraining, fine-tuning et inference.</p>
+        <div class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-900">
+            Statut: version active avec 2 labs systeme (scaling + compression).
+        </div>
+    </section>
+
+    <section class="bg-cyan-50 border border-cyan-200 rounded-xl p-5">
+        <h3 class="text-lg font-bold text-cyan-900">Analogie + equation decortiquee</h3>
+        <p class="text-sm text-cyan-900 mt-2">Analogie: entrainer un LLM, c est piloter une F1. Plus vite n est pas toujours mieux, il faut tenir la route.</p>
+        <div class="mt-3 rounded-lg bg-white border border-cyan-200 p-3 text-sm text-cyan-900">
+            $$\theta_{t+1}=\theta_t-\eta_t\frac{\hat m_t}{\sqrt{\hat v_t}+\epsilon}$$
+        </div>
+        <ul class="mt-3 list-disc pl-5 space-y-1 text-sm text-cyan-900">
+            <li><strong>\(\theta_t\):</strong> etat actuel du modele.</li>
+            <li><strong>\(\eta_t\):</strong> vitesse (learning rate schedule).</li>
+            <li><strong>\(\hat m_t,\hat v_t\):</strong> moyenne et variance du gradient (stabilite).</li>
+            <li><strong>\(\epsilon\):</strong> evite les divisions numeriquement dangereuses.</li>
+        </ul>
+        <p class="text-sm text-cyan-900 mt-2"><strong>Exemple IA:</strong> si la loss oscille, baisse \(\eta_t\), augmente warmup, puis active gradient clipping.</p>
+    </section>
+
+    <section class="grid lg:grid-cols-2 gap-4">
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Pipeline entrainement</h3>
+            <p class="text-sm text-slate-700 mt-2">Pretraining -> instruction tuning -> alignment (RLHF/DPO), avec suivi continu des couts.</p>
+            <div class="mt-3 p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-900 text-sm">
+                $$\text{Compute}\propto N_{params}\times N_{tokens},\quad \theta_{t+1}=\theta_t-\eta_t\hat{g}_t$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">Pretraining, SFT, instruction tuning, RLHF, DPO</li>
+                <li class="text-sm text-slate-700">Distillation, continual fine-tuning</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Efficience inference</h3>
+            <p class="text-sm text-slate-700 mt-2">Quantization, pruning, MoE et KV cache reduisent cout et latence en production.</p>
+            <div class="mt-3 p-3 rounded-lg bg-cyan-50 border border-cyan-200 text-cyan-900 text-sm">
+                $$\text{Latency}\approx f(\text{bits},\text{sparsity},\text{KV cache},\text{batch})$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">Quantization, pruning, sparsity, MoE</li>
+                <li class="text-sm text-slate-700">Speculative decoding, caching KV, long-context methods</li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="bg-slate-900 rounded-2xl p-6 border border-slate-700">
+        <h3 class="text-xl font-bold text-white">Labo interactif A: scaling compute vs qualite</h3>
+        <p class="text-sm text-slate-300 mt-2">Visualise la loi de rendement decroissant quand on augmente params et tokens.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-black border border-slate-700 rounded-xl p-3">
+                <canvas id="trainScaleCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-200">Parametres (B) <span id="trainParamsVal" class="font-bold text-cyan-300">13</span>
+                    <input id="trainParams" type="range" min="1" max="120" step="1" value="13" class="w-full accent-cyan-500">
+                </label>
+                <label class="block text-slate-200">Tokens (T) <span id="trainTokensVal" class="font-bold text-cyan-300">2.0</span>
+                    <input id="trainTokens" type="range" min="0.2" max="20" step="0.1" value="2.0" class="w-full accent-cyan-500">
+                </label>
+                <div class="rounded-lg bg-slate-800 border border-slate-700 p-3 text-xs text-slate-200 space-y-1">
+                    <div>Compute relatif: <span id="trainComputeVal" class="font-bold text-cyan-300">0.000</span></div>
+                    <div>Qualite proxy: <span id="trainQualityVal" class="font-bold text-cyan-300">0.000</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-xl font-bold text-slate-900">Labo interactif B: quantization/pruning tradeoff</h3>
+        <p class="text-sm text-slate-700 mt-2">Observe comment bits et sparsity reduisent VRAM/latence mais peuvent degrader la qualite.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-700 rounded-xl p-3">
+                <canvas id="trainCompressCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-800">Bits quantization <span id="trainBitsVal" class="font-bold text-indigo-600">8</span>
+                    <input id="trainBits" type="range" min="2" max="16" step="1" value="8" class="w-full accent-indigo-600">
+                </label>
+                <label class="block text-slate-800">Sparsity <span id="trainSparseVal" class="font-bold text-indigo-600">0.30</span>
+                    <input id="trainSparse" type="range" min="0" max="0.9" step="0.01" value="0.3" class="w-full accent-indigo-600">
+                </label>
+                <div class="rounded-lg bg-slate-100 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                    <div>VRAM rel.: <span id="trainVram" class="font-bold">0.000</span></div>
+                    <div>Latency rel.: <span id="trainLatency" class="font-bold">0.000</span></div>
+                    <div>Quality rel.: <span id="trainQual2" class="font-bold">0.000</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

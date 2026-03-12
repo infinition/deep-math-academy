@@ -1,0 +1,33 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-cyan-600">
+        <h2 class="text-3xl font-extrabold text-cyan-900 mb-4">Réaction-Diffusion + Neural ODE</h2>
+        <p class="text-gray-700 text-lg leading-relaxed">
+            Au lieu d'empiler des couches discrètes, on fait évoluer un état continu dans l'espace et le temps.
+            La diffusion propage l'information, la réaction la transforme localement.
+        </p>
+        <div class="mt-4 bg-cyan-50 p-3 rounded text-sm font-mono text-cyan-900 overflow-x-auto">
+            d h / d t = D nabla² h + f(h, t, theta)
+        </div>
+    </div>
+
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
+        <h3 class="text-white font-bold mb-4">Expérience visuelle: champ continu</h3>
+        <p class="text-gray-400 text-sm mb-4">Observe la naissance de motifs émergents quand tu modifies diffusion et réaction.</p>
+        <div class="grid lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-black rounded border border-gray-700 p-3">
+                <canvas id="neuralPDECanvas" width="720" height="360" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <div class="text-gray-300">Diffusion D: <span id="pdeDLabel" class="font-bold text-cyan-300">0.16</span></div>
+                <input id="pdeD" type="range" min="0.02" max="0.4" step="0.01" value="0.16" class="w-full accent-cyan-500">
+                <div class="text-gray-300">Réaction R: <span id="pdeRLabel" class="font-bold text-cyan-300">0.08</span></div>
+                <input id="pdeR" type="range" min="0.01" max="0.2" step="0.01" value="0.08" class="w-full accent-cyan-500">
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="toggleNeuralPDE()" id="pdeToggleBtn" class="bg-cyan-600 hover:bg-cyan-500 text-white rounded px-3 py-2 font-bold">Pause</button>
+                    <button onclick="resetNeuralPDE()" class="bg-gray-700 hover:bg-gray-600 text-white rounded px-3 py-2 font-bold">Reset</button>
+                </div>
+                <div class="bg-gray-800 p-3 rounded text-xs text-gray-200">Variabilité: <span id="pdeVar" class="font-bold text-emerald-300">0.00</span></div>
+            </div>
+        </div>
+    </div>
+</div>

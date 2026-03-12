@@ -1,0 +1,75 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-blue-600">
+        <h2 class="text-3xl font-extrabold text-blue-900 mb-3">Algorithmes de Machine Learning (socle prioritaire)</h2>
+        <p class="text-gray-700">Objectif: comprendre <strong>quand</strong> utiliser chaque famille, <strong>quelle equation</strong> pilote l apprentissage, et <strong>quelles limites</strong> surveiller.</p>
+    </section>
+
+    <section class="bg-blue-50 border border-blue-200 rounded-xl p-5">
+        <h3 class="font-bold text-blue-900 mb-2">Equation commune</h3>
+        <div class="text-blue-900">$$\theta^*=\arg\min_\theta \frac{1}{m}\sum_{i=1}^m \mathcal{L}(y^{(i)},f_\theta(x^{(i)})) + \lambda\,\Omega(\theta)$$</div>
+        <ul class="text-sm text-blue-900 mt-3 space-y-1">
+            <li><strong>\(\mathcal{L}\)</strong>: erreur de prediction</li>
+            <li><strong>\(\Omega(\theta)\)</strong>: regularisation (controle la complexite)</li>
+            <li><strong>\(\lambda\)</strong>: compromis biais/variance</li>
+        </ul>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">1) Modeles lineaires</h3>
+            <p class="text-sm text-gray-700 mt-1">Analogie: tirer une regle droite qui resume la tendance dominante.</p>
+            <div class="text-sm mt-2">$$\hat{y}=w^Tx+b$$</div>
+            <p class="text-xs text-gray-600 mt-2">Inclut regression lineaire, logistique, Ridge, Lasso, Elastic Net.</p>
+        </article>
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">2) Arbres de decision</h3>
+            <p class="text-sm text-gray-700 mt-1">Analogie: arbre de questions oui/non qui decoupe l espace.</p>
+            <div class="text-sm mt-2">$$\text{Gain}=H(\text{parent})-\sum_k p_k\,H(\text{enfant}_k)$$</div>
+            <p class="text-xs text-gray-600 mt-2">Fortement interpretable, sensible au surapprentissage sans regularisation.</p>
+        </article>
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">3) k-NN</h3>
+            <p class="text-sm text-gray-700 mt-1">Analogie: vote du voisinage local.</p>
+            <div class="text-sm mt-2">$$\hat{y}(x)=\mathrm{mode}\left(\{y_j: x_j\in\mathcal{N}_k(x)\}\right)$$</div>
+            <p class="text-xs text-gray-600 mt-2">Simple, zero entrainement, mais cher en inference.</p>
+        </article>
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">4) SVM / SVR</h3>
+            <p class="text-sm text-gray-700 mt-1">Analogie: chercher la frontiere avec la plus grande zone de securite.</p>
+            <div class="text-sm mt-2">$$\min_{w,b}\frac{1}{2}\|w\|^2 \quad s.c.\; y_i(w^Tx_i+b)\ge 1$$</div>
+            <p class="text-xs text-gray-600 mt-2">Robuste en haute dimension, kernels utiles en non-lineaire.</p>
+        </article>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">5) Methodes ensemblistes</h3>
+            <p class="text-sm text-gray-700 mt-1">Analogie: un jury d experts est souvent plus fiable qu une voix unique.</p>
+            <div class="text-sm mt-2">$$\hat{f}(x)=\sum_{t=1}^{T}\eta_t f_t(x)$$</div>
+            <p class="text-xs text-gray-600 mt-2">Random Forest, Gradient Boosting, XGBoost, LightGBM, CatBoost.</p>
+        </article>
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">6) Clustering</h3>
+            <p class="text-sm text-gray-700 mt-1">Analogie: regrouper automatiquement des profils similaires.</p>
+            <div class="text-sm mt-2">$$\min_{C}\sum_{i=1}^{m}\min_{k}\|x_i-\mu_k\|^2$$</div>
+            <p class="text-xs text-gray-600 mt-2">k-means, DBSCAN, HDBSCAN, GMM, spectral clustering.</p>
+        </article>
+    </section>
+
+    <section class="bg-white border border-gray-200 rounded-xl p-6 space-y-3">
+        <h3 class="font-bold text-gray-900">7) Reduction de dimension</h3>
+        <p class="text-gray-700 text-sm">Analogie: compresser un roman en fiche utile sans perdre l idee principale.</p>
+        <div class="text-sm">$$\max_{W^TW=I}\;\mathrm{Tr}(W^T\Sigma W)$$</div>
+        <p class="text-sm text-gray-700">PCA (lineaire), puis t-SNE/UMAP pour visualisation non lineaire.</p>
+    </section>
+
+    <section class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-6">
+        <h3 class="font-bold text-amber-900 mb-2">Checklist pratique (a retenir vite)</h3>
+        <ul class="text-sm text-amber-900 space-y-1">
+            <li>Donnees tabulaires: demarrer par arbres + boosting</li>
+            <li>Besoin d explicabilite: modeles lineaires + arbres peu profonds</li>
+            <li>Petit dataset: SVM/k-NN peuvent bien marcher</li>
+            <li>Sans labels: clustering + reduction de dimension + evaluation metier</li>
+        </ul>
+    </section>
+</div>

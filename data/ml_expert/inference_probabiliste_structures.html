@@ -1,0 +1,89 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+        <h2 class="text-3xl font-extrabold text-slate-900">11. Inference probabiliste / modeles structures</h2>
+        <p class="mt-3 text-slate-700">Ici on formalise l incertitude, on met a jour des croyances, et on reasonne avec des dependances structurelles.</p>
+        <div class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-900">
+            Statut: version active avec equations + 2 labs bayesiens et MCMC.
+        </div>
+    </section>
+
+    <section class="grid lg:grid-cols-2 gap-4">
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Graphical models</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: un modele graphique est une carte routiere des dependances probabilistes.</p>
+            <div class="mt-3 p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-900 text-sm">
+                $$p(x_1,\dots,x_n)=\prod_i p(x_i\mid \mathrm{pa}(x_i))$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">Bayesian networks, Markov random fields</li>
+                <li class="text-sm text-slate-700">HMM, CRF, belief propagation</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Inference approximate</h3>
+            <p class="text-sm text-slate-700 mt-2">Quand le calcul exact est impossible, on approche via VI, sampling ou EM.</p>
+            <div class="mt-3 p-3 rounded-lg bg-cyan-50 border border-cyan-200 text-cyan-900 text-sm">
+                $$\mathrm{ELBO}=\mathbb{E}_{q(z)}[\log p(x,z)-\log q(z)]$$
+            </div>
+            <ul class="mt-3 list-disc pl-5 space-y-1">
+                <li class="text-sm text-slate-700">Variational inference, MCMC, importance sampling</li>
+                <li class="text-sm text-slate-700">Expectation-Maximization, Gaussian processes</li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="bg-slate-900 rounded-2xl p-6 border border-slate-700">
+        <h3 class="text-xl font-bold text-white">Labo interactif A: Bayes Beta-Bernoulli</h3>
+        <p class="text-sm text-slate-300 mt-2">Mise a jour posterior d un taux de succes inconnu.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-black border border-slate-700 rounded-xl p-3">
+                <canvas id="probBayesCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-200">Prior alpha <span id="probAlphaVal" class="font-bold text-cyan-300">2</span>
+                    <input id="probAlpha" type="range" min="1" max="20" step="1" value="2" class="w-full accent-cyan-500">
+                </label>
+                <label class="block text-slate-200">Prior beta <span id="probBetaVal" class="font-bold text-cyan-300">2</span>
+                    <input id="probBeta" type="range" min="1" max="20" step="1" value="2" class="w-full accent-cyan-500">
+                </label>
+                <label class="block text-slate-200">Observations succes <span id="probSuccVal" class="font-bold text-cyan-300">12</span>
+                    <input id="probSucc" type="range" min="0" max="50" step="1" value="12" class="w-full accent-cyan-500">
+                </label>
+                <label class="block text-slate-200">Observations echecs <span id="probFailVal" class="font-bold text-cyan-300">8</span>
+                    <input id="probFail" type="range" min="0" max="50" step="1" value="8" class="w-full accent-cyan-500">
+                </label>
+                <div class="rounded-lg bg-slate-800 border border-slate-700 p-3 text-xs text-slate-200">
+                    Posterior mean: <span id="probPostMean" class="font-bold text-cyan-300">0.500</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-xl font-bold text-slate-900">Labo interactif B: MCMC random walk</h3>
+        <p class="text-sm text-slate-700 mt-2">Echantillonnage sur une densite bimodale; on visualise la chaine et l histogramme.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-700 rounded-xl p-3">
+                <canvas id="probMcmcCanvas" width="720" height="300" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-800">Step sigma <span id="probSigmaVal" class="font-bold text-indigo-600">0.80</span>
+                    <input id="probSigma" type="range" min="0.10" max="2.00" step="0.01" value="0.8" class="w-full accent-indigo-600">
+                </label>
+                <label class="block text-slate-800">Iterations / tick <span id="probIterTickVal" class="font-bold text-indigo-600">5</span>
+                    <input id="probIterTick" type="range" min="1" max="20" step="1" value="5" class="w-full accent-indigo-600">
+                </label>
+                <div class="grid grid-cols-2 gap-2">
+                    <button id="probMcmcStart" class="px-3 py-2 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-semibold">Start</button>
+                    <button id="probMcmcPause" class="px-3 py-2 rounded bg-slate-600 hover:bg-slate-500 text-white font-semibold">Pause</button>
+                    <button id="probMcmcStep" class="px-3 py-2 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-semibold">1 tick</button>
+                    <button id="probMcmcReset" class="px-3 py-2 rounded bg-rose-600 hover:bg-rose-500 text-white font-semibold">Reset</button>
+                </div>
+                <div class="rounded-lg bg-slate-100 border border-slate-200 p-3 text-xs text-slate-700">
+                    Taux acceptation: <span id="probAccRate" class="font-bold">0.000</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,98 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+        <h2 class="text-3xl font-extrabold text-slate-900">3. Deep Learning de base</h2>
+        <p class="mt-3 text-slate-700">Ce chapitre relie neurones, activations, backprop et strategie d entrainement avec des demonstrations visuelles.</p>
+        <div class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-900">
+            Statut: chapitre enrichi avec explications, equations et interactifs dedies.
+        </div>
+    </section>
+
+    <section class="grid lg:grid-cols-2 gap-4">
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Reseaux de neurones</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: chaque couche est un filtre qui transforme une representation brute en representation utile.</p>
+            <div class="mt-3 p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-900 text-sm">
+                $$h^{(l+1)}=\sigma\left(W^{(l)}h^{(l)}+b^{(l)}\right),\quad \hat{y}=\operatorname{softmax}(z)$$
+            </div>
+            <ul class="mt-3 space-y-1 list-disc pl-5">
+                <li class="text-sm text-slate-700">Perceptron, MLP, couches fully connected</li>
+                <li class="text-sm text-slate-700">ReLU, GELU, SiLU, tanh, sigmoid, softmax</li>
+                <li class="text-sm text-slate-700">BatchNorm, LayerNorm, RMSNorm, dropout, residuals</li>
+                <li class="text-sm text-slate-700">Embeddings, positional encoding, attention mask</li>
+            </ul>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-lg font-bold text-slate-900">Apprentissage</h3>
+            <p class="text-sm text-slate-700 mt-2">Analogie: forward = prediction, backward = audit de responsabilite de chaque poids.</p>
+            <div class="mt-3 p-3 rounded-lg bg-cyan-50 border border-cyan-200 text-cyan-900 text-sm">
+                $$\frac{\partial \mathcal{L}}{\partial w}=\frac{\partial \mathcal{L}}{\partial \hat{y}}\cdot\frac{\partial \hat{y}}{\partial w},\quad w_{t+1}=w_t-\eta\frac{\partial \mathcal{L}}{\partial w_t}$$
+            </div>
+            <ul class="mt-3 space-y-1 list-disc pl-5">
+                <li class="text-sm text-slate-700">Forward pass, backpropagation, gradient clipping</li>
+                <li class="text-sm text-slate-700">LR schedule, warmup, early stopping, weight decay</li>
+                <li class="text-sm text-slate-700">Regularization, mixed precision, curriculum learning</li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="bg-slate-900 rounded-2xl p-6 border border-slate-700">
+        <h3 class="text-xl font-bold text-white">Labo interactif A: courbes d activation</h3>
+        <p class="text-sm text-slate-300 mt-2">Compare l effet de chaque activation sur la sortie et observe sa pente locale.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-black border border-slate-700 rounded-xl p-3">
+                <canvas id="dlActivationCanvas" width="700" height="280" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-200">Activation
+                    <select id="dlActType" class="mt-1 w-full rounded bg-slate-800 border border-slate-600 text-slate-100 px-2 py-1">
+                        <option value="relu">ReLU</option>
+                        <option value="gelu">GELU (approx)</option>
+                        <option value="silu">SiLU</option>
+                        <option value="tanh">tanh</option>
+                        <option value="sigmoid">sigmoid</option>
+                    </select>
+                </label>
+                <label class="block text-slate-200">Poids w <span id="dlWVal" class="font-bold text-cyan-300">1.00</span>
+                    <input id="dlW" type="range" min="-3" max="3" step="0.05" value="1" class="w-full accent-cyan-500">
+                </label>
+                <label class="block text-slate-200">Biais b <span id="dlBVal" class="font-bold text-cyan-300">0.00</span>
+                    <input id="dlB" type="range" min="-2" max="2" step="0.05" value="0" class="w-full accent-cyan-500">
+                </label>
+                <div class="rounded-lg bg-slate-800 border border-slate-700 p-3 text-xs text-slate-200 space-y-1">
+                    <div>y(0): <span id="dlY0" class="font-bold text-cyan-300">0.000</span></div>
+                    <div>dy/dx autour de 0: <span id="dlSlope0" class="font-bold text-cyan-300">0.000</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-xl font-bold text-slate-900">Labo interactif B: dynamique d entrainement</h3>
+        <p class="text-sm text-slate-700 mt-2">Simulation simple: impact du learning rate et du clipping sur la stabilite de la loss.</p>
+        <div class="grid lg:grid-cols-3 gap-4 mt-4">
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-700 rounded-xl p-3">
+                <canvas id="dlTrainCanvas" width="700" height="280" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <label class="block text-slate-800">Learning rate <span id="dlLrVal" class="font-bold text-indigo-600">0.020</span>
+                    <input id="dlLr" type="range" min="0.002" max="0.15" step="0.001" value="0.02" class="w-full accent-indigo-600">
+                </label>
+                <label class="block text-slate-800">Gradient clip <span id="dlClipVal" class="font-bold text-indigo-600">1.00</span>
+                    <input id="dlClip" type="range" min="0.2" max="3.0" step="0.05" value="1" class="w-full accent-indigo-600">
+                </label>
+                <div class="grid grid-cols-2 gap-2">
+                    <button id="dlTrainStart" class="px-3 py-2 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-semibold">Start</button>
+                    <button id="dlTrainPause" class="px-3 py-2 rounded bg-slate-600 hover:bg-slate-500 text-white font-semibold">Pause</button>
+                    <button id="dlTrainStep" class="px-3 py-2 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-semibold">1 step</button>
+                    <button id="dlTrainReset" class="px-3 py-2 rounded bg-rose-600 hover:bg-rose-500 text-white font-semibold">Reset</button>
+                </div>
+                <div class="rounded-lg bg-slate-100 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                    <div>Step: <span id="dlStep" class="font-bold">0</span></div>
+                    <div>Loss: <span id="dlLossVal" class="font-bold">0.000</span></div>
+                    <div>|grad| apres clip: <span id="dlGradVal" class="font-bold">0.000</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

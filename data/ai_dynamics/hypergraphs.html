@@ -1,0 +1,33 @@
+﻿<div class="space-y-8 max-w-6xl mx-auto">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-lime-600">
+        <h2 class="text-3xl font-extrabold text-lime-900 mb-4">Hypergraphes & Émergence (Wolfram)</h2>
+        <p class="text-gray-700 text-lg leading-relaxed">
+            Des règles locales très simples peuvent produire des structures globales très complexes.
+            C'est l'idée clé de l'émergence computationnelle.
+        </p>
+        <div class="mt-4 bg-lime-50 p-3 rounded text-sm font-mono text-lime-900 overflow-x-auto">
+            G(t+1) = R(G(t))
+        </div>
+    </div>
+
+    <div class="bg-gray-900 p-6 rounded-xl shadow-inner">
+        <h3 class="text-white font-bold mb-4">Mini moteur de réécriture de graphe</h3>
+        <div class="grid lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-black rounded border border-gray-700 p-3">
+                <canvas id="hypergraphCanvas" width="720" height="340" class="w-full h-auto"></canvas>
+            </div>
+            <div class="space-y-3 text-sm">
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="hyperStep()" class="bg-lime-600 hover:bg-lime-500 text-white rounded px-2 py-2 font-bold">Step</button>
+                    <button onclick="toggleHyperAuto()" id="hyperAutoBtn" class="bg-cyan-600 hover:bg-cyan-500 text-white rounded px-2 py-2 font-bold">Auto</button>
+                    <button onclick="resetHypergraph()" class="bg-gray-700 hover:bg-gray-600 text-white rounded px-2 py-2 font-bold">Reset</button>
+                </div>
+                <div class="bg-gray-800 p-3 rounded text-xs text-gray-200 space-y-1">
+                    <div>Noeuds: <span id="hyperNodes" class="font-bold text-lime-300">0</span></div>
+                    <div>Hyper-liens: <span id="hyperEdges" class="font-bold text-lime-300">0</span></div>
+                    <div>Densité: <span id="hyperDensity" class="font-bold text-cyan-300">0.00</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+    <section class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-rose-600">
+        <h2 class="text-3xl font-extrabold text-rose-900 mb-3">Module IA Generative</h2>
+        <p class="text-gray-700">Du premier chatbot jusqu aux LLM/VLM modernes: generation de texte, images et workflows outilles.</p>
+    </section>
+
+    <section class="bg-rose-50 border border-rose-200 rounded-xl p-5">
+        <h3 class="font-bold text-rose-900 mb-2">Objectif probabiliste</h3>
+        <div class="text-rose-900">$$\max_\theta\sum_{t=1}^{T}\log p_\theta(x_t\mid x_{<t})$$</div>
+        <p class="text-sm text-rose-900 mt-2">Analogie: predire le prochain mot est comme completer une phrase avec le contexte precedent.</p>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">Votre premier chatbot (OpenAI + LangChain)</h3>
+            <p class="text-sm text-gray-700 mt-1">Pipeline typique: prompt -> modele -> outils -> memoire -> reponse.</p>
+            <div class="text-sm mt-2">$$\text{Answer}=f_{LLM}(\text{Prompt},\text{Context},\text{Tools})$$</div>
+        </article>
+
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">9.1 Large Language Models</h3>
+            <p class="text-sm text-gray-700 mt-1">Tokenisation, attention, pretraining, instruction tuning, alignement.</p>
+            <div class="text-sm mt-2">$$\mathrm{Attention}(Q,K,V)=\mathrm{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$</div>
+        </article>
+
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">9.2 Generation d images</h3>
+            <p class="text-sm text-gray-700 mt-1">Diffusion models: bruit -> denoising iteratif -> image finale.</p>
+            <div class="text-sm mt-2">$$x_{t-1}=\frac{1}{\sqrt{\alpha_t}}\left(x_t-\frac{1-\alpha_t}{\sqrt{1-\bar\alpha_t}}\,\epsilon_\theta(x_t,t)\right)+\sigma_t z$$</div>
+        </article>
+
+        <article class="bg-white border border-gray-200 rounded-xl p-5">
+            <h3 class="font-bold text-gray-900">RAG & Agentic RAG</h3>
+            <p class="text-sm text-gray-700 mt-1">Le modele ne memorise pas tout: il va recuperer l info utile au moment de repondre.</p>
+            <div class="text-sm mt-2">$$\text{Prompt final}=\text{Question}+\text{Passages recuperes}$$</div>
+        </article>
+    </section>
+
+    <section class="bg-gradient-to-r from-indigo-50 to-fuchsia-50 border border-indigo-200 rounded-xl p-6">
+        <h3 class="font-bold text-indigo-900 mb-2">Vocabulaire "chaud" a maitriser</h3>
+        <p class="text-sm text-indigo-900">LLM, VLM, MLLM, RAG, Agentic RAG, tool use, function calling, PEFT, LoRA, QLoRA, RLHF, DPO, long-context, MoE, speculative decoding.</p>
+    </section>
+</div>
