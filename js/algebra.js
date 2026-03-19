@@ -16,7 +16,7 @@ function initVectorSlidersCanvas() {
         ctx.clearRect(0, 0, w, h);
 
         // Grid
-        ctx.strokeStyle = '#f0f0f0';
+        ctx.strokeStyle = canvasColors().grid;
         ctx.lineWidth = 1;
         for (let i = 0; i <= w; i += 20) {
             ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, h); ctx.stroke();
@@ -62,12 +62,23 @@ function initVectorSlidersCanvas() {
 // ==========================================
 let introAlgCanvas = null;
 let introAlgCtx = null;
+let introAlgAnimId = null;
 
 function initIntroAlgCanvas() {
     introAlgCanvas = document.getElementById('introAlgCanvas');
     if (!introAlgCanvas) return;
     introAlgCtx = introAlgCanvas.getContext('2d');
     drawIntroAlg();
+
+    function loopIntroAlg() {
+        if (!document.contains(introAlgCanvas)) {
+            introAlgAnimId = null;
+            return;
+        }
+        drawIntroAlg();
+        introAlgAnimId = requestAnimationFrame(loopIntroAlg);
+    }
+    introAlgAnimId = requestAnimationFrame(loopIntroAlg);
 }
 
 function drawIntroAlg() {
@@ -110,7 +121,7 @@ function drawIntroAlg() {
         const dx = p2.x - p1.x;
         const dy = p2.y - p1.y;
 
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = canvasColors().white;
         ctx.beginPath();
         ctx.arc(p1.x + dx * offset, p1.y + dy * offset, 4, 0, Math.PI * 2);
         ctx.fill();
@@ -129,7 +140,7 @@ function drawIntroAlg() {
         ctx.lineWidth = 2;
         ctx.stroke();
 
-        ctx.fillStyle = '#1e1b4b';
+        ctx.fillStyle = canvasColors().text;
         ctx.font = 'bold 14px Arial';
         ctx.textAlign = 'center';
         ctx.fillText(label, p.x, p.y - 5);
@@ -249,7 +260,7 @@ function drawDetCanvas() {
     ctx.clearRect(0, 0, w, h);
 
     // Grid
-    ctx.strokeStyle = '#e5e7eb';
+    ctx.strokeStyle = canvasColors().grid;
     ctx.lineWidth = 1;
     for (let i = -10; i <= 10; i++) {
         // Transformed Grid Lines
@@ -324,7 +335,7 @@ function calcDet() {
         vis.style.borderColor = "#9b2c2c";
     } else {
         el.className = "text-4xl font-bold text-indigo-600";
-        if (comment) comment.innerText = `L'aire est multipliée par ${Math.abs(res.toFixed(1))}`;
+        if (comment) comment.innerText = `L'aire est multipliée par ${Math.abs(res).toFixed(1)}`;
         vis.style.backgroundColor = "#ebf4ff";
         vis.style.borderColor = "#4c51bf";
     }
@@ -363,7 +374,7 @@ function drawEigen() {
     ctx.clearRect(0, 0, w, h);
 
     // Axes
-    ctx.strokeStyle = '#e5e7eb';
+    ctx.strokeStyle = canvasColors().grid;
     ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, h); ctx.stroke();
@@ -407,12 +418,23 @@ function drawEigen() {
 // ==========================================
 let lmCanvas = null;
 let lmCtx = null;
+let lmAnimId = null;
 
 function initLinearMapCanvas() {
     lmCanvas = document.getElementById('linearMapCanvas');
     if (!lmCanvas) return;
     lmCtx = lmCanvas.getContext('2d');
     drawLinearMap();
+
+    function loopLinearMap() {
+        if (!document.contains(lmCanvas)) {
+            lmAnimId = null;
+            return;
+        }
+        drawLinearMap();
+        lmAnimId = requestAnimationFrame(loopLinearMap);
+    }
+    lmAnimId = requestAnimationFrame(loopLinearMap);
 }
 
 function drawLinearMap() {
@@ -571,13 +593,13 @@ function drawSpaces() {
     }
 
     // Axes
-    ctx.strokeStyle = '#fff';
+    ctx.strokeStyle = '#4f46e5';
     ctx.lineWidth = 2;
     ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + basisI.x * scale, cy - basisI.y * scale); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + basisJ.x * scale, cy - basisJ.y * scale); ctx.stroke();
 
     // Labels
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle = '#4f46e5';
     ctx.font = 'bold 14px Arial';
     ctx.fillText("i", cx + basisI.x * scale + 5, cy - basisI.y * scale - 5);
     ctx.fillText("j", cx + basisJ.x * scale + 5, cy - basisJ.y * scale - 5);
@@ -628,7 +650,7 @@ function drawSVD() {
     ctx.clearRect(0, 0, w, h);
 
     // Axes
-    ctx.strokeStyle = '#e5e7eb';
+    ctx.strokeStyle = canvasColors().grid;
     ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, h); ctx.stroke();
@@ -747,7 +769,7 @@ function drawVectorCanvas() {
     ctx.clearRect(0, 0, w, h);
 
     // Axes
-    ctx.strokeStyle = '#e5e7eb';
+    ctx.strokeStyle = canvasColors().grid;
     ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, h); ctx.stroke();
@@ -776,8 +798,12 @@ function drawVectorCanvas() {
 
     document.getElementById('vecSumVal').innerText = `(${sumX.toFixed(0)}, ${(-sumY).toFixed(0)})`;
 
-    const dot = vecU.x * vecV.x + mathUy * mathVy;
-    // Normalize for display (scale down)
-    const displayDot = dot / 1000;
-    document.getElementById('vecDotVal').innerText = displayDot.toFixed(2);
+    // Scale factor: ~100 pixels per unit approximately
+    const gridScale = 100;
+    const uMathX = vecU.x / gridScale;
+    const uMathY = -vecU.y / gridScale;
+    const vMathX = vecV.x / gridScale;
+    const vMathY = -vecV.y / gridScale;
+    const dot = uMathX * vMathX + uMathY * vMathY;
+    document.getElementById('vecDotVal').innerText = dot.toFixed(2);
 }

@@ -17,6 +17,79 @@
         <div class="absolute right-0 bottom-0 text-9xl opacity-10">📉</div>
     </div>
 
+    <!-- Définition formelle -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 space-y-4">
+        <h3 class="text-2xl font-bold text-gray-800 flex items-center gap-2">📐 Définition Formelle</h3>
+        <p class="text-gray-700 leading-relaxed">
+            L'analogie des montagnes russes, c'est bien. Mais voici la <strong>vraie définition mathématique</strong> de la dérivée :
+        </p>
+        <div class="bg-gradient-to-r from-indigo-50 to-blue-50 p-6 rounded-xl border border-indigo-200 text-center">
+            <p class="text-lg font-mono">
+                \[f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}\]
+            </p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-2">
+            <p class="text-gray-700"><strong>Décortiquons :</strong></p>
+            <ul class="text-gray-600 space-y-1 ml-4 list-disc">
+                <li>\(h\) = un tout petit pas. On regarde comment \(f\) change quand on bouge de \(h\).</li>
+                <li>\(f(x+h) - f(x)\) = la variation de la fonction sur ce petit pas.</li>
+                <li>On divise par \(h\) pour obtenir le <strong>taux de variation</strong>.</li>
+                <li>En faisant \(h \to 0\), on obtient la <strong>pente instantanée</strong>.</li>
+            </ul>
+        </div>
+        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+            <p class="text-sm text-emerald-800">
+                <span class="font-bold">🤖 Lien ML :</span> C'est exactement ce que fait <code class="bg-emerald-100 px-1 rounded">torch.autograd</code> :
+                il calcule cette limite numériquement pour chaque poids du réseau.
+            </p>
+        </div>
+    </div>
+
+    <!-- Règles de dérivation -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 space-y-4">
+        <h3 class="text-2xl font-bold text-gray-800 flex items-center gap-2">📏 Règles de Dérivation</h3>
+        <p class="text-gray-600">Les formules à connaître par cœur. Ce sont vos outils de base.</p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Puissance -->
+            <div class="bg-blue-50 p-4 rounded-xl border border-blue-200 space-y-2">
+                <div class="text-xs font-bold uppercase text-blue-500 tracking-wide">Puissance</div>
+                <p class="text-center font-mono text-lg">\((x^n)' = nx^{n-1}\)</p>
+                <p class="text-xs text-blue-700 text-center italic">La plus utilisée !</p>
+            </div>
+            <!-- Produit -->
+            <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 space-y-2">
+                <div class="text-xs font-bold uppercase text-purple-500 tracking-wide">Produit</div>
+                <p class="text-center font-mono text-lg">\((fg)' = f'g + fg'\)</p>
+                <p class="text-xs text-purple-700 text-center italic">Chacun son tour de se dériver</p>
+            </div>
+            <!-- Quotient -->
+            <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 space-y-2">
+                <div class="text-xs font-bold uppercase text-amber-500 tracking-wide">Quotient</div>
+                <p class="text-center font-mono text-lg">\(\left(\frac{f}{g}\right)' = \frac{f'g - fg'}{g^2}\)</p>
+                <p class="text-xs text-amber-700 text-center italic">Attention au signe !</p>
+            </div>
+            <!-- Chaîne -->
+            <div class="bg-red-50 p-4 rounded-xl border border-red-300 space-y-2 ring-2 ring-red-200">
+                <div class="text-xs font-bold uppercase text-red-500 tracking-wide">Chaîne ⭐</div>
+                <p class="text-center font-mono text-lg">\((f \circ g)' = f'(g(x)) \cdot g'(x)\)</p>
+                <p class="text-xs text-red-700 text-center italic font-bold">LA règle du deep learning</p>
+            </div>
+            <!-- Exponentielle -->
+            <div class="bg-green-50 p-4 rounded-xl border border-green-200 space-y-2">
+                <div class="text-xs font-bold uppercase text-green-500 tracking-wide">Exponentielle</div>
+                <p class="text-center font-mono text-lg">\((e^x)' = e^x\)</p>
+                <p class="text-xs text-green-700 text-center italic">Elle se dérive elle-même !</p>
+            </div>
+            <!-- Logarithme -->
+            <div class="bg-teal-50 p-4 rounded-xl border border-teal-200 space-y-2">
+                <div class="text-xs font-bold uppercase text-teal-500 tracking-wide">Logarithme</div>
+                <p class="text-center font-mono text-lg">\((\ln x)' = \frac{1}{x}\)</p>
+                <p class="text-xs text-teal-700 text-center italic">Omniprésente en cross-entropy</p>
+            </div>
+        </div>
+    </div>
+
     <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
         <div class="p-4 bg-gray-50 border-b flex justify-between items-center">
             <h3 class="font-bold text-gray-700">🔬 Labo : Visualiser la Tangente</h3>
@@ -64,6 +137,43 @@
                     Regarde : quand x est négatif, la pente (rouge) est négative !
                 </p>
             </div>
+        </div>
+    </div>
+
+    <!-- Dérivées partielles -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 space-y-4">
+        <h3 class="text-2xl font-bold text-gray-800 flex items-center gap-2">🎯 Dérivées Partielles</h3>
+        <p class="text-gray-700 leading-relaxed">
+            Quand une fonction dépend de <strong>plusieurs variables</strong>, on dérive par rapport à une seule variable en traitant les autres comme des constantes.
+        </p>
+        <div class="bg-gradient-to-r from-violet-50 to-purple-50 p-6 rounded-xl border border-violet-200 text-center">
+            <p class="text-lg font-mono">
+                \[\frac{\partial f}{\partial x_i} = \text{on dérive par rapport à } x_i \text{, les autres variables sont constantes}\]
+            </p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-3">
+            <p class="text-gray-700 font-bold">Exemple concret :</p>
+            <p class="text-center font-mono text-lg text-gray-800">
+                \(f(x, y) = x^2 + 3xy\)
+            </p>
+            <div class="grid md:grid-cols-2 gap-4 mt-2">
+                <div class="bg-white p-3 rounded-lg border border-violet-200 text-center">
+                    <p class="text-sm text-gray-500 mb-1">Dérivée par rapport à \(x\) :</p>
+                    <p class="font-mono text-lg text-violet-700">\(\frac{\partial f}{\partial x} = 2x + 3y\)</p>
+                    <p class="text-xs text-gray-400 mt-1">\(y\) est traité comme une constante</p>
+                </div>
+                <div class="bg-white p-3 rounded-lg border border-purple-200 text-center">
+                    <p class="text-sm text-gray-500 mb-1">Dérivée par rapport à \(y\) :</p>
+                    <p class="font-mono text-lg text-purple-700">\(\frac{\partial f}{\partial y} = 3x\)</p>
+                    <p class="text-xs text-gray-400 mt-1">\(x^2\) disparaît, \(x\) est une constante</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+            <p class="text-sm text-emerald-800">
+                <span class="font-bold">🤖 Lien ML :</span> Pour un réseau avec 1M de poids, on calcule <strong>1M de dérivées partielles</strong> à chaque step d'entraînement.
+                L'ensemble de ces dérivées forme le <strong>gradient</strong> (voir chapitre suivant).
+            </p>
         </div>
     </div>
 
@@ -132,4 +242,71 @@
             </div>
         </div>
     </div>
+
+    <!-- Dérivées des fonctions d'activation -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 space-y-4">
+        <h3 class="text-2xl font-bold text-gray-800 flex items-center gap-2">⚡ Dérivées des Fonctions d'Activation</h3>
+        <p class="text-gray-600">
+            Chaque fonction d'activation a une dérivée avec des propriétés cruciales pour l'entraînement.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-4">
+            <!-- Sigmoid -->
+            <div class="bg-orange-50 p-5 rounded-xl border border-orange-200 space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-bold uppercase text-orange-600 tracking-wide">Sigmoid</span>
+                    <span class="text-xs bg-orange-200 text-orange-800 px-2 py-0.5 rounded-full font-bold">Classique</span>
+                </div>
+                <p class="text-center font-mono text-lg">
+                    \(\sigma'(x) = \sigma(x)(1 - \sigma(x))\)
+                </p>
+                <div class="bg-white p-3 rounded-lg border border-orange-100">
+                    <p class="text-xs text-gray-600">
+                        <strong class="text-orange-700">Problème :</strong> Aux extrêmes (\(x \gg 0\) ou \(x \ll 0\)), la dérivée est presque <strong>0</strong>.
+                    </p>
+                    <p class="text-xs text-red-600 font-bold mt-1">→ Vanishing gradient</p>
+                </div>
+            </div>
+            <!-- ReLU -->
+            <div class="bg-green-50 p-5 rounded-xl border border-green-300 space-y-3 ring-2 ring-green-200">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-bold uppercase text-green-600 tracking-wide">ReLU</span>
+                    <span class="text-xs bg-green-200 text-green-800 px-2 py-0.5 rounded-full font-bold">La plus populaire</span>
+                </div>
+                <p class="text-center font-mono text-lg">
+                    \(\text{ReLU}'(x) = \begin{cases} 0 & x < 0 \\ 1 & x > 0 \end{cases}\)
+                </p>
+                <div class="bg-white p-3 rounded-lg border border-green-100">
+                    <p class="text-xs text-gray-600">
+                        <strong class="text-green-700">Avantage :</strong> Simple et efficace, gradient constant de 1 quand actif.
+                    </p>
+                    <p class="text-xs text-amber-600 font-bold mt-1">→ Mais neurones morts si \(x < 0\) toujours</p>
+                </div>
+            </div>
+            <!-- Tanh -->
+            <div class="bg-sky-50 p-5 rounded-xl border border-sky-200 space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-bold uppercase text-sky-600 tracking-wide">Tanh</span>
+                    <span class="text-xs bg-sky-200 text-sky-800 px-2 py-0.5 rounded-full font-bold">Centrée sur 0</span>
+                </div>
+                <p class="text-center font-mono text-lg">
+                    \(\tanh'(x) = 1 - \tanh^2(x)\)
+                </p>
+                <div class="bg-white p-3 rounded-lg border border-sky-100">
+                    <p class="text-xs text-gray-600">
+                        <strong class="text-sky-700">Avantage :</strong> Sortie centrée sur 0 (meilleur que sigmoid pour les couches cachées).
+                    </p>
+                    <p class="text-xs text-red-600 font-bold mt-1">→ Mais aussi vanishing gradient aux extrêmes</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+            <p class="text-sm text-emerald-800">
+                <span class="font-bold">🤖 Lien ML :</span> C'est pourquoi <strong>ReLU</strong> domine en pratique : sa dérivée simple (0 ou 1) permet
+                au gradient de circuler sans s'évanouir à travers des dizaines de couches.
+            </p>
+        </div>
+    </div>
+
 </div>

@@ -13,6 +13,116 @@
         <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
     </div>
 
+    <!-- Axiomes de base -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                <span>📐 Axiomes de base des probabilités</span>
+            </h3>
+            <div class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                Fondation
+            </div>
+        </div>
+        <div class="p-6 space-y-4">
+            <p class="text-sm text-gray-600 leading-relaxed">
+                Toute la théorie des probabilités repose sur trois axiomes posés par <strong>Kolmogorov (1933)</strong>.
+                Tout le reste en découle.
+            </p>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                    <h4 class="font-bold text-indigo-800 text-sm mb-2">1. Non-négativité & borne</h4>
+                    <p class="font-mono text-sm bg-white p-2 rounded text-center mb-2">
+                        $0 \leq P(A) \leq 1$
+                    </p>
+                    <p class="text-xs text-gray-600">Pour tout événement \(A\), sa probabilité est comprise entre 0 (impossible) et 1 (certain).</p>
+                </div>
+                <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                    <h4 class="font-bold text-indigo-800 text-sm mb-2">2. Certitude de l'univers</h4>
+                    <p class="font-mono text-sm bg-white p-2 rounded text-center mb-2">
+                        $P(\Omega) = 1$
+                    </p>
+                    <p class="text-xs text-gray-600">L'univers des possibles \(\Omega\) contient tous les résultats imaginables. Quelque chose se passe forcément.</p>
+                </div>
+                <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                    <h4 class="font-bold text-indigo-800 text-sm mb-2">3. Additivité (inclusion-exclusion)</h4>
+                    <p class="font-mono text-sm bg-white p-2 rounded text-center mb-2">
+                        $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+                    </p>
+                    <p class="text-xs text-gray-600">On additionne les probas, puis on retire le double comptage de l'intersection.</p>
+                </div>
+                <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                    <h4 class="font-bold text-indigo-800 text-sm mb-2">4. Complément</h4>
+                    <p class="font-mono text-sm bg-white p-2 rounded text-center mb-2">
+                        $P(\bar{A}) = 1 - P(A)$
+                    </p>
+                    <p class="text-xs text-gray-600">La probabilité que \(A\) ne se produise PAS. Découle directement des axiomes ci-dessus.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Probabilité conditionnelle -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                <span>🔗 Probabilité conditionnelle</span>
+            </h3>
+            <div class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                Clé pour Bayes
+            </div>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="bg-amber-50 p-5 rounded-xl border border-amber-100 text-center">
+                <p class="font-mono text-lg mb-3">
+                    $$P(A|B) = \frac{P(A \cap B)}{P(B)}$$
+                </p>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                    La probabilité de \(A\) <strong>sachant que</strong> \(B\) s'est produit =
+                    (probabilité que les deux arrivent) / (probabilité de \(B\)).
+                </p>
+            </div>
+            <div class="bg-cyan-50 p-4 rounded-xl border border-cyan-200">
+                <p class="text-sm font-bold text-cyan-800 mb-1">🤖 Analogie ML</p>
+                <p class="text-sm text-gray-700">
+                    Un modèle de langage calcule \(P(\text{mot suivant} \,|\, \text{contexte})\).
+                    C'est une probabilité conditionnelle ! Chaque prédiction d'un LLM est un calcul de
+                    <em>"quelle est la proba de ce token, sachant tout ce qui précède ?"</em>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loi des probabilités totales -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                <span>🧩 Loi des probabilités totales</span>
+            </h3>
+            <div class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                Pré-requis Bayes
+            </div>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="bg-purple-50 p-5 rounded-xl border border-purple-100 text-center">
+                <p class="font-mono text-lg mb-3">
+                    $$P(B) = \sum_{i} P(B|A_i) \, P(A_i)$$
+                </p>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                    Si les événements \(A_1, A_2, \ldots, A_n\) forment une <strong>partition</strong> de \(\Omega\)
+                    (ils couvrent tout, sans se chevaucher), on peut calculer \(P(B)\) en sommant sur tous les scénarios possibles.
+                </p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                <p class="text-sm font-bold text-gray-800 mb-1">💡 Le lien avec Bayes</p>
+                <p class="text-sm text-gray-700">
+                    C'est exactement le <strong>dénominateur</strong> de la formule de Bayes !
+                    Le terme \(P(B)\) (l'<em>evidence</em>) se calcule en sommant
+                    \(P(B|A_i) P(A_i)\) sur toutes les hypothèses \(A_i\).
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- Interactive Simulator -->
     <div class="grid lg:grid-cols-3 gap-8">
 
@@ -90,12 +200,68 @@
 
             <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-green-500">
                 <h4 class="font-bold text-gray-800 mb-2">Indépendance</h4>
-                <p class="text-sm text-gray-600 mb-3">
-                    $P(A \text{ et } B) = P(A) \times P(B)$ <br>
-                    Si lancer un dé n'influence pas le suivant, ils sont indépendants.
+                <p class="text-sm text-gray-600 mb-2">
+                    Deux événements sont indépendants <strong>si et seulement si</strong> :
                 </p>
+                <p class="font-mono text-sm bg-gray-50 p-2 rounded text-center mb-2">
+                    $P(A \cap B) = P(A) \cdot P(B)$
+                </p>
+                <p class="text-sm text-gray-600 mb-3">
+                    Si lancer un dé n'influence pas le suivant, ils sont indépendants.
+                    Attention : indépendance ≠ événements disjoints !
+                </p>
+                <div class="bg-cyan-50 p-3 rounded-lg border border-cyan-200 mt-2">
+                    <p class="text-xs font-bold text-cyan-800 mb-1">🤖 Analogie ML</p>
+                    <p class="text-xs text-gray-700">
+                        Naive Bayes <strong>suppose</strong> que les features sont indépendantes (d'où "naive").
+                        En pratique c'est rarement vrai, mais ça marche quand même étonnamment bien.
+                    </p>
+                </div>
             </div>
 
         </div>
     </div>
+
+    <!-- Bayésien vs Fréquentiste -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                <span>⚖️ Bayésien vs Fréquentiste</span>
+            </h3>
+            <div class="bg-rose-100 text-rose-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                Philosophie
+            </div>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-blue-50 p-5 rounded-xl border border-blue-200">
+                    <h4 class="font-bold text-blue-800 mb-2">🔁 Fréquentiste</h4>
+                    <p class="text-sm text-gray-700 mb-2">
+                        La probabilité = la <strong>fréquence</strong> observée sur un grand nombre d'expériences.
+                    </p>
+                    <p class="text-xs text-gray-500 italic">
+                        "Si je lance ce dé 10 000 fois, je verrai un 6 environ 1/6 du temps."
+                    </p>
+                </div>
+                <div class="bg-amber-50 p-5 rounded-xl border border-amber-200">
+                    <h4 class="font-bold text-amber-800 mb-2">🧠 Bayésien</h4>
+                    <p class="text-sm text-gray-700 mb-2">
+                        La probabilité = notre <strong>degré de croyance</strong>, mis à jour avec les données.
+                    </p>
+                    <p class="text-xs text-gray-500 italic">
+                        "Je crois à 70% que ce dé est truqué, voyons ce que les données disent."
+                    </p>
+                </div>
+            </div>
+            <div class="bg-cyan-50 p-4 rounded-xl border border-cyan-200">
+                <p class="text-sm font-bold text-cyan-800 mb-1">🤖 Analogie ML</p>
+                <p class="text-sm text-gray-700">
+                    <strong>MAP</strong> (Maximum A Posteriori) = approche bayésienne.
+                    <strong>MLE</strong> (Maximum Likelihood) = approche fréquentiste.
+                    La régularisation L2 équivaut à poser un <em>prior gaussien</em> sur les poids du modèle !
+                </p>
+            </div>
+        </div>
+    </div>
+
 </div>

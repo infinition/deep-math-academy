@@ -471,6 +471,55 @@
                                             "interactive":  true,
                                             "initFunction":  "initUnifiedArchitectureLab",
                                             "category":  "Synthèse"
+                                        },
+                                        {
+                                            "id":  "cnn_vision",
+                                            "title":  "CNN & Vision",
+                                            "icon":  "👁️",
+                                            "interactive":  false,
+                                            "category":  "Architectures Clés"
+                                        },
+                                        {
+                                            "id":  "rnn_sequences",
+                                            "title":  "RNN, LSTM & Séquences",
+                                            "icon":  "🔄",
+                                            "interactive":  false,
+                                            "category":  "Architectures Clés"
+                                        },
+                                        {
+                                            "id":  "optimization",
+                                            "title":  "Optimiseurs (SGD, Adam...)",
+                                            "icon":  "⛰️",
+                                            "interactive":  false,
+                                            "category":  "Entraînement"
+                                        },
+                                        {
+                                            "id":  "regularization",
+                                            "title":  "Régularisation & Généralisation",
+                                            "icon":  "🛡️",
+                                            "interactive":  false,
+                                            "category":  "Entraînement"
+                                        },
+                                        {
+                                            "id":  "loss_functions",
+                                            "title":  "Fonctions de Loss",
+                                            "icon":  "📉",
+                                            "interactive":  false,
+                                            "category":  "Entraînement"
+                                        },
+                                        {
+                                            "id":  "activation_functions",
+                                            "title":  "Fonctions d'Activation",
+                                            "icon":  "⚡",
+                                            "interactive":  false,
+                                            "category":  "Entraînement"
+                                        },
+                                        {
+                                            "id":  "normalization",
+                                            "title":  "Normalisation (BatchNorm, LayerNorm...)",
+                                            "icon":  "📐",
+                                            "interactive":  false,
+                                            "category":  "Entraînement"
                                         }
                                     ]
                     },

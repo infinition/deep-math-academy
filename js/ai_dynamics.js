@@ -700,8 +700,12 @@ window.initNeuralPDELab = function () {
 // ===============================
 function computeFreeEnergy() {
     const s = aiDynState.freeEnergy;
+    // Variational Free Energy F = Surprise + Complexity
+    // Where Surprise = -log p(observation | prediction) ≈ prediction error
+    // Complexity = KL divergence ≈ how far the model deviates from prior
     const surprise = Math.abs(s.observed - s.predicted);
-    const free = s.complexity - s.precision * (1 - surprise);
+    const free = surprise + s.complexity * 0.5;
+    // Active inference: prediction is updated to minimize free energy
     return { surprise, free };
 }
 
@@ -980,7 +984,7 @@ function drawEquivariance() {
     drawCupShape(ctx, rightX, cy, s.angle, 1.5, '#22c55e');
 
     const rad = s.angle * Math.PI / 180;
-    const rawScore = 0.45 + 0.45 * Math.cos(rad * 2);
+    const rawScore = Math.max(0, 0.9 * Math.exp(-Math.abs(rad) * 1.2));
     const invariantScore = 0.93;
 
     ctx.fillStyle = '#f3f4f6';
@@ -1158,7 +1162,9 @@ function updateHyperLabels() {
     const s = aiDynState.hyper;
     const n = s.nodes.length;
     const e = s.edges.length;
-    const density = n <= 1 ? 0 : e / (n * (n - 1) * 0.5);
+    // Normalized density: edges per possible pair of nodes
+    const maxEdges = n > 1 ? (n * (n - 1)) / 2 : 1;
+    const density = Math.min(1, e / maxEdges);
 
     const nEl = document.getElementById('hyperNodes');
     if (nEl) nEl.innerText = String(n);

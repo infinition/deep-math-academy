@@ -1,6 +1,26 @@
 // ==========================================
 // HELPERS
 // ==========================================
+
+// Theme-aware color helper for canvas drawing
+function isDarkMode() {
+    return document.body.classList.contains('dark-mode');
+}
+
+function canvasColors() {
+    const dark = isDarkMode();
+    return {
+        bg: dark ? '#0f172a' : '#ffffff',
+        grid: dark ? '#334155' : '#e5e7eb',
+        axis: dark ? '#94a3b8' : '#9ca3af',
+        text: dark ? '#e2e8f0' : '#111827',
+        textMuted: dark ? '#94a3b8' : '#6b7280',
+        gridFaint: dark ? '#1e293b' : '#f3f4f6',
+        labelBg: dark ? 'rgba(15, 23, 42, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+        white: dark ? '#e2e8f0' : '#ffffff',
+    };
+}
+
 function createFlashcard(front, back) {
     return `<div class="card-flip h-32 w-full select-none">
         <div class="card-inner">
@@ -36,7 +56,7 @@ function drawArrow(ctx, fromX, fromY, toX, toY, color, label) {
     ctx.fill();
 
     if (label) {
-        ctx.fillStyle = '#111827';
+        ctx.fillStyle = isDarkMode() ? '#e2e8f0' : '#111827';
         ctx.font = '12px Arial';
         ctx.fillText(label, toX + 6, toY + 6);
     }

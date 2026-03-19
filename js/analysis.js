@@ -93,32 +93,40 @@ function stepGradient() {
 
 function resetGradient() {
     gradXVal = -2.5;
+    gradRunning = false;
     if (gradAnimationId) {
-        cancelAnimationFrame(gradAnimationId);
+        clearTimeout(gradAnimationId);
         gradAnimationId = null;
-        const btn = document.getElementById('btnAutoGrad');
-        if (btn) btn.innerHTML = "<span>▶️</span> Auto";
     }
+    const btn = document.getElementById('btnAutoGrad');
+    if (btn) btn.innerHTML = "<span>▶️</span> Auto";
     drawGradient();
 }
 
 function toggleAutoGradient() {
-    if (gradAnimationId) {
-        cancelAnimationFrame(gradAnimationId);
-        gradAnimationId = null;
+    if (gradRunning) {
+        gradRunning = false;
+        if (gradAnimationId) {
+            clearTimeout(gradAnimationId);
+            gradAnimationId = null;
+        }
         document.getElementById('btnAutoGrad').innerHTML = "<span>▶️</span> Auto";
     } else {
+        gradRunning = true;
         document.getElementById('btnAutoGrad').innerHTML = "<span>⏸️</span> Stop";
         loopGradient();
     }
 }
 
+let gradRunning = false;
+
 function loopGradient() {
+    if (!gradRunning) return;
     stepGradient();
-    if (Math.abs(gradXVal) > 0.01 && Math.abs(gradXVal) < 10) { // Stop if converged or exploded
-        gradAnimationId = requestAnimationFrame(() => setTimeout(loopGradient, 100)); // Slow down animation
+    if (Math.abs(gradXVal) > 0.01 && Math.abs(gradXVal) < 10) {
+        gradAnimationId = setTimeout(loopGradient, 100);
     } else {
-        cancelAnimationFrame(gradAnimationId);
+        gradRunning = false;
         gradAnimationId = null;
         document.getElementById('btnAutoGrad').innerHTML = "<span>▶️</span> Auto";
     }
@@ -165,7 +173,7 @@ function drawIntegral() {
     for (let px = 0; px <= (xMax * scaleX); px++) {
         const x = px / scaleX;
         const y = f(x);
-        ctx.lineTo(originX + px, originY - y * scaleY);
+        if (px === 0) ctx.moveTo(originX + px, originY - y * scaleY); else ctx.lineTo(originX + px, originY - y * scaleY);
     }
     ctx.stroke();
 
@@ -243,13 +251,13 @@ function drawSequence() {
     const graphW = w - padding * 2;
     const graphH = h - padding * 2;
 
-    ctx.strokeStyle = '#e5e7eb';
+    ctx.strokeStyle = canvasColors().grid;
     ctx.beginPath();
     ctx.moveTo(padding, padding); ctx.lineTo(padding, h - padding); ctx.lineTo(w - padding, h - padding);
     ctx.stroke();
 
     if (seqData.length === 0) {
-        ctx.fillStyle = '#9ca3af';
+        ctx.fillStyle = canvasColors().textMuted;
         ctx.font = '14px Arial';
         ctx.fillText("Appuyez sur 'Ajouter une Époque' pour commencer", w / 2 - 140, h / 2);
         return;
@@ -342,7 +350,7 @@ function drawActivation() {
     const cy = h / 2;
     const scale = 40; // 40px = 1 unit
 
-    ctx.strokeStyle = '#e5e7eb';
+    ctx.strokeStyle = canvasColors().grid;
     ctx.lineWidth = 1;
     // Grid
     for (let i = 0; i < w; i += scale) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, h); ctx.stroke(); }
@@ -495,7 +503,7 @@ function drawDerivative() {
     const oy = h - 50;
 
     // Draw Axes
-    ctx.strokeStyle = '#e5e7eb';
+    ctx.strokeStyle = canvasColors().grid;
     ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(w, oy); ctx.stroke(); // X axis
     ctx.beginPath(); ctx.moveTo(ox, 0); ctx.lineTo(ox, h); ctx.stroke(); // Y axis
@@ -714,12 +722,12 @@ window.drawDistances = function () {
     const cx = w / 2;
     const cy = h / 2;
 
-    ctx.strokeStyle = '#f3f4f6';
+    ctx.strokeStyle = canvasColors().gridFaint;
     ctx.lineWidth = 1;
     for (let i = 0; i <= w; i += scale) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, h); ctx.stroke(); }
     for (let i = 0; i <= h; i += scale) { ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(w, i); ctx.stroke(); }
 
-    ctx.strokeStyle = '#d1d5db';
+    ctx.strokeStyle = canvasColors().axis;
     ctx.lineWidth = 2;
     ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, h); ctx.stroke();
@@ -770,18 +778,29 @@ window.drawDistances = function () {
         ctx.beginPath();
         ctx.strokeStyle = '#9333ea';
         ctx.lineWidth = 2;
-        ctx.arc(cx, cy, 40, Math.min(angA, angB), Math.max(angA, angB)); // Simplified arc
+        // Draw the smaller arc between the two angles
+        let startAng = angA;
+        let endAng = angB;
+        let diff = endAng - startAng;
+        // Normalize to [-PI, PI]
+        while (diff > Math.PI) diff -= 2 * Math.PI;
+        while (diff < -Math.PI) diff += 2 * Math.PI;
+        if (diff > 0) {
+            ctx.arc(cx, cy, 40, startAng, startAng + diff);
+        } else {
+            ctx.arc(cx, cy, 40, endAng, endAng - diff);
+        }
         ctx.stroke();
     }
 
     // Points
     ctx.fillStyle = '#2563eb';
     ctx.beginPath(); ctx.arc(pA.x, pA.y, 8, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = 'white'; ctx.fillText("A", pA.x - 4, pA.y + 4);
+    ctx.fillStyle = canvasColors().white; ctx.fillText("A", pA.x - 4, pA.y + 4);
 
     ctx.fillStyle = '#dc2626';
     ctx.beginPath(); ctx.arc(pB.x, pB.y, 8, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = 'white'; ctx.fillText("B", pB.x - 4, pB.y + 4);
+    ctx.fillStyle = canvasColors().white; ctx.fillText("B", pB.x - 4, pB.y + 4);
 
     // Calculations
     const dx = distB.x - distA.x;

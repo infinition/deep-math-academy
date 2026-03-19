@@ -83,4 +83,345 @@
 
         </div>
     </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- Section : Norme d'un vecteur                           -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2 text-lg">
+                📏 Norme d'un vecteur
+            </h3>
+        </div>
+        <div class="p-6 space-y-5">
+
+            <!-- Norme L2 -->
+            <div>
+                <h4 class="font-bold text-gray-800 mb-2">Norme L2 (euclidienne)</h4>
+                <div class="bg-indigo-50 dark:bg-indigo-900/30 p-4 rounded-lg border border-indigo-200 text-center mb-3">
+                    <span class="text-lg font-mono">
+                        \(\|\vec{v}\| = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2}\)
+                    </span>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed mb-2">
+                    C'est la <strong>longueur</strong> du vecteur. On prend chaque composante, on l'élève au carré,
+                    on additionne le tout, puis on prend la racine carrée (\(\sqrt{}\)) de cette somme.
+                </p>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    <strong>Exemple :</strong> Si \(\vec{v} = \begin{pmatrix} 3 \\ 4 \end{pmatrix}\),
+                    alors \(\|\vec{v}\| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5\).
+                </p>
+            </div>
+
+            <div class="bg-emerald-50 dark:bg-emerald-900/30 p-3 rounded-lg border border-emerald-200">
+                <p class="text-sm text-gray-700">
+                    🤖 <strong>ML :</strong> La norme L2 est utilisée comme <strong>régularisation Ridge</strong>
+                    pour empêcher les poids du modèle de devenir trop grands. On ajoute
+                    \(\lambda \sum w_i^2\) à la loss : les gros poids sont pénalisés quadratiquement.
+                </p>
+            </div>
+
+            <hr class="border-gray-200">
+
+            <!-- Norme L1 -->
+            <div>
+                <h4 class="font-bold text-gray-800 mb-2">Norme L1 (Manhattan)</h4>
+                <div class="bg-indigo-50 dark:bg-indigo-900/30 p-4 rounded-lg border border-indigo-200 text-center mb-3">
+                    <span class="text-lg font-mono">
+                        \(\|\vec{v}\|_1 = |v_1| + |v_2| + \cdots + |v_n|\)
+                    </span>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    On additionne les valeurs absolues de chaque composante. Pas de carré, pas de racine.
+                    C'est la distance que parcourrait un taxi sur une grille (d'où le nom "Manhattan").
+                </p>
+            </div>
+
+            <div class="bg-emerald-50 dark:bg-emerald-900/30 p-3 rounded-lg border border-emerald-200">
+                <p class="text-sm text-gray-700">
+                    🤖 <strong>ML :</strong> La norme L1 (<strong>Lasso</strong>) favorise des poids
+                    <strong>exactement à zéro</strong> \(\rightarrow\) sélection automatique de features.
+                    Si un poids tombe à 0, la feature correspondante est ignorée par le modèle.
+                </p>
+            </div>
+
+            <!-- Comparaison visuelle L1 vs L2 -->
+            <div class="bg-amber-50 dark:bg-amber-900/30 p-4 rounded-lg border border-amber-200">
+                <p class="text-sm text-gray-700">
+                    ⚖️ <strong>L1 vs L2 en résumé :</strong>
+                </p>
+                <ul class="text-sm text-gray-600 mt-2 space-y-1 list-disc list-inside">
+                    <li><strong>L2 (Ridge)</strong> : poids petits mais rarement nuls. Bon quand toutes les features comptent.</li>
+                    <li><strong>L1 (Lasso)</strong> : poids souvent exactement 0. Bon pour la sélection de features.</li>
+                    <li><strong>Elastic Net</strong> : combine les deux (\(\alpha L1 + (1-\alpha) L2\)).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- Section : Combinaison linéaire                         -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2 text-lg">
+                🧩 Combinaison linéaire
+            </h3>
+        </div>
+        <div class="p-6 space-y-5">
+
+            <div class="bg-indigo-50 dark:bg-indigo-900/30 p-4 rounded-lg border border-indigo-200 text-center mb-3">
+                <span class="text-lg font-mono">
+                    \(\vec{w} = \alpha \vec{u} + \beta \vec{v}\)
+                </span>
+            </div>
+
+            <p class="text-sm text-gray-600 leading-relaxed">
+                Tout nouveau vecteur créé en <strong>multipliant</strong> des vecteurs existants par des scalaires
+                puis en les <strong>additionnant</strong> est une combinaison linéaire.
+            </p>
+            <p class="text-sm text-gray-600 leading-relaxed">
+                <strong>Exemple :</strong> Si \(\vec{u} = \begin{pmatrix} 1 \\ 0 \end{pmatrix}\) et
+                \(\vec{v} = \begin{pmatrix} 0 \\ 1 \end{pmatrix}\), alors
+                \(3\vec{u} + 2\vec{v} = \begin{pmatrix} 3 \\ 2 \end{pmatrix}\).
+                On a "dosé" chaque direction.
+            </p>
+
+            <div class="bg-emerald-50 dark:bg-emerald-900/30 p-3 rounded-lg border border-emerald-200">
+                <p class="text-sm text-gray-700">
+                    🤖 <strong>ML :</strong> Un neurone calcule exactement une combinaison linéaire de ses entrées :
+                </p>
+                <div class="text-center mt-2">
+                    <span class="font-mono text-sm">
+                        \(z = w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b\)
+                    </span>
+                </div>
+                <p class="text-sm text-gray-700 mt-2">
+                    Les \(w_i\) sont les poids (scalaires), les \(x_i\) sont les features (vecteurs d'entrée),
+                    et \(b\) est le biais. Ensuite on applique une activation non-linéaire (\(\sigma\), ReLU, ...).
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- Section : Espace engendré (Span)                       -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2 text-lg">
+                🌐 Espace engendré (Span)
+            </h3>
+        </div>
+        <div class="p-6 space-y-5">
+
+            <div class="bg-indigo-50 dark:bg-indigo-900/30 p-4 rounded-lg border border-indigo-200 text-center mb-3">
+                <span class="text-lg font-mono">
+                    \(\text{Span}(\vec{u}, \vec{v}) = \{ \alpha \vec{u} + \beta \vec{v} \mid \alpha, \beta \in \mathbb{R} \}\)
+                </span>
+            </div>
+
+            <p class="text-sm text-gray-600 leading-relaxed">
+                L'espace engendré (Span) est l'<strong>ensemble de tous les vecteurs</strong> qu'on peut créer
+                par combinaison linéaire d'une famille de vecteurs.
+            </p>
+            <p class="text-sm text-gray-600 leading-relaxed">
+                Si \(\{\vec{u}, \vec{v}\}\) sont deux vecteurs non-colinéaires dans \(\mathbb{R}^2\),
+                alors \(\text{Span}(\vec{u}, \vec{v}) = \mathbb{R}^2\) :
+                on peut atteindre <strong>n'importe quel point du plan</strong>.
+            </p>
+            <p class="text-sm text-gray-600 leading-relaxed">
+                Mais si \(\vec{v} = 3\vec{u}\) (colinéaires), le span ne couvre qu'une droite.
+                On a "perdu" une dimension.
+            </p>
+
+            <div class="bg-emerald-50 dark:bg-emerald-900/30 p-3 rounded-lg border border-emerald-200">
+                <p class="text-sm text-gray-700">
+                    🤖 <strong>ML :</strong> Les features d'un dataset définissent un sous-espace.
+                    Si deux features sont corrélées (quasi-colinéaires), elles n'ajoutent pas de dimension utile
+                    \(\rightarrow\) c'est pour ça que <strong>PCA</strong> réduit la dimensionnalité :
+                    elle identifie les directions qui "comptent vraiment" et élimine la redondance.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- Section : Indépendance linéaire                        -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2 text-lg">
+                🔗 Indépendance linéaire
+            </h3>
+        </div>
+        <div class="p-6 space-y-5">
+
+            <div class="bg-indigo-50 dark:bg-indigo-900/30 p-4 rounded-lg border border-indigo-200 text-center mb-3">
+                <span class="text-lg font-mono">
+                    \(\alpha_1 \vec{v}_1 + \alpha_2 \vec{v}_2 + \cdots + \alpha_n \vec{v}_n = \vec{0}
+                    \implies \alpha_1 = \alpha_2 = \cdots = \alpha_n = 0\)
+                </span>
+            </div>
+
+            <p class="text-sm text-gray-600 leading-relaxed">
+                Des vecteurs sont <strong>linéairement indépendants</strong> si aucun d'entre eux ne peut être
+                écrit comme combinaison linéaire des autres. La seule façon d'obtenir \(\vec{0}\) en les combinant,
+                c'est de mettre <em>tous</em> les coefficients à zéro.
+            </p>
+            <p class="text-sm text-gray-600 leading-relaxed">
+                <strong>Intuition :</strong> Chaque vecteur apporte une information nouvelle, une direction
+                qu'aucun autre ne couvre. Si on en retire un, on perd une dimension du span.
+            </p>
+
+            <div class="bg-emerald-50 dark:bg-emerald-900/30 p-3 rounded-lg border border-emerald-200">
+                <p class="text-sm text-gray-700">
+                    🤖 <strong>ML :</strong> Features indépendantes = <strong>maximum d'information</strong>.
+                    Features dépendantes = <strong>redondance</strong> \(\rightarrow\) multicolinéarité.
+                    Cela rend la régression linéaire instable (la matrice \(X^TX\) devient presque singulière)
+                    et les coefficients deviennent peu fiables.
+                </p>
+            </div>
+
+            <div class="bg-amber-50 dark:bg-amber-900/30 p-4 rounded-lg border border-amber-200">
+                <p class="text-sm text-gray-700">
+                    💡 <strong>Astuce pratique :</strong> Pour détecter la multicolinéarité, calculez le
+                    <strong>VIF</strong> (Variance Inflation Factor) de chaque feature. Un VIF &gt; 10 signale
+                    une forte dépendance. Solutions : retirer la feature redondante, ou utiliser PCA / régularisation.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- Section : Produit scalaire décortiqué                  -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2 text-lg">
+                🎯 Produit scalaire decortique
+            </h3>
+        </div>
+        <div class="p-6 space-y-5">
+
+            <p class="text-sm text-gray-600 leading-relaxed">
+                Le produit scalaire a deux formules equivalentes :
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-indigo-50 dark:bg-indigo-900/30 p-4 rounded-lg border border-indigo-200 text-center">
+                    <p class="text-xs text-indigo-600 font-bold mb-1">Formule algebrique</p>
+                    <span class="text-lg font-mono">
+                        \(\vec{u} \cdot \vec{v} = u_1 v_1 + u_2 v_2 + \cdots + u_n v_n\)
+                    </span>
+                </div>
+                <div class="bg-indigo-50 dark:bg-indigo-900/30 p-4 rounded-lg border border-indigo-200 text-center">
+                    <p class="text-xs text-indigo-600 font-bold mb-1">Formule geometrique</p>
+                    <span class="text-lg font-mono">
+                        \(\vec{u} \cdot \vec{v} = \|\vec{u}\| \, \|\vec{v}\| \, \cos\theta\)
+                    </span>
+                </div>
+            </div>
+
+            <p class="text-sm text-gray-600 leading-relaxed">
+                Decortiquons chaque terme de la formule geometrique :
+            </p>
+            <ul class="text-sm text-gray-600 space-y-2 list-disc list-inside">
+                <li>\(\|\vec{u}\|\) = longueur (norme) du vecteur \(\vec{u}\)</li>
+                <li>\(\|\vec{v}\|\) = longueur (norme) du vecteur \(\vec{v}\)</li>
+                <li>\(\cos\theta\) = cosinus de l'angle \(\theta\) entre les deux vecteurs</li>
+            </ul>
+
+            <div class="bg-sky-50 dark:bg-sky-900/30 p-4 rounded-lg border border-sky-200">
+                <p class="text-sm text-gray-700 font-bold mb-2">Que nous dit \(\cos\theta\) ?</p>
+                <div class="grid grid-cols-3 gap-3 text-center text-sm">
+                    <div class="bg-white p-3 rounded border border-sky-200">
+                        <div class="text-2xl mb-1">→→</div>
+                        <p class="font-mono">\(\cos\theta = 1\)</p>
+                        <p class="text-gray-500 text-xs mt-1">Meme direction</p>
+                    </div>
+                    <div class="bg-white p-3 rounded border border-sky-200">
+                        <div class="text-2xl mb-1">→↑</div>
+                        <p class="font-mono">\(\cos\theta = 0\)</p>
+                        <p class="text-gray-500 text-xs mt-1">Perpendiculaires</p>
+                    </div>
+                    <div class="bg-white p-3 rounded border border-sky-200">
+                        <div class="text-2xl mb-1">→←</div>
+                        <p class="font-mono">\(\cos\theta = -1\)</p>
+                        <p class="text-gray-500 text-xs mt-1">Opposes</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-emerald-50 dark:bg-emerald-900/30 p-3 rounded-lg border border-emerald-200">
+                <p class="text-sm text-gray-700">
+                    🤖 <strong>ML :</strong> La <strong>similarite cosinus</strong> en NLP compare deux embeddings de mots :
+                </p>
+                <div class="text-center mt-2 mb-2">
+                    <span class="font-mono text-sm">
+                        \(\text{cos\_sim}(\vec{u}, \vec{v}) = \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \, \|\vec{v}\|}\)
+                    </span>
+                </div>
+                <p class="text-sm text-gray-700">
+                    "roi" et "reine" ont un cosinus proche de 1 (sens similaire).
+                    "roi" et "banane" ont un cosinus proche de 0 (aucun rapport).
+                    C'est la base de la recherche semantique et des systemes de recommandation.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- Section : Haute dimension                              -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2 text-lg">
+                🚀 Vecteurs en haute dimension
+            </h3>
+        </div>
+        <div class="p-6 space-y-5">
+
+            <p class="text-sm text-gray-600 leading-relaxed">
+                En 2D ou 3D, on peut dessiner un vecteur. Mais en ML, les vecteurs vivent dans des espaces
+                a des <strong>centaines ou milliers de dimensions</strong> :
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-3">
+                <div class="bg-violet-50 dark:bg-violet-900/30 p-4 rounded-lg border border-violet-200 text-center">
+                    <p class="text-2xl font-bold text-violet-600">768</p>
+                    <p class="text-xs text-gray-500 mt-1">dimensions pour BERT</p>
+                </div>
+                <div class="bg-violet-50 dark:bg-violet-900/30 p-4 rounded-lg border border-violet-200 text-center">
+                    <p class="text-2xl font-bold text-violet-600">1536</p>
+                    <p class="text-xs text-gray-500 mt-1">dimensions pour les embeddings OpenAI</p>
+                </div>
+                <div class="bg-violet-50 dark:bg-violet-900/30 p-4 rounded-lg border border-violet-200 text-center">
+                    <p class="text-2xl font-bold text-violet-600">12288</p>
+                    <p class="text-xs text-gray-500 mt-1">dimensions pour GPT-4</p>
+                </div>
+            </div>
+
+            <div class="bg-amber-50 dark:bg-amber-900/30 p-4 rounded-lg border border-amber-200">
+                <p class="text-sm text-gray-700">
+                    💡 <strong>Intuition contre-intuitive :</strong> En haute dimension, presque tous les vecteurs
+                    aleatoires sont <strong>quasi-perpendiculaires</strong> entre eux !
+                    Plus la dimension augmente, plus \(\cos\theta\) entre deux vecteurs aleatoires se concentre
+                    autour de 0. C'est un aspect de la <strong>malediction de la dimensionnalite</strong>.
+                </p>
+            </div>
+
+            <div class="bg-emerald-50 dark:bg-emerald-900/30 p-3 rounded-lg border border-emerald-200">
+                <p class="text-sm text-gray-700">
+                    🤖 <strong>ML :</strong> Consequences pratiques de la haute dimension :
+                </p>
+                <ul class="text-sm text-gray-700 mt-2 space-y-1 list-disc list-inside">
+                    <li>Les distances euclidiennes deviennent peu discriminantes \(\rightarrow\) on prefere la similarite cosinus.</li>
+                    <li>L'espace est si vaste qu'il faut enormement de donnees pour le "remplir" (curse of dimensionality).</li>
+                    <li>Les techniques de reduction (PCA, t-SNE, UMAP) projettent les vecteurs en 2D/3D pour la visualisation.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
 </div>

@@ -399,7 +399,7 @@ window.initOperators = function () {
             // NOT: 0 -> PI/2 (Up), PI/2 -> 0. 
             // Actually X swaps |0> and |1>. On Bloch sphere it's rotation around X.
             // On this 2D circle (Re/Im or 0/1 basis?), let's say it swaps X and Y axes.
-            targetAngle = Math.PI / 2 - targetAngle;
+            targetAngle = Math.PI - targetAngle;
         } else if (op === 'Z') {
             // Phase flip: |1> -> -|1>. 
             // If we map Y axis to |1>, it flips Y.
@@ -408,7 +408,12 @@ window.initOperators = function () {
             // Hadamard: |0> -> |+> (45 deg), |1> -> |-> (-135 deg).
             // It's a rotation/reflection.
             // Simplified: Set to 45 deg (PI/4) if close to 0 or PI/2
-            targetAngle = Math.PI / 4;
+            // H maps |0⟩ (theta≈0) to |+⟩ (pi/4) and |1⟩ (theta≈pi) to |-⟩ (3pi/4)
+            if (targetAngle < Math.PI / 2) {
+                targetAngle = Math.PI / 4;
+            } else {
+                targetAngle = 3 * Math.PI / 4;
+            }
         }
     }
 }
@@ -879,9 +884,24 @@ window.initQuantumCircuits = function () {
         let state = ["0", "0"];
         [0, 1].forEach(q => {
             circuitState[q].forEach(gate => {
-                if (gate === 'X') { state[q] = state[q] === '0' ? '1' : '0'; }
-                else if (gate === 'H') { state[q] = '+'; }
-                else if (gate === 'Z') { if (state[q] === '+') state[q] = '-'; }
+                if (gate === 'X') {
+                    if (state[q] === '0') state[q] = '1';
+                    else if (state[q] === '1') state[q] = '0';
+                    else if (state[q] === '+') state[q] = '+'; // X|+⟩ = |+⟩
+                    else if (state[q] === '-') state[q] = '-'; // X|-⟩ = -|-⟩ (phase, same state)
+                }
+                else if (gate === 'H') {
+                    if (state[q] === '0') state[q] = '+';
+                    else if (state[q] === '1') state[q] = '-';
+                    else if (state[q] === '+') state[q] = '0';
+                    else if (state[q] === '-') state[q] = '1';
+                }
+                else if (gate === 'Z') {
+                    if (state[q] === '0') {} // Z|0⟩ = |0⟩ (no change)
+                    else if (state[q] === '1') {} // Z|1⟩ = -|1⟩ (global phase, no observable change)
+                    else if (state[q] === '+') state[q] = '-'; // Z|+⟩ = |-⟩
+                    else if (state[q] === '-') state[q] = '+'; // Z|-⟩ = |+⟩
+                }
             });
         });
         return `État Final : |${state[0]}${state[1]}⟩`;
@@ -895,7 +915,7 @@ window.initQuantumAlgorithms = function () {
     const setup = createQuantumCanvas('grover-viz');
     if (!setup) return;
     const { ctx, width, height } = setup;
-    let amplitudes = [0.25, 0.25, 0.25, 0.25]; const target = 2;
+    let amplitudes = [0.5, 0.5, 0.5, 0.5]; const target = 2;
     function draw() {
         ctx.clearRect(0, 0, width, height);
         const barWidth = width / 4;
@@ -1349,7 +1369,8 @@ window.initQKD = function () {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Draw Photons
-        qkdState.photons.forEach((p, i) => {
+        for (let i = qkdState.photons.length - 1; i >= 0; i--) {
+            const p = qkdState.photons[i];
             p.x += 3; // Move
 
             // Interception by Eve
@@ -1383,7 +1404,7 @@ window.initQKD = function () {
             ctx.font = '10px Arial';
             ctx.textAlign = 'center';
             ctx.fillText(p.basis === '+' ? '+' : 'x', p.x, canvas.height / 2 + 3);
-        });
+        }
 
         requestAnimationFrame(draw);
     }
@@ -1503,14 +1524,15 @@ window.initQRNG = function () {
         }
 
         // Draw bits stream
-        bits.forEach((b, i) => {
+        for (let i = bits.length - 1; i >= 0; i--) {
+            const b = bits[i];
             b.x -= 5; // Fast speed
             ctx.fillStyle = b.val ? '#2dd4bf' : '#0f766e';
             ctx.font = '20px monospace';
             ctx.fillText(b.val, b.x, b.y);
 
             if (b.x < -20) bits.splice(i, 1);
-        });
+        }
 
         requestAnimationFrame(draw);
     }
@@ -1882,7 +1904,8 @@ window.initPhotonic = function () {
         ctx.fillStyle = '#fff'; ctx.font = '10px Arial'; ctx.fillText(`φ=${phase}°`, xBS1 + 45, y2 + 5);
 
         // Photons
-        photonicPhotons.forEach((p, i) => {
+        for (let i = photonicPhotons.length - 1; i >= 0; i--) {
+            const p = photonicPhotons[i];
             p.x += 4;
 
             // Logic at BS1
@@ -1907,7 +1930,7 @@ window.initPhotonic = function () {
             ctx.shadowBlur = 10; ctx.shadowColor = '#fbbf24'; ctx.fill(); ctx.shadowBlur = 0;
 
             if (p.x > canvas.width) photonicPhotons.splice(i, 1);
-        });
+        }
 
         requestAnimationFrame(draw);
     }

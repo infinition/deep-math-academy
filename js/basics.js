@@ -22,8 +22,10 @@ function initVennCanvas() {
     // Add click listener
     vennCanvas.addEventListener('mousedown', (e) => {
         const rect = vennCanvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const scaleX = vennCanvas.width / rect.width;
+        const scaleY = vennCanvas.height / rect.height;
+        const x = (e.clientX - rect.left) * scaleX;
+        const y = (e.clientY - rect.top) * scaleY;
         handleVennClick(x, y);
     });
 
@@ -76,17 +78,17 @@ function drawVenn() {
     ctx.clearRect(0, 0, w, h);
 
     // Universe Background
-    ctx.fillStyle = vennState.U ? '#d1fae5' : '#f9fafb';
+    ctx.fillStyle = vennState.U ? '#d1fae5' : (isDarkMode() ? '#1e293b' : '#f9fafb');
     ctx.fillRect(0, 0, w, h);
-    ctx.strokeStyle = '#374151';
+    ctx.strokeStyle = canvasColors().text;
     ctx.strokeRect(0, 0, w, h);
-    ctx.fillStyle = '#374151';
+    ctx.fillStyle = canvasColors().text;
     ctx.fillText("U (Univers)", 10, 20);
 
     // Circle A (Left)
     ctx.beginPath();
     ctx.arc(cxA, cy, r, 0, Math.PI * 2);
-    ctx.fillStyle = vennState.A ? '#93c5fd' : 'rgba(255, 255, 255, 0.5)';
+    ctx.fillStyle = vennState.A ? '#93c5fd' : (isDarkMode() ? 'rgba(100, 116, 139, 0.3)' : 'rgba(255, 255, 255, 0.5)');
     ctx.fill();
     ctx.strokeStyle = '#2563eb';
     ctx.stroke();
@@ -94,7 +96,7 @@ function drawVenn() {
     // Circle B (Right)
     ctx.beginPath();
     ctx.arc(cxB, cy, r, 0, Math.PI * 2);
-    ctx.fillStyle = vennState.B ? '#fca5a5' : 'rgba(255, 255, 255, 0.5)';
+    ctx.fillStyle = vennState.B ? '#fca5a5' : (isDarkMode() ? 'rgba(100, 116, 139, 0.3)' : 'rgba(255, 255, 255, 0.5)');
     ctx.fill();
     ctx.strokeStyle = '#dc2626';
     ctx.stroke();
@@ -106,7 +108,7 @@ function drawVenn() {
     ctx.clip();
     ctx.beginPath();
     ctx.arc(cxB, cy, r, 0, Math.PI * 2);
-    ctx.fillStyle = vennState.I ? '#c084fc' : 'rgba(0, 0, 0, 0.05)';
+    ctx.fillStyle = vennState.I ? '#c084fc' : (isDarkMode() ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)');
     ctx.fill();
     ctx.restore();
 
@@ -119,7 +121,6 @@ function drawVenn() {
 
 function updateVennNotation() {
     let notation = [];
-    if (vennState.U && !vennState.A && !vennState.B && !vennState.I) notation.push("∅ (Vide)");
     if (vennState.A) notation.push("A \\ B");
     if (vennState.B) notation.push("B \\ A");
     if (vennState.I) notation.push("A ∩ B");
@@ -657,8 +658,8 @@ function playSymbolAnim(type) {
             if (len > 20) {
                 ctx.setLineDash([5, 5]);
                 ctx.strokeStyle = "#9ca3af";
+                ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(ex, cy); ctx.stroke();
                 ctx.beginPath(); ctx.moveTo(ex, cy); ctx.lineTo(ex, ey); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(cx, ey); ctx.lineTo(ex, ey); ctx.stroke();
                 ctx.setLineDash([]);
             }
 
@@ -1039,7 +1040,7 @@ function playSymbolAnim(type) {
             ctx.fillText("Animation générique...", w / 2, h / 2);
         }
 
-        if (frame < 300) requestAnimationFrame(animate);
+        if (currentSymbolAnim === type) requestAnimationFrame(animate);
     }
 
 

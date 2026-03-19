@@ -69,4 +69,395 @@
 
         </div>
     </div>
+
+    <!-- ================= SECTION: Loi de Bernoulli décortiquée ================= -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-6 border-b border-gray-100 bg-gray-50">
+            <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                🎯 Loi de Bernoulli décortiquée
+            </h3>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-2">Formule</p>
+                <div class="text-center text-lg py-2">
+                    \[P(X = k) = p^k (1-p)^{1-k}, \quad k \in \{0, 1\}\]
+                </div>
+            </div>
+
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-3">Décomposition terme par terme</p>
+                <p class="text-gray-700 leading-relaxed mb-3">
+                    Un seul lancer : succès (\(k=1\)) avec probabilité \(p\), échec (\(k=0\)) avec probabilité \(1-p\).
+                </p>
+                <div class="grid sm:grid-cols-2 gap-3 text-sm">
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100">
+                        <span class="font-mono text-indigo-600">k = 1</span> → \(P(X=1) = p^1(1-p)^0 = p\)
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100">
+                        <span class="font-mono text-indigo-600">k = 0</span> → \(P(X=0) = p^0(1-p)^1 = 1-p\)
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-2">Espérance et Variance</p>
+                <div class="grid sm:grid-cols-2 gap-3 text-sm">
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100 text-center">
+                        \[E(X) = p\]
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100 text-center">
+                        \[\text{Var}(X) = p(1-p)\]
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200">
+                <p class="font-bold text-emerald-800 mb-2">🤖 Analogie ML</p>
+                <p class="text-gray-700 leading-relaxed">
+                    Chaque classification binaire est un essai de Bernoulli. La sortie du sigmoid
+                    \(p = P(Y=1|X)\) modélise directement la probabilité de succès. La <strong>Binary Cross-Entropy</strong>
+                    est la log-vraisemblance négative d'une loi de Bernoulli :
+                    \[\mathcal{L} = -[y \log(p) + (1-y)\log(1-p)]\]
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SECTION: Loi Binomiale décortiquée ================= -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-6 border-b border-gray-100 bg-gray-50">
+            <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                🎲 Loi Binomiale décortiquée
+            </h3>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-2">Formule</p>
+                <div class="text-center text-lg py-2">
+                    \[P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}\]
+                </div>
+            </div>
+
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-3">Décomposition terme par terme</p>
+                <div class="space-y-3">
+                    <div class="bg-white p-4 rounded-lg border border-indigo-100">
+                        <p class="font-mono text-indigo-600 font-bold mb-1">\(\binom{n}{k} = \frac{n!}{k!(n-k)!}\)</p>
+                        <p class="text-gray-700 text-sm">Nombre de façons de choisir \(k\) succès parmi \(n\) essais. C'est le <strong>coefficient binomial</strong>.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-indigo-100">
+                        <p class="font-mono text-indigo-600 font-bold mb-1">\(p^k\)</p>
+                        <p class="text-gray-700 text-sm">Probabilité d'avoir exactement \(k\) succès (chacun avec probabilité \(p\)).</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-indigo-100">
+                        <p class="font-mono text-indigo-600 font-bold mb-1">\((1-p)^{n-k}\)</p>
+                        <p class="text-gray-700 text-sm">Probabilité d'avoir exactement \(n-k\) échecs (chacun avec probabilité \(1-p\)).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-2">Espérance et Variance</p>
+                <div class="grid sm:grid-cols-2 gap-3 text-sm">
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100 text-center">
+                        \[E(X) = np\]
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100 text-center">
+                        \[\text{Var}(X) = np(1-p)\]
+                    </div>
+                </div>
+                <p class="text-gray-500 text-xs mt-2">Logique : c'est la somme de \(n\) Bernoulli indépendantes, donc \(E = n \times p\) et \(\text{Var} = n \times p(1-p)\).</p>
+            </div>
+
+            <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200">
+                <p class="font-bold text-emerald-800 mb-2">🤖 Analogie ML</p>
+                <p class="text-gray-700 leading-relaxed">
+                    <strong>Accuracy sur un batch</strong> de \(n\) prédictions : combien de bonnes réponses dans \(n\) essais indépendants ?
+                    Si votre modèle a une accuracy de 90% (\(p=0.9\)) sur un batch de \(n=100\), le nombre de prédictions correctes suit
+                    \(X \sim \text{Binomiale}(100, 0.9)\) avec \(E(X) = 90\) et \(\sigma \approx 3\).
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SECTION: Loi de Poisson ================= -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-6 border-b border-gray-100 bg-gray-50">
+            <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                ☄️ Loi de Poisson décortiquée
+            </h3>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-2">Formule</p>
+                <div class="text-center text-lg py-2">
+                    \[P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}, \quad k \in \{0, 1, 2, \ldots\}\]
+                </div>
+            </div>
+
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-3">Décomposition terme par terme</p>
+                <div class="space-y-3">
+                    <div class="bg-white p-4 rounded-lg border border-indigo-100">
+                        <p class="font-mono text-indigo-600 font-bold mb-1">\(\lambda^k\)</p>
+                        <p class="text-gray-700 text-sm">\(\lambda\) = taux moyen d'événements par unité de temps. \(\lambda^k\) traduit l'intensité de voir \(k\) événements.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-indigo-100">
+                        <p class="font-mono text-indigo-600 font-bold mb-1">\(e^{-\lambda}\)</p>
+                        <p class="text-gray-700 text-sm">Facteur de normalisation qui garantit que la somme de toutes les probabilités vaut 1.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-indigo-100">
+                        <p class="font-mono text-indigo-600 font-bold mb-1">\(k!\)</p>
+                        <p class="text-gray-700 text-sm">Factorielle : corrige le sur-comptage car l'ordre des événements n'importe pas.</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">
+                    <strong>Quand l'utiliser ?</strong> Quand \(n\) est grand et \(p\) est petit. La Poisson est la limite de la Binomiale quand \(n \to \infty\), \(p \to 0\), et \(\lambda = np\) reste constant.
+                </p>
+            </div>
+
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-2">Espérance et Variance</p>
+                <div class="grid sm:grid-cols-2 gap-3 text-sm">
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100 text-center">
+                        \[E(X) = \lambda\]
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100 text-center">
+                        \[\text{Var}(X) = \lambda\]
+                    </div>
+                </div>
+                <p class="text-gray-500 text-xs mt-2">Propriété remarquable : l'espérance et la variance sont égales. C'est un test rapide pour vérifier si des données suivent une Poisson.</p>
+            </div>
+
+            <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200">
+                <p class="font-bold text-emerald-800 mb-2">🤖 Analogie ML</p>
+                <p class="text-gray-700 leading-relaxed">
+                    Nombre de requêtes sur un serveur par seconde, détection d'anomalies, événements rares en cybersécurité.
+                    En NLP, le nombre d'occurrences d'un mot rare dans un document suit souvent une loi de Poisson.
+                    La <strong>Poisson regression</strong> est utilisée quand la variable cible est un comptage (ex : nombre de défauts par lot).
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SECTION: Loi Géométrique ================= -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-6 border-b border-gray-100 bg-gray-50">
+            <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                ⏳ Loi Géométrique décortiquée
+            </h3>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-2">Formule</p>
+                <div class="text-center text-lg py-2">
+                    \[P(X = k) = (1-p)^{k-1} \, p, \quad k \in \{1, 2, 3, \ldots\}\]
+                </div>
+            </div>
+
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-3">Décomposition terme par terme</p>
+                <div class="space-y-3">
+                    <div class="bg-white p-4 rounded-lg border border-indigo-100">
+                        <p class="font-mono text-indigo-600 font-bold mb-1">\((1-p)^{k-1}\)</p>
+                        <p class="text-gray-700 text-sm">Probabilité d'échouer \(k-1\) fois de suite avant le succès.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-indigo-100">
+                        <p class="font-mono text-indigo-600 font-bold mb-1">\(p\)</p>
+                        <p class="text-gray-700 text-sm">Le \(k\)-ième essai est un succès.</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">
+                    <strong>Intuition :</strong> Nombre d'essais nécessaires jusqu'au <strong>premier succès</strong>.
+                    C'est la seule loi discrète qui possède la propriété <em>sans mémoire</em> :
+                    \(P(X > s + t \mid X > s) = P(X > t)\).
+                </p>
+            </div>
+
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-2">Espérance et Variance</p>
+                <div class="grid sm:grid-cols-2 gap-3 text-sm">
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100 text-center">
+                        \[E(X) = \frac{1}{p}\]
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100 text-center">
+                        \[\text{Var}(X) = \frac{1-p}{p^2}\]
+                    </div>
+                </div>
+                <p class="text-gray-500 text-xs mt-2">Si \(p = 0.1\), il faut en moyenne \(1/0.1 = 10\) essais pour obtenir un succès.</p>
+            </div>
+
+            <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200">
+                <p class="font-bold text-emerald-800 mb-2">🤖 Analogie ML</p>
+                <p class="text-gray-700 leading-relaxed">
+                    Temps d'attente avant de trouver un bug dans du code, nombre de trials dans la recherche d'hyperparamètres
+                    (combien de configs tester avant de trouver la bonne ?).
+                    En <strong>random search</strong>, si la probabilité qu'un tirage soit dans le top 5% est \(p=0.05\),
+                    il faut en moyenne \(1/0.05 = 20\) essais.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SECTION: PMF vs CDF ================= -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-6 border-b border-gray-100 bg-gray-50">
+            <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                📊 PMF vs CDF : deux visions de la même loi
+            </h3>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                    <p class="font-bold text-indigo-800 mb-2">PMF (Probability Mass Function)</p>
+                    <div class="text-center py-2">
+                        \[\text{PMF}(k) = P(X = k)\]
+                    </div>
+                    <p class="text-gray-700 text-sm">
+                        Probabilité <strong>exacte</strong> d'obtenir la valeur \(k\).
+                        C'est un diagramme en bâtons : chaque bâton représente la proba d'une valeur précise.
+                    </p>
+                </div>
+                <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                    <p class="font-bold text-indigo-800 mb-2">CDF (Cumulative Distribution Function)</p>
+                    <div class="text-center py-2">
+                        \[\text{CDF}(k) = P(X \leq k) = \sum_{i=0}^{k} P(X = i)\]
+                    </div>
+                    <p class="text-gray-700 text-sm">
+                        Probabilité d'obtenir <strong>au plus</strong> \(k\). C'est une fonction en escalier,
+                        croissante de 0 à 1.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-2">Lien entre PMF et CDF</p>
+                <div class="text-center py-2">
+                    \[\text{PMF}(k) = \text{CDF}(k) - \text{CDF}(k-1)\]
+                </div>
+                <p class="text-gray-700 text-sm">
+                    On peut toujours retrouver l'une à partir de l'autre. La CDF est la somme cumulative de la PMF.
+                </p>
+            </div>
+
+            <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200">
+                <p class="font-bold text-emerald-800 mb-2">🤖 Analogie ML</p>
+                <p class="text-gray-700 leading-relaxed">
+                    En ML, les CDF sont utilisées pour les <strong>p-values</strong> et les <strong>tests statistiques</strong>.
+                    Par exemple, pour tester si un modèle A est significativement meilleur que B, on calcule
+                    \(P(X \geq \text{observé})\) via la CDF.
+                    Les <strong>quantiles</strong> (médiane, percentiles) sont aussi définis via l'inverse de la CDF.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SECTION: Variance décortiquée ================= -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-6 border-b border-gray-100 bg-gray-50">
+            <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                📐 Variance décortiquée
+            </h3>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-2">Formule</p>
+                <div class="text-center text-lg py-2">
+                    \[\text{Var}(X) = E\!\left[(X - \mu)^2\right] = E[X^2] - \big(E[X]\big)^2\]
+                </div>
+                <p class="text-gray-700 text-sm mt-2">
+                    La variance mesure la <strong>dispersion</strong> autour de la moyenne \(\mu = E[X]\).
+                    La deuxième forme (dite de <em>K&ouml;nig-Huygens</em>) est souvent plus pratique pour les calculs.
+                </p>
+            </div>
+
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-3">Écart-type</p>
+                <div class="text-center py-2">
+                    \[\sigma = \sqrt{\text{Var}(X)}\]
+                </div>
+                <p class="text-gray-700 text-sm">
+                    L'écart-type a la même unité que \(X\), ce qui le rend plus interprétable que la variance.
+                    Règle empirique : environ 68% des données sont dans \([\mu - \sigma,\; \mu + \sigma]\).
+                </p>
+            </div>
+
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
+                <p class="font-bold text-indigo-800 mb-3">Propriétés utiles</p>
+                <div class="space-y-2 text-sm text-gray-700">
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100">
+                        \(\text{Var}(aX + b) = a^2 \,\text{Var}(X)\) — la translation \(b\) ne change pas la dispersion.
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100">
+                        Si \(X\) et \(Y\) sont indépendantes : \(\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)\).
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200">
+                <p class="font-bold text-emerald-800 mb-2">🤖 Analogie ML</p>
+                <p class="text-gray-700 leading-relaxed">
+                    <strong>Bias-variance tradeoff :</strong> un modèle à haute variance <em>overfit</em> (il est trop sensible aux données d'entraînement),
+                    un modèle à haut biais <em>underfit</em> (il est trop rigide).
+                    L'erreur de généralisation se décompose :
+                    \[\text{Erreur} = \text{Biais}^2 + \text{Variance} + \text{Bruit irréductible}\]
+                    Réduire la variance passe par la <strong>régularisation</strong> (L1, L2, dropout) ou l'<strong>ensemble learning</strong> (bagging, random forest).
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= Tableau récapitulatif ================= -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-6 border-b border-gray-100 bg-gray-50">
+            <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                📋 Tableau récapitulatif
+            </h3>
+        </div>
+        <div class="p-6 overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead>
+                    <tr class="border-b-2 border-gray-200 text-gray-600">
+                        <th class="py-3 px-4 font-bold">Loi</th>
+                        <th class="py-3 px-4 font-bold">PMF \(P(X=k)\)</th>
+                        <th class="py-3 px-4 font-bold">\(E(X)\)</th>
+                        <th class="py-3 px-4 font-bold">\(\text{Var}(X)\)</th>
+                        <th class="py-3 px-4 font-bold">Support</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                        <td class="py-3 px-4 font-bold text-indigo-700">Bernoulli(\(p\))</td>
+                        <td class="py-3 px-4">\(p^k(1-p)^{1-k}\)</td>
+                        <td class="py-3 px-4">\(p\)</td>
+                        <td class="py-3 px-4">\(p(1-p)\)</td>
+                        <td class="py-3 px-4">\(\{0, 1\}\)</td>
+                    </tr>
+                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                        <td class="py-3 px-4 font-bold text-indigo-700">Binomiale(\(n,p\))</td>
+                        <td class="py-3 px-4">\(\binom{n}{k}p^k(1-p)^{n-k}\)</td>
+                        <td class="py-3 px-4">\(np\)</td>
+                        <td class="py-3 px-4">\(np(1-p)\)</td>
+                        <td class="py-3 px-4">\(\{0,\ldots,n\}\)</td>
+                    </tr>
+                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                        <td class="py-3 px-4 font-bold text-indigo-700">Poisson(\(\lambda\))</td>
+                        <td class="py-3 px-4">\(\frac{\lambda^k e^{-\lambda}}{k!}\)</td>
+                        <td class="py-3 px-4">\(\lambda\)</td>
+                        <td class="py-3 px-4">\(\lambda\)</td>
+                        <td class="py-3 px-4">\(\mathbb{N}\)</td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-3 px-4 font-bold text-indigo-700">Géométrique(\(p\))</td>
+                        <td class="py-3 px-4">\((1-p)^{k-1}p\)</td>
+                        <td class="py-3 px-4">\(\frac{1}{p}\)</td>
+                        <td class="py-3 px-4">\(\frac{1-p}{p^2}\)</td>
+                        <td class="py-3 px-4">\(\{1, 2, \ldots\}\)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>

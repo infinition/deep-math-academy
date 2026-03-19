@@ -18,6 +18,48 @@
         <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
     </div>
 
+    <!-- Comment calculer les valeurs propres -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-6 border-b border-gray-100 bg-gray-50">
+            <h3 class="text-xl font-bold text-gray-800">Comment calculer les valeurs propres ?</h3>
+        </div>
+        <div class="p-6 space-y-6">
+            <!-- Formule principale -->
+            <div class="bg-pink-50 p-5 rounded-xl border border-pink-200">
+                <h4 class="font-bold text-pink-800 mb-2">Le polynôme caractéristique</h4>
+                <div class="text-center my-3">
+                    <span class="inline-block bg-white px-6 py-3 rounded-lg border border-pink-300 font-mono text-lg shadow-sm">
+                        \(\det(A - \lambda I) = 0\)
+                    </span>
+                </div>
+                <p class="text-sm text-pink-900 mt-3">
+                    On soustrait \(\lambda\) à la diagonale, puis on calcule le déterminant. Les racines = valeurs propres.
+                </p>
+            </div>
+
+            <!-- Exemple 2x2 -->
+            <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                <h4 class="font-bold text-gray-800 mb-3">Exemple concret (2×2)</h4>
+                <div class="space-y-3 text-sm text-gray-700">
+                    <p>Soit la matrice :</p>
+                    <div class="text-center my-2">
+                        <span class="inline-block bg-gray-50 px-4 py-2 rounded border border-gray-200 font-mono">
+                            \(A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}\)
+                        </span>
+                    </div>
+                    <p>On calcule \(\det(A - \lambda I)\) :</p>
+                    <div class="text-center my-2">
+                        <span class="inline-block bg-gray-50 px-4 py-2 rounded border border-gray-200 font-mono text-xs sm:text-sm">
+                            \(\det\begin{pmatrix} 2-\lambda & 1 \\ 1 & 2-\lambda \end{pmatrix} = (2-\lambda)^2 - 1 = \lambda^2 - 4\lambda + 3 = 0\)
+                        </span>
+                    </div>
+                    <p>Les racines : \(\lambda_1 = 1\) et \(\lambda_2 = 3\)</p>
+                    <p class="text-gray-500 italic">Cette matrice étire d'un facteur 1 dans une direction, et d'un facteur 3 dans l'autre.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Interactive Simulator -->
     <div class="grid lg:grid-cols-3 gap-8">
 
@@ -82,4 +124,135 @@
 
         </div>
     </div>
+
+    <!-- Diagonalisation -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-6 border-b border-gray-100 bg-gray-50">
+            <h3 class="text-xl font-bold text-gray-800">Diagonalisation</h3>
+        </div>
+        <div class="p-6 space-y-6">
+            <div class="bg-purple-50 p-5 rounded-xl border border-purple-200">
+                <h4 class="font-bold text-purple-800 mb-2">La formule magique</h4>
+                <div class="text-center my-3">
+                    <span class="inline-block bg-white px-6 py-3 rounded-lg border border-purple-300 font-mono text-lg shadow-sm">
+                        \(A = PDP^{-1}\)
+                    </span>
+                </div>
+                <p class="text-sm text-purple-900 mt-3">
+                    Où \(P\) = matrice des vecteurs propres, \(D\) = matrice diagonale des valeurs propres.
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                <h4 class="font-bold text-gray-800 mb-2">Pourquoi c'est utile ?</h4>
+                <p class="text-sm text-gray-700 mb-3">
+                    Calculer \(A^{100}\) directement est un cauchemar. Mais avec la diagonalisation :
+                </p>
+                <div class="text-center my-3">
+                    <span class="inline-block bg-gray-50 px-4 py-2 rounded border border-gray-200 font-mono">
+                        \(A^{100} = PD^{100}P^{-1}\)
+                    </span>
+                </div>
+                <p class="text-sm text-gray-700">
+                    Et \(D^{100}\) est trivial : on élève chaque valeur propre à la puissance 100 sur la diagonale, c'est tout.
+                </p>
+            </div>
+
+            <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200">
+                <h4 class="font-bold text-emerald-800 mb-2 flex items-center gap-2">
+                    <span>🤖</span> Analogie ML : PCA
+                </h4>
+                <p class="text-sm text-emerald-900">
+                    PCA = diagonalisation de la matrice de covariance. Les vecteurs propres = axes principaux des données.
+                    On projette les données sur ces axes pour réduire la dimensionnalité tout en gardant un maximum de variance.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Matrices symétriques -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-6 border-b border-gray-100 bg-gray-50">
+            <h3 class="text-xl font-bold text-gray-800">Matrices symétriques : un cas spécial très important</h3>
+        </div>
+        <div class="p-6 space-y-6">
+            <div class="bg-blue-50 p-5 rounded-xl border border-blue-200">
+                <h4 class="font-bold text-blue-800 mb-2">Le théorème spectral</h4>
+                <p class="text-sm text-blue-900">
+                    Si \(A\) est symétrique (\(A = A^T\)), alors :
+                </p>
+                <ul class="text-sm text-blue-900 mt-2 space-y-1 list-disc list-inside">
+                    <li>Ses valeurs propres sont <strong>TOUJOURS réelles</strong> (jamais de nombres complexes)</li>
+                    <li>Ses vecteurs propres sont <strong>orthogonaux</strong> entre eux</li>
+                </ul>
+                <p class="text-sm text-blue-900 mt-2">
+                    Cela signifie que la diagonalisation devient \(A = Q D Q^T\) avec \(Q\) orthogonale (\(Q^{-1} = Q^T\)), ce qui est numériquement très stable.
+                </p>
+            </div>
+
+            <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200">
+                <h4 class="font-bold text-emerald-800 mb-2 flex items-center gap-2">
+                    <span>🤖</span> Analogie ML
+                </h4>
+                <p class="text-sm text-emerald-900">
+                    La matrice de covariance est symétrique par construction. C'est pour cela que PCA fonctionne toujours proprement : les axes principaux sont garantis orthogonaux et les variances expliquées sont toujours positives.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applications ML décortiquées -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-6 border-b border-gray-100 bg-gray-50">
+            <h3 class="text-xl font-bold text-gray-800">Applications ML décortiquées</h3>
+        </div>
+        <div class="p-6 space-y-6">
+
+            <!-- PCA -->
+            <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200">
+                <h4 class="font-bold text-emerald-800 mb-2 flex items-center gap-2">
+                    <span>🤖</span> PCA (Analyse en Composantes Principales)
+                </h4>
+                <p class="text-sm text-emerald-900">
+                    On calcule les valeurs propres de la matrice de covariance. Les plus grandes valeurs propres correspondent aux directions de plus grande variance dans les données. On garde le top-\(k\) pour réduire la dimensionnalité avec une perte minimale d'information.
+                </p>
+                <div class="mt-3 bg-white/60 p-3 rounded-lg text-xs text-emerald-800 font-mono">
+                    Données 1000D → top-50 valeurs propres → projection en 50D → 95% de la variance conservée
+                </div>
+            </div>
+
+            <!-- PageRank -->
+            <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200">
+                <h4 class="font-bold text-emerald-800 mb-2 flex items-center gap-2">
+                    <span>🤖</span> Google PageRank
+                </h4>
+                <p class="text-sm text-emerald-900">
+                    Le web est modélisé comme une matrice de transition géante (qui pointe vers qui). Le vecteur propre dominant (associé à \(\lambda = 1\)) de cette matrice donne le score d'importance de chaque page.
+                </p>
+                <div class="mt-3 bg-white/60 p-3 rounded-lg text-xs text-emerald-800 font-mono">
+                    Matrice de transition \(M\) → \(M \vec{v} = 1 \cdot \vec{v}\) → \(\vec{v}\) = classement des pages
+                </div>
+            </div>
+
+            <!-- Hessienne -->
+            <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200">
+                <h4 class="font-bold text-emerald-800 mb-2 flex items-center gap-2">
+                    <span>🤖</span> Hessienne et points critiques
+                </h4>
+                <p class="text-sm text-emerald-900">
+                    Les valeurs propres de la matrice Hessienne en un point critique révèlent sa nature :
+                </p>
+                <ul class="text-sm text-emerald-900 mt-2 space-y-1 list-disc list-inside">
+                    <li><strong>Toutes positives</strong> → minimum local (on est dans un creux)</li>
+                    <li><strong>Toutes négatives</strong> → maximum local (on est sur un sommet)</li>
+                    <li><strong>Mixtes (+ et -)</strong> → point-selle (on est sur une crête de montagne)</li>
+                </ul>
+                <div class="mt-3 bg-white/60 p-3 rounded-lg text-xs text-emerald-800 font-mono">
+                    En deep learning, la plupart des points critiques sont des points-selles, pas des minima locaux.
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>

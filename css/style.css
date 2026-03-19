@@ -61,6 +61,10 @@ canvas {
     max-width: 100%;
 }
 
+body.dark-mode canvas {
+    background: #0f172a;
+}
+
 /* Mobile Menu Transition */
 #sidebar {
     transition: transform 0.3s ease-in-out;
@@ -1951,4 +1955,91 @@ body.dark-mode #content-area [role="button"] {
 
 body.dark-mode #content-area a {
     color: #7dd3fc !important;
+}
+
+/* Fix: bg-white opacity variants not caught by .bg-white */
+body.dark-mode #content-area [class*="bg-white\/"] {
+    background: rgba(21, 34, 56, 0.9) !important;
+}
+
+/* Fix: Missing border color overrides */
+body.dark-mode #content-area .border-blue-300,
+body.dark-mode #content-area .border-green-300,
+body.dark-mode #content-area .border-indigo-300,
+body.dark-mode #content-area .border-purple-100,
+body.dark-mode #content-area .border-purple-200,
+body.dark-mode #content-area .border-orange-100,
+body.dark-mode #content-area .border-orange-200,
+body.dark-mode #content-area .border-violet-200,
+body.dark-mode #content-area .border-rose-200,
+body.dark-mode #content-area .border-blue-200,
+body.dark-mode #content-area .border-teal-200 {
+    border-color: rgba(148, 163, 184, 0.45) !important;
+}
+
+/* Fix: Preserve semantic colors on spans with explicit color classes */
+body.dark-mode #content-area span.text-red-500,
+body.dark-mode #content-area span.text-red-600,
+body.dark-mode #content-area span.text-blue-500,
+body.dark-mode #content-area span.text-blue-600,
+body.dark-mode #content-area span.text-green-500,
+body.dark-mode #content-area span.text-green-600,
+body.dark-mode #content-area span.text-purple-500,
+body.dark-mode #content-area span.text-purple-600,
+body.dark-mode #content-area span.text-orange-500,
+body.dark-mode #content-area span.text-orange-600,
+body.dark-mode #content-area span.text-emerald-500,
+body.dark-mode #content-area span.text-emerald-600,
+body.dark-mode #content-area span.text-cyan-500,
+body.dark-mode #content-area span.text-cyan-600,
+body.dark-mode #content-area span.text-amber-500,
+body.dark-mode #content-area span.text-amber-600,
+body.dark-mode #content-area span.text-pink-500,
+body.dark-mode #content-area span.text-pink-600,
+body.dark-mode #content-area span.text-violet-500,
+body.dark-mode #content-area span.text-violet-600,
+body.dark-mode #content-area span.text-indigo-500,
+body.dark-mode #content-area span.text-indigo-600,
+body.dark-mode #content-area span.text-rose-500,
+body.dark-mode #content-area span.text-rose-600,
+body.dark-mode #content-area span.text-yellow-500,
+body.dark-mode #content-area span.text-yellow-600 {
+    color: inherit !important;
+}
+
+/* Fix: Specific semantic dark-mode color mappings */
+body.dark-mode #content-area .text-red-500,
+body.dark-mode #content-area .text-red-600 { color: #fca5a5 !important; }
+body.dark-mode #content-area .text-blue-500,
+body.dark-mode #content-area .text-blue-600 { color: #93c5fd !important; }
+body.dark-mode #content-area .text-green-500,
+body.dark-mode #content-area .text-green-600 { color: #86efac !important; }
+body.dark-mode #content-area .text-purple-500,
+body.dark-mode #content-area .text-purple-600 { color: #d8b4fe !important; }
+body.dark-mode #content-area .text-orange-500,
+body.dark-mode #content-area .text-orange-600 { color: #fdba74 !important; }
+body.dark-mode #content-area .text-emerald-500,
+body.dark-mode #content-area .text-emerald-600 { color: #6ee7b7 !important; }
+body.dark-mode #content-area .text-cyan-500,
+body.dark-mode #content-area .text-cyan-600 { color: #67e8f9 !important; }
+body.dark-mode #content-area .text-amber-500,
+body.dark-mode #content-area .text-amber-600 { color: #fcd34d !important; }
+body.dark-mode #content-area .text-pink-500,
+body.dark-mode #content-area .text-pink-600 { color: #f9a8d4 !important; }
+body.dark-mode #content-area .text-violet-500,
+body.dark-mode #content-area .text-violet-600 { color: #c4b5fd !important; }
+body.dark-mode #content-area .text-indigo-500,
+body.dark-mode #content-area .text-indigo-600 { color: #a5b4fc !important; }
+body.dark-mode #content-area .text-rose-500,
+body.dark-mode #content-area .text-rose-600 { color: #fda4af !important; }
+body.dark-mode #content-area .text-yellow-500,
+body.dark-mode #content-area .text-yellow-600 { color: #fde047 !important; }
+
+/* Fix: hover states in dark mode */
+body.dark-mode #content-area .hover\:bg-gray-100:hover,
+body.dark-mode #content-area .hover\:bg-gray-50:hover {
+    background: #1e293b !important;
+}
+body.dark-mode #content-area .hover\:bg-indigo-50:hover {
+    background: #312e81 !important;
 }

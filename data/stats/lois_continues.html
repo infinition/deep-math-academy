@@ -82,4 +82,236 @@
 
         </div>
     </div>
+
+    <!-- Section: Formule de la Gaussienne décortiquée -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                <span>📐 Formule de la Gaussienne décortiquée</span>
+            </h3>
+            <div class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                Essentiel
+            </div>
+        </div>
+        <div class="p-6 space-y-6">
+            <!-- Main Formula -->
+            <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-200 text-center">
+                <p class="text-xs font-bold uppercase text-indigo-500 mb-3">Densité de probabilité de la loi normale</p>
+                $$f(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$$
+            </div>
+
+            <!-- Breakdown -->
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-xl border-l-4 border-blue-500 shadow-sm">
+                    <p class="text-sm font-mono text-blue-700 mb-1">$$\frac{1}{\sigma\sqrt{2\pi}}$$</p>
+                    <p class="text-sm text-gray-600">
+                        <strong>Facteur de normalisation</strong> — garantit que l'aire totale sous la courbe = 1.
+                        Sans lui, ce ne serait pas une vraie distribution de probabilité.
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border-l-4 border-green-500 shadow-sm">
+                    <p class="text-sm font-mono text-green-700 mb-1">$$\mu$$</p>
+                    <p class="text-sm text-gray-600">
+                        <strong>La moyenne</strong> — le centre de la cloche. Déplacer $\mu$ translate toute la courbe
+                        à gauche ou à droite sans changer sa forme.
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border-l-4 border-purple-500 shadow-sm">
+                    <p class="text-sm font-mono text-purple-700 mb-1">$$\sigma$$</p>
+                    <p class="text-sm text-gray-600">
+                        <strong>L'écart-type</strong> — la largeur de la cloche. Grand $\sigma$ = courbe aplatie,
+                        petit $\sigma$ = courbe étroite et haute.
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border-l-4 border-orange-500 shadow-sm">
+                    <p class="text-sm font-mono text-orange-700 mb-1">$$\exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$$</p>
+                    <p class="text-sm text-gray-600">
+                        <strong>Décroissance exponentielle</strong> — plus on s'éloigne de $\mu$, plus la probabilité
+                        chute brutalement. C'est ce qui crée la forme en cloche.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ML Analogy -->
+            <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-200">
+                <p class="text-xs font-bold uppercase text-yellow-600 mb-1">Lien ML / Deep Learning</p>
+                <p class="text-sm text-gray-700">
+                    Le <strong>Batch Normalization</strong> force les activations de chaque couche à suivre
+                    approximativement $\mathcal{N}(0,1)$, ce qui stabilise et accélère l'entraînement.
+                    Sans BatchNorm, les distributions internes dérivent (covariate shift) et le réseau apprend mal.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Standardisation (Z-scores) -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                <span>📏 Standardisation (Z-scores)</span>
+            </h3>
+            <div class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                Technique clé
+            </div>
+        </div>
+        <div class="p-6 space-y-5">
+            <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 text-center">
+                <p class="text-xs font-bold uppercase text-blue-500 mb-3">Transformation Z</p>
+                $$Z = \frac{X - \mu}{\sigma}$$
+            </div>
+            <p class="text-sm text-gray-600">
+                On soustrait la moyenne et on divise par l'écart-type.
+                Après cette transformation, $Z$ suit la <strong>loi normale standard</strong> $\mathcal{N}(0,1)$ :
+                moyenne = 0, écart-type = 1. Cela permet de comparer des variables qui vivent sur des échelles différentes.
+            </p>
+            <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-200">
+                <p class="text-xs font-bold uppercase text-yellow-600 mb-1">Lien ML / Deep Learning</p>
+                <p class="text-sm text-gray-700">
+                    <strong>Feature scaling</strong> : <code class="bg-gray-100 px-1 rounded text-xs">StandardScaler</code>
+                    de scikit-learn fait exactement cette opération sur chaque feature.
+                    Sans standardisation, le gradient descent converge lentement car les features à grande échelle
+                    dominent le gradient.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Densité vs Probabilité -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                <span>⚠️ Distribution de probabilité vs Densité</span>
+            </h3>
+            <div class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                Piège classique
+            </div>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="bg-red-50 p-4 rounded-xl border border-red-200">
+                <p class="text-sm text-red-700 font-bold mb-1">ATTENTION : pour une loi continue, $P(X = \text{valeur exacte}) = 0$ !</p>
+                <p class="text-sm text-gray-600">
+                    La densité $f(x)$ n'est <strong>pas</strong> une probabilité. Elle peut même dépasser 1.
+                    Ce qui compte, c'est l'<strong>aire sous la courbe</strong>.
+                </p>
+            </div>
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200 text-center">
+                $$P(a \leq X \leq b) = \int_a^b f(x)\,dx = \text{aire sous la courbe entre } a \text{ et } b$$
+            </div>
+            <p class="text-sm text-gray-500">
+                Cela fait le lien direct avec le chapitre sur les <strong>intégrales</strong> : calculer une probabilité continue,
+                c'est calculer une intégrale définie de la fonction de densité.
+            </p>
+        </div>
+    </div>
+
+    <!-- Section: Autres Lois Continues -->
+    <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- Loi Exponentielle -->
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+            <div class="p-4 border-b border-gray-100 bg-gray-50">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>⏱️ Loi Exponentielle</span>
+                </h3>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200 text-center">
+                    $$f(x) = \lambda\, e^{-\lambda x}, \quad x \geq 0$$
+                </div>
+                <p class="text-sm text-gray-600">
+                    Modélise le <strong>temps d'attente</strong> entre deux événements aléatoires indépendants.
+                    Le paramètre $\lambda$ est le <strong>taux d'arrivée</strong> (nombre moyen d'événements par unité de temps).
+                    L'espérance vaut $E[X] = \frac{1}{\lambda}$.
+                </p>
+                <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-200">
+                    <p class="text-xs font-bold uppercase text-yellow-600 mb-1">Lien ML / Data Science</p>
+                    <p class="text-sm text-gray-700">
+                        Modélise le temps entre deux pannes système, entre deux clics utilisateur,
+                        entre deux requêtes API. Utilisée en <strong>analyse de survie</strong> et en monitoring temps réel.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loi Uniforme -->
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+            <div class="p-4 border-b border-gray-100 bg-gray-50">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <span>🎲 Loi Uniforme</span>
+                </h3>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="bg-teal-50 p-5 rounded-xl border border-teal-200 text-center">
+                    $$f(x) = \frac{1}{b - a}, \quad x \in [a,\, b]$$
+                </div>
+                <p class="text-sm text-gray-600">
+                    Toutes les valeurs dans l'intervalle $[a, b]$ ont <strong>exactement la même probabilité</strong>.
+                    C'est la plus simple des distributions continues. En dehors de $[a, b]$, $f(x) = 0$.
+                </p>
+                <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-200">
+                    <p class="text-xs font-bold uppercase text-yellow-600 mb-1">Lien ML / Deep Learning</p>
+                    <p class="text-sm text-gray-700">
+                        Initialisation aléatoire uniforme des poids d'un réseau :
+                        <code class="bg-gray-100 px-1 rounded text-xs">np.random.uniform(-0.1, 0.1)</code>.
+                        Aussi utilisée dans les recherches d'hyperparamètres (<strong>random search</strong>).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Gaussienne Multivariée (Intro) -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+            <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                <span>🌐 Gaussienne Multivariée (Introduction)</span>
+            </h3>
+            <div class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                Avancé
+            </div>
+        </div>
+        <div class="p-6 space-y-5">
+            <div class="bg-purple-50 p-6 rounded-xl border border-purple-200 text-center">
+                <p class="text-xs font-bold uppercase text-purple-500 mb-3">Densité en dimension $d$</p>
+                $$f(\vec{x}) = \frac{1}{\sqrt{(2\pi)^d\, |\Sigma|}} \exp\!\left(-\frac{1}{2}(\vec{x}-\vec{\mu})^T \Sigma^{-1} (\vec{x}-\vec{\mu})\right)$$
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-white p-4 rounded-xl border-l-4 border-purple-500 shadow-sm">
+                    <p class="text-sm font-mono text-purple-700 mb-1">$$\vec{\mu}$$</p>
+                    <p class="text-sm text-gray-600">
+                        <strong>Vecteur moyenne</strong> — le centre de l'ellipsoïde en dimension $d$.
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border-l-4 border-pink-500 shadow-sm">
+                    <p class="text-sm font-mono text-pink-700 mb-1">$$\Sigma$$</p>
+                    <p class="text-sm text-gray-600">
+                        <strong>Matrice de covariance</strong> — contrôle la forme et l'orientation de l'ellipsoïde.
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border-l-4 border-indigo-500 shadow-sm">
+                    <p class="text-sm font-mono text-indigo-700 mb-1">$$|\Sigma|$$</p>
+                    <p class="text-sm text-gray-600">
+                        <strong>Déterminant</strong> — mesure le « volume » de la distribution.
+                    </p>
+                </div>
+            </div>
+
+            <p class="text-sm text-gray-600">
+                En dimension $d$, la cloche 1D devient un <strong>ellipsoïde</strong>.
+                Si les variables sont indépendantes, $\Sigma$ est diagonale et l'ellipsoïde est aligné avec les axes.
+            </p>
+
+            <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-200">
+                <p class="text-xs font-bold uppercase text-yellow-600 mb-1">Lien ML / Deep Learning</p>
+                <p class="text-sm text-gray-700">
+                    <strong>Gaussian Mixture Models (GMM)</strong> : mélange de plusieurs gaussiennes multivariées pour le clustering.
+                    <strong>Variational Autoencoders (VAE)</strong> : le <em>reparameterization trick</em>
+                    utilise $z = \vec{\mu} + \vec{\sigma} \odot \vec{\varepsilon}$ avec $\vec{\varepsilon} \sim \mathcal{N}(0, I)$
+                    pour rendre l'échantillonnage différentiable.
+                </p>
+            </div>
+        </div>
+    </div>
+
 </div>

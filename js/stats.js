@@ -61,10 +61,14 @@ function takeSample(n) {
 
     // Pick n random indices
     let redCount = 0;
-    for (let i = 0; i < n; i++) {
+    const sampledIndices = new Set();
+    while (sampledIndices.size < Math.min(n, population.length)) {
         const idx = Math.floor(Math.random() * population.length);
-        population[idx].sampled = true;
-        if (population[idx].isRed) redCount++;
+        if (!sampledIndices.has(idx)) {
+            sampledIndices.add(idx);
+            population[idx].sampled = true;
+            if (population[idx].isRed) redCount++;
+        }
     }
 
     drawSampling();
@@ -185,12 +189,12 @@ function drawDescripCanvas(mean, median) {
     ctx.beginPath();
     ctx.moveTo(padding, axisY);
     ctx.lineTo(w - padding, axisY);
-    ctx.strokeStyle = '#9ca3af';
+    ctx.strokeStyle = canvasColors().axis;
     ctx.lineWidth = 2;
     ctx.stroke();
 
     // Ticks
-    ctx.fillStyle = '#6b7280';
+    ctx.fillStyle = canvasColors().textMuted;
     ctx.font = '12px Arial';
     ctx.textAlign = 'center';
     for (let i = 0; i <= 20; i += 2) {
@@ -338,7 +342,7 @@ function drawCorrelation() {
     ctx.clearRect(0, 0, w, h);
 
     // Axes
-    ctx.strokeStyle = '#e5e7eb';
+    ctx.strokeStyle = canvasColors().grid;
     ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, h); ctx.stroke();
@@ -379,7 +383,7 @@ function updateBayes() {
     const pPos = sens * prior + (1 - spec) * (1 - prior);
 
     // P(Sick | Pos) = (P(Pos|Sick) * P(Sick)) / P(Pos)
-    const posterior = (sens * prior) / pPos;
+    const posterior = pPos > 0 ? (sens * prior) / pPos : 0;
 
     // Update UI
     document.getElementById('priorVal').innerText = (prior * 100).toFixed(1) + "%";
@@ -414,9 +418,10 @@ function dropGaltonBall() {
     galtonBalls.push({
         x: galtonCanvas.width / 2,
         y: 20,
-        vx: (Math.random() - 0.5) * 2, // Jitter
+        vx: 0,
         vy: 0,
-        row: 0,
+        row: -1,
+        binPos: 0,
         finished: false
     });
 }
@@ -463,33 +468,34 @@ function loopGalton() {
         let b = galtonBalls[i];
 
         if (!b.finished) {
-            b.vy += 0.2; // Gravity
+            // Smooth falling animation
+            b.vy += 0.3;
             b.y += b.vy;
-            b.x += b.vx;
 
-            // Collision with pegs logic (simplified)
-            const currentRow = Math.floor((b.y - startY + 10) / rowH);
+            // Check if ball reached next peg row
+            const currentRow = Math.floor((b.y - startY + 5) / rowH);
 
             if (currentRow > b.row && currentRow < GALTON_ROWS) {
                 b.row = currentRow;
-                // Hit peg -> bounce left or right
-                // 50/50 chance
+                // Discrete 50/50 choice at each peg
                 const dir = Math.random() < 0.5 ? -1 : 1;
-                b.vx = dir * 1.5 + (Math.random() - 0.5); // Add randomness
-                b.vy *= 0.6; // Lose energy
+                b.binPos += dir; // Track cumulative position
+                // Snap x to correct position for this row
+                const pegsInRow = currentRow + 1;
+                const rowWidth = (pegsInRow - 1) * pegSpacing;
+                const rowStartX = (w - rowWidth) / 2;
+                // Target x between pegs
+                b.x = (w / 2) + (b.binPos * pegSpacing / 2);
+                b.vy = 0.5; // Reset vertical speed after bounce
             }
 
             // Bottom reached
-            if (b.y > startY + GALTON_ROWS * rowH) {
+            if (b.y > startY + GALTON_ROWS * rowH + 10) {
                 b.finished = true;
-                // Calculate bin based on x position
-                // Map x to bin index 0 to GALTON_ROWS
-                // Center is w/2. Total width at bottom approx GALTON_ROWS * pegSpacing
-                const bottomW = GALTON_ROWS * pegSpacing;
-                const relativeX = b.x - (w / 2 - bottomW / 2);
-                let binIdx = Math.floor(relativeX / pegSpacing);
+                // binPos ranges from -GALTON_ROWS to +GALTON_ROWS in steps of 2
+                // Map to bin index: (binPos + GALTON_ROWS) / 2
+                let binIdx = Math.round((b.binPos + GALTON_ROWS) / 2);
                 binIdx = Math.max(0, Math.min(GALTON_ROWS, binIdx));
-
                 galtonBins[binIdx]++;
             }
 
@@ -503,28 +509,26 @@ function loopGalton() {
     // Remove finished balls from array to save memory (optional, but good for long runs)
     galtonBalls = galtonBalls.filter(b => !b.finished);
 
-    // Draw Bins (Histogram)
-    const binW = 20;
+    // Draw Bins (Histogram) - aligned with peg positions
+    const maxCount = Math.max(...galtonBins, 1);
     const maxBinH = 100;
-    const maxCount = Math.max(...galtonBins, 10); // Scale
-
     const bottomY = h - 10;
-    const binsTotalW = (GALTON_ROWS + 1) * binW;
-    const binsStartX = (w - binsTotalW) / 2;
 
     for (let i = 0; i <= GALTON_ROWS; i++) {
         const count = galtonBins[i];
         const barH = (count / maxCount) * maxBinH;
+        // Center bins under the peg structure
+        const binCenterX = (w / 2) + (i - GALTON_ROWS / 2) * pegSpacing;
+        const barW = pegSpacing * 0.8;
 
         ctx.fillStyle = '#6366f1';
-        ctx.fillRect(binsStartX + i * binW + 2, bottomY - barH, binW - 4, barH);
+        ctx.fillRect(binCenterX - barW / 2, bottomY - barH, barW, barH);
 
-        // Count label
         if (count > 0) {
-            ctx.fillStyle = '#374151';
+            ctx.fillStyle = canvasColors().text;
             ctx.font = '10px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText(count, binsStartX + i * binW + binW / 2, bottomY - barH - 5);
+            ctx.fillText(count, binCenterX, bottomY - barH - 5);
         }
     }
 
@@ -567,7 +571,7 @@ function initNormalChart() {
             maintainAspectRatio: false,
             scales: {
                 x: { min: -5, max: 5 },
-                y: { min: 0, max: 1 } // Normalized pdf max is ~0.4 but we leave room
+                y: { min: 0, beginAtZero: true }
             },
             plugins: {
                 legend: { display: false }
@@ -587,6 +591,7 @@ function updateNormalChart() {
 
     const mu = parseFloat(muEl.value);
     const sigma = parseFloat(sigmaEl.value);
+    if (sigma <= 0) return;
 
     document.getElementById('muVal').innerText = mu;
     document.getElementById('sigmaVal').innerText = sigma;
