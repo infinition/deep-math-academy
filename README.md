@@ -1,80 +1,63 @@
-# 🚀 Deep Math Academy : Les Fondamentaux Mathématiques pour l'IA
+# Deep Math Academy
 
-https://infinition.github.io/deep-math-academy/
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) [![Release](https://img.shields.io/github/v/release/infinition/deep-math-academy?style=flat)](https://github.com/infinition/deep-math-academy/releases) [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/infinition)
 
-> Une plateforme web interactive pour maîtriser l'Algèbre Linéaire, l'Analyse (Calcul), les Statistiques et la Physique Quantique, les piliers essentiels de l'IA moderne et future.
+An interactive browser platform for the mathematical foundations of AI. Each module teaches a concept visually and interactively, then connects it to a concrete machine learning application.
 
-## ✨ Pourquoi ce Projet ?
+Live: https://infinition.github.io/deep-math-academy/
 
-<img width="805" height="437" alt="image" src="https://github.com/user-attachments/assets/b85d75bc-b470-41af-b4b0-8cfdff3ab797" />
+<img width="805" height="437" alt="Deep Math Academy" src="https://github.com/user-attachments/assets/b85d75bc-b470-41af-b4b0-8cfdff3ab797" />
 
-L'Intelligence Artificielle repose entièrement sur les mathématiques. Ce projet vise à démystifier ces concepts en les rendant :
-
-1.  **Visuels :** Fini les pages de formules sèches. Visualisez les vecteurs, les descentes de gradient et les distributions.
-2.  **Interactifs :** Modifiez les paramètres (vecteurs, matrices, moyennes) et observez immédiatement l'impact sur les graphiques et les résultats.
-3.  **Orientés IA :** Chaque module explique le concept mathématique et son application directe en Data Science (PCA, Backpropagation, Embeddings, Bayes).
-
-<img width="1352" height="944" alt="image" src="https://github.com/user-attachments/assets/75eae69a-949c-4780-b36f-4bad0f17fc7c" />
-
-
-## 📚 Modules d'Apprentissage
-
-Le projet est divisé en plusieurs cours, chacun structuré en modules progressifs :
-
-### 📐 Algèbre Linéaire (Le Squelette de l'IA)
-* **Concepts Clés :** Théorie des Ensembles, Vecteurs, Matrices.
-* **Applications IA :** Tenseurs, Produits Scalaires (Similarité), Transformations d'Espace, Décomposition en Valeurs Singulières (SVD, Compression).
-
-### 📉 Analyse & Calcul (Le Moteur de l'Apprentissage)
-* **Concepts Clés :** Dérivées, Fonctions, Suites & Séries.
-* **Applications IA :** Gradient, Règle de la Chaîne (Backpropagation), Optimisation (Descente de Gradient), Distances et Mesures de Perte.
-
-### 📊 Statistiques & Probabilités (La Logique de la Donnée)
-* **Concepts Clés :** Statistique Descriptive, Corrélation, Lois de Probabilité (Normale, Binomiale).
-* **Applications IA :** Théorème de Bayes, Inférence, Théorème Central Limite, Mesures de Dispersion.
-
-### ⚛️ Physique Quantique & Quantum Computing (Le Futur du Calcul)
-* **Concepts Clés :** Superposition, Intrication, Qubits, Portes Quantiques, Algorithmes (Shor, Grover).
-* **Mathématiques :** Espaces de Hilbert, Notation Bra-Ket, Produit Tensoriel, Opérateurs Unitaires.
-* **Applications IA :** Quantum Machine Learning (QML), Réseaux de Neurones Quantiques, Optimisation Quantique.
-
-## ⚙️ Technologies Utilisées
-
-* **Frontend :** HTML pur, JavaScript natif (vanilla JS).
-* **Styling :** [Tailwind CSS](https://tailwindcss.com/) pour un design moderne et responsive.
-* **Formules Mathématiques :** [MathJax](https://www.mathjax.org/) pour un rendu LaTeX élégant.
-* **Graphiques :** [Chart.js](https://www.chartjs.org/) pour les visualisations statistiques.
-* **Interactivité :** Canvas API pour les démonstrations de vecteurs et de gradient en temps réel.
-
-## 🏃 Comment Lancer le Projet
-
-Ce projet est conçu pour être une application web légère et autonome. Il n'y a **aucune dépendance côté serveur ou étape de construction** (build process).
-
-1.  **Cloner le dépôt :**
-    ```bash
-    git clone [https://github.com/infinition/deep-math-academy.git](https://github.com/infinition/deep-math-academy.git)
-    ```
-2.  **Ouvrir le fichier :**
-    Naviguez jusqu'au dossier cloné et ouvrez le fichier `index.html` directement dans votre navigateur.
-    
-    ```bash
-    cd deep-math-academy
-    open index.html 
-    # ou double-cliquez sur index.html dans votre explorateur de fichiers
-    ```
-
-3.  **Commencer à explorer !**
-
-## 🤝 Contribution
-
-Toute contribution est la bienvenue ! Si vous trouvez un bug, souhaitez ajouter un module (ex: Optimisation Avancée, Espaces de Hilbert) ou améliorer les animations, n'hésitez pas à :
-
-1.  **Fork** le projet.
-2.  Créer une branche de fonctionnalité (`git checkout -b feature/nouveau-module-stats`).
-3.  Commit vos changements (`git commit -m 'feat: ajout du module ...'`).
-4.  Pousser vers la branche (`git push origin feature/nouveau-module-stats`).
-5.  Ouvrir une **Pull Request** détaillée.
+<img width="1352" height="944" alt="Deep Math Academy modules" src="https://github.com/user-attachments/assets/75eae69a-949c-4780-b36f-4bad0f17fc7c" />
 
 ---
 
-*Créé avec passion pour la communauté Data par Infinition - (C) 2025*
+## Modules
+
+**Linear Algebra** -- Sets, vectors, matrices. AI applications: tensors, dot products, SVD, embeddings, space transformations.
+
+**Analysis and Calculus** -- Derivatives, functions, sequences and series. AI applications: gradient, chain rule (backpropagation), gradient descent, loss functions.
+
+**Statistics and Probability** -- Descriptive statistics, correlation, probability distributions. AI applications: Bayes theorem, inference, central limit theorem.
+
+**Quantum Physics and Quantum Computing** -- Superposition, entanglement, qubits, quantum gates, Shor and Grover algorithms. Mathematics: Hilbert spaces, Bra-Ket notation, tensor products, unitary operators. AI applications: Quantum ML, quantum neural networks, quantum optimization.
+
+---
+
+## Running
+
+No server, no build step.
+
+```bash
+git clone https://github.com/infinition/deep-math-academy.git
+cd deep-math-academy
+# open index.html in your browser
+```
+
+---
+
+## Stack
+
+- Vanilla JavaScript, HTML5
+- Tailwind CSS (CDN)
+- MathJax (LaTeX)
+- Chart.js (statistical graphs)
+- Canvas API (vector and gradient visualizations)
+
+---
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=infinition%2Fdeep-math-academy&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=infinition/deep-math-academy&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=infinition/deep-math-academy&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=infinition/deep-math-academy&type=date&legend=top-left" />
+ </picture>
+</a>
+
+---
+
+## License
+
+MIT. See [LICENSE](LICENSE).
