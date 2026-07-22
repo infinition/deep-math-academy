@@ -1,0 +1,405 @@
+<div class="space-y-6 qa-level" data-qa-level="quantum:6">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">QUANTUM ACADEMY &middot; Niveau 6 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Qubits, portes et circuits</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: le quantum computing commence ici — X, Z, H, T, CNOT, circuits, mesure, téléportation.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">10 concepts</span>
+            <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-700 font-bold">1 lab interactif</span>
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <div class="qa-lab" id="qa-lab-quantum-6" data-qa-lab="quantum:6">
+        <div class="qa-lab-loading">Chargement du lab interactif&hellip;</div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-6-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">|q⟩</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le qubit</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Le qubit = le plus petit système quantique utile: 2 états de base, une infinité de superpositions α|0⟩+β|1⟩ (un point de la sphère de Bloch). Paradoxe fondateur: il « contient » deux amplitudes complexes continues, mais une mesure n'en extrait qu'UN bit. L'art du QC = calculer dans le continu, récolter dans le discret.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|q\rangle = \alpha|0\rangle + \beta|1\rangle,\quad |\alpha|^2+|\beta|^2=1$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« ket q égale alpha ket zéro plus bêta ket un » — deux amplitudes complexes normalisées: c'est tout le qubit.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Réalisations physiques du même objet mathématique: transmon supraconducteur (IBM, Google), ion piégé (IonQ, Quantinuum), photon (PsiQuantum), spin dans le silicium, atome neutre (Pasqal, QuEra). Le formalisme est identique — seuls T₂, fidélités et connectivité changent.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Compte l'information: décrire un qubit = 2 nombres réels (θ, φ de Bloch). Décrire n qubits = 2·2ⁿ−2 réels. MAIS mesurer n qubits ne donne que n bits.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Comprends la conséquence: tu ne peux PAS « lire » les amplitudes d'un seul coup — un état inconnu ne se lit pas (non-clonage + Born). Il faut des statistiques (shots) ou de l'astuce (interférence).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Formule la vraie question du QC: comment chorégraphier les 2ⁿ amplitudes pour que le SEUL échantillon final tombe sur la réponse ? Réponse: l'interférence (Grover, Shor, niveau 7).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: « un qubit stocke une infinité d'information » est un mythe: il en stocke une infinité INACCESSIBLE. La puissance quantique n'est pas dans le stockage mais dans la dynamique de l'espace exponentiel avant mesure.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Théorème utile (Holevo): n qubits ne peuvent transmettre que n bits classiques. Garde-le comme antidote au marketing — et comme boussole: cherche l'avantage dans le CALCUL, pas dans la mémoire.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-6-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">X,Z</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les portes X et Z</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">X = le NOT quantique (échange |0⟩↔|1⟩, demi-tour de Bloch autour de l'axe x). Z = le flip de phase (|1⟩ → −|1⟩, demi-tour autour de z, invisible en base Z mais décisif en base X). Elles anticommutent: XZ = −ZX. Ce sont les Pauli du niveau 2, promues au rang de portes.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$X|0\rangle=|1\rangle \qquad Z|1\rangle=-|1\rangle \qquad HZH = X$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« X ket zéro égale ket un »; « Z ket un égale moins ket un ». Et l'identité clé: « H Z H égale X » — encadrer Z par deux Hadamard le transforme en X.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">X: initialisation, logique classique embarquée. Z (et ses racines S, T): toute la sculpture de phase des algorithmes. Le duo X/Z est aussi la classification COMPLÈTE des erreurs: tout bruit 1-qubit = combinaison bit-flip (X) + phase-flip (Z) — le point de départ du niveau 8.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Applique X à α|0⟩+β|1⟩: → α|1⟩+β|0⟩ = β|0⟩+α|1⟩ — les amplitudes sont échangées. Deux X de suite: retour au départ (X² = I).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique Z à |+⟩ = (|0⟩+|1⟩)/√2: → (|0⟩−|1⟩)/√2 = |−⟩. Les probas en Z restent 50/50 (rien de visible), mais l'état a basculé de +x à −x sur Bloch: en base X, tout a changé.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Vérifie HZH = X sur |0⟩: H|0⟩ = |+⟩, Z|+⟩ = |−⟩, H|−⟩ = |1⟩. Bilan: |0⟩ → |1⟩ = X ✓. Les changements de base transportent les portes — l'identité la plus utilisée du domaine.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: X et Z sont duales par Hadamard: ce qui est « bit » dans une base est « phase » dans l'autre. Cette dualité structure tout: les codes correcteurs protègent les DEUX types d'erreurs en travaillant dans les DEUX bases.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit: <code>qc.x(0)</code>, <code>qc.z(0)</code>. Astuce de lecture de circuits: un Z juste avant une mesure Z est invisible (supprimable); un Z entre deux H ne l'est pas.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-6-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">H</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La porte Hadamard</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">H = LA porte qui crée et détruit la superposition: |0⟩ → |+⟩, |1⟩ → |−⟩, et inversement (H² = I). Géométriquement: demi-tour autour de la diagonale (x+z)/√2 — elle ÉCHANGE l'axe z et l'axe x, donc la base de calcul et la base de phase. La porte la plus utilisée de tous les circuits.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$H = \tfrac{1}{\sqrt2}\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix} \qquad H|0\rangle = |+\rangle$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« H égale un sur racine de deux, fois la matrice un, un, un, moins un ». « H ket zéro égale ket plus » — Hadamard ouvre la superposition.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Ouverture de quasi tout algorithme: H^⊗n sur |0...0⟩ crée la superposition uniforme des 2ⁿ états — toutes les entrées possibles d'un coup. Fermeture aussi: un H final convertit l'information de phase en information de bit lisible. H = le traducteur phase ↔ bit.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule H|0⟩: (1/√2)[[1,1],[1,−1]]·(1,0) = (1,1)/√2 = |+⟩ ✓. Et H|1⟩ = (1,−1)/√2 = |−⟩.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique H deux fois: H|+⟩ = ((1+1)/2, (1−1)/2)·√2... calcule proprement: H(1,1)/√2 = (2,0)/2 = (1,0) = |0⟩ → H² = I: son propre inverse.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Le calcul qui contient TOUT le QC — H, phase, H: pars de |0⟩ → H → |+⟩ → Z (phase) → |−⟩ → H → |1⟩. Compare sans la phase: |0⟩ → H → H → |0⟩. La phase INVISIBLE au milieu détermine le bit FINAL: interférence convertie en réponse. C'est le squelette de Deutsch-Jozsa, de Grover, de Shor.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Sur n qubits: H^⊗n|00⟩ = (|00⟩+|01⟩+|10⟩+|11⟩)/2 — quatre amplitudes égales en DEUX portes. n portes → 2ⁿ termes: la superposition est bon marché (c'est l'interférence utile qui est chère).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: mémorise le motif « H — cœur du calcul en phases — H »: tu reconnaîtras alors la structure de 80% des circuits que tu liras.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit: <code>qc.h(0)</code>. Identités à connaître: HXH = Z, HZH = X (H échange X et Z), et « mesurer en base X » = H + mesure Z.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-6-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">S,T</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les portes de phase S, T et Rz</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">S = phase de π/2 (|1⟩ → i|1⟩), T = phase de π/4, Rz(θ) = phase quelconque: elles font tourner la LONGITUDE de Bloch sans toucher aux probabilités en Z. Hiérarchie: T² = S, S² = Z. T est la clé de l'universalité: H et S seuls restent simulables classiquement (Clifford); AJOUTER T rend le calcul quantique complet.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$S=\begin{pmatrix}1&amp;0\\0&amp;i\end{pmatrix} \quad T=\begin{pmatrix}1&amp;0\\0&amp;e^{i\pi/4}\end{pmatrix} \quad T^2=S,\ S^2=Z$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« S égale diagonale un, i »; « T égale diagonale un, e puissance i pi sur quatre ». « T carré égale S, S carré égale Z » — des demi-phases en cascade.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Le réglage fin des interférences: la QFT (niveau 7) est un tissage de phases contrôlées. En correction d'erreur, le « T-count » est LA métrique de coût: les portes Clifford sont quasi gratuites sur un code de surface, chaque T exige une usine à « états magiques » — on optimise les circuits en comptant les T.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Applique S à |+⟩ = (|0⟩+|1⟩)/√2: → (|0⟩+i|1⟩)/√2 = |+i⟩ — le point de Bloch a glissé de l'axe x à l'axe y (quart de tour d'équateur). Les probas Z: toujours 50/50.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Vérifie la hiérarchie: T²|1⟩ = e^{iπ/4}·e^{iπ/4}|1⟩ = e^{iπ/2}|1⟩ = i|1⟩ = S|1⟩ ✓. Puis S² = Z ✓. Quatre T = un Z: la phase s'accumule.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Comprends pourquoi T est « chère »: le théorème de Gottesman-Knill dit que {H, S, CNOT} (le groupe de Clifford) se simule efficacement sur ton laptop — pas de magie quantique dedans. Le T casse cette simulabilité: c'est LUI, l'ingrédient non-classique.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: la ressource quantique fine n'est ni la superposition ni même l'intrication seule: c'est la « magie » que T injecte. Lis « T-count/T-depth » dans un papier d'algorithmique fault-tolerant comme tu lirais « FLOPs » en ML.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit: <code>qc.s(0)</code>, <code>qc.t(0)</code>, <code>qc.rz(theta, 0)</code>. Le hardware exécute Rz « virtuellement » (rotation de repère, coût nul, fidélité parfaite) — d'où des circuits compilés bourrés de Rz.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-6-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">CX</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La porte CNOT</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">CNOT (CX) = le NOT contrôlé: applique X sur la CIBLE si le CONTRÔLE est |1⟩, ne fait rien sinon — appliqué en superposition, il INTRIQUE. C'est la porte à 2 qubits standard, l'unique pont entre les qubits, et la plus coûteuse en pratique (10× plus d'erreurs qu'une porte 1-qubit).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\mathrm{CNOT}\,|c\rangle|t\rangle = |c\rangle|t\oplus c\rangle$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« CNOT ket c ket t égale ket c, ket t XOR c » — la cible reçoit le OU-exclusif d'elle-même et du contrôle; le contrôle ne change pas (en base Z).</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">L'atome de l'intrication: paires de Bell, téléportation, mesures de parité de la correction d'erreur, arithmétique quantique — tout passe par CNOT. Le benchmark d'un hardware se résume souvent à « fidélité 2-qubits »: 99.9% (ions) à 99.5% (transmons) aujourd'hui.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Table de vérité (base Z): |00⟩→|00⟩, |01⟩→|01⟩, |10⟩→|11⟩, |11⟩→|10⟩ — un XOR câblé, réversible.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Le cas qui change tout — contrôle en superposition: CNOT sur |+⟩|0⟩ = (|0⟩+|1⟩)|0⟩/√2 → par linéarité: (|00⟩ + |11⟩)/√2 = Φ⁺. Le contrôle « à moitié 1 » n'a PAS donné une cible « à moitié flippée »: il a donné de l'INTRICATION.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Vérifie que le contrôle peut bouger quand même: en base X, les rôles s'inversent (un Z sur la cible remonte au contrôle — le « phase kickback », moteur secret des algorithmes du niveau 7).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: CNOT classique sur les états de base, créateur d'intrication sur les superpositions — la double vie qui fait tout le sel des portes contrôlées. Fais le calcul Φ⁺ à la main une fois: c'est l'intrication qui naît sous tes yeux, par simple linéarité.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit: <code>qc.cx(controle, cible)</code>. Contrainte réelle: le hardware n'a de CNOT qu'entre qubits VOISINS (graphe de connectivité) — le transpileur insère des SWAP coûteux sinon. Regarde toujours le « coupling map » de ta machine.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-6-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⊢</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le circuit quantique</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Un circuit = une partition musicale: chaque ligne un qubit, le temps de gauche à droite, chaque boîte une porte, la mesure à la fin. Mathématiquement: un produit d'unitaires appliqué à |0...0⟩ — le circuit ENTIER est une seule grande matrice U. Le modèle de calcul standard du domaine.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\psi_{out}\rangle = U_k \cdots U_2\,U_1\,|0\rangle^{\otimes n}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« l'état de sortie égale U k, jusqu'à U deux, U un, appliqués à ket zéro tenseur n » — attention: le circuit se LIT de gauche à droite mais la formule s'ÉCRIT de droite à gauche (la première porte est la plus proche du ket).</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Ton programme quantique EST un circuit. Métriques de coût: largeur (nb de qubits), profondeur (nb de couches — à comparer à T₂), nombre de portes 2-qubits (la source d'erreurs), T-count (le coût fault-tolerant). Optimiser un circuit = réduire ces quatre nombres.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Lis ce circuit 2 qubits: [H sur q0] puis [CNOT q0→q1] puis [mesures]. Traduis en formule: |ψ⟩ = CNOT·(H⊗I)·|00⟩ — note l'ordre inversé et le ⊗I (H n'agit que sur q0, l'identité complète).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Déroule: (H⊗I)|00⟩ = |+0⟩ = (|00⟩+|10⟩)/√2 → CNOT → (|00⟩+|11⟩)/√2 = Φ⁺. Deux portes, un état de Bell: le circuit de la carte 39 est formalisé.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Compte les coûts: largeur 2, profondeur 2, une porte 2-qubits. Sur un transmon (CNOT ~300 ns, T₂ ~100 μs): tu peux enchaîner ~300 CNOT avant que la décohérence ne mange tout — voilà ton budget NISQ, concret.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: circuit = produit de matrices + planning temporel. Prends l'habitude de traduire chaque diagramme en formule (et vice-versa): la moitié des bugs de débutant sont des inversions d'ordre ou des ⊗I oubliés.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit: <code>qc.draw()</code> pour voir, <code>qc.depth()</code> et <code>qc.count_ops()</code> pour chiffrer. Le transpileur (<code>transpile(qc, backend)</code>) réécrit ton circuit dans les portes natives de la machine — compare toujours la profondeur avant/après.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-6-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⟨M⟩</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La mesure dans le circuit</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La mesure clôt le circuit: chaque qubit rend UN bit, tiré selon Born sur l'état final. Un run = un échantillon; un résultat utile = des MILLIERS de runs (shots) → un histogramme. Les algorithmes sont conçus pour que cet échantillonnage suffise: soit la bonne réponse a une proba ~1, soit chaque échantillon est une pièce d'un puzzle classique.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$P(x) = |\langle x|\psi_{out}\rangle|^2, \quad x\in\{0,1\}^n$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« la probabilité de lire la chaîne de bits x égale le module carré du braket x, psi de sortie » — Born appliqué à l'état final, sur les 2ⁿ chaînes possibles.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Le goulot de sortie de tout algorithme: 2ⁿ amplitudes → n bits par run. Le design d'algorithme EST la gestion de ce goulot: Grover amplifie la proba de la cible avant de mesurer; Shor mesure une propriété GLOBALE (la période) que chaque échantillon révèle partiellement.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prépare Φ⁺ et lance 1000 shots: histogramme ≈ {'00': 500, '11': 500} ± bruit binomial (~±16). Jamais 01 ni 10 (aux erreurs près) — les corrélations de Bell, lues en direct.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Estime une valeur moyenne: ⟨Z₀⟩ = P(q0=0) − P(q0=1) ≈ (500−500)/1000 = 0 ± 0.03. Précision en 1/√shots: pour 10× mieux, 100× plus de shots — le coût de mesure est quadratique en précision.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Piège d'ordre: Qiskit affiche les bits en ordre INVERSE (q0 = bit de droite). Le '10' de l'histogramme = q1 à 1, q0 à 0. Ce piège a coûté des heures à tous les débutants — qu'il t'en coûte zéro.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: pense « distribution », jamais « la sortie »: un circuit quantique est un générateur d'échantillons programmable. La question de design est toujours: quelle distribution rend mon problème facile à échantillonner ?</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit: <code>qc.measure_all()</code>, puis <code>result.get_counts()</code>. Pour les valeurs moyennes propres: <code>Estimator</code> (primitive dédiée); pour les histogrammes: <code>Sampler</code>.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-6-7">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">{H,T,CX}</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'universalité</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Théorème: {H, T, CNOT} suffit à approximer N'IMPORTE QUELLE unitaire sur n qubits à précision arbitraire — l'analogue quantique du « NAND suffit ». Et Solovay-Kitaev garantit que l'approximation est EFFICACE (polylog en la précision). Trois portes = tout le calcul quantique.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\forall U\ \exists\ \text{circuit } \{H,T,\mathrm{CNOT}\}: \ \|U - U_{circuit}\| &lt; \varepsilon$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« pour toute unitaire U, il existe un circuit en H, T et CNOT qui l'approche à epsilon près » — un jeu de portes fini engendre le continu des unitaires.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">C'est le contrat hardware/software: un constructeur n'implémente que quelques portes natives calibrées, le compilateur traduit tout le reste. C'est aussi la porte d'entrée du fault-tolerant: on sait protéger H, S, CNOT facilement, T difficilement — d'où le T-count comme monnaie (carte 49).</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Sens l'enjeu: les unitaires forment un CONTINU (des angles réels), un jeu de portes est FINI — comment couvrir le continu ? Comme les décimales couvrent les réels: par approximations de plus en plus fines.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Vois la mécanique: H et T ne commutent pas → leurs produits (HT, THT, HTHT...) densifient la sphère des rotations 1-qubit. Une rotation Rz(0.3217...) se compile en une séquence H/T de ~50-100 portes pour ε = 10⁻¹⁰.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Ajoute CNOT: il apporte l'intrication et permet de « téléporter » ces rotations sur n'importe quel sous-ensemble de qubits → toute unitaire n-qubits se décompose (portes 1-qubit + CNOT), puis chaque 1-qubit se compile en H/T.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: la pile logicielle quantique existe grâce à ce théorème: ton algorithme abstrait → décomposition → portes natives → impulsions micro-ondes. Chaque étage est un théorème devenu compilateur.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit, regarde <code>backend.configuration().basis_gates</code> (souvent ['rz','sx','x','ecr']) puis <code>transpile()</code>: tu verras l'universalité au travail — ton H devient rz-sx-rz.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-6-8">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Φ⁺!</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Créer un état de Bell (le hello world)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">H puis CNOT sur |00⟩ = la recette canonique de l'intrication: H ouvre la superposition sur le contrôle, CNOT la propage en corrélation. Deux portes, et tu as fabriqué l'objet le plus non-classique de la physique. LE premier circuit à exécuter sur du vrai hardware.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\mathrm{CNOT}\cdot(H\otimes I)\,|00\rangle = \tfrac{1}{\sqrt2}(|00\rangle+|11\rangle)$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« CNOT, fois H tenseur identité, appliqué à ket zéro-zéro, égale un sur racine de deux, ket zéro-zéro plus ket un-un » — Hadamard puis CNOT fabriquent phi-plus.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Les 4 états de Bell s'obtiennent par variantes (X ou Z avant): c'est la sous-routine « create entanglement » de la téléportation, du superdense coding et de tous les protocoles réseau. En sens inverse (CNOT puis H), le même circuit MESURE en base de Bell.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Étape 1 — H sur q0: |00⟩ → (|00⟩ + |10⟩)/√2. Le contrôle est en superposition, la cible encore vierge: état PRODUIT (vérifie: ad−bc = 0).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Étape 2 — CNOT: le terme |00⟩ ne bouge pas, le terme |10⟩ devient |11⟩ → (|00⟩ + |11⟩)/√2. Test de séparabilité: ad − bc = (1/√2)(1/√2) − 0 ≠ 0 → INTRIQUÉ.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Étape 3 — vérifie sur simulateur: counts ≈ 50% '00', 50% '11'. Puis mesure en base X (ajoute H sur les deux qubits avant mesure): counts ≈ 50% '00', 50% '11' encore — corrélés dans les DEUX bases: la signature Bell (carte 39).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Étape 4 — lance-le sur un vrai backend IBM (gratuit): tu verras ~2-5% de '01'/'10' parasites. Ce pourcentage EST le bruit du hardware — ta première mesure de fidélité réelle.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: en 4 étapes tu as créé, vérifié et caractérisé de l'intrication sur une machine quantique réelle. Peu de « hello world » ont cette profondeur.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Généralisation immédiate: H + chaîne de CNOT = état GHZ (|0...0⟩+|1...1⟩)/√2 sur n qubits — le benchmark d'intrication multi-qubits que tout nouveau hardware publie.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-6-9">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">📡</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La téléportation quantique</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Transférer un état INCONNU |ψ⟩ d'Alice à Bob sans le déplacer physiquement: consomme 1 paire de Bell + 2 bits classiques. Alice mesure (en base de Bell) son qubit et |ψ⟩, envoie 2 bits; Bob corrige (I, X, Z ou XZ) — et détient |ψ⟩ exactement. Compatible avec non-clonage: l'original est détruit par la mesure d'Alice.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\psi\rangle_A \otimes |\Phi^+\rangle_{AB} \ \xrightarrow{\text{mesure Bell + 2 bits}}\ |\psi\rangle_B$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« l'état psi chez Alice, tenseur une paire de Bell partagée, devient — après mesure de Bell et envoi de deux bits classiques — l'état psi chez Bob ».</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Pas un gadget: LA primitive des réseaux quantiques (répéteurs: on téléporte de proche en proche), du calcul distribué, et du « gate teleportation » qui exécute les portes T en fault-tolerant. L'intrication + des bits classiques = un câble quantique.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Pose le système (3 qubits): |ψ⟩ = α|0⟩+β|1⟩ chez Alice, et Φ⁺ partagé. État global: (α|0⟩+β|1⟩)⊗(|00⟩+|11⟩)/√2.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Développe et REGROUPE dans la base de Bell des deux qubits d'Alice: l'algèbre (fais-la une fois, 6 lignes) donne: ½[ Φ⁺(α|0⟩+β|1⟩) + Φ⁻(α|0⟩−β|1⟩) + Ψ⁺(α|1⟩+β|0⟩) + Ψ⁻(α|1⟩−β|0⟩) ] — le qubit de Bob porte déjà ψ, à une correction près.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Alice mesure en base Bell (CNOT+H+mesures): elle obtient 2 bits au hasard (4 cas équiprobables) et les envoie. Note: SES résultats ne dépendent pas de ψ — elle n'apprend RIEN sur l'état (Born la protège).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Bob corrige selon les bits: 00→rien, 01→X, 10→Z, 11→ZX. Dans les quatre cas: son qubit devient α|0⟩+β|1⟩ = ψ, exactement, amplitudes complexes comprises.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: rien ne voyage plus vite que la lumière (les 2 bits sont indispensables), rien n'est copié (le ψ d'Alice est détruit), et pourtant un état quantique a changé de lieu. Code-le en Qiskit — 10 lignes — c'est le rite de passage du niveau 6.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Le circuit type est dans tous les tutoriels Qiskit (« teleportation »). Variante à connaître: l'« entanglement swapping » — téléporter de l'intrication elle-même — la brique des répéteurs longue distance.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

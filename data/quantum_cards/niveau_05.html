@@ -1,0 +1,325 @@
+<div class="space-y-6 qa-level" data-qa-level="quantum:5">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">QUANTUM ACADEMY &middot; Niveau 5 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Intrication et fondations</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: ⊗, états de Bell, non-clonage, inégalités de Bell, matrice densité, décohérence — ce qui rend le quantique VRAIMENT différent.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">8 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-5-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⊗</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">États composés et séparabilité</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Deux qubits indépendants: l'état global est un PRODUIT |ψ⟩⊗|φ⟩ — chacun garde sa description propre. Mais l'espace ℂ⁴ contient bien plus que les produits: la plupart de ses états ne se factorisent PAS. Ces états non-séparables sont les états intriqués — la carte suivante.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\Psi\rangle_{AB} = |\psi\rangle_A \otimes |\varphi\rangle_B \quad(\text{séparable})$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« l'état global A B égale ket psi de A, tenseur, ket phi de B » — quand cette factorisation existe, l'état est dit séparable ou produit.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Point de départ de tout circuit: |00...0⟩ = |0⟩⊗...⊗|0⟩, parfaitement séparable. Les portes à 1 qubit préservent la séparabilité; seules les portes à 2 qubits (CNOT...) peuvent la briser — c'est pourquoi elles sont indispensables ET les plus difficiles à faire proprement.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Fabrique un produit: (α|0⟩+β|1⟩)⊗|0⟩ = α|00⟩ + β|10⟩. Quatre amplitudes: (α, 0, β, 0).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Teste la séparabilité d'un état donné (a,b,c,d) sur |00⟩,|01⟩,|10⟩,|11⟩: il est produit ssi ad = bc (le déterminant 2×2 des amplitudes s'annule).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique le test: (1,0,0,1)/√2 → ad − bc = 1/2 − 0 ≠ 0 → NON séparable. Cet état (c'est Φ⁺, carte suivante) ne peut pas s'écrire « qubit A dans tel état, qubit B dans tel état ».</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: la séparabilité est l'exception, pas la règle: dans ℂ⁴ les produits forment une surface de mesure nulle. Le « normal » quantique, c'est l'intrication — notre intuition « chaque objet a son état » est le cas particulier.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Le critère ad = bc est ton test rapide à 2 qubits. Au-delà: calcul de l'entropie d'intrication via la trace partielle (carte 44) — <code>qiskit.quantum_info.entropy</code>.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-5-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Φ⁺</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les états de Bell</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Les quatre états de Bell — Φ± = (|00⟩±|11⟩)/√2 et Ψ± = (|01⟩±|10⟩)/√2 — sont les états MAXIMALEMENT intriqués de deux qubits, et forment une base de ℂ⁴. Chaque qubit pris seul est totalement aléatoire, mais les deux sont parfaitement corrélés: toute l'information est dans la RELATION.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\Phi^+\rangle = \tfrac{1}{\sqrt2}\big(|00\rangle + |11\rangle\big)$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« ket phi plus égale un sur racine de deux, ket zéro-zéro plus ket un-un » — superposition de « les deux à 0 » et « les deux à 1 », sans terme croisé.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">LA ressource standard: téléportation (carte 55), superdense coding, tests de Bell, répéteurs quantiques, distribution de clés E91. « Distribuer des paires de Bell » est le service de base d'un futur internet quantique. Se prépare en deux portes: H puis CNOT (carte 54).</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Mesure les deux qubits de Φ⁺ en base Z: amplitudes non nulles seulement sur 00 et 11 → résultats possibles: 00 (50%) ou 11 (50%). JAMAIS 01 ni 10: corrélation parfaite.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Regarde un qubit seul: P(A=0) = 50%, P(A=1) = 50% — pile ou face parfait. Le qubit A seul ne contient AUCUNE information; c'est le couple qui en contient.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Mesure maintenant en base X (les deux qubits): réécris Φ⁺ dans la base |±⟩ → Φ⁺ = (|++⟩+|−−⟩)/√2 → corrélation parfaite AUSSI en X ! Des variables classiques corrélées ne peuvent pas faire ça dans deux bases incompatibles — c'est le germe de Bell (carte 42).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: l'intrication maximale = corrélations parfaites dans plusieurs bases à la fois, avec des parts individuelles vides. « Le tout est défini, les parties ne le sont pas » — la phrase qui résume la non-classicité.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit, la paire de Bell en 2 lignes: <code>qc.h(0); qc.cx(0,1)</code>. C'est le « hello world » du QC — et le circuit que tu lanceras en premier sur du vrai hardware (niveau 10).</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-5-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⧉</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'intrication</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Deux systèmes sont intriqués quand leur état global ne se factorise pas: aucune description individuelle complète n'existe. Les mesures sur A et B montrent des corrélations plus fortes que tout modèle classique local (Bell). Attention: ça ne transmet AUCUN signal — les résultats locaux restent aléatoires.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\Psi\rangle_{AB} \ne |\psi\rangle_A \otimes |\varphi\rangle_B$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« l'état global n'est pas égal à un produit tensoriel d'états individuels » — la définition de l'intrication est une NON-factorisation.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">La ressource qui sépare le QC du calcul classique: sans intrication, un circuit se simule efficacement. Aussi: métrologie augmentée (horloges intriquées), réseaux quantiques, et le phénomène derrière le Nobel 2022 (Aspect, Clauser, Zeilinger).</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Désamorce le paradoxe du « signal instantané »: Alice (Paris) et Bob (Tokyo) partagent Φ⁺. Alice mesure: elle obtient 0 ou 1 à 50/50. Bob mesure: 0 ou 1 à 50/50. CHACUN ne voit que du hasard pur.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">La corrélation n'apparaît qu'en COMPARANT les carnets de résultats — ce qui exige un canal classique (téléphone), limité par la vitesse de la lumière. Aucune information ne voyage par l'intrication seule.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">L'analogie des gants (et sa limite): deux gants d'une paire envoyés au hasard — ouvrir sa boîte « révèle » l'autre. MAIS les gants avaient une valeur définie à l'avance; les qubits NON (c'est prouvable: carte Bell). L'intrication = des gants qui choisissent leur main à l'ouverture, de façon coordonnée, dans plusieurs bases.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: intrication = corrélations sans valeurs préexistantes ni communication. Tiens ces trois mots ensemble — chaque vulgarisation qui en lâche un raconte n'importe quoi.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Pour quantifier: entropie d'intrication (pour les états purs), négativité ou concurrence (mixtes) — <code>qiskit.quantum_info</code> les calcule. En pratique circuit: la profondeur en portes 2-qubits ≈ ton budget d'intrication.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-5-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⊘</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le théorème de non-clonage</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Il n'existe AUCUNE opération quantique qui copie un état inconnu: U|ψ⟩|0⟩ = |ψ⟩|ψ⟩ pour tout |ψ⟩ est impossible. Preuve en trois lignes par la linéarité. Conséquences énormes: pas de backup d'état, pas d'amplification naïve, sécurité de la crypto quantique, et la correction d'erreur doit ruser.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\nexists\,U:\ U\,|\psi\rangle|0\rangle = |\psi\rangle|\psi\rangle \ \ \forall|\psi\rangle$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« il n'existe pas d'unitaire U tel que U appliqué à psi-zéro donne psi-psi, pour tout psi » — la copie universelle d'états quantiques est interdite.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">BB84 est sûr PARCE QUE l'espion ne peut pas copier les photons avant de les mesurer. Les répéteurs quantiques ne peuvent pas « réamplifier » comme en fibre classique (d'où la téléportation). Et la correction d'erreur quantique (niveau 8) doit protéger SANS copier — son tour de force.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Fais la preuve toi-même, par linéarité. Suppose que U clone les états de base: U|0⟩|0⟩ = |0⟩|0⟩ et U|1⟩|0⟩ = |1⟩|1⟩.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique U à la superposition |+⟩|0⟩ = (|0⟩+|1⟩)|0⟩/√2. Par LINÉARITÉ: U donne (|00⟩ + |11⟩)/√2 — un état de Bell !</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Compare à ce qu'exigerait le clonage: |+⟩|+⟩ = (|00⟩+|01⟩+|10⟩+|11⟩)/2. Les deux résultats sont DIFFÉRENTS → contradiction. U clonait les états de base mais intrique les superpositions. CQFD.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: la linéarité de la mécanique quantique interdit la photocopieuse. Note la beauté: le même mécanisme (linéarité) qui donne la superposition retire la copie — les pouvoirs et les interdits quantiques ont la même source.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Nuance à connaître: on peut cloner les états d'une base CONNUE (c'est un CNOT), et faire des copies approximatives (fidélité ≤ 5/6). C'est la copie PARFAITE et UNIVERSELLE qui est interdite.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-5-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">S≤2</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les inégalités de Bell (CHSH)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Bell a rendu la métaphysique expérimentale: si les résultats étaient déterminés à l'avance par des variables cachées locales, alors une certaine combinaison de corrélations S vérifierait |S| ≤ 2. Le quantique prédit jusqu'à 2√2 ≈ 2.83 — et les expériences donnent 2.7+. La nature VIOLE Bell: pas de réalisme local.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$S = E(a,b) - E(a,b') + E(a',b) + E(a',b') \qquad |S|\le 2 \ \text{(classique)}, \ \le 2\sqrt2 \ \text{(quantique)}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« S égale E de a b, moins E de a b prime, plus E de a prime b, plus E de a prime b prime » — quatre corrélations mesurées avec deux réglages de chaque côté. « Classiquement, S est borné par deux; quantiquement, par deux racine de deux ».</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Le test de Bell certifie l'intrication SANS faire confiance aux appareils (device-independent): base de la crypto DI-QKD et de la certification d'aléa quantique. Les tests « loophole-free » de 2015 ont fermé le débat; Nobel 2022.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Le montage: Alice et Bob partagent des paires de Bell. Alice mesure au hasard selon l'angle a (0°) ou a' (45°); Bob selon b (22.5°) ou b' (67.5°). Résultats: ±1. On répète des milliers de fois.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule chaque corrélation quantique: E(θ_A, θ_B) = cos[2(θ_A − θ_B)] pour des photons. E(a,b) = cos45° = 0.707; E(a,b') = cos(−135°)... attention: = −0.707; E(a',b) = 0.707; E(a',b') = 0.707.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Assemble S = 0.707 − (−0.707) + 0.707 + 0.707 = 2.83 = 2√2 → VIOLATION de |S| ≤ 2, maximale (borne de Tsirelson).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Comprends ce qui meurt: |S| ≤ 2 découle UNIQUEMENT de « les résultats préexistent (réalisme) et ne dépendent pas du choix distant (localité) ». S = 2.83 ⟹ au moins une des deux hypothèses est fausse. Pas d'échappatoire.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: les corrélations quantiques ne sont pas « des corrélations classiques plus fortes » — elles sont d'une autre NATURE, prouvablement. Refais ce calcul de S une fois seul: c'est le calcul le plus philosophiquement chargé que tu feras jamais en quatre cosinus.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Tu peux VIOLER Bell toi-même sur du hardware IBM gratuit (~30 lignes de Qiskit, S ≈ 2.5 avec le bruit). À faire absolument au niveau 10 — peu d'expériences changent autant ta relation au réel.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-5-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">ρ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La matrice densité</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">ρ généralise le ket aux situations d'IGNORANCE: un mélange statistique d'états (50% |0⟩, 50% |1⟩) n'est pas une superposition — c'est ρ = Σpᵢ|ψᵢ⟩⟨ψᵢ|. État pur: ρ = |ψ⟩⟨ψ|, Tr(ρ²) = 1. Mixte: Tr(ρ²) &lt; 1. C'est le langage obligatoire dès qu'il y a du bruit — donc tout le hardware réel.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\rho = \sum_i p_i\,|\psi_i\rangle\langle\psi_i| \qquad \langle A\rangle = \mathrm{Tr}(\rho A) \qquad \mathrm{Tr}(\rho^2)\le 1$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« rho égale la somme des p i, ket psi i bra psi i » — un mélange pondéré de projecteurs. « La moyenne de A égale la trace de rho A », et « la pureté, trace de rho carré, vaut un pour un état pur, moins pour un mixte ».</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Tout qubit réel est un ρ (le bruit mélange). Les simulateurs de bruit travaillent en ρ (density matrix simulation). La tomographie d'état reconstruit ρ expérimentalement. Sur la sphère de Bloch: pur = surface, mixte = intérieur, ρ = I/2 = centre (ignorance totale).</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Compare LA superposition |+⟩ et LE mélange 50/50 de |0⟩ et |1⟩ — le distinguo le plus important du niveau.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Écris les matrices: ρ_sup = |+⟩⟨+| = ½[[1,1],[1,1]]; ρ_mix = ½|0⟩⟨0| + ½|1⟩⟨1| = ½[[1,0],[0,1]]. Les termes HORS-diagonale (les « cohérences ») font toute la différence.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Mesure en Z: les deux donnent 50/50 — indistinguables. Mesure en X: ρ_sup donne + avec certitude (⟨+|ρ_sup|+⟩ = 1); ρ_mix donne 50/50 (⟨+|ρ_mix|+⟩ = ½). La superposition a une phase, le mélange n'en a pas.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule les puretés: Tr(ρ_sup²) = 1 (pur); Tr(ρ_mix²) = ½ (maximalement mixte pour un qubit).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: cohérences = « quanticité » disponible; leur mort = la décohérence (carte suivante) qui transforme littéralement ρ_sup en ρ_mix. Tu as maintenant l'outil pour la décrire.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit: <code>DensityMatrix(qc)</code>, et les simulateurs bruités (<code>AerSimulator(noise_model=...)</code>) travaillent en ρ. Coût: 4ⁿ éléments au lieu de 2ⁿ — la simulation bruitée plafonne ~15 qubits sur ta machine.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-5-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Tr_B</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La trace partielle</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Tr_B « oublie » le sous-système B: ρ_A = Tr_B(ρ_AB) = tout ce qu'un observateur limité à A peut savoir. Résultat spectaculaire: la partie A d'un état de Bell PUR est maximalement MIXTE (ρ_A = I/2) — l'intrication vue de l'intérieur ressemble à du bruit.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\rho_A = \mathrm{Tr}_B(\rho_{AB}) \qquad \text{Bell: } \rho_A = \tfrac{I}{2}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« rho A égale la trace partielle sur B de rho A B » — on somme sur les états de B pour ne garder que la description réduite de A.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">L'outil qui relie intrication et entropie: S(ρ_A) mesure l'intrication d'un état pur AB. C'est aussi le cœur conceptuel de la décohérence (l'environnement = un B qu'on trace) et du paradoxe de l'information des trous noirs — le même calcul, de ton simulateur à Hawking.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends Φ⁺ = (|00⟩+|11⟩)/√2, donc ρ_AB = |Φ⁺⟩⟨Φ⁺| — un état PUR (pureté 1).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Trace sur B (recette: garde les blocs diagonaux en B): ρ_A = ½(|0⟩⟨0| + |1⟩⟨1|) = I/2.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Interprète: la pureté de A = Tr((I/2)²) = ½ → maximalement mixte ! Le tout est parfaitement défini, la partie est du bruit blanc — l'énoncé mathématique exact du « toute l'information est dans la relation » (carte 39).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Quantifie: l'entropie de von Neumann S(ρ_A) = −Tr(ρ_A log ρ_A) = log 2 = 1 bit → « 1 ebit » d'intrication, la valeur maximale pour des qubits.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: intrication du tout ⟺ mixité des parties: ce dictionnaire est l'un des plus féconds de la physique moderne (matière condensée, gravité quantique, et tes tenseurs networks).</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En code: <code>qiskit.quantum_info.partial_trace(state, [1])</code>. Réflexe d'analyse: pour savoir si tes qubits sont intriqués en simulation, trace et regarde la pureté du réduit.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-5-7">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">T₂</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La décohérence</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Un qubit n'est jamais seul: il s'INTRIQUE avec son environnement, et vu de l'intérieur (trace partielle !) ses cohérences s'évanouissent exponentiellement — la superposition devient mélange classique. Ce n'est pas un « collapse mystérieux »: c'est de l'intrication non désirée. Temps caractéristique: T₂.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\rho_{01}(t) = \rho_{01}(0)\,e^{-t/T_2}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« l'élément de cohérence rho zéro-un décroît en e puissance moins t sur T deux » — les termes hors-diagonale de la matrice densité fondent avec la constante de temps T₂.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">LA raison pour laquelle le QC est difficile: tout calcul doit finir avant ~T₂ (50-500 μs sur les transmons actuels). Explique aussi pourquoi le monde macroscopique paraît classique: un grain de poussière décohère en 10⁻³¹ s — les superpositions de chats meurent avant d'exister.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Suis le mécanisme sur un qubit dans |+⟩ qui interagit avec UN photon de l'environnement: l'interaction copie l'info de base → état global (|0⟩|e₀⟩ + |1⟩|e₁⟩)/√2 — qubit et environnement INTRIQUÉS.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Trace l'environnement (personne ne le suit): ρ_qubit a ses cohérences multipliées par ⟨e₀|e₁⟩. Si l'environnement distingue bien les deux branches (⟨e₀|e₁⟩ ≈ 0): cohérences MORTES → ρ ≈ mélange 50/50. Exactement la transformation ρ_sup → ρ_mix de la carte 43.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Multiplie: des milliards d'interactions par seconde → ⟨e₀|e₁⟩ⁿ → décroissance exponentielle: voilà le e^{−t/T₂}. Chaque photon perdu, chaque phonon = une petite « mesure » que fait l'environnement.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: la décohérence = l'environnement qui « mesure » sans arrêt. Elle explique l'apparence classique du monde SANS résoudre le problème de la mesure (pourquoi UN résultat ?) — sois précis sur cette limite, les vulgarisations la franchissent à tort.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Les deux temps du hardware (niveau 8): T₁ (relaxation, |1⟩ tombe vers |0⟩: perte d'ÉNERGIE) et T₂ (déphasage, perte de PHASE), avec T₂ ≤ 2T₁. Compare-les au temps de porte (~20-100 ns): le ratio te dit combien d'opérations tiennent dans un calcul.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

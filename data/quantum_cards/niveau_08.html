@@ -1,0 +1,277 @@
+<div class="space-y-6 qa-level" data-qa-level="quantum:8">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">QUANTUM ACADEMY &middot; Niveau 8 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Bruit, erreurs et hardware</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: le monde réel — T1/T2, fidélité, codes correcteurs, qubit logique, les plateformes physiques, l'ère NISQ.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">7 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-8-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">T₁,T₂</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les temps de cohérence T₁ et T₂</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">T₁ = temps de relaxation: |1⟩ retombe vers |0⟩ (perte d'ÉNERGIE). T₂ = temps de déphasage: la phase de la superposition se brouille (perte de COHÉRENCE), avec T₂ ≤ 2T₁. Le ratio T₂/temps-de-porte = combien d'opérations tiennent dans un calcul: LE chiffre de mérite d'un qubit.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$P_{|1\rangle}(t) = e^{-t/T_1} \qquad \rho_{01}(t) \propto e^{-t/T_2}, \quad T_2 \le 2T_1$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« la population de ket un décroît en e puissance moins t sur T un »; « la cohérence décroît en e puissance moins t sur T deux, avec T deux au plus égal à deux T un ».</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Chiffres 2025-2026 à connaître: transmons T₁,T₂ ~ 50-500 μs, portes ~20-300 ns → budget ~10³-10⁴ opérations; ions piégés: T₂ ~ secondes-minutes, portes ~10-100 μs → budget similaire mais tempo lent. Ces deux nombres ouvrent chaque spec sheet.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Mesure T₁ (protocole réel): prépare |1⟩ (porte X), attends un délai t variable, mesure. Trace P(1) vs t → exponentielle décroissante → T₁ = le temps du facteur 1/e.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Mesure T₂ (Ramsey): H → attente t → H → mesure. La superposition accumule une phase pendant t; les franges d'oscillation s'amortissent en e^{−t/T₂}. (L'écho de Hahn — un X au milieu — refocalise le bruit lent et donne le T₂ « echo », plus long.)</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule un budget: T₂ = 100 μs, CNOT = 300 ns → ~330 CNOT max, et en pratique ~50-100 avant que la fidélité globale ne s'effondre (les erreurs se multiplient). Ton circuit de profondeur 200 en portes 2-qubits ? Mort-né sur cette machine.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: T₁/T₂ transforment le « quantique » en ingénierie chiffrable: profondeur de circuit × temps de porte ≪ T₂, sinon rien. Le premier calcul à faire avant TOUT projet hardware.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Les backends IBM publient T₁/T₂ par qubit en temps réel (<code>backend.properties()</code>). Réflexe: choisis tes qubits (le mapping) selon ces valeurs — elles varient du simple au triple sur une même puce.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-8-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">F</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La fidélité</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">F mesure « à quel point deux états (ou une porte et son idéal) se ressemblent »: F = |⟨ψ_idéal|ψ_réel⟩|² pour les états. Fidélité de porte 99.9% = une erreur toutes les 1000 opérations. Les erreurs se COMPOSENT: un circuit de 100 portes à 99% ≈ 0.99¹⁰⁰ ≈ 37% de réussite. La comptabilité impitoyable du NISQ.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$F = |\langle\psi_{ideal}|\psi_{reel}\rangle|^2 \qquad F_{circuit} \approx \prod_i F_i$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« la fidélité égale le module carré du recouvrement entre l'état idéal et l'état réel »; « la fidélité d'un circuit est environ le produit des fidélités de ses portes ».</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">LE tableau de bord du hardware: 1-qubit ~99.9-99.99%, 2-qubits ~99-99.9% (ions au sommet), mesure ~98-99.5%. Le seuil fault-tolerant (~99.9% 2-qubits, carte 67) est L'objectif de toute l'industrie — on y arrive tout juste.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Compose les erreurs: circuit de 50 CNOT à F = 99.5% → 0.995⁵⁰ ≈ 0.78 → 22% des runs sont corrompus. À 99.9%: 0.999⁵⁰ ≈ 0.95. Un facteur 5 sur l'erreur par porte = la différence entre exploitable et poubelle.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Mesure une fidélité toi-même (randomized benchmarking, l'idée): applique des séquences ALÉATOIRES de portes Clifford de longueur croissante qui devraient revenir à |0⟩; la proba de retour décroît exponentiellement avec la longueur → le taux de décroissance = l'erreur moyenne par porte, indépendamment des erreurs de mesure.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique à ton design: budget d'erreur total visé 50% → nombre max de CNOT ≈ ln(2)/ε ≈ 0.7/0.005 = 140 portes à 99.5%. Dimensionne AVANT de coder.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: la fidélité est multiplicative, ton budget est logarithmique. Chaque « 9 » supplémentaire (99% → 99.9% → 99.99%) multiplie par 10 la profondeur accessible — voilà pourquoi l'industrie se bat pour des 9.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Compare les hardwares par le couple (fidélité 2-qubits, nb de qubits) — jamais le nombre de qubits seul: 1000 qubits à 99% valent moins que 100 à 99.9% pour la plupart des usages.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-8-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">3,1</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le code de répétition</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Protéger un bit quantique SANS le copier (non-clonage !): encoder |ψ⟩ = α|0⟩+β|1⟩ dans 3 qubits comme α|000⟩+β|111⟩, puis mesurer des PARITÉS (Z₁Z₂, Z₂Z₃) qui localisent un bit-flip sans jamais lire les amplitudes. Le « syndrome » dit OÙ est l'erreur, on la corrige, la superposition survit. Le principe fondateur de toute la QEC.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\alpha|0\rangle+\beta|1\rangle \ \rightarrow\ \alpha|000\rangle+\beta|111\rangle \qquad \text{syndromes: } Z_1Z_2,\ Z_2Z_3$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« alpha ket zéro plus bêta ket un devient alpha ket zéro-zéro-zéro plus bêta ket un-un-un »; « on mesure les parités Z un Z deux et Z deux Z trois » — les syndromes, qui dénoncent l'erreur sans toucher l'information.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Le tutoriel canonique de la QEC — et son squelette conceptuel: mesurer des observables qui COMMUTENT avec l'information logique mais PAS avec les erreurs. Limite assumée: il ne corrige que les X (bit-flips); les Z (phase-flips) exigent le même code dans la base X — d'où Shor 9-qubits, puis le code de surface.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Encode: |ψ⟩|00⟩ → deux CNOT → α|000⟩+β|111⟩. Note bien: ce N'EST PAS trois copies de ψ (ce serait du clonage): c'est UN état intriqué à 3 qubits. Aucun qubit seul ne contient ψ.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Injecte une erreur: X sur le qubit 2 → α|010⟩+β|101⟩.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Mesure les syndromes: Z₁Z₂ compare les qubits 1 et 2 → différents → résultat −1. Z₂Z₃ → différents → −1. Syndrome (−1,−1) = « c'est le qubit 2 » (table: (+,+)=rien, (−,+)=q1, (−,−)=q2, (+,−)=q3). CRUCIAL: ces mesures ne révèlent RIEN sur α, β — elles commutent avec l'information logique.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Corrige: X sur le qubit 2 → α|000⟩+β|111⟩ restauré, superposition intacte. Tu viens de corriger une erreur quantique sans jamais regarder l'état.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: le tour de force tient en une phrase: on mesure les RELATIONS entre qubits (parités), pas les qubits. Ce déplacement du regard — de la valeur à la relation — est l'idée la plus élégante du domaine après Bell.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Code-le en Qiskit (5 qubits: 3 data + 2 ancillas de syndrome, ~15 lignes): l'exercice qui fait vraiment « cliquer » la QEC. Puis lis « stabilizer codes »: la généralisation systématique de ce que tu viens de faire.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-8-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⊞</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le code de surface et le seuil</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Le code de surface: une grille 2D de qubits, des parités X et Z mesurées localement en boucle — corrige bit-flips ET phase-flips, ne demande que des voisins proches (compatible puces réelles), tolère ~1% d'erreur physique. Le THÉORÈME DU SEUIL: si l'erreur physique &lt; seuil, agrandir le code écrase l'erreur logique EXPONENTIELLEMENT. La QEC n'est pas un pansement: c'est une machine à fabriquer de la perfection.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$p_L \sim \left(\frac{p}{p_{th}}\right)^{(d+1)/2} \qquad p_{th}\approx 1\%$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« l'erreur logique décroît comme, p sur p-seuil, puissance d plus un sur deux » — d étant la distance du code: sous le seuil, chaque agrandissement du code gagne un facteur constant sur l'erreur.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">LE plan de route de l'industrie (Google, IBM, la plupart des roadmaps): Google a démontré en 2023-2024 qu'agrandir son code de surface RÉDUIT bien l'erreur logique (distance 3 → 5 → 7) — la preuve expérimentale que la voie est ouverte. Coût: ~d² qubits physiques par logique.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Applique la formule avec p = 0.3% (hardware actuel haut de gamme) et p_th = 1%: ratio 0.3. Distance d = 3: p_L ~ 0.3² = 9%... par cycle: encore élevé. d = 11: p_L ~ 0.3⁶ ≈ 7×10⁻⁴. d = 25: ~10⁻⁸ — utilisable pour Shor.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Compte le prix: distance d ≈ d² qubits physiques + autant d'ancillas → d = 25 ≈ ~1200 physiques PAR qubit logique. Shor-2048 (~4000 logiques) → millions de physiques: le chiffre de la carte 62, maintenant démontré.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Comprends la mécanique du seuil: une erreur logique exige une CHAÎNE d'erreurs physiques traversant tout le code (d/2 erreurs coordonnées) — probabilité ~p^{d/2}: exponentiellement improbable si p est petit. Le code convertit « erreurs fréquentes mais locales » en « catastrophes exponentiellement rares ».</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: le théorème du seuil est LA raison de croire au QC à grande échelle: pas besoin de qubits parfaits, juste « assez bons » (&lt; 1%) et NOMBREUX. Tout le reste est de l'ingénierie — colossale, mais de l'ingénierie.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Vocabulaire de roadmap à décoder: « logical qubit » (protégé), « distance » (d), « below threshold » (le milestone Google 2024), « lattice surgery » (comment on fait des portes entre qubits logiques). Avec ces 4 termes tu lis toutes les annonces.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-8-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">L/P</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Qubit logique vs physique</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Le qubit LOGIQUE = l'abstraction parfaite (celle des algorithmes, T₂ = ∞); le PHYSIQUE = le transmon bruité du frigo. Taux de change actuel: ~100-1500 physiques par logique selon le code, la fidélité et l'objectif. TOUTE annonce hardware doit être traduite: « 1000 qubits » physiques ≈ « ~1 à quelques » logiques utiles. Le facteur 1000 que le marketing omet.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$1\ \text{qubit logique} \approx d^2 \ \text{physiques} \ (\sim 10^2\text{-}10^3)$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« un qubit logique coûte environ d carré qubits physiques » — de l'ordre de cent à mille selon la distance de code requise.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">La grille de lecture des roadmaps: IBM (Starling ~2029: ~200 logiques annoncés), Google (10⁶ physiques visés), Quantinuum (fidélités records → moins de physiques par logique), PsiQuantum (photonique, million-scale d'emblée). Compare les LOGIQUES, jamais les physiques.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Traduis une annonce: « processeur 1121 qubits » (physiques, ~99.5% 2q) → à d = 17-25 pour du calcul sérieux: ~0-2 qubits logiques pleinement corrigés → machine de RECHERCHE, pas de production. Aucun mensonge, juste deux unités différentes.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Traduis un besoin: casser RSA-2048 ≈ 4000 logiques × ~1000 = ~4 millions de physiques + des heures de cohérence logique. Chemie utile: ~100-1000 logiques. Le gouffre entre 2026 et ces chiffres EST l'état du domaine.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Repère la vraie courbe de progrès: fidélité 2-qubits (99% → 99.5% → 99.9% en dix ans) et démonstrations « below threshold » — pas le compte de qubits, qui croît vite parce qu'il est le plus facile à faire croître.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: physique/logique est LA distinction qui sépare le lecteur informé du lecteur de communiqués. Un ratio, deux courbes (fidélité, échelle), et toutes les annonces deviennent comparables.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Réflexe en lisant toute news QC: chercher « logical », « error-corrected », « below threshold » dans le texte. Absents ? L'annonce parle de physiques — divise mentalement par 1000.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-8-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">❄️</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les plateformes physiques</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Cinq grandes façons de fabriquer un qubit — supraconducteurs (transmons: rapides, industrialisables, T₂ courts), ions piégés (fidélités records, connectivité totale, lents), photons (volent à c, salle propre au lieu de frigo, portes probabilistes), atomes neutres (milliers de qubits, reconfigurables), spins silicium (compatibles CMOS). Aucun vainqueur déclaré: un TABLEAU de compromis.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Qui mise sur quoi: IBM/Google/Rigetti → transmons; IonQ/Quantinuum → ions; PsiQuantum/Xanadu → photons; Pasqal/QuEra → atomes neutres; Intel/CEA-Leti (cocorico Grenoble) → spins Si. Suivre le domaine = suivre ces cinq courses en parallèle.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Compare sur les quatre axes qui comptent — vitesse de porte: transmons ~20-300 ns ≫ ions ~10-100 μs (facteur 1000); fidélité 2q: ions ~99.9% &gt; transmons ~99.5%; connectivité: ions tout-à-tous &gt; transmons voisins-seulement (SWAP coûteux); échelle démontrée: transmons/atomes ~1000+ &gt; ions ~50-100.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Croise avec l'infrastructure: transmons = réfrigérateur à dilution 15 mK (le « chandelier » doré); ions = ultravide + lasers; photons = température ambiante mais sources/détecteurs exotiques; atomes = pinces optiques reconfigurables à la volée.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Tire la conséquence stratégique: le classement DÉPEND de l'application — algorithmes profonds et rares: ions; itérations variationnelles rapides: transmons; communication/réseaux: photons; simulation analogique de matière: atomes neutres.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: « quelle est la meilleure plateforme ? » est une question mal posée — demande « pour quelle métrique ? ». Garde le tableau à quatre axes en tête et chaque annonce hardware se range toute seule.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Pour toucher du doigt: les backends IBM (transmons) sont gratuits en accès cloud; Pasqal et Quandela offrent des accès européens. Lance ton circuit de Bell sur deux plateformes et compare les histogrammes — instructif.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-8-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">NISQ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'ère NISQ</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">NISQ (Preskill, 2018) = Noisy Intermediate-Scale Quantum: 50-1000+ qubits SANS correction d'erreur complète — trop de qubits pour être simulés exactement, trop de bruit pour les grands algorithmes. La question de l'époque: existe-t-il un usage utile dans cette fenêtre ? Réponse honnête 2026: démonstrations oui, avantage commercial démontré, toujours pas.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\text{profondeur} \times \text{erreur/porte} \lesssim 1$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« le produit de la profondeur du circuit par l'erreur par porte doit rester nettement sous un » — la contrainte de fer qui définit ce qu'on peut exécuter sans correction.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Les outils de l'ère: algorithmes variationnels courts (VQE/QAOA, niveau 9), error MITIGATION (extrapolation à bruit nul, PEC — réduire l'erreur en post-traitement sans la corriger), benchmarks de suprématie (échantillonnage). La transition « early fault-tolerant » (quelques logiques + mitigation) est le sujet chaud 2025-2027.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Chiffre la fenêtre: 100 qubits à 99.5% de fidélité 2q → profondeur exploitable ~100-200 portes 2q. Compare aux besoins: Shor-2048 ~10⁹ portes, chimie QPE ~10⁶-10⁸ → gouffre de 4 à 7 ordres de grandeur. Voilà le problème NISQ en une soustraction.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Comprends la réponse variationnelle: puisque seuls les circuits COURTS passent, on délègue le gros du travail à un optimiseur CLASSIQUE qui règle les paramètres d'un petit circuit (niveau 9) — hybrid computing, né de cette contrainte.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Comprends la mitigation (≠ correction): exécute ton circuit à bruit ×1, ×1.5, ×2 (en étirant les impulsions), puis EXTRAPOLE à bruit zéro (ZNE). Coût: plus de shots; gain: des espérances quasi-idéales sans qubits en plus. C'est du post-processing statistique — ta culture ML s'applique directement.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: NISQ = une ère de contraintes créatives, pas d'applications tueuses. Les vraies retombées à date: la SCIENCE (simulations de systèmes quantiques inédits) et la maturation de toute la pile. Calibre tes attentes là-dessus, et chaque annonce se lit sereinement.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Mots-clés à maîtriser pour la lecture: « error mitigation » vs « error correction » (post-traitement vs redondance), « ZNE », « utility-scale » (le terme IBM 2023 pour « utile scientifiquement, pas commercialement »).</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

@@ -1,0 +1,130 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+
+    <div class="bg-gradient-to-r from-rose-600 to-pink-700 p-8 rounded-2xl shadow-xl text-white">
+        <h2 class="text-3xl font-extrabold mb-4">Fonctions de Loss</h2>
+        <p class="text-lg text-rose-100 leading-relaxed">
+            La loss est la <strong>seule</strong> définition de « bien faire » que le modèle possède. Il
+            n'optimisera jamais ton intention, seulement cette formule. Choisir sa loss, c'est écrire le contrat —
+            et la plupart des échecs d'entraînement sont des contrats mal rédigés.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Régression : MSE, MAE, Huber</h3>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$\text{MSE} = \frac{1}{n}\sum_i (y_i - \hat{y}_i)^2 \qquad\qquad \text{MAE} = \frac{1}{n}\sum_i |y_i - \hat{y}_i|$$
+        </div>
+        <ul class="space-y-2 text-sm text-gray-700 list-disc list-outside ml-5 mt-4">
+            <li><strong>MSE</strong> : le carré punit les grosses erreurs de façon quadratique. Gradient
+                proportionnel à l'erreur, donc lisse et facile à optimiser. Elle prédit la <strong>moyenne</strong>
+                conditionnelle — et elle est <em>très</em> sensible aux valeurs aberrantes.</li>
+            <li><strong>MAE</strong> : gradient constant, robuste aux outliers. Elle prédit la
+                <strong>médiane</strong>. Sa dérivée est discontinue en 0, ce qui gêne près de l'optimum.</li>
+            <li><strong>Huber</strong> : quadratique près de zéro, linéaire au-delà d'un seuil <code>δ</code>. Le
+                compromis pragmatique, standard en détection d'objets (smooth L1).</li>
+        </ul>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Classification : la cross-entropy</h3>
+        <p class="text-gray-600 mb-4">
+            C'est <em>la</em> loss de classification, et elle mesure la surprise : combien de bits te coûte la
+            vérité si tu crois à la distribution prédite ?
+        </p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center space-y-1">
+            $$\text{BCE} = -\big[y\log\hat{y} + (1-y)\log(1-\hat{y})\big]$$
+            $$\text{CE} = -\sum_{k=1}^{K} y_k \log \hat{y}_k = -\log \hat{y}_{\text{classe vraie}}$$
+        </div>
+        <p class="text-gray-600 mt-4">
+            En multi-classe, l'étiquette est un one-hot : tous les termes s'annulent sauf un. La loss vaut donc
+            simplement <code>−log(probabilité attribuée à la bonne classe)</code>. Prédire 0.99 coûte 0.01 ;
+            prédire 0.01 coûte 4.6. La punition est <strong>non bornée</strong> pour une erreur confiante — c'est
+            exactement ce qu'on veut.
+        </p>
+        <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mt-4">
+            <p class="text-sm text-emerald-900">
+                <strong>Le fait à retenir :</strong> combinée à softmax, le gradient par rapport aux logits se
+                simplifie en $$\frac{\partial L}{\partial z_k} = \hat{y}_k - y_k$$
+                « prédiction moins vérité ». C'est pour cette élégance que le couple softmax + cross-entropy est
+                universel — et pourquoi les frameworks fusionnent les deux en une seule opération numériquement
+                stable (<code>cross_entropy</code> prend des <em>logits</em>, pas des probabilités).
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">L'origine commune : le maximum de vraisemblance</h3>
+        <p class="text-gray-600 mb-4">
+            MSE et cross-entropy ne sont pas deux inventions séparées. Maximiser la vraisemblance des données
+            revient à minimiser <code>−log P(données | modèle)</code>, et le produit des probabilités devient une
+            somme de logs :
+        </p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$\hat{\theta} = \arg\max_\theta \prod_i p(y_i \mid x_i, \theta) = \arg\min_\theta \sum_i -\log p(y_i \mid x_i, \theta)$$
+        </div>
+        <ul class="space-y-2 text-sm text-gray-700 list-disc list-outside ml-5 mt-4">
+            <li>Si l'on suppose un bruit <strong>gaussien</strong> sur la sortie &rarr; on retombe sur la
+                <strong>MSE</strong>.</li>
+            <li>Si l'on suppose une sortie <strong>catégorielle</strong> &rarr; on retombe sur la
+                <strong>cross-entropy</strong>.</li>
+            <li>Si l'on suppose un bruit <strong>de Laplace</strong> &rarr; on retombe sur la <strong>MAE</strong>.</li>
+        </ul>
+        <p class="text-gray-600 mt-4 text-sm">
+            Choisir une loss, c'est donc toujours poser une hypothèse sur la distribution du bruit — même quand on
+            ne s'en rend pas compte.
+        </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-rose-100 shadow-sm">
+            <h3 class="font-bold text-rose-800 mb-2">Divergence KL</h3>
+            <p class="text-sm text-gray-700">
+                <code>KL(p‖q) = Σ p log(p/q)</code> : l'écart entre deux distributions. Cœur des VAE, de la
+                distillation et de la contrainte de PPO en RLHF. Attention, elle est <strong>asymétrique</strong> :
+                KL(p‖q) ≠ KL(q‖p), et le choix du sens change le comportement (couvrir les modes ou en chercher un).
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-rose-100 shadow-sm">
+            <h3 class="font-bold text-rose-800 mb-2">Focal loss</h3>
+            <p class="text-sm text-gray-700">
+                <code>−(1−ŷ)^γ log ŷ</code> : on atténue la contribution des exemples déjà bien classés pour que
+                le signal vienne des cas durs. Conçue pour la détection d'objets, où 99 % des ancres sont du fond.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-rose-100 shadow-sm">
+            <h3 class="font-bold text-rose-800 mb-2">Contrastive / InfoNCE</h3>
+            <p class="text-sm text-gray-700">
+                Rapprocher les paires positives, éloigner les négatives dans l'espace d'embedding. Le moteur de
+                SimCLR, CLIP et de tout l'apprentissage auto-supervisé moderne.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-rose-100 shadow-sm">
+            <h3 class="font-bold text-rose-800 mb-2">Dice / IoU</h3>
+            <p class="text-sm text-gray-700">
+                En segmentation, la cross-entropy pixel par pixel ignore la structure et se fait écraser par les
+                classes majoritaires. Dice optimise directement le recouvrement des masques.
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-amber-50 border border-amber-200 p-6 rounded-xl">
+        <h3 class="font-bold text-amber-800 mb-3">Loss ≠ métrique</h3>
+        <p class="text-sm text-amber-900">
+            La loss doit être <strong>dérivable</strong> pour que la descente de gradient fonctionne. L'accuracy,
+            le F1, le BLEU ne le sont pas : ce sont des <em>métriques</em> d'évaluation. On optimise donc toujours
+            un proxy dérivable en espérant qu'il corrèle avec ce qu'on veut vraiment. Quand la corrélation casse,
+            le modèle « triche » — c'est le mécanisme central du <em>reward hacking</em>.
+        </p>
+    </div>
+
+    <div class="bg-rose-50 border border-rose-200 p-6 rounded-xl">
+        <h3 class="font-bold text-rose-800 mb-3">Le piège</h3>
+        <p class="text-sm text-rose-900">
+            Sur des classes déséquilibrées (99 % / 1 %), la cross-entropy non pondérée converge joyeusement vers
+            « toujours prédire la classe majoritaire » : 99 % d'accuracy, zéro utilité. Il faut pondérer les
+            classes, rééchantillonner, ou changer de loss. La loss ne détectera jamais toute seule que ton objectif
+            réel était de trouver les 1 %.
+        </p>
+    </div>
+
+</div>

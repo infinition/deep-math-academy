@@ -1,0 +1,291 @@
+<div class="space-y-6 qa-level" data-qa-level="quantum:4">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">QUANTUM ACADEMY &middot; Niveau 4 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Systèmes emblématiques</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: les exemples canoniques que TOUT le monde cite — puits, oscillateur, tunnel, spin ½, sphère de Bloch.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">7 concepts</span>
+            <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-700 font-bold">1 lab interactif</span>
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <div class="qa-lab" id="qa-lab-quantum-4" data-qa-lab="quantum:4">
+        <div class="qa-lab-loading">Chargement du lab interactif&hellip;</div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-4-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">n²</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le puits infini: la quantification</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Une particule enfermée dans une boîte de largeur L ne peut avoir QUE certaines énergies: Eₙ = n²π²ℏ²/2mL², n = 1, 2, 3... Comme une corde de guitare qui n'admet que ses harmoniques. La quantification n'est pas décrétée: elle ÉMERGE des conditions aux bords (ψ = 0 aux murs).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$E_n = \frac{n^2\pi^2\hbar^2}{2mL^2} \qquad \psi_n(x)=\sqrt{\tfrac{2}{L}}\sin\!\left(\tfrac{n\pi x}{L}\right)$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« E n égale n carré, pi carré, h-barre carré, sur deux m L carré » — les énergies croissent comme le CARRÉ du numéro de niveau. Et « psi n égale racine de deux sur L, sinus de n pi x sur L »: des demi-ondes empilées.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Le modèle zéro de tout confinement: électrons dans un nanofil, quantum dots (la couleur des QLED = ce n² !), et l'intuition de base des niveaux discrets qu'on retrouve dans chaque spectre.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Pose les conditions aux bords: ψ(0) = ψ(L) = 0 → seules les ondes sin(kx) avec kL = nπ survivent → k est quantifié: kₙ = nπ/L.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Convertis en énergie (particule libre dans la boîte): E = ℏ²k²/2m → Eₙ = n²π²ℏ²/2mL². La discrétisation de k ENTRAÎNE celle de E — voilà d'où vient la quantification.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule pour un électron dans L = 1 nm: E₁ = π²ℏ²/2mL² ≈ 0.38 eV; E₂ = 4E₁ ≈ 1.5 eV. La transition E₂−E₁ ≈ 1.1 eV → photon proche infrarouge: rétrécis la boîte, la couleur bleuit — c'est le réglage des quantum dots.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Note E₁ ≠ 0: même au repos, la particule garde une « énergie de point zéro » — Heisenberg interdit l'immobilité dans une boîte.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: bords + équation d'onde = spectre discret. Retiens la mécanique de l'argument: elle se transpose à tous les systèmes liés (atomes, molécules, transmons).</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Ordre de grandeur à retenir: électron dans 1 nm ~ eV (optique); dans 1 cm ~ 10⁻¹⁴ eV (rien). Le confinement nanométrique est ce qui « allume » le quantique dans les matériaux.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-4-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">ℏω(n+½)</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'oscillateur harmonique</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">LE système le plus important de la physique: tout potentiel ressemble à une parabole près de son minimum. Spectre en échelle régulière: Eₙ = ℏω(n + ½) — des barreaux également espacés de ℏω, avec une énergie de point zéro ℏω/2. Les opérateurs a et a† (annihilation/création) montent et descendent l'échelle.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$E_n = \hbar\omega\left(n+\tfrac{1}{2}\right) \qquad a^\dagger|n\rangle = \sqrt{n+1}\,|n+1\rangle$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« E n égale h-barre oméga, fois n plus un demi ». Et « a-dague ket n égale racine de n plus un, ket n plus un » — l'opérateur de création ajoute un quantum et grimpe d'un barreau.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Chaque mode du champ électromagnétique EST un oscillateur harmonique: ses barreaux sont les PHOTONS (n photons = niveau n). Les phonons, les modes des cavités micro-ondes qui lisent les qubits supraconducteurs: tout est oscillateur. Et le transmon est un oscillateur ANharmonisé (carte plus loin en creux: c'est l'anharmonicité qui isole les 2 niveaux du qubit).</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Regarde le spectre: E₀ = ℏω/2, E₁ = 3ℏω/2, E₂ = 5ℏω/2... écart CONSTANT ℏω entre voisins — l'échelle parfaite.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Comprends « photon » avec: exciter le mode du niveau n au niveau n+1 = « ajouter un photon d'énergie ℏω ». La lumière est quantifiée PARCE QUE le champ est un oscillateur.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Repère le problème pour un qubit: l'échelle étant régulière, une impulsion à fréquence ω qui excite 0→1 excite AUSSI 1→2 → impossible d'isoler deux niveaux. Le transmon ajoute une non-linéarité (jonction Josephson): l'écart 1→2 diffère de 0→1 de ~300 MHz → on peut adresser 0↔1 seul. Un qubit = un oscillateur volontairement faussé.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: maîtriser l'oscillateur = lire d'office la moitié des papiers d'optique quantique et de hardware supraconducteur. a, a†, |n⟩ (états de Fock): ce vocabulaire est partout.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Vocabulaire à reconnaître en lecture: « Fock state » |n⟩ = n quanta exactement; « coherent state » |α⟩ = l'état « le plus classique » (un laser); « anharmonicity » = ce qui fait d'un oscillateur un qubit.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-4-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">e^{−2κL}</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'effet tunnel</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Une particule d'énergie E peut traverser une barrière de hauteur V &gt; E — interdit classiquement, routinier quantiquement: la fonction d'onde ne s'annule pas dans la barrière, elle décroît exponentiellement, et il en reste de l'autre côté. Probabilité T ≈ e^{−2κL}: exponentiellement sensible à l'épaisseur.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$T \approx e^{-2\kappa L}, \qquad \kappa = \frac{\sqrt{2m(V-E)}}{\hbar}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« T environ égal à e puissance moins deux kappa L » — kappa étant « racine de deux m fois V moins E, sur h-barre »: plus la barrière est haute ou la particule lourde, plus kappa est grand et le tunnel improbable.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">La fusion du Soleil (les protons tunnellent leur répulsion), la radioactivité alpha, les mémoires flash de ton SSD (électrons tunnelés à travers l'oxyde), le microscope STM qui image les atomes — et la jonction Josephson des qubits supraconducteurs EST un élément tunnel.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends un électron avec V − E = 1 eV et une barrière de L = 0.5 nm (typique d'un oxyde mince).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule κ = √(2mΔE)/ℏ = √(2 × 9.1×10⁻³¹ × 1.6×10⁻¹⁹)/1.05×10⁻³⁴ ≈ 5.1×10⁹ m⁻¹.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">T ≈ e^{−2×5.1×10⁹×0.5×10⁻⁹} = e^{−5.1} ≈ 0.6% — faible mais très réel: avec 10¹⁵ tentatives/seconde, ça traverse en masse.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Double l'épaisseur (L = 1 nm): T ≈ e^{−10.2} ≈ 0.004% — 160× moins. Cette sensibilité exponentielle est la magie du STM: 0.1 nm de relief change le courant d'un facteur ~10 → résolution atomique.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: le tunnel n'est pas une rareté exotique: c'est l'ingénierie quotidienne du nanomètre. Retiens la loi: exponentielle en épaisseur × racine de la masse — les électrons tunnellent partout, les protons parfois, toi jamais.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Pour le QC: « Josephson junction » = deux supraconducteurs séparés par un oxyde tunnel — l'élément non-linéaire qui fabrique TOUS les qubits supraconducteurs. Quand tu lis ça, pense « effet tunnel industrialisé ».</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-4-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">½</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le spin ½</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Le spin = un moment angulaire INTERNE, sans équivalent classique (rien ne « tourne »): un degré de liberté quantique à deux états, |↑⟩ et |↓⟩. Mesuré selon N'IMPORTE quel axe, il ne donne que ±ℏ/2 — jamais entre les deux (Stern-Gerlach, 1922). C'est le qubit originel de la nature.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$S_z|\!\uparrow\rangle = +\tfrac{\hbar}{2}|\!\uparrow\rangle \qquad S_{x,y,z}=\tfrac{\hbar}{2}\,\sigma_{x,y,z}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« S z ket up égale plus h-barre sur deux, ket up » — et les trois composantes du spin sont « h-barre sur deux fois les matrices de Pauli »: le spin ½, C'EST les Pauli du niveau 2, habillés en physique.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Électrons, protons, neutrons: tous spin ½. La RMN/IRM manipule des spins nucléaires; les qubits « spin » (Si, NV centers) encodent l'information dedans; et mathématiquement, TOUT qubit — quelle que soit sa réalisation — est un spin ½ abstrait.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">L'expérience fondatrice (Stern-Gerlach): envoie des atomes à travers un champ magnétique inhomogène. Classiquement: un étalement continu. Observé: DEUX taches — le spin selon z ne prend que ±ℏ/2.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Enchaîne les mesures: mesure Sz (obtiens ↑), puis Sx (obtiens + ou − à 50/50), puis Sz à nouveau → de nouveau 50/50 ! La mesure de Sx a EFFACÉ l'information Sz: [Sz, Sx] ≠ 0, l'incompatibilité en action (carte 29).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Traduis en langage qubit: |↑⟩ = |0⟩, |↓⟩ = |1⟩; mesurer selon un axe n = mesurer l'observable n·σ. Un spin dans un champ magnétique précesse = un qubit dont la phase tourne. Dictionnaire complet.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: le spin ½ est le pont entre physique et information: chaque théorème sur les qubits est un théorème sur les spins et réciproquement. Stern-Gerlach est LA mesure projective réalisée en 1922, avant même le formalisme.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Astuce de lecture: « spin qubit », « two-level system » (TLS), « qubit » = mathématiquement interchangeables. Les papiers de RMN des années 90 sont d'excellents tutoriels de contrôle quantique déguisés.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-4-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">θ,φ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La sphère de Bloch</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">TOUT état d'un qubit se représente comme un point sur une sphère: |ψ⟩ = cos(θ/2)|0⟩ + e^{iφ}sin(θ/2)|1⟩. Pôle nord = |0⟩, sud = |1⟩, équateur = superpositions égales dont la longitude φ est la phase. Les portes = des ROTATIONS de la sphère. L'outil de visualisation n°1 du QC.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\psi\rangle = \cos\tfrac{\theta}{2}|0\rangle + e^{i\varphi}\sin\tfrac{\theta}{2}|1\rangle$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« ket psi égale cosinus de thêta sur deux, ket zéro, plus e puissance i phi, sinus de thêta sur deux, ket un » — thêta est la colatitude (0 = pôle nord), phi la longitude (la phase relative).</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Chaque porte 1-qubit se LIT sur la sphère: X = demi-tour autour de l'axe x, H = demi-tour autour de la diagonale x+z (échange pôles et équateur), Rz(φ) = rotation d'angle φ autour de z. Les trajectoires de contrôle, la décohérence (le point qui rentre vers le centre): tout se dessine ici.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Place |0⟩: θ = 0 → cos(0)|0⟩ = |0⟩ → pôle nord ✓. |1⟩: θ = π → pôle sud.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Place |+⟩: θ = π/2, φ = 0 → (|0⟩+|1⟩)/√2 → sur l'équateur, direction x. |−⟩: équateur direction −x (φ = π). |+i⟩ = (|0⟩+i|1⟩)/√2: équateur direction y (φ = π/2). Les six états cardinaux sont posés.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Note le facteur ½ piégeux: des états ORTHOGONAUX (|0⟩ et |1⟩) sont DIAMÉTRALEMENT opposés sur la sphère (angle 180°, pas 90°). Le θ/2 dans la formule fait ce doublement — source d'erreur classique.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Anime: applique H à |0⟩ → saut au point |+⟩; puis Rz(π/2) → glisse le long de l'équateur vers |+i⟩; puis H → remonte vers... calcule-le au lab de ce niveau: la sphère y est interactive.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: pense chaque circuit 1-qubit comme une chorégraphie sur la sphère. C'est l'intuition géométrique qui rend les identités de portes (HZH = X, etc.) évidentes au lieu d'algébriques.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit: <code>plot_bloch_multivector(state)</code>. Limite à connaître: la sphère ne montre QU'UN qubit — l'intrication (niveau 5) n'y est pas représentable, chaque qubit intriqué apparaît « au centre » (mixte).</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-4-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">e^{−iEt/ℏ}</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les états stationnaires</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Un état propre de H n'évolue que par une phase globale e^{−iEt/ℏ}: toutes ses probabilités sont FIGÉES. « Stationnaire » = rien d'observable ne bouge. Le mouvement quantique vient exclusivement des SUPERPOSITIONS d'énergies différentes, dont les phases relatives tournent.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\psi_n(t)\rangle = e^{-iE_n t/\hbar}\,|E_n\rangle$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« psi n de t égale e puissance moins i E n t sur h-barre, fois ket E n » — l'aiguille de phase tourne à la fréquence E n sur h-barre, et c'est tout.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Les orbitales atomiques sont stationnaires: un atome isolé dans son état fondamental est ÉTERNEL (d'où la stabilité de la matière). Un qubit idéal parké dans |0⟩ ou |1⟩ ne bouge pas; en superposition, sa phase tourne à la fréquence du qubit — ce que les séquences de Ramsey mesurent.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends |ψ(0)⟩ = (|E₁⟩ + |E₂⟩)/√2 et laisse tourner: |ψ(t)⟩ = (e^{−iE₁t/ℏ}|E₁⟩ + e^{−iE₂t/ℏ}|E₂⟩)/√2.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Factorise la phase globale: ∼ (|E₁⟩ + e^{−iΔEt/ℏ}|E₂⟩)/√2 avec ΔE = E₂−E₁ → seule la phase RELATIVE compte, elle tourne à la fréquence de Bohr ΔE/h.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Chiffre pour un transmon (ΔE/h = 5 GHz): la phase relative fait un tour complet toutes les 200 picosecondes. Toute manipulation doit être synchronisée sur cette horloge — c'est le « rotating frame » des papiers de contrôle.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: statique dans les états propres, oscillant dans les superpositions — cette dichotomie EST la dynamique quantique. Une « horloge atomique » n'est rien d'autre qu'une superposition de deux niveaux dont on compte les tours de phase.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Vocabulaire de papier: « rotating frame » = on soustrait la rotation triviale e^{−iE t/ℏ} pour ne garder que la dynamique intéressante; « detuning » = l'écart entre la fréquence de ton contrôle et celle du qubit.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-4-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">↔</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le photon et la polarisation</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La polarisation d'un photon = un qubit volant: |H⟩ (horizontal) et |V⟩ (vertical) jouent |0⟩ et |1⟩; le diagonal |D⟩ = (|H⟩+|V⟩)/√2 et le circulaire = les superpositions. Un simple polariseur réalise la règle de Born en direct: loi de Malus cos²θ = |⟨θ|ψ⟩|².</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|D\rangle = \tfrac{1}{\sqrt2}(|H\rangle+|V\rangle) \qquad P(\theta)=\cos^2\theta$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« ket D égale un sur racine de deux, ket H plus ket V ». Et la loi de Malus: « la probabilité de passer un polariseur à angle thêta égale cosinus carré de thêta » — la règle de Born avec du matériel à 10 euros.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Le photon polarisé est LE qubit des communications: BB84 (crypto quantique, niveau 9), les tests de Bell photoniques (Nobel 2022), le photonic computing (Xanadu, PsiQuantum). Avantage: il vole à c et ne décohère quasiment pas; inconvénient: difficile de faire interagir deux photons.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Envoie un photon |D⟩ (45°) sur un polariseur vertical: P(passe) = |⟨V|D⟩|² = |1/√2|² = 50%. Chaque photon passe OU est absorbé — jamais « à moitié »: Born au photon près.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Le tour des trois polariseurs: H puis V = 0% de transmission (orthogonaux). INSÈRE un 45° entre les deux: H→45° (50%), 45°→V (50%) → 25% passent ! Ajouter un filtre AUGMENTE la transmission — impossible classiquement, trivial en collapse successifs.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Refais le calcul en kets: |H⟩ --mesure 45°--&gt; |D⟩ (proba ½) --mesure V--&gt; |V⟩ (proba ½). Chaque mesure REPRÉPARE l'état: le deuxième polariseur ne voit plus un |H⟩.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: pour ~20€ de filtres polarisants tu peux TOUCHER la mécanique quantique: superposition, Born, collapse, incompatibilité des bases. La meilleure expérience de intuition-building qui existe.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Dictionnaire QC: base H/V = base Z; base diagonale D/A = base X; circulaire G/D = base Y. BB84 (niveau 9) n'est QUE ce jeu de bases — tu as déjà tous les outils.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

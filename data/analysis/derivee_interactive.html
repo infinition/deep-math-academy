@@ -1,0 +1,167 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+
+    <div class="bg-gradient-to-r from-emerald-600 to-teal-700 p-8 rounded-2xl shadow-xl text-white">
+        <h2 class="text-3xl font-extrabold mb-4">Dérivée interactive : f, f′, dx, df</h2>
+        <p class="text-lg text-emerald-100 leading-relaxed">
+            Quatre objets qu'on confond tout le temps, réunis sur un seul graphe.
+            <strong>f(x)</strong> est une hauteur, <strong>f′(x)</strong> est une pente,
+            <strong>dx</strong> est un petit pas horizontal, <strong>df</strong> est la montée que la tangente
+            <em>prédit</em> pour ce pas. Manipule-les jusqu'à ce que la distinction devienne évidente.
+        </p>
+    </div>
+
+    <div id="deriv-lab">
+        <div class="dv-app">
+            <div class="dv-stage">
+                <div class="dv-hud">
+                    <span class="dv-pill"><span class="dv-dot dv-curve"></span> f(x), la hauteur</span>
+                    <span class="dv-pill"><span class="dv-dot dv-tangent"></span> f′(x), la pente</span>
+                    <span class="dv-pill"><span class="dv-dot dv-dx"></span> dx horizontal</span>
+                    <span class="dv-pill"><span class="dv-dot dv-df"></span> df vertical estimé</span>
+                    <span class="dv-pill"><span class="dv-dot dv-secant"></span> vraie variation</span>
+                </div>
+                <canvas id="dv-graph"></canvas>
+                <div class="dv-hint">
+                    Glisse le point blanc pour changer <b>x</b>. Glisse le fond pour déplacer le repère.
+                    Molette / pincement pour zoomer. La tangente jaune montre la pente instantanée.
+                </div>
+            </div>
+
+            <aside class="dv-side">
+                <h3 class="dv-title">Dérivée interactive</h3>
+                <div class="dv-subtitle">
+                    Une fonction transforme une entrée <b>x</b> en sortie <b>f(x)</b>.
+                    La dérivée <b>f′(x)</b> ou <b>df/dx</b> mesure la pente à cet endroit.
+                </div>
+
+                <div class="dv-card">
+                    <label for="dv-fn">Fonction</label>
+                    <select id="dv-fn">
+                        <option value="x4">f(x) = x⁴</option>
+                        <option value="x3">f(x) = x³</option>
+                        <option value="x2">f(x) = x²</option>
+                        <option value="sin">f(x) = sin(x)</option>
+                        <option value="cos">f(x) = cos(x)</option>
+                        <option value="exp">f(x) = eˣ / 4</option>
+                        <option value="mix">f(x) = 0.25x³ - x</option>
+                    </select>
+
+                    <div class="dv-row">
+                        <div>
+                            <label for="dv-x0">x : l'endroit sur l'axe horizontal</label>
+                            <input id="dv-x0" type="range" min="-4" max="4" step="0.001" value="1.4">
+                        </div>
+                        <div class="dv-value" id="dv-xVal">1.400</div>
+                    </div>
+
+                    <div class="dv-row">
+                        <div>
+                            <label for="dv-dx">dx : petit déplacement horizontal</label>
+                            <input id="dv-dx" type="range" min="-1.2" max="1.2" step="0.001" value="0.45">
+                        </div>
+                        <div class="dv-value" id="dv-dxVal">0.450</div>
+                    </div>
+
+                    <div class="dv-grid2">
+                        <button id="dv-centerBtn" type="button">Recentrer</button>
+                        <button id="dv-tinyBtn" type="button">Rendre dx minuscule</button>
+                    </div>
+                </div>
+
+                <div class="dv-card dv-equation">
+                    <label>Fonction originale</label>
+                    <div class="dv-math" id="dv-formula">f(x) = x^4</div>
+                    <div class="dv-big" id="dv-fx">f(1.400) = 3.842</div>
+                    <div class="dv-mini">C'est la hauteur du point sur l'axe Y.</div>
+                </div>
+
+                <div class="dv-card dv-equation dv-der">
+                    <label>Dérivée</label>
+                    <div class="dv-math" id="dv-derFormula">f′(x) = df/dx = 4x^3</div>
+                    <div class="dv-big" id="dv-fpx">f′(1.400) = 10.976</div>
+                    <div class="dv-mini">C'est la pente de la tangente jaune. Pas une hauteur.</div>
+                </div>
+
+                <div class="dv-card dv-equation dv-diff">
+                    <label>Différentielle : version « petit pas »</label>
+                    <div class="dv-math" id="dv-dfLine">df ≈ f′(x) · dx</div>
+                    <div class="dv-grid2" style="margin-top:10px">
+                        <div class="dv-metric"><b>df estimé</b><span id="dv-dfVal">4.939</span></div>
+                        <div class="dv-metric"><b>vrai Δf</b><span id="dv-dyVal">7.482</span></div>
+                    </div>
+                    <div class="dv-mini" style="margin-top:10px">
+                        Si <b>dx</b> devient très petit, <b>df</b> et le vrai <b>Δf = f(x+dx) − f(x)</b> se rapprochent.
+                    </div>
+                </div>
+
+                <div class="dv-card">
+                    <div class="dv-callout">
+                        <b>À retenir :</b><br>
+                        <span class="dv-math">f(x)</span> = la valeur / hauteur.<br>
+                        <span class="dv-math">f′(x)</span> = la pente instantanée.<br>
+                        <span class="dv-math">df/dx</span> = « variation verticale divisée par variation horizontale ».<br>
+                        <span class="dv-math">df ≈ f′(x)dx</span> = ce que la tangente prédit pour un petit déplacement.
+                    </div>
+                </div>
+
+                <div class="dv-card dv-mini">
+                    Astuce visuelle : quand la tangente jaune monte fort, <b>f′(x)</b> est positif et grand.
+                    Quand elle descend, <b>f′(x)</b> est négatif. Quand elle est plate, <b>f′(x) ≈ 0</b>.
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Ce que le graphe raconte, en une équation</h3>
+        <p class="text-gray-600 mb-4">
+            La flèche bleue est <strong>dx</strong>, la flèche orange est <strong>df</strong>, et la flèche rose
+            pointillée est la <strong>vraie</strong> variation Δf. La dérivée est exactement le rapport limite
+            entre les deux premières :
+        </p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$f'(x) = \lim_{dx \to 0} \frac{f(x+dx) - f(x)}{dx} \qquad\Longrightarrow\qquad df = f'(x)\,dx$$
+        </div>
+        <p class="text-gray-600 mt-4">
+            Clique sur <strong>« Rendre dx minuscule »</strong> et regarde les deux compteurs du bas :
+            <em>df estimé</em> et <em>vrai Δf</em> se rejoignent. C'est toute la définition de la dérivée,
+            observable en direct — et la raison pour laquelle on peut remplacer une fonction compliquée par
+            sa tangente sur un petit intervalle.
+        </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-emerald-100 shadow-sm">
+            <h3 class="font-bold text-emerald-800 mb-2">Pente nulle = optimum</h3>
+            <p class="text-sm text-gray-700">
+                Prends <code>f(x) = x²</code> et amène x sur 0 : la tangente devient horizontale, f′(x) = 0.
+                C'est exactement là que la descente de gradient s'arrête.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-emerald-100 shadow-sm">
+            <h3 class="font-bold text-emerald-800 mb-2">L'erreur d'approximation</h3>
+            <p class="text-sm text-gray-700">
+                L'écart entre df et Δf est le terme d'ordre 2 du développement de Taylor. Sur <code>x⁴</code>
+                avec un grand dx, il est énorme ; sur une droite, il est nul.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-emerald-100 shadow-sm">
+            <h3 class="font-bold text-emerald-800 mb-2">Signe = direction</h3>
+            <p class="text-sm text-gray-700">
+                f′ &gt; 0 : la fonction monte. f′ &lt; 0 : elle descend. En apprentissage, on se déplace
+                toujours dans le sens opposé au gradient pour faire baisser la loss.
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-amber-50 border border-amber-200 p-6 rounded-xl">
+        <h3 class="font-bold text-amber-800 mb-3">Le piège classique</h3>
+        <p class="text-sm text-amber-900">
+            <strong>f′(x) n'est pas une hauteur.</strong> Sur le graphe, la tangente jaune passe par le point,
+            mais sa <em>valeur</em> f′(x) ne se lit pas sur l'axe Y : c'est son inclinaison. Deux points peuvent
+            avoir la même hauteur f(x) et des dérivées opposées — essaie avec <code>sin(x)</code> en x = π/4
+            puis x = 3π/4.
+        </p>
+    </div>
+
+</div>

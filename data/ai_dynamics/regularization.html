@@ -1,0 +1,125 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+
+    <div class="bg-gradient-to-r from-teal-600 to-emerald-700 p-8 rounded-2xl shadow-xl text-white">
+        <h2 class="text-3xl font-extrabold mb-4">Régularisation &amp; Généralisation</h2>
+        <p class="text-lg text-teal-100 leading-relaxed">
+            Un réseau assez gros peut apprendre par cœur un dataset entier — y compris des étiquettes tirées au
+            hasard. Le vrai objectif n'est donc jamais de minimiser l'erreur d'entraînement, mais l'erreur sur
+            des données <strong>jamais vues</strong>. Réguler, c'est contraindre le modèle pour l'y forcer.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Le diagnostic : biais contre variance</h3>
+        <p class="text-gray-600 mb-4">
+            L'erreur attendue se décompose en trois termes, dont un est irréductible :
+        </p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$\mathbb{E}\big[(y - \hat{f}(x))^2\big] = \underbrace{\text{Biais}^2}_{\text{trop simple}} + \underbrace{\text{Variance}}_{\text{trop sensible}} + \underbrace{\sigma^2}_{\text{bruit}}$$
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+            <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                <h4 class="font-bold text-orange-800 mb-2 text-sm">Sous-apprentissage (biais élevé)</h4>
+                <p class="text-sm text-orange-900">Loss train ET val toutes deux mauvaises. Le modèle est trop
+                    petit ou trop contraint. <strong>Ne régularise pas</strong> : agrandis-le.</p>
+            </div>
+            <div class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+                <h4 class="font-bold text-rose-800 mb-2 text-sm">Sur-apprentissage (variance élevée)</h4>
+                <p class="text-sm text-rose-900">Loss train excellente, val qui remonte. Le modèle mémorise le
+                    bruit. <strong>C'est ici</strong> que la régularisation sert.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Pénalités L2 et L1</h3>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$L_{total} = L_{data} + \lambda \sum_i \theta_i^2 \quad (\text{L2}) \qquad\qquad L_{total} = L_{data} + \lambda \sum_i |\theta_i| \quad (\text{L1})$$
+        </div>
+        <ul class="space-y-2 text-sm text-gray-700 list-disc list-outside ml-5 mt-4">
+            <li><strong>L2 (weight decay, ridge)</strong> : pousse tous les poids vers zéro proportionnellement à
+                leur taille. Résultat : des poids petits et diffus, une fonction plus lisse. Son gradient est
+                <code>2λθ</code>, d'où le nom « decay » — à chaque pas on retire une fraction du poids.</li>
+            <li><strong>L1 (lasso)</strong> : gradient constant <code>λ·signe(θ)</code>, qui pousse les poids
+                exactement à zéro. Résultat : de la <strong>parcimonie</strong>, donc une sélection de features
+                implicite.</li>
+        </ul>
+        <p class="text-gray-600 mt-4 text-sm">
+            En deep learning, L2 domine largement — et se déclare via <code>weight_decay</code> dans AdamW, pas en
+            l'ajoutant à la main à la loss.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Dropout : entraîner un ensemble de réseaux</h3>
+        <p class="text-gray-600 mb-4">
+            À chaque batch, on désactive aléatoirement une fraction <code>p</code> des neurones. Le réseau ne peut
+            plus dépendre d'un neurone précis : il doit répartir l'information, ce qui casse les
+            <strong>co-adaptations</strong> fragiles.
+        </p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$\tilde{h} = \frac{m \odot h}{1-p}, \qquad m_i \sim \text{Bernoulli}(1-p)$$
+        </div>
+        <ul class="space-y-2 text-sm text-gray-700 list-disc list-outside ml-5 mt-4">
+            <li>La division par <code>1−p</code> (« inverted dropout ») garde l'espérance constante, pour que
+                l'inférence n'ait rien à corriger.</li>
+            <li><strong>Il doit être désactivé en évaluation.</strong> C'est tout l'objet de
+                <code>model.eval()</code> — l'oublier est l'erreur la plus fréquente du domaine.</li>
+            <li>Valeurs usuelles : 0.5 sur les couches denses, 0.1 dans les Transformers, souvent 0 en vision
+                moderne où BatchNorm et l'augmentation suffisent.</li>
+        </ul>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-teal-100 shadow-sm">
+            <h3 class="font-bold text-teal-800 mb-2">Early stopping</h3>
+            <p class="text-sm text-gray-700">
+                On surveille la loss de validation et on arrête dès qu'elle remonte, en gardant les meilleurs
+                poids. Gratuit, efficace, et théoriquement proche d'une pénalité L2 implicite.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-teal-100 shadow-sm">
+            <h3 class="font-bold text-teal-800 mb-2">Augmentation de données</h3>
+            <p class="text-sm text-gray-700">
+                Flips, crops, rotations, mixup, CutMix, bruit. C'est la régularisation <strong>la plus rentable</strong> :
+                elle injecte de vraies invariances plutôt que de simplement brider le modèle.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-teal-100 shadow-sm">
+            <h3 class="font-bold text-teal-800 mb-2">Label smoothing</h3>
+            <p class="text-sm text-gray-700">
+                On remplace la cible 1.0 par 0.9 et 0 par <code>0.1/(K−1)</code>. Le modèle cesse de viser une
+                confiance infinie, ce qui améliore nettement sa <strong>calibration</strong>.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-teal-100 shadow-sm">
+            <h3 class="font-bold text-teal-800 mb-2">Bruit &amp; ensembles</h3>
+            <p class="text-sm text-gray-700">
+                Bruiter les entrées, les poids ou les gradients régularise. Moyenner plusieurs modèles
+                indépendants reste la méthode la plus fiable pour réduire la variance — au prix du calcul.
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-amber-50 border border-amber-200 p-6 rounded-xl">
+        <h3 class="font-bold text-amber-800 mb-3">Double descente : la théorie classique est incomplète</h3>
+        <p class="text-sm text-amber-900">
+            La courbe en U du manuel (plus de paramètres &rarr; plus de sur-apprentissage) s'arrête au point
+            d'interpolation. Au-delà, en régime <strong>sur-paramétré</strong>, l'erreur de test
+            <em>redescend</em>. C'est pourquoi des modèles à des milliards de paramètres généralisent malgré une
+            capacité qui devrait, en théorie classique, garantir la catastrophe. Le mécanisme exact reste un
+            sujet de recherche ouvert.
+        </p>
+    </div>
+
+    <div class="bg-rose-50 border border-rose-200 p-6 rounded-xl">
+        <h3 class="font-bold text-rose-800 mb-3">Le piège</h3>
+        <p class="text-sm text-rose-900">
+            Empiler dropout + L2 fort + early stopping agressif sur un modèle qui <strong>sous-apprend</strong>
+            aggrave tout. Diagnostique d'abord : si la loss d'entraînement est déjà mauvaise, le problème n'est pas
+            la généralisation. Et régler <code>λ</code> ou <code>p</code> sur le jeu de test, c'est fuiter — il
+            faut un jeu de validation distinct.
+        </p>
+    </div>
+
+</div>

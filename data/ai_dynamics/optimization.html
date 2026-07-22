@@ -1,0 +1,138 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+
+    <div class="bg-gradient-to-r from-orange-600 to-amber-700 p-8 rounded-2xl shadow-xl text-white">
+        <h2 class="text-3xl font-extrabold mb-4">Optimiseurs : SGD, Adam et les autres</h2>
+        <p class="text-lg text-orange-100 leading-relaxed">
+            Le gradient te dit dans quelle direction descendre. Il ne te dit <strong>ni de combien</strong>,
+            <strong>ni comment amortir le bruit</strong>. Tout l'art de l'optimiseur est là — et c'est souvent ce
+            qui sépare un entraînement qui converge d'un entraînement qui diverge.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">La brique de base : SGD</h3>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$\theta_{t+1} = \theta_t - \eta \, \nabla_\theta L(\theta_t)$$
+        </div>
+        <p class="text-gray-600 mt-4">
+            « Stochastique » parce qu'on estime le gradient sur un <strong>mini-batch</strong> et non sur tout le
+            dataset. Ce bruit d'estimation n'est pas qu'un défaut : il aide à sortir des minima locaux étroits et
+            agit comme une régularisation implicite. C'est une des raisons pour lesquelles SGD généralise souvent
+            mieux qu'Adam en vision.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Momentum : de l'inertie dans la descente</h3>
+        <p class="text-gray-600 mb-4">
+            Dans une vallée étroite, SGD zigzague entre les parois et avance à peine le long du fond. Le momentum
+            accumule les gradients passés : les composantes qui changent de signe s'annulent, celles qui pointent
+            toujours dans le même sens s'additionnent.
+        </p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$v_{t+1} = \beta v_t + \nabla L(\theta_t) \qquad \theta_{t+1} = \theta_t - \eta \, v_{t+1}$$
+        </div>
+        <p class="text-gray-600 mt-4 text-sm">
+            Avec <code>β = 0.9</code>, le pas effectif est amplifié d'un facteur ~10 dans les directions
+            cohérentes. La variante <strong>Nesterov</strong> évalue le gradient au point d'arrivée anticipé :
+            un correctif qui freine avant le mur au lieu d'après.
+        </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-orange-100 shadow-sm">
+            <h3 class="font-bold text-orange-800 mb-2">AdaGrad</h3>
+            <p class="text-sm text-gray-700">
+                Un learning rate par paramètre, divisé par la racine de la somme des gradients au carré. Idéal pour
+                les features rares. Défaut : la somme ne fait que croître, le pas finit par mourir.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-orange-100 shadow-sm">
+            <h3 class="font-bold text-orange-800 mb-2">RMSProp</h3>
+            <p class="text-sm text-gray-700">
+                Remplace la somme par une moyenne mobile exponentielle. Le pas ne s'éteint plus. C'est AdaGrad
+                rendu utilisable en deep learning.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-orange-100 shadow-sm">
+            <h3 class="font-bold text-orange-800 mb-2">Adam</h3>
+            <p class="text-sm text-gray-700">
+                RMSProp + momentum, avec correction de biais. Le défaut raisonnable dans 90 % des cas, et le
+                standard absolu pour les Transformers.
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Adam en détail</h3>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center space-y-1">
+            $$m_t = \beta_1 m_{t-1} + (1-\beta_1) g_t \qquad v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2$$
+            $$\hat{m}_t = \frac{m_t}{1-\beta_1^t} \qquad \hat{v}_t = \frac{v_t}{1-\beta_2^t} \qquad
+            \theta_{t+1} = \theta_t - \eta \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \varepsilon}$$
+        </div>
+        <ul class="space-y-2 text-sm text-gray-700 list-disc list-outside ml-5 mt-4">
+            <li><code>m</code> est le moment d'ordre 1 : la direction moyenne (le momentum).</li>
+            <li><code>v</code> est le moment d'ordre 2 : l'amplitude typique du gradient, qui sert à normaliser le pas.</li>
+            <li>La <strong>correction de biais</strong> compense le fait que <code>m</code> et <code>v</code>
+                démarrent à zéro — sans elle, les premiers pas seraient ridiculement petits.</li>
+            <li>Réglages par défaut : <code>β₁ = 0.9</code>, <code>β₂ = 0.999</code>, <code>ε = 1e-8</code>.
+                On y touche rarement, sauf <code>β₂ = 0.95</code> pour les gros LLM.</li>
+        </ul>
+    </div>
+
+    <div class="bg-emerald-50 border border-emerald-200 p-6 rounded-xl">
+        <h3 class="font-bold text-emerald-800 mb-3">AdamW : la correction qui compte vraiment</h3>
+        <p class="text-sm text-emerald-900">
+            Dans Adam, ajouter la pénalité L2 au gradient la fait passer dans le dénominateur adaptatif : les
+            paramètres à gros gradient sont beaucoup moins régularisés que les autres, ce qui n'est pas du tout
+            l'intention. <strong>AdamW</strong> découple le weight decay et l'applique directement sur les poids :
+        </p>
+        <div class="bg-white/60 border border-emerald-200 rounded-lg p-3 text-center mt-3">
+            $$\theta_{t+1} = \theta_t - \eta \left( \frac{\hat{m}_t}{\sqrt{\hat{v}_t}+\varepsilon} + \lambda \theta_t \right)$$
+        </div>
+        <p class="text-sm text-emerald-900 mt-3">
+            C'est aujourd'hui le défaut pour tout entraînement sérieux de Transformer. Si tu utilises encore
+            <code>Adam(weight_decay=…)</code>, tu ne régularises probablement pas ce que tu crois.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Le learning rate schedule</h3>
+        <p class="text-gray-600 mb-4">
+            Le learning rate est <strong>l'hyperparamètre le plus important</strong>, et le faire varier vaut mieux
+            que le fixer :
+        </p>
+        <ul class="space-y-2 text-sm text-gray-700 list-disc list-outside ml-5">
+            <li><strong>Warmup</strong> : monter linéairement de 0 au LR cible sur quelques milliers de pas. Au
+                démarrage, <code>v</code> est mal estimé et Adam produit des pas erratiques — le warmup est
+                quasi obligatoire pour les Transformers.</li>
+            <li><strong>Cosine decay</strong> : redescendre en cosinus jusqu'à ~0. Le standard actuel.</li>
+            <li><strong>Step decay</strong> : diviser par 10 à des paliers fixes. Encore courant en vision.</li>
+            <li><strong>One-cycle</strong> : monter puis redescendre agressivement, pour entraîner vite.</li>
+        </ul>
+    </div>
+
+    <div class="bg-amber-50 border border-amber-200 p-6 rounded-xl">
+        <h3 class="font-bold text-amber-800 mb-3">Réflexes de terrain</h3>
+        <ul class="space-y-2 text-sm text-amber-900">
+            <li>• <strong>La loss explose en NaN</strong> ? LR trop grand, ou pas de gradient clipping. Commence
+                par diviser le LR par 10.</li>
+            <li>• <strong>La loss stagne</strong> ? LR trop petit, ou tu es sur un plateau : augmente d'un facteur
+                3 et regarde.</li>
+            <li>• <strong>Gradient clipping</strong> (norme max 1.0) : une assurance à deux lignes contre les
+                batches pathologiques.</li>
+            <li>• <strong>Doubler le batch size</strong> : la règle empirique est de multiplier le LR par √2
+                (ou par 2 en régime linéaire).</li>
+        </ul>
+    </div>
+
+    <div class="bg-rose-50 border border-rose-200 p-6 rounded-xl">
+        <h3 class="font-bold text-rose-800 mb-3">Le piège</h3>
+        <p class="text-sm text-rose-900">
+            Adam converge plus vite que SGD sur la loss d'entraînement, mais <strong>généralise parfois moins
+            bien</strong>. En vision, l'état de l'art se fait encore souvent avec SGD + momentum + cosine. Ne
+            juge jamais un optimiseur sur la courbe d'entraînement seule : c'est la validation qui tranche.
+        </p>
+    </div>
+
+</div>

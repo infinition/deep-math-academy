@@ -1,0 +1,444 @@
+<div class="space-y-6 qa-level" data-qa-level="deep:9">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">DEEP ACADEMY &middot; Niveau 9 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Frontière de la recherche</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: les familles avancées: <b>RL, génératif, self-supervisé (JEPA), calibration, conformal prediction, scaling laws</b>. Le vocabulaire des papiers de 2024-2026.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">10 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-9-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">π(a|s)</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le RL : agent, récompense, policy</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Un <b>agent</b> observe un état s, choisit une action a selon sa <b>policy</b> π(a|s), reçoit une <b>récompense</b> r, et cherche à maximiser la somme des récompenses futures (actualisées par γ). Apprendre par essai-erreur, sans exemples étiquetés.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\max_\pi\ \mathbb{E}\left[\sum_t \gamma^t r_t\right]$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">AlphaGo, robotique, trading (ton domaine ORBIT), gestion de datacenter, et surtout: le RLHF qui aligne les LLM. Le paradigme des problèmes séquentiels où chaque décision change le futur.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Vocabulaire à ancrer: état, action, récompense, policy, valeur, γ (poids du futur). Gym/Gymnasium pour pratiquer: CartPole est le MNIST du RL, un après-midi suffit.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># l agent apprend par essai-erreur:
+import gymnasium as gym
+env = gym.make('CartPole-v1')
+state, _ = env.reset()
+total_reward = 0
+for _ in range(200):
+    action = policy(state)          # pi(a|s): la politique
+    state, reward, done, _, _ = env.step(action)
+    total_reward += reward
+    if done:
+        break
+print(f'Recompense totale: {total_reward}')
+# le modele n a pas d etiquettes: il explore et reçoit des recompenses</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">En RL, les donnees sont GENEREES par la politique en cours d'apprentissage. C'est un cercle: la politique produit des actions, les actions produisent des etats, les etats entrainent la politique. Si la politique est mauvaise, elle genere des mauvaises donnees et s'entretient dans l'echec.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-9-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Q(s,a)</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Q-learning et Bellman</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Q(s,a) = « combien vaut faire l'action a dans l'état s, si je joue bien ensuite ». L'équation de Bellman la définit <b>récursivement</b>: valeur immédiate + valeur du meilleur futur. On l'apprend par itérations.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$Q(s,a) \leftarrow r + \gamma \max_{a'} Q(s',a')$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">DQN (Atari, 2013) a lancé le deep RL: un réseau qui approxime Q. La récursion de Bellman est l'idée mère de toute la planification: découper « bien jouer » en « bien jouer maintenant + bien jouer après ».</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Comprends la récursion de Bellman en profondeur, elle éclaire tout le RL. Analogie: la valeur d'une position aux échecs = gain immédiat + valeur de la meilleure position suivante.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># Q-learning: apprendre la valeur des actions
+# table Q: [etat, action] → valeur esperee
+Q = torch.zeros(n_etats, n_actions)
+for episode in range(1000):
+    s = env.reset()
+    while not done:
+        a = Q[s].argmax()             # meilleure action connue
+        s_next, r, done, _ = env.step(a)
+        # mise a jour de Bellman:
+        Q[s, a] = Q[s, a] + lr * (
+            r + gamma * Q[s_next].max() - Q[s, a]
+        )
+        s = s_next
+# la valeur de l etat present depend de la recompense + la valeur du futur</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">L'equation de Bellman est recursive: la valeur de l'etat maintenant = recompense immediate + valeur du meilleur etat futur (actualisee). C'est une 'recompense qui voyage dans le temps' a rebours, de la fin vers le debut de l'episode.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-9-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">RLHF</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">RLHF et DPO</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Aligner un LLM sur les préférences humaines: des humains classent des paires de réponses, on en tire un signal de récompense, et on optimise le modèle <b>sans trop s'éloigner</b> du modèle de base (pénalité KL). DPO obtient le même effet sans modèle de récompense séparé.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\max_\pi\ \mathbb{E}[r(x,y)] - \beta\, D_{KL}(\pi \| \pi_{ref})$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">La différence entre GPT-3 (brut, 2020) et ChatGPT (utilisable, 2022) est essentiellement le RLHF. Aujourd'hui: DPO, RLAIF, et le RL sur récompenses vérifiables (maths, code) qui a produit les modèles de raisonnement.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Note que la KL du niveau 4 est ici littéralement dans l'objectif: garde-fou contre le « reward hacking ». Les frontières actuelles de la recherche LLM sont à 80% des variations de cette équation.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># DPO: preference sans modele de recompense:
+# on a des paires (reponse preferee, reponse rejetee)
+# beta = force de la contrainte KL (ne pas trop s eloigner)
+def dpo_loss(pi_logps, ref_logps, pref_mask, beta=0.1):
+    pi_diff = pi_logps[pref_mask].sum(-1)
+    ref_diff = ref_logps[pref_mask].sum(-1)
+    logits = beta * (pi_diff - ref_diff)
+    # loss: -log(sigmoid(score_prefere - score_rejete))
+    loss = -F.logsigmoid(logits).mean()
+    return loss</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le RLHF peut 'reward hack': le LLM apprend a produire des textes qui maximisent le score du reward model, pas la qualite reelle. Par exemple, des textes plus longs ou avec des mots-cles qui plaisent au juge artificiel. La contrainte KL (beta) est la laisse qui empeche cette derive.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-9-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">VAE</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le VAE (auto-encodeur variationnel)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Compresser les données vers un <b>espace latent probabiliste</b> (encodeur), puis reconstruire (décodeur). La loss équilibre reconstruction fidèle et espace latent organisé en gaussienne (terme KL): on peut alors échantillonner du neuf.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$L = \underbrace{\|x - \hat x\|^2}_{\text{reconstruction}} + \underbrace{D_{KL}(q(z|x)\,\|\,\mathcal{N}(0,I))}_{\text{organisation}}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Génération, détection d'anomalies (mauvaise reconstruction = donnée anormale, très utilisé en cyber), compression. Stable Diffusion travaille DANS l'espace latent d'un VAE (d'où « latent diffusion »).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Chef-d'œuvre pédagogique: sa loss combine tes niveaux 2 (norme), 4 (KL, gaussienne) et 5 (deux objectifs en tension). Si tu peux expliquer cette formule à quelqu'un, les niveaux précédents sont acquis.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># VAE: espace latent organise:
+class VAE(nn.Module):
+    def encode(self, x):
+        mu = self.mu_enc(x)
+        logvar = self.logvar_enc(x)  # log(sigma^2)
+        return mu, logvar
+    def reparameterize(self, mu, logvar):
+        std = torch.exp(0.5 * logvar)
+        eps = torch.randn_like(std)
+        return mu + eps * std  # z tire de N(mu, sigma^2)
+    def forward(self, x):
+        mu, logvar = self.encode(x)
+        z = self.reparameterize(mu, logvar)
+        return self.decode(z), mu, logvar</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">SANS le reparameterization trick (z = mu + eps * std), on ne peut pas backpropager a travers l'echantillonnage aleatoire. Le trick deplace le hasard dans eps (une entree fixe) et garde mu et std derivables. C'est la raison pour laquelle les VAE ont fonctionne des 2013.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-9-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">G/D</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le GAN</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Deux réseaux en <b>duel</b>: un générateur fabrique des faux, un discriminateur apprend à les repérer, et chacun force l'autre à progresser. À l'équilibre, les faux sont indiscernables du réel.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\min_G \max_D\ \mathbb{E}[\log D(x)] + \mathbb{E}[\log(1 - D(G(z)))]$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">A régné sur la génération d'images 2014-2021 (StyleGAN, deepfakes), détrôné par la diffusion. Reste vivant en super-résolution, transfert de style, augmentation de données. Le min-max introduit les jeux à deux joueurs en ML. Variante réelle utilisée (non-saturating): min_G -E[log D(G(z))] où G maximise la proba de tromper D.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">À connaître pour la culture et pour l'idée adversariale, féconde bien au-delà (attaques adversariales en cyber, entraînement robuste). Notoirement instable à entraîner: tu es prévenu.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># le jeu du GAN en deux losses:
+# Discriminateur: distingue vrai du faux
+loss_D = -torch.log(D(x_real)).mean() - torch.log(1 - D(G(z))).mean()
+# Generateur: tromper le discriminateur
+loss_G = -torch.log(D(G(z))).mean()  # version non-saturating (celle qui marche)
+# a l equilibre: D ne fait pas mieux que 50%
+# car les faux sont indistinguables des vrais</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La version originale du GAN (saturating, 2014) avait loss_G = log(1 - D(G(z))). Cette loss sature: si D est tres bon, son gradient est nul et G n'apprend rien. La version non-saturating (loss_G = -log(D(G(z)))) donne toujours un gradient. Tous les GANs reels utilisent la seconde.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-9-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">ε_θ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les modèles de diffusion</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Détruire progressivement une image en bruit pur (facile), puis apprendre à <b>inverser chaque petit pas de débruitage</b> (apprenable). Générer = partir du bruit et débruiter itérativement, guidé par le texte.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$L = \mathbb{E}\left[\|\varepsilon - \varepsilon_\theta(x_t, t)\|^2\right]$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Stable Diffusion, Midjourney, DALL-E, Sora (vidéo), et de plus en plus l'audio et la biologie (structures de protéines). Le paradigme génératif dominant hors texte.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">L'insight à retenir: on ne demande jamais au réseau de créer une image d'un coup, seulement de prédire le bruit ajouté (une régression MSE toute simple, niveau 6!). La magie vient de l'itération.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># entrainer un modele de diffusion:
+# objectif: predire le bruit ajoute a l etape t
+for x_0 in dataloader:
+    t = torch.randint(0, T, (batch,))       # etape aleatoire
+    noise = torch.randn_like(x_0)            # bruit pur
+    x_t = q_sample(x_0, t, noise)            # image bruitee
+    noise_pred = model(x_t, t)               # predire LE BRUIT ajoute
+    loss = F.mse_loss(noise, noise_pred)     # simple erreur quadratique!
+# une fois entraine: generer = partir du bruit pur et debruiter pas a pas</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le modele de diffusion ne 'cree' pas une image a partir de rien: il DEBRUITE une image qui n'est que du bruit. Chaque pas retire un peu de bruit. Apres 50 a 1000 pas, l'image emerge du bruit. C'est un processus de 'sculpture inverse': enlever la matiere en trop fait apparaitre la forme.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-9-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">±pair</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'apprentissage contrastif</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Apprendre des embeddings en <b>rapprochant les paires positives</b> (deux vues du même objet) et en <b>éloignant les négatives</b>. Pas besoin de labels: les paires se fabriquent par augmentation ou co-occurrence.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$L = -\log\frac{e^{s(x,x^+)/\tau}}{\sum_j e^{s(x,x_j)/\tau}}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">CLIP (aligner images et textes: le socle de la recherche multimodale et de Stable Diffusion), SimCLR, les modèles d'embeddings de tout système RAG. La loss InfoNCE ci-contre = un softmax sur des similarités: que du connu.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Décompose la formule: s = similarité cosinus (N2), τ = température (N8), structure = cross-entropy (N4). La recherche moderne recombine sans cesse les mêmes briques: tu les as toutes.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># CLIP: aligner images et textes:
+# batch de 32 768 paires (image, legende)
+I = image_encoder(images)    # [32768, 768]
+T = text_encoder(texts)      # [32768, 768]
+logits = I @ T.T * exp(tau)   # [32768, 32768] similarites croisees
+labels = torch.arange(32768)  # la bonne paire est sur la diagonale
+loss_i = F.cross_entropy(logits, labels)   # pour les images
+loss_t = F.cross_entropy(logits.T, labels) # pour les textes
+loss = (loss_i + loss_t) / 2  # symetrique</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le batch size est l'hyperparametre le PLUS important du contrastif. Avec 32 paires, les negatifs sont trop faciles a distinguer. Avec 32 768 paires (CLIP), chaque image a 32 767 vrais negatifs → le modele doit vraiment comprendre le sens pour trouver la bonne paire.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-9-7">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">JEPA</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Self-supervisé et JEPA</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Le self-supervisé fabrique ses propres labels depuis les données brutes (prédire un mot masqué, un patch caché). JEPA (LeCun) pousse plus loin: prédire la <b>représentation abstraite</b> de la partie masquée, pas ses pixels, pour capturer le sens sans gaspiller sur les détails.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$L = \|\,s_\theta(z_{ctx}) - \bar z_{target}\,\|^2 \ \ \text{(dans l'espace latent)}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Le pré-entraînement des LLM EST du self-supervisé. I-JEPA, V-JEPA: les world models qui apprennent la physique intuitive en regardant des vidéos. C'est ton terrain de recherche direct (FluidWorld, TS-JEPA).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Piège central du domaine: le collapse (tout prédire identique). Les parades (EMA du target encoder, stop-gradient) sont le cœur technique de ces papiers: lis-les avec cette question en tête.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># JEPA: predire la representation, pas les pixels
+# 1. Decouper l image en patches
+# 2. Masquer 75% des patches
+# 3. Encodeur: traite les patches visibles
+# 4. Predictor: predit la representation des patches masques
+# 5. Target encoder: encode les patches originaux (cible)
+z_visible = encoder(x_visible)
+z_pred = predictor(z_visible, mask)   # predit le latent des masques
+z_target = target_encoder(x_target)    # le vrai latent (AVEC gradient detache)
+loss = F.mse_loss(z_pred, z_target.detach())  # MSE dans l ESPACE LATENT</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">JEPA predit en LATENT, pas en PIXEL. Pourquoi? Predire le pixel manquant force le modele a generer le bruit, les textures, les details insignifiants. Predire la REPRESENTATION du patch manquant force le modele a comprendre la semantique. Le stop-gradient (detach) empeche l'effondrement.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-9-8">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⊂α</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Calibration et conformal prediction</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Un modèle est <b>calibré</b> si « 80% de confiance » = correct 80% du temps (les réseaux modernes sont typiquement surconfiants). La prédiction conforme fournit des <b>ensembles de prédiction avec garantie</b>: le vrai label est dedans avec proba ≥ 1-α, sans hypothèse sur le modèle.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$P(y \in \hat C(x)) \ge 1 - \alpha$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Indispensable dès que les décisions coûtent cher: médecine, trading (ton meta-gate ORBIT avec conformal Mondrian!), cybersécurité. Champ en plein essor car il rend les modèles honnêtes sur leur incertitude.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Recette étonnamment simple: un set de calibration, des scores de non-conformité, un quantile. Librairie <code>MAPIE</code> en Python. Tu l'utilises déjà en production: ici tu relies la pratique à la théorie.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># prediction conforme: avoir une GARANTIE
+from mapie.classification import MapieClassifier
+
+# n'importe quel classifieur, meme mal calibre
+mapie = MapieClassifier(model, method='score')
+mapie.fit(X_cal, y_cal)  # jeu de calibration: ~1000 exemples
+
+# la prediction n'est plus une classe, mais un ENSEMBLE:
+pred_sets = mapie.predict(X_test, alpha=0.1)
+# garantie mathematique: vrai label dans l'ensemble ≥ 90%
+# si l'ensemble contient {chien, loup} → le modele hesite
+# si l'ensemble = {chien} → le modele est sur</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La prediction conforme donne une GARANTIE PROBABILISTE sans AUCUNE hypothese sur le modele. Les softmax disent 'je pense a 92%' sans que ce soit vrai. Conformal dit 'le vrai label est dans cet ensemble avec 90% de chance' et c'est une garantie mathematique, pas une estimation.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-9-9">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">L∝N⁻ᵅ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les scaling laws</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Découverte empirique majeure: la loss des LLM décroît en <b>loi de puissance</b> prévisible avec la taille du modèle, les données et le calcul. On peut prédire la performance d'un modèle à 10M\$ avant de le lancer.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$L(N) \approx \left(\frac{N_c}{N}\right)^{\alpha}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Chinchilla (2022) a montré le ratio optimal ~20 tokens par paramètre, redéfinissant comment l'industrie dépense son compute. Les scaling laws pilotent les décisions à un milliard de dollars.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Note le ∝ du niveau 0 en pleine action. Débat de recherche actuel et ouvert: jusqu'où ces lois tiennent-elles, et que scaler ensuite (données synthétiques, compute d'inférence, raisonnement) ?</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># estimer la loss d un modele plus gros avant de l entrainer:
+# loi de puissance: L(N) ≈ L_0 * (N/N_0)^(-alpha)
+# avec N=7B: L=3.2, N=13B: L=3.0, N=70B: L=2.7
+# on peut predire qu un modele 700B aura loss ≈ 2.4
+# c est comme ca que l industrie decide d investir des centaines de millions
+N = np.array([1e6, 3e6, 1e7, 3e7, 1e8])
+L = np.array([4.5, 4.2, 3.9, 3.7, 3.5])
+alpha = -np.polyfit(np.log(N), np.log(L), 1)[0]  # ≈ 0.076</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Les scaling laws sont EMPIRIQUES, pas theoriques. On ne sait pas POURQUOI elles tiennent, seulement qu'elles tiennent sur 7 ordres de grandeur. Personne ne sait si elles continuent au-dela. C'est un pari d'investissement, pas une certitude physique.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

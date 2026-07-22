@@ -105,9 +105,9 @@ function stripHtmlTags(html) {
 // ==========================================
 // GLOBAL LOGIC
 // ==========================================
-let currentCourse = 'analysis';
+let currentCourse = 'deep_cards';
+let currentModuleId = null;
 let coursesData = {};
-let visitedModules = {};
 let searchQuery = '';
 let searchIndex = [];
 let searchIndexReady = false;
@@ -139,14 +139,53 @@ function updateDarkModeIcon() {
 // ==========================================
 // GLOBAL SEARCH
 // ==========================================
+const COURSE_SECTIONS = [
+    {
+        id: 'parcours',
+        title: 'Parcours guidés',
+        description: 'À suivre dans l’ordre, du débutant à l’expert.'
+    },
+    {
+        id: 'fondations',
+        title: 'Fondations interactives',
+        description: 'Pour comprendre et manipuler chaque brique mathématique.'
+    },
+    {
+        id: 'approfondissements',
+        title: 'Labs & références',
+        description: 'Pour approfondir un sujet précis sans refaire tout le parcours.'
+    }
+];
+
 function getCourseOrder() {
-    const preferred = ['bases', 'analysis', 'algebra', 'stats', 'ml_expert', 'ai_dynamics', 'quantum'];
-    const existing = Object.keys(coursesData);
-    const ordered = preferred.filter(id => existing.includes(id));
-    existing.forEach(id => {
-        if (!ordered.includes(id)) ordered.push(id);
+    return Object.keys(coursesData).sort((a, b) => {
+        const orderA = Number.isFinite(coursesData[a].order) ? coursesData[a].order : Number.MAX_SAFE_INTEGER;
+        const orderB = Number.isFinite(coursesData[b].order) ? coursesData[b].order : Number.MAX_SAFE_INTEGER;
+        return orderA - orderB;
     });
-    return ordered;
+}
+
+function getCourseGroups() {
+    const ordered = getCourseOrder();
+    const knownSections = COURSE_SECTIONS.map(section => ({
+        ...section,
+        courseIds: ordered.filter(courseId => coursesData[courseId].section === section.id)
+    })).filter(section => section.courseIds.length);
+
+    const ungrouped = ordered.filter(courseId =>
+        !COURSE_SECTIONS.some(section => section.id === coursesData[courseId].section)
+    );
+
+    if (ungrouped.length) {
+        knownSections.push({
+            id: 'autres',
+            title: 'Autres contenus',
+            description: 'Modules complémentaires.',
+            courseIds: ungrouped
+        });
+    }
+
+    return knownSections;
 }
 
 function updateSearchStatus() {
@@ -188,6 +227,20 @@ function buildSeedSearchIndex() {
 async function readResponseUtf8(response) {
     const buffer = await response.arrayBuffer();
     return new TextDecoder('utf-8').decode(buffer);
+}
+
+function getBundledContent(key) {
+    const pages = window.DEEP_ACADEMY_DATA && window.DEEP_ACADEMY_DATA.pages;
+    return pages && typeof pages[key] === 'string' ? pages[key] : null;
+}
+
+async function loadTextAsset(url, bundleKey) {
+    const bundled = getBundledContent(bundleKey);
+    if (bundled !== null) return bundled;
+
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Erreur de chargement : ${url}`);
+    return readResponseUtf8(response);
 }
 
 function initGlobalSearchControls() {
@@ -241,9 +294,10 @@ async function buildGlobalSearchIndex() {
 
     const tasks = searchIndex.map(async (entry) => {
         try {
-            const response = await fetch(`data/${entry.courseId}/${entry.moduleId}.html`);
-            if (!response.ok) return;
-            const html = await readResponseUtf8(response);
+            const html = await loadTextAsset(
+                `data/${entry.courseId}/${entry.moduleId}.html`,
+                `${entry.courseId}/${entry.moduleId}`
+            );
             const text = stripHtmlTags(html);
             entry.text = text;
             entry.preview = text.slice(0, 220);
@@ -305,7 +359,7 @@ function renderSearchResults(container) {
 
     if (!results.length) {
         container.innerHTML = `
-            <div class="rounded-lg border border-indigo-700 bg-indigo-900/60 p-3 text-xs text-indigo-200">
+            <div class="rounded-lg border border-zinc-800 bg-zinc-800/60 p-3 text-xs text-zinc-300">
                 Aucun resultat pour <span class="font-bold">${escapeHtml(searchQuery)}</span>.
             </div>
         `;
@@ -314,12 +368,12 @@ function renderSearchResults(container) {
 
     container.innerHTML = results.map(item => {
         const preview = item.preview
-            ? `<div class="mt-1 text-[11px] text-indigo-200/80 line-clamp-2">${escapeHtml(item.preview)}</div>`
+            ? `<div class="mt-1 text-[11px] text-zinc-400 line-clamp-2">${escapeHtml(item.preview)}</div>`
             : '';
 
         return `
             <button onclick="openSearchResult('${item.courseId}','${item.moduleId}')"
-                class="w-full text-left px-3 py-3 rounded-lg bg-indigo-900/50 hover:bg-indigo-800 border border-indigo-700/60 transition mb-2">
+                class="w-full text-left px-3 py-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/60 transition mb-2">
                 <div class="flex items-center gap-2">
                     <span class="text-base w-5 text-center">${item.icon}</span>
                     <span class="text-sm font-semibold text-white truncate flex-1">${escapeHtml(item.moduleTitle)}</span>
@@ -342,13 +396,15 @@ function clearSearchQuery() {
 
 window.openSearchResult = function (courseId, moduleId) {
     if (!coursesData[courseId]) return;
-    switchCourse(courseId, true);
+    // autoLoadFirst=false : sinon switchCourse lance le chargement du 1er module
+    // en parallele du notre, et c'est le fetch le plus lent qui gagne le DOM.
+    switchCourse(courseId, true, false);
     loadModule(moduleId, true);
 };
 
 window.openCourseFromWelcome = function (courseId, moduleId) {
     if (!coursesData[courseId]) return;
-    switchCourse(courseId, true);
+    switchCourse(courseId, true, false);
     const modules = coursesData[courseId].modules || [];
     const targetId = moduleId && modules.some(m => m.id === moduleId)
         ? moduleId
@@ -357,6 +413,35 @@ window.openCourseFromWelcome = function (courseId, moduleId) {
         loadModule(targetId, true);
     }
 };
+
+// Les raccourcis sont derives de courses_config.json et regroupes par usage :
+// parcours progressifs, fondations interactives, puis labs et references.
+function renderHomeCourses() {
+    const container = document.getElementById('home-courses');
+    if (!container) return;
+
+    container.innerHTML = getCourseGroups().map(section => {
+        const buttons = section.courseIds.map(courseId => {
+            const course = coursesData[courseId];
+            const modules = course.modules || [];
+            if (!modules.length) return '';
+
+            return `
+                <button onclick="enterAppAndOpenCourse('${courseId}','${modules[0].id}')"
+                    class="w-full px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm text-left transition">
+                    ${escapeHtml(course.title)}
+                </button>
+            `;
+        }).join('');
+
+        return `
+            <div class="rounded-xl border border-white/10 bg-black/10 p-3">
+                <div class="text-[11px] uppercase tracking-wider text-cyan-300 font-bold mb-2">${escapeHtml(section.title)}</div>
+                <div class="space-y-2">${buttons}</div>
+            </div>
+        `;
+    }).join('');
+}
 
 window.enterAppAndOpenCourse = function (courseId, moduleId) {
     enterApp();
@@ -376,15 +461,12 @@ async function init() {
     updateDarkModeIcon();
 
     try {
-        const response = await fetch('data/courses_config.json');
-        if (!response.ok) throw new Error('Erreur de chargement de courses_config.json');
-        const configText = await readResponseUtf8(response);
-        const sanitizedConfigText = configText.replace(/^\uFEFF/, '');
-        coursesData = JSON.parse(sanitizedConfigText);
-
-        visitedModules = {};
-        for (const courseId in coursesData) {
-            visitedModules[courseId] = new Set();
+        const bundledConfig = window.DEEP_ACADEMY_DATA && window.DEEP_ACADEMY_DATA.config;
+        if (bundledConfig) {
+            coursesData = bundledConfig;
+        } else {
+            const configText = await loadTextAsset('data/courses_config.json', '__config__');
+            coursesData = JSON.parse(configText.replace(/^\uFEFF/, ''));
         }
 
         if (!coursesData[currentCourse]) {
@@ -395,6 +477,7 @@ async function init() {
         searchIndex = buildSeedSearchIndex();
 
         renderCourseSelector();
+        renderHomeCourses();
         initGlobalSearchControls();
         renderNav();
         loadWelcome();
@@ -421,32 +504,35 @@ function renderCourseSelector() {
 
     let html = `
         <button onclick="toggleCourseMenu()"
-            class="w-full mt-2 bg-indigo-700/50 hover:bg-indigo-700 border border-indigo-600 rounded-lg text-white p-3 flex items-center justify-between transition-all duration-300 group">
+            class="w-full mt-2 bg-zinc-700/60 hover:bg-zinc-700 border border-zinc-700 rounded-lg text-white p-3 flex items-center justify-between transition-all duration-300 group">
             <span class="font-bold text-sm truncate mr-2">${currentCourseData.title}</span>
-            <svg id="course-chevron" class="w-4 h-4 text-indigo-300 transition-transform duration-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg id="course-chevron" class="w-4 h-4 text-zinc-400 transition-transform duration-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
         </button>
 
         <div id="course-menu"
-            class="hidden absolute top-full left-0 w-full mt-2 bg-indigo-800/95 backdrop-blur-md border border-indigo-600 rounded-xl shadow-2xl overflow-hidden transform origin-top transition-all duration-200 z-50">
-            <div class="py-1 max-h-64 overflow-y-auto custom-scrollbar">
+            class="hidden absolute top-full left-0 w-full mt-2 bg-zinc-800/95 backdrop-blur-md border border-zinc-700 rounded-xl shadow-2xl overflow-hidden transform origin-top transition-all duration-200 z-50">
+            <div class="py-1 max-h-96 overflow-y-auto custom-scrollbar">
     `;
 
-    getCourseOrder().forEach(courseId => {
-        if (!coursesData[courseId]) return;
+    getCourseGroups().forEach(section => {
+        html += `<div class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-[0.16em] text-cyan-300">${escapeHtml(section.title)}</div>`;
 
-        const course = coursesData[courseId];
-        const isSelected = courseId === currentCourse;
-        const bgClass = isSelected ? 'bg-indigo-600' : 'hover:bg-indigo-700/50';
+        section.courseIds.forEach(courseId => {
+            const course = coursesData[courseId];
+            const isSelected = courseId === currentCourse;
+            const bgClass = isSelected ? 'bg-zinc-700' : 'hover:bg-zinc-700/60';
 
-        html += `
-            <button onclick="switchCourse('${courseId}')"
-                class="w-full text-left px-4 py-3 text-sm font-medium text-white transition-colors flex items-center gap-3 ${bgClass}">
-                <span>${course.title}</span>
-                ${isSelected ? '<span class="ml-auto text-indigo-300">&#10003;</span>' : ''}
-            </button>
-        `;
+            html += `
+                <button onclick="switchCourse('${courseId}')"
+                    class="w-full text-left px-4 py-2.5 text-sm font-medium text-white transition-colors flex items-center gap-3 ${bgClass}"
+                    title="${escapeHtml(course.summary || course.title)}">
+                    <span>${course.title}</span>
+                    ${isSelected ? '<span class="ml-auto text-cyan-300">&#10003;</span>' : ''}
+                </button>
+            `;
+        });
     });
 
     html += `
@@ -482,7 +568,7 @@ document.addEventListener('click', (event) => {
     }
 });
 
-function switchCourse(courseId, preserveSearch = false) {
+function switchCourse(courseId, preserveSearch = false, autoLoadFirst = true) {
     if (!coursesData[courseId]) return;
 
     const menu = document.getElementById('course-menu');
@@ -502,7 +588,7 @@ function switchCourse(courseId, preserveSearch = false) {
     renderNav();
 
     const modules = coursesData[courseId].modules || [];
-    if (modules.length > 0) {
+    if (autoLoadFirst && modules.length > 0) {
         loadModule(modules[0].id, false);
     }
 }
@@ -516,41 +602,33 @@ function renderNav() {
     if (!container) return;
 
     const mods = getModules();
-    if (!visitedModules[currentCourse]) visitedModules[currentCourse] = new Set();
-    const progressSet = visitedModules[currentCourse];
 
     if (searchQuery) {
         renderSearchResults(container);
-    } else {
-        let lastCategory = null;
-        container.innerHTML = mods.map(module => {
-            let html = '';
-            if (module.category && module.category !== lastCategory) {
-                html += `<div class="text-xs font-bold text-indigo-300 uppercase tracking-wider mt-6 mb-2 px-2 border-b border-indigo-700 pb-1">${module.category}</div>`;
-                lastCategory = module.category;
-            }
-
-            html += `
-                <button onclick="loadModule('${module.id}')"
-                    class="w-full text-left px-4 py-3 rounded-lg hover:bg-indigo-800 transition flex items-center gap-3 mb-1 ${progressSet.has(module.id) ? 'bg-indigo-800 border-l-4 border-green-400 font-bold shadow-lg transform scale-[1.02]' : 'text-indigo-100 opacity-80 hover:opacity-100'}">
-                    <span class="text-xl filter drop-shadow-md w-6 text-center">${module.icon}</span>
-                    <span class="text-sm tracking-wide truncate flex-1">${module.title}</span>
-                    ${progressSet.has(module.id) ? '<span class="text-green-400 text-xs">&#10003;</span>' : ''}
-                </button>
-            `;
-
-            return html;
-        }).join('');
+        return;
     }
 
-    const pct = mods.length > 0 ? Math.round((progressSet.size / mods.length) * 100) : 0;
-    const progEl = document.getElementById('course-progress');
-    if (progEl) {
-        progEl.innerText = `${pct}%`;
-        progEl.className = pct === 100
-            ? 'text-green-400 font-bold text-xl transition-all duration-500'
-            : 'font-bold text-xl transition-all duration-500';
-    }
+    let lastCategory = null;
+    container.innerHTML = mods.map(module => {
+        let html = '';
+        if (module.category && module.category !== lastCategory) {
+            html += `<div class="text-xs font-bold text-zinc-400 uppercase tracking-wider mt-6 mb-2 px-2 border-b border-zinc-800 pb-1">${module.category}</div>`;
+            lastCategory = module.category;
+        }
+
+        // Repere de navigation : le module ouvert, pas une progression.
+        const isCurrent = module.id === currentModuleId;
+
+        html += `
+            <button onclick="loadModule('${module.id}')"
+                class="w-full text-left px-4 py-3 rounded-lg hover:bg-zinc-800 transition flex items-center gap-3 mb-1 ${isCurrent ? 'bg-zinc-800 border-l-4 border-cyan-400 font-bold shadow-lg' : 'text-zinc-100 opacity-80 hover:opacity-100'}">
+                <span class="text-xl filter drop-shadow-md w-6 text-center">${module.icon}</span>
+                <span class="text-sm tracking-wide truncate flex-1">${module.title}</span>
+            </button>
+        `;
+
+        return html;
+    }).join('');
 }
 
 async function loadModule(id, closeSidebar = true) {
@@ -563,10 +641,7 @@ async function loadModule(id, closeSidebar = true) {
         toggleSidebar();
     }
 
-    if (!visitedModules[currentCourse]) visitedModules[currentCourse] = new Set();
-    visitedModules[currentCourse].add(id);
-
-
+    currentModuleId = id;
     renderNav();
 
     const chapterTitle = document.getElementById('chapter-title');
@@ -575,10 +650,10 @@ async function loadModule(id, closeSidebar = true) {
     }
 
     try {
-        const response = await fetch(`data/${currentCourse}/${id}.html`);
-        if (!response.ok) throw new Error(`Erreur chargement module ${id}`);
-
-        let html = await readResponseUtf8(response);
+        let html = await loadTextAsset(
+            `data/${currentCourse}/${id}.html`,
+            `${currentCourse}/${id}`
+        );
 
         html = html.replace(/\$\{createFlashcard\((['"`])(.*?)\1,\s*(['"`])(.*?)\3\)\}/g, (match, q1, front, q2, back) => {
             return createFlashcard(front, back);
@@ -683,6 +758,7 @@ async function loadModule(id, closeSidebar = true) {
 }
 
 async function loadWelcome() {
+    currentModuleId = null;
     renderNav();
 
     const chapterTitle = document.getElementById('chapter-title');
@@ -691,10 +767,7 @@ async function loadWelcome() {
     }
 
     try {
-        const response = await fetch('data/welcome.html');
-        if (!response.ok) throw new Error('Erreur chargement welcome.html');
-
-        const html = await readResponseUtf8(response);
+        const html = await loadTextAsset('data/welcome.html', 'welcome');
         const contentArea = document.getElementById('content-area');
         if (contentArea) {
             contentArea.innerHTML = html;
@@ -705,18 +778,6 @@ async function loadWelcome() {
         }
     } catch (error) {
         console.error(error);
-    }
-}
-
-function resetCurrentProgress() {
-    if (!visitedModules[currentCourse]) return;
-
-    visitedModules[currentCourse].clear();
-    renderNav();
-
-    const mods = getModules();
-    if (mods.length > 0) {
-        loadModule(mods[0].id);
     }
 }
 
@@ -812,7 +873,9 @@ window.addEventListener('load', () => {
             this.vx = (Math.random() - 0.5) * 0.5;
             this.vy = (Math.random() - 0.5) * 0.5;
             this.size = Math.random() * 2 + 1;
-            this.color = `rgba(${100 + Math.random() * 100}, ${100 + Math.random() * 100}, 255, ${Math.random() * 0.5})`;
+            // teintes neutres a cyan, accordees au logo cerveau
+            const t = Math.random();
+            this.color = `rgba(${Math.round(120 + t * 40)}, ${Math.round(180 + t * 40)}, ${Math.round(190 + t * 50)}, ${Math.random() * 0.45})`;
         }
 
         update() {
@@ -837,7 +900,7 @@ window.addEventListener('load', () => {
 
     function animate() {
         ctx.clearRect(0, 0, width, height);
-        ctx.strokeStyle = 'rgba(100, 100, 255, 0.05)';
+        ctx.strokeStyle = 'rgba(140, 190, 200, 0.05)';
         ctx.lineWidth = 1;
 
         for (let i = 0; i < particles.length; i += 1) {

@@ -1,0 +1,140 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+
+    <div class="bg-gradient-to-r from-yellow-500 to-orange-600 p-8 rounded-2xl shadow-xl text-white">
+        <h2 class="text-3xl font-extrabold mb-4">Fonctions d'Activation</h2>
+        <p class="text-lg text-yellow-100 leading-relaxed">
+            Sans elles, un réseau de 100 couches est <strong>exactement équivalent à une seule couche</strong> :
+            composer des applications linéaires donne une application linéaire. La non-linéarité n'est pas un
+            détail de réglage, c'est ce qui rend la profondeur utile.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">La démonstration en une ligne</h3>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$W_3(W_2(W_1 x)) = (W_3 W_2 W_1)\,x = W' x$$
+        </div>
+        <p class="text-gray-600 mt-4">
+            Trois couches, une seule matrice équivalente. Glisse une fonction non linéaire entre chaque produit et
+            l'espace des fonctions représentables explose : c'est le <strong>théorème d'approximation
+            universelle</strong> — un réseau à une couche cachée assez large approxime n'importe quelle fonction
+            continue sur un compact. Le théorème ne dit rien sur la <em>facilité</em> de l'apprendre, d'où la
+            profondeur.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Les historiques : sigmoïde et tanh</h3>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$\sigma(z) = \frac{1}{1+e^{-z}} \in\; ]0,1[ \qquad\qquad \tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}} \in\; ]-1,1[$$
+        </div>
+        <ul class="space-y-2 text-sm text-gray-700 list-disc list-outside ml-5 mt-4">
+            <li><strong>Sigmoïde</strong> : sa dérivée <code>σ(z)(1−σ(z))</code> vaut au maximum
+                <strong>0.25</strong>. Sur 10 couches, le gradient est multiplié par au plus
+                <code>0.25¹⁰ ≈ 10⁻⁶</code> : c'est la cause mécanique du <strong>vanishing gradient</strong> qui a
+                bloqué le deep learning pendant vingt ans.</li>
+            <li>Elle n'est pas centrée en zéro, ce qui fait dériver les activations et ralentit la convergence.</li>
+            <li><strong>tanh</strong> est centrée et sa dérivée monte à 1 : strictement meilleure que la sigmoïde
+                en couche cachée. Mais elle sature toujours aux extrêmes.</li>
+            <li>Aujourd'hui on les réserve aux <strong>sorties</strong> (probabilité binaire, portes de LSTM) et
+                jamais aux couches profondes.</li>
+        </ul>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">ReLU : la révolution par la simplicité</h3>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$\text{ReLU}(z) = \max(0, z) \qquad \text{ReLU}'(z) = \begin{cases} 1 & z > 0 \\ 0 & z < 0 \end{cases}$$
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+            <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+                <h4 class="font-bold text-emerald-800 mb-2 text-sm">Pourquoi ça marche</h4>
+                <ul class="text-sm text-emerald-900 space-y-1">
+                    <li>• Dérivée exactement 1 pour z &gt; 0 : le gradient traverse intact, quelle que soit la profondeur.</li>
+                    <li>• Un <code>max</code> : coût de calcul quasi nul, pas d'exponentielle.</li>
+                    <li>• Sortie exactement nulle pour z &lt; 0 : ~50 % d'activations à zéro, une parcimonie gratuite.</li>
+                </ul>
+            </div>
+            <div class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+                <h4 class="font-bold text-rose-800 mb-2 text-sm">Le défaut : les neurones morts</h4>
+                <p class="text-sm text-rose-900">
+                    Si un neurone tombe durablement dans la zone négative, son gradient est nul <em>pour
+                    toujours</em> : il n'apprendra plus jamais. Un LR trop grand peut en tuer une bonne partie
+                    d'un coup. C'est ce que corrigent les variantes ci-dessous.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-orange-100 shadow-sm">
+            <h3 class="font-bold text-orange-800 mb-2">Leaky ReLU / PReLU</h3>
+            <p class="text-sm text-gray-700">
+                <code>max(αz, z)</code> avec α ≈ 0.01. Une petite pente à gauche suffit à empêcher la mort
+                définitive. PReLU rend α apprenable.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-orange-100 shadow-sm">
+            <h3 class="font-bold text-orange-800 mb-2">ELU / SELU</h3>
+            <p class="text-sm text-gray-700">
+                Branche négative exponentielle, sortie moyenne proche de zéro. SELU vise l'auto-normalisation des
+                activations, mais exige une initialisation précise.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-orange-100 shadow-sm">
+            <h3 class="font-bold text-orange-800 mb-2">GELU</h3>
+            <p class="text-sm text-gray-700">
+                <code>z · Φ(z)</code>, où Φ est la loi normale cumulée. Une ReLU « lissée et probabiliste ». C'est
+                l'activation de BERT, GPT et de la quasi-totalité des Transformers.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-orange-100 shadow-sm">
+            <h3 class="font-bold text-orange-800 mb-2">SiLU / Swish</h3>
+            <p class="text-sm text-gray-700">
+                <code>z · σ(z)</code>, découverte par recherche automatique d'architecture. Non monotone, très
+                proche de GELU en pratique. La variante <strong>SwiGLU</strong> équipe LLaMA et Mistral.
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Softmax : le cas à part</h3>
+        <p class="text-gray-600 mb-4">
+            Ce n'est pas une activation de couche cachée mais une <strong>normalisation de sortie</strong> :
+            elle transforme un vecteur de scores quelconques en distribution de probabilité.
+        </p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$\text{softmax}(z)_i = \frac{e^{z_i}}{\sum_j e^{z_j}} \qquad \sum_i \text{softmax}(z)_i = 1$$
+        </div>
+        <p class="text-gray-600 mt-4 text-sm">
+            En pratique on soustrait toujours <code>max(z)</code> avant l'exponentielle : mathématiquement neutre,
+            indispensable numériquement pour éviter l'overflow. Diviser les logits par une
+            <strong>température T</strong> avant softmax contrôle le piqué de la distribution — c'est le paramètre
+            que tu passes à l'API d'un LLM.
+        </p>
+    </div>
+
+    <div class="bg-amber-50 border border-amber-200 p-6 rounded-xl">
+        <h3 class="font-bold text-amber-800 mb-3">Que choisir, concrètement</h3>
+        <ul class="space-y-2 text-sm text-amber-900">
+            <li>• <strong>Couches cachées, cas général</strong> : ReLU. Simple, rapide, éprouvé.</li>
+            <li>• <strong>Transformer</strong> : GELU ou SwiGLU, c'est le standard de fait.</li>
+            <li>• <strong>Neurones morts constatés</strong> : Leaky ReLU, et baisse le learning rate.</li>
+            <li>• <strong>Sortie binaire</strong> : sigmoïde. <strong>Sortie multi-classe</strong> : softmax.
+                <strong>Régression</strong> : aucune activation.</li>
+            <li>• <strong>Sortie contrainte positive</strong> : softplus ou exponentielle, jamais ReLU (son
+                gradient nul bloquerait l'apprentissage sur toute la zone).</li>
+        </ul>
+    </div>
+
+    <div class="bg-rose-50 border border-rose-200 p-6 rounded-xl">
+        <h3 class="font-bold text-rose-800 mb-3">Le piège</h3>
+        <p class="text-sm text-rose-900">
+            Mettre une <strong>sigmoïde sur la dernière couche puis une cross-entropy « from logits »</strong>
+            applique la sigmoïde deux fois. Les frameworks attendent des <em>logits</em> bruts :
+            <code>BCEWithLogitsLoss</code> et <code>cross_entropy</code> intègrent déjà la non-linéarité, pour la
+            stabilité numérique. L'erreur ne plante pas — elle dégrade silencieusement l'entraînement.
+        </p>
+    </div>
+
+</div>

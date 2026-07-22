@@ -1,0 +1,326 @@
+<div class="space-y-6 qa-level" data-qa-level="quantum:2">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">QUANTUM ACADEMY &middot; Niveau 2 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Algèbre linéaire quantique</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: l'espace de Hilbert, les matrices hermitiennes et unitaires, Pauli — la grammaire mathématique de toute la suite.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">8 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-2-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">ℋ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'espace de Hilbert</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">L'espace de Hilbert ℋ = l'espace vectoriel COMPLEXE (avec produit scalaire ⟨·|·⟩) où vivent les états. Un qubit: ℋ = ℂ² (2 amplitudes complexes). n qubits: ℂ^{2ⁿ}. Une particule sur une ligne: dimension infinie. « État quantique » = vecteur unitaire de ℋ.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\mathcal H = \mathbb C^2 \ (\text{qubit}) \qquad \mathcal H_n = (\mathbb C^2)^{\otimes n} = \mathbb C^{2^n}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« l'espace de Hilbert d'un qubit est C deux »; « celui de n qubits est C deux, tenseur n fois, c'est-à-dire C puissance deux puissance n ».</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Toute la question « que peut faire un ordinateur quantique » se formule ici: le vecteur d'état de 50 qubits a 2⁵⁰ composantes — ta RAM de simulateur explose à ~30-45 qubits, et c'est précisément la frontière où le hardware devient intéressant.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Compte les nombres réels nécessaires pour décrire n qubits: 2ⁿ amplitudes complexes = 2·2ⁿ réels (moins 2 pour normalisation et phase globale).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">n = 10: 2¹⁰ = 1024 amplitudes → trivial. n = 30: ~10⁹ → 16 Go en complex128: ta machine sature déjà.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">n = 50: 2⁵⁰ ≈ 10¹⁵ amplitudes → 16 pétaoctets. n = 300: plus d'amplitudes que d'atomes dans l'univers observable.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: l'espace de Hilbert croît exponentiellement avec le nombre de sous-systèmes — c'est la malédiction du simulateur classique ET la promesse du hardware quantique: la nature « stocke » ce vecteur gratuitement.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Repère de praticien: simuler en vecteur d'état ≈ jusqu'à 30-35 qubits sur ta machine (RTX incluse), ~45+ sur supercalculateur. Au-delà: tenseurs networks ou vrai hardware.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-2-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">δᵢⱼ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Bases orthonormées</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Une base orthonormée {|i⟩}: des états deux à deux orthogonaux (⟨i|j⟩ = 0 si i≠j) et normalisés (⟨i|i⟩ = 1) — résumé par ⟨i|j⟩ = δᵢⱼ (delta de Kronecker: 1 si i=j, 0 sinon). Orthogonal = parfaitement distinguable par une mesure: la base définit CE QU'ON PEUT demander au système.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\langle i|j\rangle = \delta_{ij} \qquad \sum_i |i\rangle\langle i| = I$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« braket i j égale delta i j » — un si les indices sont égaux, zéro sinon. Et la relation de fermeture: « la somme des ket i bra i égale l'identité » — la base couvre tout l'espace.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">La base de calcul {|0⟩, |1⟩} (mesure Z) et la base {|+⟩, |−⟩} (mesure X) sont les deux bases stars du QC. Changer de base de mesure = le cœur de BB84 (crypto quantique) et de la violation de Bell.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Vérifie que {|0⟩, |1⟩} est orthonormée: ⟨0|0⟩ = 1, ⟨1|1⟩ = 1, ⟨0|1⟩ = 1·0 + 0·1 = 0 ✓.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Construis la base X: |+⟩ = (|0⟩+|1⟩)/√2, |−⟩ = (|0⟩−|1⟩)/√2. Teste: ⟨+|−⟩ = (1·1 + 1·(−1))/2 = 0 ✓ orthogonaux.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Point crucial: |+⟩ n'est PAS orthogonal à |0⟩: ⟨0|+⟩ = 1/√2 → une mesure Z sur |+⟩ donne 0 ou 1 à 50/50. Deux états non orthogonaux sont IMPOSSIBLES à distinguer de façon fiable — le fondement de la crypto quantique.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: « orthogonal » = « distinguable en une mesure », « non orthogonal » = « confusion inévitable ». Cette équivalence géométrie ↔ information est le théorème le plus utile du domaine.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En circuit: mesurer dans la base X = appliquer H puis mesurer en Z. Toute « mesure dans une autre base » se ramène à: rotation unitaire + mesure standard.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-2-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Σcᵢ|i⟩</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Décomposer un état sur une base</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Tout état s'écrit |ψ⟩ = Σᵢ cᵢ|i⟩ avec cᵢ = ⟨i|ψ⟩: les coefficients s'obtiennent par projection (braket). Les |cᵢ|² sont les probabilités de mesure dans cette base, et Σ|cᵢ|² = 1. Changer de base = réécrire le MÊME état avec d'autres coefficients.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\psi\rangle = \sum_i c_i\,|i\rangle, \quad c_i = \langle i|\psi\rangle, \quad \sum_i |c_i|^2 = 1$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« ket psi égale la somme des c i, ket i — où c i égale braket i psi ». Les coefficients sont les « ombres » de l'état sur chaque vecteur de base.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">C'est le geste permanent: exprimer l'état dans la base de la mesure pour lire les probabilités. Un algorithme quantique = préparer des cᵢ dont les modules concentrent la probabilité sur les bonnes réponses.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends |ψ⟩ = |0⟩ et décompose-le dans la base X {|+⟩, |−⟩}.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">c₊ = ⟨+|0⟩ = (⟨0|+⟨1|)/√2 · |0⟩ = 1/√2. c₋ = ⟨−|0⟩ = 1/√2.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Écris: |0⟩ = (|+⟩ + |−⟩)/√2 — l'état « certain » en base Z est une superposition 50/50 en base X !</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Vérifie: |1/√2|² + |1/√2|² = 1 ✓. Mesure en Z: résultat 0 certain. Mesure en X: pile ou face. MÊME état, questions différentes, certitudes différentes.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: la superposition n'est pas une propriété absolue d'un état mais RELATIVE à une base. « Être en superposition » signifie toujours « ...dans telle base ». Cette nuance désamorce la moitié des paradoxes de vulgarisation.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En code, les coefficients d'un vecteur d'état dans une autre base: <code>c = B.conj().T @ psi</code> où les colonnes de B sont la nouvelle base. Une multiplication matricielle, pas un mystère.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-2-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">XYZ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les matrices de Pauli</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">X, Y, Z: trois matrices 2×2 qui sont à la fois les rotations fondamentales du qubit et les observables de spin. X = bit-flip (échange |0⟩↔|1⟩), Z = phase-flip (signe de |1⟩), Y = les deux. Avec I, elles forment une base de TOUTES les matrices 2×2: le quantique d'un qubit tient dans quatre matrices.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$X=\begin{pmatrix}0&amp;1\\1&amp;0\end{pmatrix} \quad Y=\begin{pmatrix}0&amp;-i\\i&amp;0\end{pmatrix} \quad Z=\begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« X, Y, Z: les matrices de Pauli ». Propriétés qui se récitent: « X carré égale Y carré égale Z carré égale l'identité », et « X Y égale i Z » (et cycliquement).</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Les portes X/Y/Z des circuits; les axes de la sphère de Bloch; les termes des hamiltoniens (H = ΣJᵢⱼZᵢZⱼ + ...); les erreurs élémentaires que corrigent les codes (toute erreur 1-qubit = combinaison de X, Y, Z). Omniprésentes.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Applique X à |0⟩: [[0,1],[1,0]]·(1,0) = (0,1) = |1⟩ → X est le NOT quantique ✓.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique Z à |+⟩ = (1,1)/√2: Z|+⟩ = (1,−1)/√2 = |−⟩ → Z ne change pas les probas en base Z (|amplitudes| intactes) mais retourne la PHASE relative — invisible en Z, décisif en X.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Vérifie l'anticommutation: XZ = [[0,−1],[1,0]] et ZX = [[0,1],[−1,0]] → XZ = −ZX. Elles ne commutent pas: ordre des portes ≠ interchangeable.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule les états propres: X a pour états propres |+⟩ (valeur +1) et |−⟩ (−1); Z a |0⟩ et |1⟩. « Mesurer X » et « mesurer Z » = questions incompatibles (carte 29).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: apprends ces trois matrices PAR CŒUR — c'est l'alphabet. Tout le niveau 6 (portes) et le niveau 8 (erreurs) les recycle sans répit.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Mnémotechnique Bloch: X, Y, Z = rotations de 180° autour des axes x, y, z de la sphère. Une erreur matérielle quelconque sur un qubit se décompose toujours en « un peu de X, un peu de Y, un peu de Z ».</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-2-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">A=A†</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Hermitien = observable</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Une matrice hermitienne (A = A†) a deux super-pouvoirs garantis: valeurs propres RÉELLES (des résultats de mesure sensés) et états propres ORTHOGONAUX (des résultats distinguables). C'est pourquoi le postulat dit: toute grandeur mesurable EST un opérateur hermitien.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$A = A^\dagger \ \Rightarrow\ a_i \in \mathbb R,\ \ \langle a_i|a_j\rangle = \delta_{ij}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« si A égale A dague, alors ses valeurs propres a i sont réelles et ses vecteurs propres sont orthogonaux » — hermitien implique mesurable proprement.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Le hamiltonien (énergie), les Pauli (spin), la position, l'impulsion: tous hermitiens. En QC, « mesurer l'observable Z₁Z₂ » (parité de deux qubits) est le geste de base de la correction d'erreur.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends A = [[2, 1−i], [1+i, 3]]. Vérifie l'hermiticité: transpose → [[2, 1+i], [1−i, 3]], conjugue → [[2, 1−i], [1+i, 3]] = A ✓. Note la structure: diagonale RÉELLE, hors-diagonale en paires conjuguées.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule ses valeurs propres (trace = 5, det = 6 − |1−i|² = 6−2 = 4): λ² − 5λ + 4 = 0 → λ = 1 et λ = 4. RÉELLES ✓, comme promis.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Interprète: une mesure de « l'observable A » ne peut donner QUE 1 ou 4 — jamais 2.5, jamais un complexe. Le spectre EST le menu des résultats possibles.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: la valeur moyenne ⟨A⟩ = ⟨ψ|A|ψ⟩ (carte 22) sera une moyenne pondérée de ces valeurs propres. Hermitien = le tampon « cette matrice a le droit d'être une question posée à la nature ».</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En code: <code>np.linalg.eigh</code> (le h!) exploite l'hermiticité: plus rapide, valeurs propres réelles triées. Si <code>eig</code> te sort des valeurs propres complexes pour un « observable », ta matrice n'est pas hermitienne — bug.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-2-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">U†U=I</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Unitaire = évolution</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Une matrice unitaire (U†U = I) préserve les normes et les brakets: les probabilités totales restent 1, l'information n'est ni créée ni détruite. TOUTE évolution quantique fermée (portes, Schrödinger) est unitaire — et donc RÉVERSIBLE: U⁻¹ = U†, il suffit de « conjuguer le circuit ».</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$U^\dagger U = I \qquad \|U|\psi\rangle\| = \||\psi\rangle\| \qquad U^{-1}=U^\dagger$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« U dague U égale l'identité »; conséquence: « la norme de U psi égale la norme de psi » et « l'inverse de U est U dague » — l'évolution quantique se rembobine en prenant l'adjoint.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Chaque porte d'un circuit est une unitaire; le circuit entier est LEUR PRODUIT (une grosse unitaire). L'« uncompute » (défaire des calculs intermédiaires en appliquant U†) est une technique standard des algorithmes. La non-unitarité n'entre que par la mesure et le bruit.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Vérifie que H (Hadamard) = (1/√2)[[1,1],[1,−1]] est unitaire: H† = H (elle est aussi hermitienne), et H·H = (1/2)[[2,0],[0,2]] = I ✓. Bonus: H est son propre inverse — l'appliquer deux fois revient au départ.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Teste la conservation: |ψ⟩ = (0.6, 0.8), norme 1. H|ψ⟩ = ((0.6+0.8)/√2, (0.6−0.8)/√2) = (0.99, −0.141). Norme² = 0.98 + 0.02 = 1 ✓ — pas une goutte de probabilité perdue.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Contre-exemple: M = [[1,0],[0,0.5]] « atténue » |1⟩: M|+⟩ a une norme &lt; 1 → M détruit de l'information: interdite comme porte (mais utile pour modéliser des PERTES, niveau 8).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: unitaire = « rotation généralisée » de l'espace de Hilbert. Un circuit quantique ne fait que TOURNER un grand vecteur — la mesure finale décide où le couperet tombe.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Réflexe Qiskit: <code>circuit.inverse()</code> existe précisément parce que tout est unitaire. Et pour tester une matrice maison: <code>np.allclose(U @ U.conj().T, np.eye(n))</code> — une ligne, zéro excuse.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-2-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">|a⟩⟨a|</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les projecteurs</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">P = |a⟩⟨a| (« ket-bra ») = le projecteur sur l'état |a⟩: appliqué à |ψ⟩, il en extrait la composante le long de |a⟩. Signature: P² = P (projeter deux fois = projeter une fois) et P† = P. C'est l'outil mathématique de la MESURE.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$P_a = |a\rangle\langle a| \qquad P_a^2 = P_a \qquad P_a|\psi\rangle = \langle a|\psi\rangle\,|a\rangle$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« P a égale ket a, bra a ». Appliqué à psi: « P a psi égale braket a psi, fois ket a » — le nombre ⟨a|ψ⟩ (l'amplitude) devant l'état |a⟩.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">La mesure projective: résultat a avec proba ⟨ψ|Pₐ|ψ⟩ = |⟨a|ψ⟩|², état après mesure = Pₐ|ψ⟩ renormalisé. Les observables se décomposent en projecteurs: Z = (+1)|0⟩⟨0| + (−1)|1⟩⟨1| — la décomposition spectrale.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Construis P₀ = |0⟩⟨0| = colonne(1,0) × ligne(1,0) = [[1,0],[0,0]].</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique-le à |ψ⟩ = (0.6, 0.8): P₀|ψ⟩ = (0.6, 0) — la composante |1⟩ a été rasée, seule l'ombre sur |0⟩ survit.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Vérifie P₀² = P₀: [[1,0],[0,0]]² = [[1,0],[0,0]] ✓. Une fois projeté, reprojeter ne change rien — voilà pourquoi répéter la même mesure redonne le même résultat.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Utilise-le pour la mesure: proba(0) = ⟨ψ|P₀|ψ⟩ = 0.36; état après: (0.6,0)/0.6 = (1,0) = |0⟩. Tu viens de dérouler le postulat de la mesure entièrement en algèbre.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: le « collapse » mystique = une projection + une renormalisation. Deux opérations de lycée. Le ket-bra |a⟩⟨a| est aussi la brique des matrices densité (niveau 5) — investis-le maintenant.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Astuce de lecture des papiers: toute expression de la forme Σᵢ λᵢ|i⟩⟨i| est une décomposition spectrale — « l'opérateur, raconté par ses résultats de mesure possibles ». Repère-la, elle est partout.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-2-7">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⟨A⟩</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Valeur moyenne et trace</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">⟨A⟩ = ⟨ψ|A|ψ⟩: la MOYENNE des résultats de mesure de A sur l'état |ψ⟩ (moyenne d'ensemble: mille copies, mille mesures, moyenne). Version générale avec la trace: ⟨A⟩ = Tr(ρA). C'est LE nombre que calculent VQE et toute la chimie quantique.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\langle A\rangle = \langle\psi|A|\psi\rangle = \sum_i a_i\,|\langle a_i|\psi\rangle|^2$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« la valeur moyenne de A égale bra psi, A, ket psi » — un sandwich: l'opérateur entre le bra et le ket. Égal aussi à « la somme des valeurs propres a i, pondérées par leurs probabilités ».</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">L'énergie moyenne ⟨H⟩ est la quantité que VQE minimise (niveau 9). En labo, chaque « expectation value » publiée = ce sandwich, estimé en répétant le circuit des milliers de fois (les « shots »).</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends |ψ⟩ = (0.6, 0.8) et l'observable Z.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Méthode sandwich: Z|ψ⟩ = (0.6, −0.8), puis ⟨ψ|·(0.6, −0.8) = 0.6×0.6 + 0.8×(−0.8) = 0.36 − 0.64 = −0.28.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Méthode probabiliste (contrôle): P(+1) = 0.36, P(−1) = 0.64 → moyenne = (+1)(0.36) + (−1)(0.64) = −0.28 ✓ — les deux routes coïncident, comme il se doit.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Interprète: chaque mesure individuelle donne +1 OU −1 (jamais −0.28); c'est la MOYENNE sur les répétitions qui vaut −0.28. Avec 1000 shots, tu l'estimes à ±0.03 près (bruit statistique en 1/√N).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: le sandwich ⟨ψ|A|ψ⟩ est à la fois trois lignes de NumPy et des heures de temps machine réel — comprendre ce double statut (nombre exact / estimation par shots) est ce qui distingue le praticien du théoricien.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En code: <code>psi.conj() @ A @ psi</code>. En hardware: choisis ton nombre de shots selon la précision voulue (erreur ∝ 1/√shots) — le budget de mesure est un vrai coût, compte-le.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

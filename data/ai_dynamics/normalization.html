@@ -1,0 +1,141 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+
+    <div class="bg-gradient-to-r from-blue-600 to-cyan-700 p-8 rounded-2xl shadow-xl text-white">
+        <h2 class="text-3xl font-extrabold mb-4">Normalisation : BatchNorm, LayerNorm &amp; co.</h2>
+        <p class="text-lg text-blue-100 leading-relaxed">
+            À chaque couche, la distribution des activations dérive. Certaines explosent, d'autres s'écrasent,
+            et l'optimiseur passe son temps à courir après une cible mouvante. La normalisation recentre et
+            remet à l'échelle — c'est probablement l'astuce d'ingénierie la plus rentable du deep learning.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Le schéma commun</h3>
+        <p class="text-gray-600 mb-4">
+            Toutes les variantes font la même chose ; elles ne diffèrent que par <strong>les axes sur lesquels on
+            calcule la moyenne et la variance</strong>.
+        </p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$\hat{x} = \frac{x - \mu}{\sqrt{\sigma^2 + \varepsilon}} \qquad\qquad y = \gamma \hat{x} + \beta$$
+        </div>
+        <p class="text-gray-600 mt-4">
+            Le couple <code>(γ, β)</code> est <strong>apprenable</strong>, et c'est essentiel : sans lui, on
+            imposerait de force une distribution centrée réduite. Avec lui, le réseau peut annuler la
+            normalisation s'il y a intérêt — on lui offre une option, on ne lui impose pas une contrainte.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">BatchNorm : normaliser sur le batch</h3>
+        <p class="text-gray-600 mb-4">
+            Pour chaque canal, on calcule μ et σ² <strong>à travers les exemples du batch</strong>. Un tenseur
+            d'images (N, C, H, W) donne donc C moyennes, chacune agrégée sur N&times;H&times;W valeurs.
+        </p>
+        <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+                <h4 class="font-bold text-emerald-800 mb-2 text-sm">Ce qu'on y gagne</h4>
+                <ul class="text-sm text-emerald-900 space-y-1">
+                    <li>• Des learning rates 10&times; plus élevés deviennent stables.</li>
+                    <li>• Une régularisation gratuite : le bruit du batch agit comme du dropout léger.</li>
+                    <li>• Une bien moindre sensibilité à l'initialisation.</li>
+                </ul>
+            </div>
+            <div class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+                <h4 class="font-bold text-rose-800 mb-2 text-sm">Ce qu'on y perd</h4>
+                <ul class="text-sm text-rose-900 space-y-1">
+                    <li>• Une dépendance au <strong>batch size</strong> : en dessous de ~16, les statistiques sont trop bruitées.</li>
+                    <li>• Deux comportements distincts, entraînement et inférence.</li>
+                    <li>• Un cauchemar en distribué (il faut synchroniser les stats) et inapplicable en ligne.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
+            <p class="text-sm text-amber-900">
+                <strong>Train vs eval :</strong> à l'entraînement on utilise les statistiques du batch courant ;
+                à l'inférence on utilise des <strong>moyennes mobiles</strong> accumulées pendant l'entraînement.
+                C'est pourquoi <code>model.eval()</code> n'est pas optionnel — l'oublier donne des prédictions qui
+                dépendent des autres éléments du batch, un bug parfaitement déroutant.
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">LayerNorm : normaliser sur les features</h3>
+        <p class="text-gray-600 mb-4">
+            On calcule μ et σ² <strong>à l'intérieur de chaque exemple</strong>, sur la dimension des features.
+            Conséquence décisive : <strong>aucune dépendance au batch</strong>. Chaque token est normalisé
+            indépendamment, batch de 1 ou de 1024, entraînement ou inférence — même calcul.
+        </p>
+        <p class="text-gray-600">
+            C'est ce qui en fait la norme obligatoire des Transformers, où les séquences ont des longueurs
+            variables et où la génération se fait token par token.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Pre-norm ou post-norm ?</h3>
+        <p class="text-gray-600 mb-4">
+            Le Transformer original (2017) plaçait la normalisation <em>après</em> le bloc résiduel. Tous les
+            modèles modernes la placent <em>avant</em> :
+        </p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center space-y-1">
+            $$\text{post-norm : } x_{l+1} = \text{LN}\big(x_l + F(x_l)\big)$$
+            $$\text{pre-norm : } x_{l+1} = x_l + F\big(\text{LN}(x_l)\big)$$
+        </div>
+        <p class="text-gray-600 mt-4 text-sm">
+            En pre-norm, le chemin résiduel reste <strong>parfaitement propre</strong> de la première à la dernière
+            couche : le gradient remonte sans être remis à l'échelle. C'est ce qui permet d'entraîner 100 couches
+            sans warmup délicat. Le post-norm donne parfois une meilleure qualité finale, mais l'entraînement est
+            nettement plus capricieux.
+        </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-blue-100 shadow-sm">
+            <h3 class="font-bold text-blue-800 mb-2">RMSNorm</h3>
+            <p class="text-sm text-gray-700">
+                LayerNorm sans le recentrage : on divise seulement par la racine de la moyenne des carrés. Environ
+                10 % plus rapide, qualité équivalente. Utilisée par LLaMA, Mistral, Gemma.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-blue-100 shadow-sm">
+            <h3 class="font-bold text-blue-800 mb-2">GroupNorm</h3>
+            <p class="text-sm text-gray-700">
+                Compromis : on normalise par groupes de canaux. Indépendante du batch, elle est le choix par
+                défaut en détection et segmentation, où les batches sont minuscules.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-blue-100 shadow-sm">
+            <h3 class="font-bold text-blue-800 mb-2">InstanceNorm</h3>
+            <p class="text-sm text-gray-700">
+                Un jeu de statistiques par canal <em>et</em> par image. En transfert de style, elle efface
+                justement le contraste global — ce qui est le but recherché.
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-amber-50 border border-amber-200 p-6 rounded-xl">
+        <h3 class="font-bold text-amber-800 mb-3">Pourquoi ça marche vraiment</h3>
+        <p class="text-sm text-amber-900">
+            L'article fondateur invoquait l'<em>internal covariate shift</em>. Des travaux ultérieurs
+            (Santurkar et al., 2018) ont montré expérimentalement que ce n'est probablement pas la bonne
+            explication : injecter du bruit après la BatchNorm rétablit le covariate shift sans dégrader les
+            performances. L'explication qui tient aujourd'hui est que la normalisation
+            <strong>lisse le paysage de la loss</strong> — elle réduit la constante de Lipschitz du gradient, ce
+            qui rend les grands pas sûrs. Utile à savoir : c'est une technique qui fonctionne mieux qu'on ne
+            sait l'expliquer.
+        </p>
+    </div>
+
+    <div class="bg-rose-50 border border-rose-200 p-6 rounded-xl">
+        <h3 class="font-bold text-rose-800 mb-3">Le piège</h3>
+        <p class="text-sm text-rose-900">
+            Un biais sur la couche linéaire juste avant une normalisation est <strong>parfaitement inutile</strong> :
+            le recentrage l'annule, et <code>β</code> le remplace. D'où le <code>bias=False</code> systématique
+            dans les convolutions suivies de BatchNorm. Autre écueil : appliquer une BatchNorm avec un batch de 1
+            normalise chaque exemple par lui-même, ce qui produit une sortie identiquement nulle avant
+            <code>(γ, β)</code>.
+        </p>
+    </div>
+
+</div>

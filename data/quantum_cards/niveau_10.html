@@ -1,0 +1,149 @@
+<div class="space-y-6 qa-level" data-qa-level="quantum:10">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">QUANTUM ACADEMY &middot; Niveau 10 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Devenir praticien</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: lire les papiers, coder tes circuits (Qiskit), et le parcours de ressources pour tout apprendre gratuitement.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">4 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-10-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">📄</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Lire un papier quantique</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La méthode des 3 passes (déjà tienne) + les spécificités du domaine: identifier le hamiltonien ou le circuit central, traquer les hypothèses de bruit (idéal ? mitigé ? corrigé ?), convertir toute revendication en ressources (qubits logiques/physiques, profondeur, T-count, shots) et chercher la baseline classique honnête.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Sources: arXiv quant-ph (le flux), PRX Quantum / Nature / PRL (le prestige), le blog de Scott Aaronson (le détecteur de hype le plus fiable du domaine), Quanta Magazine (la vulgarisation exacte).</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Passe 1 quantique (5 min): abstract + figures + la question « expérience ou théorie ? hardware ou algorithme ? ». Cherche le nombre de qubits ET la fidélité — s'ils n'y sont pas ensemble, méfiance.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Passe 2 (30-60 min): trouve LE hamiltonien ou LE circuit (souvent Fig. 1 / Eq. 1); décode chaque terme avec tes niveaux 0-3; scrute la section bruit: simulateur idéal ? error mitigation ? quelle baseline classique (état de l'art ou homme de paille) ?</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Passe 3 (pour ceux qui comptent): re-dérive le circuit à la main, ré-implémente en Qiskit sur simulateur, reproduis LA figure principale. Le quantique a un avantage pédagogique unique: presque tout papier ≤ 30 qubits est reproductible sur TON GPU.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique le détecteur de hype (5 questions): baseline classique sérieuse ? ressources chiffrées ? bruit inclus ? speedup prouvé ou heuristique ? code disponible ? — 3 « non » = communiqué de presse, pas science.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: mêmes muscles que tes lectures ML, plus deux réflexes locaux: « où est le H ? » et « logique ou physique ? ». Avec ça, quant-ph devient un flux lisible en diagonale.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Routine suggérée: le digest quotidien d'arXiv quant-ph (titres seulement, 5 min), Aaronson en RSS, et UNE reproduction de papier par mois — le rythme qui construit une vraie culture en un an.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-10-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">≔</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Décoder la notation d'un papier QC</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Les dialectes à connaître: |ψ⟩ vs ψ (Dirac vs fonction d'onde), σx/σy/σz vs X/Y/Z (physiciens vs informaticiens), ℏ=1 (quasi toujours), qubit q₀ = bit de POIDS FAIBLE chez Qiskit (little-endian !), circuits lus gauche→droite mais formules droite→gauche. Dix conventions, et 90% de la friction de lecture disparaît.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\sigma_z \equiv Z \qquad \hbar=1 \qquad U_{circuit} = U_k\cdots U_1$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« sigma z, c'est Z »; « h-barre égale un »; « l'unitaire du circuit égale U k jusqu'à U un » — la dernière porte du dessin s'écrit en premier dans la formule.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Le tableau de correspondance mental qui te permet de lire indifféremment un papier de physique (PRL, style σ, ℏ, hamiltoniens) et un papier d'informatique quantique (style portes, circuits, complexité) — deux tribus, une seule théorie.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Construis ton lexique bi-dialecte: physicien dit « σz, état fondamental, splitting ℏω, driving »; informaticien dit « Z, |0⟩, fréquence du qubit, porte X ». Même objets. Note-le dans ton Obsidian une fois pour toutes.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Vérifie l'endianness à CHAQUE outil: |q₂q₁q₀⟩ chez Qiskit (q0 à droite) vs |q₀q₁q₂⟩ dans la plupart des papiers. Le test en 30 s: prépare |10⟩, regarde si les counts disent '10' ou '01'. Fais-le pour chaque nouveau framework — ce bug a mangé des semaines à toute la communauté.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Traduis les équations en shapes, comme en ML: |ψ⟩ sur n qubits = vecteur (2ⁿ,); porte k-qubits = matrice (2ᵏ, 2ᵏ) élargie par ⊗I; mesure = échantillonnage. Toute équation de papier doit passer ton test « je peux l'écrire en NumPy » — sinon relis.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: la notation quantique est un DIALECTE de l'algèbre linéaire que tu maîtrises déjà via le ML. Kets = vecteurs, portes = matrices, ⊗ = kron, mesure = sampling: quatre équivalences, et les deux littératures s'ouvrent.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Garde une page de notation dans ton vault (fais-la ce soir: 15 lignes). Complète-la à chaque papier qui introduit un symbole neuf — au bout de 20 papiers, elle sera complète et tu ne l'ouvriras plus.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-10-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⌨️</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Coder: Qiskit et les simulateurs</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La théorie ne devient réelle qu'au clavier: Qiskit (IBM, le standard de facto, hardware réel gratuit), PennyLane (différentiable, l'esprit PyTorch — ton pont QML), Cirq (Google), et les simulateurs GPU (cuQuantum sur ta RTX: ~30 qubits en vecteur d'état). Le workflow: circuit → simulateur idéal → simulateur bruité → hardware réel.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Ton avantage injuste: un dev senior avec GPU apprend le QC 10× plus vite que la moyenne — chaque concept des niveaux 0-9 tient en &lt; 30 lignes de NumPy ou Qiskit, et cuQuantum transforme ta 4070 Ti en simulateur sérieux.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Semaine 1 — le simulateur MAISON (le meilleur exercice du cursus): 80 lignes de NumPy — état = vecteur 2ⁿ, portes = kron(I, ..., G, ..., I), mesure = np.random.choice selon |amplitudes|². Écris-le SANS framework: tu ne « croiras » plus le quantique, tu l'auras construit.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Semaine 2 — Qiskit: refais Bell, GHZ, téléportation; compare ton simulateur maison à Aer (validation croisée). Lance Bell sur un backend IBM réel gratuit: tes premiers ~3% de bruit véritable.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Semaine 3 — le bruit: <code>AerSimulator(noise_model=NoiseModel.from_backend(...))</code> — simule la machine réelle, retrouve ses histogrammes. Implémente une mitigation ZNE à la main (3 niveaux de bruit, extrapolation linéaire): tu viens de faire du NISQ engineering.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Semaine 4 — l'algorithmique: Deutsch-Jozsa puis Grover (avec PhaseOracle sur un mini-SAT), puis VQE sur H₂. À la fin: tu as parcouru les niveaux 6-9 EN CODE.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: un mois à 5-8 h/semaine et le quantique passe de « lu » à « exécuté ». Règle inchangée depuis Deep Academy: la compréhension vient des doigts.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Setup ce soir: <code>pip install qiskit qiskit-aer qiskit-ibm-runtime</code>, compte IBM Quantum gratuit, et ton premier job hardware avant de dormir. GPU: <code>qiskit-aer-gpu</code> exploite ta RTX directement.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-10-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">🎓</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Ton parcours de ressources</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">L'ordre optimal des ressources, calé sur les niveaux de cette page — tout est gratuit. Prérequis: les niveaux 0-3 de Deep Academy (complexes, algèbre linéaire, un peu de proba) — que tu as déjà.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">De zéro à praticien en 6-12 mois à 5 h/semaine, en codant chaque concept — le même contrat que Deep Academy.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">NIVEAUX 0-3: 3Blue1Brown (les vidéos sur i, Euler, l'algèbre linéaire — revois-les avec des lunettes quantiques) + « Quantum computing for the very curious » (Matuschak &amp; Nielsen, quantum.country: LE texte interactif à mémoire espacée — commence ICI ce soir) + les vidéos de Looking Glass Universe pour l'intuition MQ.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">NIVEAUX 4-5: le MIT 8.04 (Allan Adams, OpenCourseWare — le meilleur cours filmé de MQ, regarde AVEC un notebook) + « Quantum Mechanics: The Theoretical Minimum » de Susskind (le livre le plus accessible qui reste exact).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">NIVEAUX 6-7: le Qiskit Textbook (learning.quantum.ibm.com — théorie + code exécutable, ta voie royale) + les conférences de Ryan O'Donnell (CMU, sur YouTube) pour la rigueur algorithmique + Nielsen &amp; Chuang (« Mike &amp; Ike ») comme référence — pas une lecture linéaire, une bible à consulter.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">NIVEAUX 8-9: les review papers « NISQ era and beyond » (Preskill) et « Quantum error correction for beginners »; le blog d'Aaronson en continu; les tutoriels PennyLane pour le QML (ton pont naturel).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">NIVEAU 10 et rythme: S1-4 quantum.country + ton simulateur NumPy; S5-12 MIT 8.04 + Qiskit textbook en parallèle; S13-20 algorithmes en code (DJ→Grover→VQE); S21+ un papier reproduit par mois. Coche les cartes de cette page en avançant: quand tu peux expliquer une carte à voix haute sans la relire, elle est à toi. La compréhension vient des doigts — ici plus que partout.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Commence CE SOIR par quantum.country (2h, gratuit, à mémoire espacée intégrée): c'est l'équivalent quantique du « 3B1B + notebook » qui t'a lancé sur Deep Academy.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

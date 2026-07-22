@@ -1,0 +1,286 @@
+<div class="space-y-6 qa-level" data-qa-level="quantum:9">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">QUANTUM ACADEMY &middot; Niveau 9 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Frontières et applications</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: VQE, QAOA, quantum ML, simulation, cryptographie quantique et post-quantique, avantage quantique.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">7 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-9-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">VQE</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">VQE</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Variational Quantum Eigensolver: trouver l'énergie fondamentale d'une molécule en mariant un PETIT circuit paramétré θ (qui prépare un état d'essai) et un optimiseur CLASSIQUE (qui règle θ pour minimiser ⟨H⟩). Garanti par le principe variationnel: ⟨ψ(θ)|H|ψ(θ)⟩ ≥ E₀ toujours — on ne peut que s'approcher par au-dessus. L'algorithme emblématique du NISQ.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$E(\theta) = \langle\psi(\theta)|H|\psi(\theta)\rangle \ \ge\ E_0$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« E de thêta égale le sandwich psi de thêta, H, psi de thêta — toujours supérieur ou égal à l'énergie fondamentale E zéro » — minimiser ce sandwich, c'est viser E₀ par le haut.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Chimie quantique (dissociation de H₂, LiH — démonstré), matériaux, et le pont direct avec ton monde: VQE EST une boucle d'entraînement — forward (circuit), loss (⟨H⟩ par shots), optimizer (COBYLA/SPSA/gradient) — un « ML où le modèle est un circuit quantique ».</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Étape 1 — encode le problème: le H de la molécule H₂ devient une somme de Pauli: H = c₀ + c₁Z₀ + c₂Z₁ + c₃Z₀Z₁ + c₄X₀X₁ (coefficients calculés classiquement une fois pour toutes). 2 qubits suffisent.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Étape 2 — choisis l'ansatz: un circuit court paramétré, ex. Ry(θ₁)⊗Ry(θ₂) + CNOT + Ry(θ₃)⊗Ry(θ₄). C'est ton « architecture de modèle » — expressivité vs profondeur, le trade-off que tu connais.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Étape 3 — évalue la « loss »: pour chaque terme de Pauli, exécute le circuit, mesure dans la bonne base, moyenne sur ~10⁴ shots → E(θ) = Σcᵢ⟨Pᵢ⟩. Une évaluation = plusieurs milliers de runs: le coût de mesure est le vrai goulot.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Étape 4 — optimise: l'optimiseur classique propose de nouveaux θ (SPSA gère bien le bruit de shots), reboucle. Convergence pour H₂: E ≈ −1.137 Ha ✓ (valeur exacte connue — c'est un benchmark, pas une découverte).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: VQE = descente de « gradient » sur un paysage E(θ) évalué par une machine quantique. Ses démons sont les tiens: minima locaux, et les « barren plateaus » (gradients exponentiellement plats quand l'ansatz grossit) — le vanishing gradient du quantique. Ton intuition ML est un vrai avantage compétitif ici.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit: <code>qiskit_algorithms.VQE</code> + <code>EstimatorV2</code>. Honnêteté: pour les molécules que VQE atteint aujourd'hui, le classique (DFT, DMRG) fait aussi bien ou mieux — la valeur actuelle est l'apprentissage de la pile, pas le résultat.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-9-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">QAOA</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">QAOA</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Quantum Approximate Optimization Algorithm: encoder un problème d'optimisation combinatoire (MaxCut, portfolio...) dans un hamiltonien H_C dont l'état fondamental EST la solution, puis alterner p couches « coût » (e^{−iγH_C}) et « mélange » (e^{−iβΣX}) avec 2p paramètres optimisés classiquement. Le cousin optimisation de VQE — et le plus scruté des candidats à l'avantage NISQ.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\gamma,\beta\rangle = \prod_{k=1}^{p} e^{-i\beta_k \sum X_j}\,e^{-i\gamma_k H_C}\ H^{\otimes n}|0\rangle^{\otimes n}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« l'état gamma-bêta égale le produit, sur p couches, de: e puissance moins i bêta k somme des X, fois e puissance moins i gamma k H de coût — appliqué à la superposition uniforme » — coût, mélange, coût, mélange, p fois.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">MaxCut est le benchmark canonique; les cas d'usage visés: logistique, finance, scheduling. Statut honnête 2026: pas d'avantage démontré contre les meilleurs solveurs classiques (Gurobi, recuits) — un pari de recherche actif, pas un produit.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Encode MaxCut sur un triangle (3 sommets, 3 arêtes): couper une arête (i,j) rapporte 1 → H_C = ½Σ(1 − ZᵢZⱼ): chaque terme ZᵢZⱼ vaut −1 quand les deux sommets diffèrent (arête coupée). Max de coupes sur un triangle: 2.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Prépare la superposition uniforme (H^⊗3): toutes les 8 partitions coexistent. Applique e^{−iγH_C}: chaque état de base |x⟩ reçoit une phase proportionnelle à SON nombre de coupes — les bonnes solutions sont marquées en phase (le kickback généralisé).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique le mélangeur e^{−iβΣX}: des rotations X qui font interférer les états voisins — les phases deviennent des amplitudes: les bonnes solutions se renforcent (Grover en version douce et paramétrée).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Optimise (γ, β) classiquement sur ⟨H_C⟩, échantillonne l'état final: les chaînes mesurées les plus fréquentes ≈ des coupes maximales (101, 010... = 2 coupes ✓). À p = 1 sur un triangle, l'approximation est déjà bonne; p ↑ → mieux, mais circuits plus profonds — le dilemme NISQ éternel.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: QAOA = « phases selon le coût + interférence de mélange », répété p fois. Sa vraie question ouverte: battre un jour les heuristiques classiques dopées à 50 ans d'ingénierie. Suis les papiers « QAOA vs Gurobi » — c'est là que se joue l'honnêteté du domaine.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit: <code>QAOAAnsatz</code>. Pour tester utile: compare TOUJOURS à un solveur classique sérieux sur la même instance — l'hygiène de baseline que tu pratiques déjà en ML.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-9-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">QML</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le Quantum Machine Learning</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Trois idées principales: (1) circuits paramétrés comme modèles (« quantum neural networks » — des VQE pour la classification), (2) noyaux quantiques (encoder x dans un état |φ(x)⟩ et utiliser |⟨φ(x)|φ(x')⟩|² comme kernel SVM), (3) accélérations d'algèbre linéaire (HHL — avec des astérisques massifs). Statut: recherche fascinante, AUCUN avantage pratique démontré sur données classiques.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$K(x,x') = |\langle\varphi(x)|\varphi(x')\rangle|^2$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« le noyau de x et x prime égale le module carré du recouvrement entre les états qui encodent x et x prime » — la similarité de deux données, mesurée dans l'espace de Hilbert.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Pour TOI c'est le terrain de jeu naturel (ML + quantique). Les vrais enseignements transférables: les barren plateaus (≈ vanishing gradients), l'expressivité des ansätze (≈ capacité des architectures), la « dequantization » de Tang (des algos classiques inspirés du quantique qui rattrapent le speedup — un pattern de recherche à connaître).</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Comprends le kernel quantique en pipeline: encode x → circuit φ(x) (des rotations Ry(xᵢ), des intrications) → l'état vit en dimension 2ⁿ → estime K(x,x') sur hardware (test de swap ou inversion de circuit) → donne la matrice K à un SVM CLASSIQUE. Le quantique ne fait QUE le feature map.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Pose la question qui tue: ce kernel est-il MEILLEUR qu'un RBF classique sur des données réelles ? Réponse expérimentale à date: non sur les données classiques testées; oui par CONSTRUCTION sur des données artificielles à structure quantique (Havlíček 2019, Liu 2021 — preuve d'avantage sur un problème cryptographique). Le débat est là.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Repère le pattern « dequantization »: HHL promettait exp sur les systèmes linéaires → Tang (2018, à 18 ans) a montré qu'avec les MÊMES hypothèses d'accès aux données, un algo classique randomisé suit → le speedup s'est évaporé. Morale: toujours demander « l'hypothèse d'accès (qRAM ?) est-elle réaliste, et le classique avec les mêmes hypothèses fait quoi ? ».</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: le QML honnête en 2026 = une question de recherche ouverte sur QUELLES données/tâches un espace de Hilbert aide vraiment. Ton profil (ML sérieux + bases quantiques) est exactement celui qui peut y contribuer sans hype — les deux communautés se comprennent mal, les ponts sont rares.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Outils: PennyLane (différentiation automatique de circuits, très « PyTorch-like ») et Qiskit Machine Learning. Commence par reproduire le kernel de Havlíček sur 2 qubits — un après-midi, et tu sauras ce que le domaine sait.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-9-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">sim</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La simulation quantique</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">« Nature isn't classical, dammit » (Feynman, 1982): simuler des systèmes quantiques (molécules, matériaux, noyaux) est exponentiellement dur classiquement — et NATIF pour une machine quantique: elle parle la langue du problème. C'est l'application la plus solide du domaine: BQP-complète, demande vérifiable, clients réels (chimie, pharma, matériaux, énergie).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$e^{-iHt} \approx \left(e^{-iH_1 t/n}\,e^{-iH_2 t/n}\cdots\right)^n \ (\text{Trotter})$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« e puissance moins i H t s'approxime en découpant: le produit des exponentielles de chaque morceau de H, sur des petits pas de temps, répété n fois » — la formule de Trotter, qui transforme un hamiltonien en circuit.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Cibles concrètes: FeMoco (le site actif de la fixation d'azote — comprendre pour remplacer le procédé Haber-Bosch, ~2% de l'énergie mondiale), supraconducteurs à haute température, batteries, catalyseurs. Les estimations sérieuses: quelques centaines-milliers de qubits logiques → la première killer app plausible du fault-tolerant.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Comprends pourquoi le classique sature: un système de n spins = vecteur de 2ⁿ amplitudes → la chimie exacte (FCI) plafonne à ~20-25 orbitales même sur supercalculateur; au-delà, approximations (DFT) qui échouent précisément sur les systèmes « fortement corrélés » — les plus intéressants.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Comprends la trotterisation en pratique: H = Σhⱼ (termes de Pauli locaux) → chaque e^{−ihⱼδt} est un PETIT circuit standard → l'évolution complète = ces circuits enchaînés n fois. Erreur de découpage ~O(t²/n): précision ↔ profondeur, encore le même curseur.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Distingue les deux voies: NUMÉRIQUE (Trotter/QPE sur machine universelle — précis, cher) vs ANALOGIQUE (régler des atomes froids pour qu'ils AIENT le hamiltonien voulu et regarder — Pasqal, QuEra, 100-1000 atomes DÈS AUJOURD'HUI, science réelle publiée dans Nature).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: la simulation est le seul domaine où le quantique bat déjà le classique sur des problèmes scientifiques (analogique) et où le chemin fault-tolerant a un client final chiffré. Si tu dois parier une application: c'est celle-ci.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Pour suivre: les papiers « quantum simulation of » de Google/QuEra/Pasqal, et le chiffrage de référence « FeMoco resource estimates » — le baromètre du « quand » pour la chimie.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-9-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">BB84</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La cryptographie quantique (QKD)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">BB84: distribuer une clé secrète dont la sécurité repose sur la PHYSIQUE, pas sur des maths difficiles — non-clonage + perturbation par la mesure: tout espion laisse des traces statistiques détectables. Alice envoie des qubits dans des bases aléatoires (Z ou X), Bob mesure dans des bases aléatoires; ils gardent les cas concordants, sacrifient un échantillon pour tester l'espionnage.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\text{QBER} &gt; 11\% \ \Rightarrow\ \text{abandon (espion détecté)}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« si le taux d'erreur quantique de bit, QBER, dépasse environ onze pour cent, on abandonne la clé » — au-delà de ce seuil, un espion a pu apprendre trop; en dessous, l'amplification de confidentialité efface ce qu'il sait.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Déployé commercialement (ID Quantique, réseaux métropolitains, satellite chinois Micius: 1200 km). Limites réelles: portée fibre ~100-400 km sans répéteur quantique, débit modeste, et sécurité THÉORIQUE ≠ implémentation (attaques par lasers sur les détecteurs — d'où le device-independent basé sur Bell).</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Déroule le protocole: Alice tire bit + base ((0,Z)→|0⟩, (1,X)→|−⟩...), envoie le photon. Bob tire SA base, mesure. Base identique (50% des cas): son bit = celui d'Alice, garanti. Base différente: résultat aléatoire — poubelle.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Réconcilie: sur canal public, ils comparent les BASES (jamais les bits), gardent les ~50% concordants → la « clé brute ».</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Traque l'espionne: Ève intercepte-mesure-renvoie → sur les photons où elle a choisi la mauvaise base (50%), elle renvoie un état faux → Bob se trompe 25% du temps sur des bits qui devraient être parfaits. Alice et Bob sacrifient 10% de la clé, comparent publiquement: QBER ≈ 25% ≫ seuil → Ève est GRILLÉE par la mécanique quantique elle-même.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: la sécurité vient de deux théorèmes que tu possèdes déjà: non-clonage (carte 41: Ève ne peut pas copier-attendre) et bases incompatibles (carte 16: mesurer dans la mauvaise base détruit). BB84 = ces deux cartes, militarisées. Note la distinction: QKD (quantique, du hardware) ≠ post-quantique (classique, du logiciel — carte suivante).</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">À savoir dire en contexte pro (ton monde cyber): QKD = niche infrastructure critique point-à-point; la réponse MAINSTREAM à la menace quantique est le post-quantique logiciel — carte suivante, directement actionnable.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-9-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">PQC</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le post-quantique (PQC)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La parade LOGICIELLE à Shor: remplacer RSA/ECC par des problèmes durs MÊME pour un ordinateur quantique — réseaux euclidiens (lattices), hachés, codes. Standards NIST finalisés en 2024: ML-KEM (Kyber, échange de clés), ML-DSA (Dilithium, signatures), SLH-DSA (SPHINCS+). La migration mondiale est EN COURS — et c'est un chantier cyber, pas un chantier physique.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\text{LWE}: \ b = As + e \ \ (\text{retrouver } s \text{ est dur, même en BQP})$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« le problème LWE: b égale A s plus e — une équation linéaire bruitée: retrouver le secret s connaissant A et b est présumé difficile même pour une machine quantique » — le petit bruit e change tout.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">DIRECTEMENT ton métier: inventaire cryptographique, crypto-agilité, priorisation par durée de vie des données (« harvest now, decrypt later »: ce qui doit rester secret 15 ans doit migrer MAINTENANT), TLS hybride (X25519+ML-KEM — déjà déployé par Chrome, Cloudflare, Signal, iMessage PQ3). Le pont parfait entre ta cybersécurité et ce cursus.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Comprends LWE en petit: A = matrice publique aléatoire, s = secret, e = petit bruit. SANS bruit: b = As s'inverse en une élimination de Gauss (facile). AVEC le bruit e: le problème devient un « plus proche vecteur dans un réseau en grande dimension » — exponentiel pour tous les algorithmes connus, classiques ET quantiques (pas de structure de période à la Shor).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Note la subtilité de sécurité: « présumé dur » — pas de preuve absolue (comme toujours en crypto). D'où la défense en profondeur: TLS HYBRIDE (classique + PQC ensemble: casser exige de casser les DEUX).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique la checklist pro: (1) inventorier où vivent RSA/ECC (certificats, VPN, signatures de code, HSM), (2) prioriser par longévité des données, (3) exiger la crypto-agilité des fournisseurs, (4) suivre ANSSI/NIST (l'ANSSI: hybridation obligatoire en phase de transition).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: le PQC est le SEUL sujet de tout ce cursus qui soit actionnable en entreprise dès lundi matin — et il exige exactement ton profil: comprendre ASSEZ de quantique (Shor, Grover: cartes 61-62) pour dimensionner la menace, et assez de cyber pour piloter la migration. Positionnement en or.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Repères chiffrés pour un avis d'expert: Grover ⇒ AES-256 recommandé (au lieu de 128); Shor ⇒ RSA/ECC condamnés à terme ⇒ ML-KEM/ML-DSA; échéances réglementaires: migrations critiques visées 2030-2035 (NSA CNSA 2.0).</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-9-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⚡</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'avantage quantique</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">« Avantage/suprématie quantique » = une machine quantique exécute UNE tâche (même artificielle) hors de portée classique. Google 2019 (Sycamore, échantillonnage de circuits aléatoires): revendication → contestée → itérations. Leçon: l'avantage est une CIBLE MOUVANTE — chaque annonce quantique provoque un contre-algorithme classique. Le vrai jalon d'intérêt: l'avantage sur un problème UTILE. Pas encore atteint.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\text{XEB} = 2^n\,\langle P(x_i)\rangle - 1$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« le cross-entropy benchmarking, XEB, égale deux puissance n fois la moyenne des probabilités idéales des échantillons obtenus, moins un » — proche de 1: la machine échantillonne bien la bonne distribution; proche de 0: du bruit.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Le fil d'actualité permanent du domaine: Google Willow (2024, échantillonnage + « below threshold » en QEC), les répliques par tenseurs networks (des runs « en heures » classiques rattrapant des claims « en siècles »), les photons de Jiuzhang. Savoir lire ces joutes = comprendre où en est VRAIMENT le terrain.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Comprends la tâche choisie (random circuit sampling): exécuter un circuit aléatoire profond et échantillonner sa distribution de sortie — choisie précisément parce qu'elle est PROUVABLEMENT dure à simuler et facile à exécuter... et inutile par ailleurs. Un sprint conçu pour être gagné.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Suis le match 2019-2024: claim « 10 000 ans classiques » → IBM: « 2.5 jours avec assez de disque » → tenseurs networks (2021-2023): quelques heures GPU → Google augmente taille/profondeur → re-écart. La frontière EST cette oscillation.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Extrais les leçons de méthode: (1) tout claim d'avantage est daté du meilleur algorithme classique CONNU au moment T, (2) la vérification est elle-même un problème (XEB n'est estimable que sur les petites instances), (3) « quantique bat classique » sans préciser tâche + baseline + date = du bruit médiatique.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: range les jalons dans le bon ordre d'importance: suprématie artificielle (fait, contesté, refait) &lt; QEC below-threshold (fait, 2024 — le VRAI tournant) &lt; avantage utile (à venir — la simulation quantique en pole position, carte 74). Cette hiérarchie te donne dix ans de grille de lecture.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Réflexe devant chaque annonce: chercher la réplique classique dans les 6-12 mois (elle vient presque toujours). Les groupes tenseurs-networks (Flatiron, Alibaba avant dissolution, EPFL) sont l'autre moitié de l'histoire — suis-les autant que Google.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

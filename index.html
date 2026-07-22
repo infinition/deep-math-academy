@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep Math Academy</title>
+    <title>Deep Academy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- MathJax pour les formules math&#233;matiques &#233;l&#233;gantes -->
@@ -30,8 +30,22 @@
 <body class="h-screen flex flex-col md:flex-row overflow-hidden">
 
     <!-- Mobile Header -->
-    <div class="md:hidden bg-indigo-900 text-white p-4 flex justify-between items-center z-30 shadow-md flex-shrink-0">
-        <span class="font-bold text-lg">&#128640; Deep Math Academy</span>
+    <div class="md:hidden bg-zinc-900 text-white p-4 flex justify-between items-center z-30 shadow-md flex-shrink-0 border-b border-zinc-800">
+        <span class="font-bold text-lg flex items-center gap-2">
+            <svg class="dma-brain" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <g class="dma-brain-lobes">
+                    <path d="M15 5.6c-2.5 0-4.1 1.5-4.4 3.3-1.9.5-3.3 2-3.3 4 0 1.1.4 2.1 1.2 2.8-.6.7-1 1.5-1 2.5 0 1.8 1.3 3.3 3.2 3.6.3 1.9 1.9 3.4 4.3 3.4" />
+                    <path d="M17 5.6c2.5 0 4.1 1.5 4.4 3.3 1.9.5 3.3 2 3.3 4 0 1.1-.4 2.1-1.2 2.8.6.7 1 1.5 1 2.5 0 1.8-1.3 3.3-3.2 3.6-.3 1.9-1.9 3.4-4.3 3.4" />
+                </g>
+                <path class="dma-brain-synapses" d="M16 9.4 11.8 12.9M16 9.4l4.2 3.5M11.8 12.9v5M20.2 12.9v5M11.8 17.9 16 21.4M20.2 17.9 16 21.4M16 9.4v12" />
+                <g class="dma-brain-nodes">
+                    <circle cx="16" cy="9.4" r="1.7" /><circle cx="11.8" cy="12.9" r="1.4" />
+                    <circle cx="20.2" cy="12.9" r="1.4" /><circle cx="11.8" cy="17.9" r="1.4" />
+                    <circle cx="20.2" cy="17.9" r="1.4" /><circle cx="16" cy="21.4" r="1.7" />
+                </g>
+            </svg>
+            Deep Academy
+        </span>
         <button onclick="toggleSidebar()" class="p-2 focus:outline-none">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
@@ -42,39 +56,47 @@
 
     <!-- Sidebar Navigation -->
     <nav id="sidebar"
-        class="fixed md:relative inset-y-0 left-0 w-80 bg-indigo-900 text-white flex flex-col flex-shrink-0 shadow-2xl z-40 transform transition-transform duration-300 -translate-x-full md:translate-x-0 h-full">
-        <div class="p-4 bg-indigo-800 font-bold text-xl hidden md:flex items-center justify-between shadow-lg shrink-0">
-            <span>&#128640; Deep Math Academy</span>
+        class="fixed md:relative inset-y-0 left-0 w-80 bg-zinc-900 text-white flex flex-col flex-shrink-0 shadow-2xl z-40 transform transition-transform duration-300 -translate-x-full md:translate-x-0 h-full border-r border-zinc-800">
+        <div class="p-4 bg-zinc-800 font-bold text-xl hidden md:flex items-center gap-3 shadow-lg shrink-0 border-b border-zinc-700">
+            <svg class="dma-brain" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <g class="dma-brain-lobes">
+                    <path d="M15 5.6c-2.5 0-4.1 1.5-4.4 3.3-1.9.5-3.3 2-3.3 4 0 1.1.4 2.1 1.2 2.8-.6.7-1 1.5-1 2.5 0 1.8 1.3 3.3 3.2 3.6.3 1.9 1.9 3.4 4.3 3.4" />
+                    <path d="M17 5.6c2.5 0 4.1 1.5 4.4 3.3 1.9.5 3.3 2 3.3 4 0 1.1-.4 2.1-1.2 2.8.6.7 1 1.5 1 2.5 0 1.8-1.3 3.3-3.2 3.6-.3 1.9-1.9 3.4-4.3 3.4" />
+                </g>
+                <path class="dma-brain-synapses" d="M16 9.4 11.8 12.9M16 9.4l4.2 3.5M11.8 12.9v5M20.2 12.9v5M11.8 17.9 16 21.4M20.2 17.9 16 21.4M16 9.4v12" />
+                <g class="dma-brain-nodes">
+                    <circle cx="16" cy="9.4" r="1.7" /><circle cx="11.8" cy="12.9" r="1.4" />
+                    <circle cx="20.2" cy="12.9" r="1.4" /><circle cx="11.8" cy="17.9" r="1.4" />
+                    <circle cx="20.2" cy="17.9" r="1.4" /><circle cx="16" cy="21.4" r="1.7" />
+                </g>
+            </svg>
+            <span>Deep Academy</span>
         </div>
 
         <!-- Course Selector -->
-        <div class="p-4 border-b border-indigo-700 bg-indigo-800/50 shrink-0">
-            <label class="text-xs text-indigo-300 uppercase font-bold tracking-wider">Mati&#232;re</label>
+        <div class="p-4 border-b border-zinc-800 bg-zinc-800/40 shrink-0">
+            <label class="text-xs text-zinc-400 uppercase font-bold tracking-wider">Mati&#232;re</label>
             <div id="courseSelectorWrapper" class="relative z-50">
                 <!-- Custom Selector injected by JS -->
             </div>
         </div>
 
-        <div class="p-3 border-b border-indigo-700/80 bg-indigo-900/40 shrink-0">
-            <label for="globalSearchInput" class="text-xs text-indigo-300 uppercase font-bold tracking-wider">Recherche globale</label>
+        <div class="p-3 border-b border-zinc-800 bg-zinc-900/40 shrink-0">
+            <label for="globalSearchInput" class="text-xs text-zinc-400 uppercase font-bold tracking-wider">Recherche globale</label>
             <div class="mt-2 relative">
                 <input id="globalSearchInput" type="search" placeholder="Cours, chapitre, concept, equation..."
-                    class="w-full rounded-lg border border-indigo-600 bg-indigo-950/70 text-white placeholder-indigo-300/70 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400">
+                    class="w-full rounded-lg border border-zinc-700 bg-zinc-950/70 text-white placeholder-zinc-500 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400">
                 <button id="globalSearchClear" type="button"
-                    class="absolute right-2 top-1/2 -translate-y-1/2 text-indigo-300 hover:text-white text-lg leading-none hidden"
+                    class="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white text-lg leading-none hidden"
                     aria-label="Effacer la recherche">x</button>
             </div>
-            <div id="globalSearchStatus" class="mt-1 text-[11px] text-indigo-300/80 min-h-[1rem]"></div>
+            <div id="globalSearchStatus" class="mt-1 text-[11px] text-zinc-500 min-h-[1rem]"></div>
         </div>
 
         <div class="flex-1 overflow-y-auto p-2 space-y-1" id="nav-container">
             <!-- Navigation items injected here -->
         </div>
 
-        <div class="p-4 bg-indigo-950 text-xs text-indigo-300 text-center border-t border-indigo-800 shrink-0">
-            Progression : <span id="course-progress" class="font-bold">0%</span>
-            <br><span class="opacity-50 text-[10px]">Cliquez pour valider un module</span>
-        </div>
     </nav>
 
     <!-- Overlay for mobile sidebar -->
@@ -92,17 +114,6 @@
             <div class="flex gap-2 shrink-0">
                 <button id="darkModeBtn" onclick="toggleDarkMode()"
                     class="text-xl px-2 py-1 rounded hover:bg-gray-100 transition">&#127769;</button>
-                <button onclick="resetCurrentProgress()" title="R&#233;initialiser le module"
-                    class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-300 group">
-                    <svg class="w-3.5 h-3.5 text-gray-400 group-hover:text-red-500 group-hover:-rotate-180 transition-transform duration-500"
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
-                        </path>
-                    </svg>
-                    <span
-                        class="text-xs font-semibold text-gray-500 dark:text-gray-400 group-hover:text-red-500 transition-colors">Reset</span>
-                </button>
             </div>
         </header>
 
@@ -120,43 +131,50 @@
 
     <!-- Home Screen Overlay -->
     <div id="home-screen"
-        class="fixed inset-0 z-50 bg-slate-900 flex flex-col items-center justify-center text-white transition-opacity duration-1000"
-        style="background-color: #0f172a;">
+        class="fixed inset-0 z-50 bg-zinc-950 flex flex-col items-center justify-start lg:justify-center overflow-y-auto text-white transition-opacity duration-1000"
+        style="background-color: #131316;">
         <!-- Background Animation Canvas -->
         <canvas id="home-bg-canvas" class="absolute inset-0 w-full h-full"></canvas>
 
         <!-- Content -->
-        <div class="relative z-10 text-center space-y-8 p-6">
-            <div class="mb-4">
-                <span class="text-6xl md:text-8xl animate-pulse">&#128640;</span>
+        <div class="relative z-10 text-center space-y-8 p-6 my-auto">
+            <div class="mb-4 flex justify-center">
+                <svg class="dma-brain dma-brain-hero" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <g class="dma-brain-lobes">
+                        <path d="M15 5.6c-2.5 0-4.1 1.5-4.4 3.3-1.9.5-3.3 2-3.3 4 0 1.1.4 2.1 1.2 2.8-.6.7-1 1.5-1 2.5 0 1.8 1.3 3.3 3.2 3.6.3 1.9 1.9 3.4 4.3 3.4" />
+                        <path d="M17 5.6c2.5 0 4.1 1.5 4.4 3.3 1.9.5 3.3 2 3.3 4 0 1.1-.4 2.1-1.2 2.8.6.7 1 1.5 1 2.5 0 1.8-1.3 3.3-3.2 3.6-.3 1.9-1.9 3.4-4.3 3.4" />
+                    </g>
+                    <path class="dma-brain-synapses" d="M16 9.4 11.8 12.9M16 9.4l4.2 3.5M11.8 12.9v5M20.2 12.9v5M11.8 17.9 16 21.4M20.2 17.9 16 21.4M16 9.4v12" />
+                    <g class="dma-brain-nodes">
+                        <circle cx="16" cy="9.4" r="1.7" /><circle cx="11.8" cy="12.9" r="1.4" />
+                        <circle cx="20.2" cy="12.9" r="1.4" /><circle cx="11.8" cy="17.9" r="1.4" />
+                        <circle cx="20.2" cy="17.9" r="1.4" /><circle cx="16" cy="21.4" r="1.7" />
+                    </g>
+                </svg>
             </div>
             <h1
-                class="text-5xl md:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 drop-shadow-lg tracking-tight">
-                Deep Math Academy
+                class="text-5xl md:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-zinc-100 via-cyan-300 to-teal-400 drop-shadow-lg tracking-tight">
+                Deep Academy
             </h1>
-            <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed">
-                Ma&#238;trisez les Math&#233;matiques de l'Intelligence Artificielle.<br>
-                <span class="text-indigo-400 font-medium">Alg&#232;bre &#8226; Analyse &#8226; Probabilit&#233;s &#8226; IA Moderne &#8226; Quantique</span>
+            <p class="text-xl md:text-2xl text-zinc-300 max-w-2xl mx-auto font-light leading-relaxed">
+                Des premiers symboles math&#233;matiques aux fronti&#232;res de la recherche.<br>
+                <span class="text-cyan-400 font-medium">Comprendre en profondeur, une notion &#224; la fois.</span>
             </p>
 
             <button onclick="enterApp()"
-                class="group relative px-8 py-4 bg-white text-indigo-900 font-bold text-xl rounded-full shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)] hover:scale-105 transition-all duration-300 overflow-hidden">
+                class="group relative px-8 py-4 bg-white text-zinc-900 font-bold text-xl rounded-full shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)] hover:scale-105 transition-all duration-300 overflow-hidden">
                 <span class="relative z-10 flex items-center gap-3">
                     Commencer l'Aventure <span class="group-hover:translate-x-1 transition-transform">&#10140;</span>
                 </span>
                 <div
-                    class="absolute inset-0 bg-gradient-to-r from-blue-100 to-indigo-100 opacity-0 group-hover:opacity-100 transition-opacity">
+                    class="absolute inset-0 bg-gradient-to-r from-zinc-100 to-cyan-100 opacity-0 group-hover:opacity-100 transition-opacity">
                 </div>
             </button>
 
             <div class="max-w-3xl mx-auto">
-                <p class="text-xs uppercase tracking-wider text-indigo-300 mb-3">Demarrage rapide par theme</p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                    <button onclick="enterAppAndOpenCourse('analysis','gradient')" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm transition">Analyse</button>
-                    <button onclick="enterAppAndOpenCourse('algebra','vectors')" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm transition">Algebre</button>
-                    <button onclick="enterAppAndOpenCourse('stats','stat_intro')" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm transition">Stats</button>
-                    <button onclick="enterAppAndOpenCourse('ml_expert','coverage_global')" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm transition">IA Expert</button>
-                </div>
+                <p class="text-xs uppercase tracking-wider text-zinc-400 mb-3">Parcours disponibles</p>
+                <!-- Genere depuis courses_config.json : tout nouveau cours apparait ici tout seul -->
+                <div id="home-courses" class="grid md:grid-cols-3 gap-3 text-left"></div>
             </div>
         </div>
 
@@ -165,6 +183,7 @@
         </div>
     </div>
 
+    <script src="data/content_bundle.js"></script>
     <script src="js/pedagogy.js"></script>
     <script src="js/global.js"></script>
     <script src="js/basics.js"></script>
@@ -174,6 +193,8 @@
     <script src="js/ai_dynamics.js"></script>
     <script src="js/ml_expert.js"></script>
     <script src="js/quantum.js"></script>
+    <script src="js/cards.js"></script>
+    <script src="js/derivee_interactive.js"></script>
 
 </body>
 

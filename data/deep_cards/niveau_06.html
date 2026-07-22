@@ -1,0 +1,530 @@
+<div class="space-y-6 qa-level" data-qa-level="deep:6">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">DEEP ACADEMY &middot; Niveau 6 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Machine Learning classique</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: maîtriser le socle: régressions, classification, métriques, overfitting. 80% des problèmes réels se résolvent à ce niveau, sans deep learning.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">13 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-6-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">X→y</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Supervisé vs non supervisé</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Supervisé: on a des exemples <b>étiquetés</b> (X → y) et on apprend la correspondance. Non supervisé: pas d'étiquettes, on cherche la structure cachée (groupes, dimensions). Entre les deux: self-supervisé (niveau 9).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$f_\theta: X \rightarrow y \quad \text{vs} \quad \text{structure}(X)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Supervisé: spam/pas spam, prix d'une maison, diagnostic. Non supervisé: segmentation clients (clustering), compression (PCA), détection d'anomalies.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Première question de cadrage de tout projet: « ai-je des labels ? sont-ils fiables ? combien ? ». La réponse détermine la famille d'algorithmes et 80% du budget (labelliser coûte cher).</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># classer un nouveau probleme:
+if labels is not None:
+    model.fit(X, y)            # supervise: j'ai des reponses
+elif structure is not None:
+    KMeans().fit(X)            # non supervise: je cherche des groupes
+else:
+    # apprendre depuis la donnee elle-meme
+    masked_autoencoder.fit(X)  # self-supervise: les labels sont dans X</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La frontiere entre supervise et non supervise n'est pas nette. Le self-supervise (masquer des mots, des patches) fabrique des labels depuis la donnee elle-meme. GPT est un classifieur supervise... ou les labels sont les mots suivants du texte.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-6-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">ŷ=wx</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La régression linéaire</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Le « hello world » du ML: prédire un nombre par une <b>somme pondérée des features</b> + un biais. Simple, rapide, interprétable: chaque poids dit l'influence de sa feature.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\hat y = w^\top x + b, \quad L = \tfrac{1}{n}\sum(\hat y_i - y_i)^2$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Prévision de ventes, estimation de prix, baseline obligatoire avant tout modèle complexe. Si ton réseau profond ne bat pas la régression linéaire, ton problème est ailleurs (données, features, fuite).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>LinearRegression().fit(X, y)</code> en 2 lignes de sklearn. Discipline de pro: TOUJOURS établir cette baseline d'abord. Elle t'a déjà servi de garde-fou sur ORBIT.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># interpreter les coefficients:
+model = LinearRegression().fit(X, y)
+for i, (coef, name) in enumerate(zip(model.coef_, feature_names)):
+    print(f'{name}: {coef:.4f}')
+    # si coef ≈ 0: la feature n influence pas la prediction
+    # si coef &gt; 0: augmenter la feature augmente la prediction
+    # si coef &lt; 0: augmenter la feature diminue la prediction
+# la regression lineaire est TRANSPARENTE</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Si tu ajoutes une constante a TOUTES les entrees (x → x + c), seul le biais change, les coefficients restent identiques. C'est l'invariance par translation: la regression capture les pentes, pas les niveaux.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-6-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">σ(z)</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La sigmoïde</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Écrase n'importe quel nombre réel dans ]0,1[: parfait pour produire une <b>probabilité</b>. En forme de S: saturée aux extrêmes, sensible au centre.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\sigma(z)=\frac{1}{1+e^{-z}} \qquad \sigma'(z)=\sigma(1-\sigma)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Sortie de toute classification binaire. Les « portes » des LSTM. Historiquement l'activation des premiers réseaux, détrônée en interne par ReLU (elle sature et tue le gradient).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>torch.sigmoid(z)</code>. Repères: σ(0)=0.5, σ(4)≈0.98, σ(-4)≈0.02. Le score brut z avant la sigmoïde s'appelle un <b>logit</b>: ce mot reviendra sans cesse.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># la sigmoide comme porte de decibision:
+def logit_to_proba(z):
+    return 1 / (1 + torch.exp(-z))
+# z = 0 → p = 0.5 (equilibre)
+# z = 3 → p = 0.95 (presque sur)
+# z = -3 → p = 0.05 (presque sur de l inverse)
+# z = 10 → p = 0.99995 (sature)
+# z = -10 → p = 0.00005 (sature)</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La sigmoide SATURE: pour z &lt; -5 ou z &gt; +5, la pente est quasi nulle → gradient ≃ 0 → le neurone n'apprend plus. C'est le 'vanishing gradient' qui a condamne les reseaux a sigmoide pour les couches profondes.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-6-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">logit</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La régression logistique</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La régression linéaire + une sigmoïde au bout = un <b>classifieur probabiliste</b>. Entraînée par cross-entropy. Malgré son nom, c'est de la classification.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$P(y{=}1\mid x) = \sigma(w^\top x + b)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Détection de fraude, churn, scoring crédit: souvent imbattable sur données tabulaires avec bonnes features, et exigée en production régulée car chaque poids est explicable.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>LogisticRegression().fit(X, y)</code>. Vision unificatrice: un réseau de neurones de classification = une régression logistique posée sur des features apprises par les couches précédentes.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># regression logistique = lineaire + sigmoide:
+class LogisticRegression(nn.Module):
+    def __init__(self, n_features, n_classes):
+        super().__init__()
+        self.linear = nn.Linear(n_features, n_classes)
+    def forward(self, x):
+        return torch.sigmoid(self.linear(x))  # pour 2 classes
+        # pour n classes: return F.softmax(self.linear(x), dim=-1)</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">LE piage: utiliser MSE comme loss pour la regression logistique. La cross-entropy est convexe, la MSE ne l'est PAS pour la classification binaire → convergence garantee pour l'une, pas pour l'autre.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-6-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">soft</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le softmax</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Généralise la sigmoïde à N classes: transforme un vecteur de scores en <b>distribution de probabilités</b> (tout positif, somme = 1). Exponentielle puis normalisation: amplifie les écarts.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\operatorname{softmax}(z)_i = \frac{e^{z_i}}{\sum_j e^{z_j}}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">La dernière couche de tout classifieur multi-classes et de tout LLM (distribution sur le vocabulaire). Aussi au cœur de l'attention (niveau 8). Un des 3 blocs les plus utilisés de l'IA.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Manipule le Lab 04 avec la température: tu verras le softmax se concentrer ou s'aplatir. Astuce numérique standard: soustraire max(z) avant l'exp pour éviter l'overflow.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># softmax numeriquement stable:
+def softmax_stable(z):
+    z_max = z.max(dim=-1, keepdim=True)[0]  # le plus grand logit
+    z_shifted = z - z_max                    # soustraire le max
+    exp_z = torch.exp(z_shifted)             # stable: max exponentiel ≈ 1
+    return exp_z / exp_z.sum(dim=-1, keepdim=True)
+# sans cette astuce, exp(1000) = inf, tout casse</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le softmax n'est PAS invariant par translation: ajouter +100 a tous les logits ne change pas le softmax (car (z_i + 100)/T = z_i/T + 100/T, et la constante se simplifie dans la normalisation). Mais (z_i*100) change tout.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-6-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">MSE</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">MSE et MAE</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Les deux loss de régression. MSE (erreur quadratique moyenne): punit fortement les gros écarts, sensible aux outliers. MAE (erreur absolue): robuste, punit linéairement.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\text{MSE}=\tfrac{1}{n}\sum(\hat y - y)^2 \quad \text{MAE}=\tfrac{1}{n}\sum|\hat y - y|$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">MSE = le choix par défaut (gradients lisses, lien avec le bruit gaussien). MAE ou Huber quand les données ont des valeurs aberrantes (capteurs, finance).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Rapporte toujours le RMSE (racine du MSE): il est dans l'unité de ta cible, donc parlant pour le métier (« erreur moyenne de 12 euros » plutôt qu'un nombre abstrait).</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># comparer MSE, MAE et Huber:
+y_true = torch.tensor([2.0, 3.0, 10.0])  # outlier a 10
+y_pred = torch.tensor([1.5, 3.5, 5.0])
+print(F.mse_loss(y_pred, y_true))     # (0.25 + 0.25 + 25)/3 = 8.5
+print(F.l1_loss(y_pred, y_true))      # (0.5 + 0.5 + 5)/3 = 2.0
+print(F.huber_loss(y_pred, y_true))   # 0.125 + 0.125 + (5-0.5)*0.5 = 2.5
+# l outlier pese 10x plus en MSE qu en MAE!</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Si tes donnees ont des outliers (capteur casse, erreur de saisie), la MSE les amplifie au carre et le modele va tout faire pour les 'corriger' aux depends du reste. La MAE est robuste aux outliers mais sa derivee est constante par morceaux → optimisation plus instable.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-6-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⚠</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Overfitting et underfitting</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Overfitting: le modèle <b>mémorise</b> le train (bruit compris) et échoue sur du neuf. Underfitting: trop simple, il rate même le train. Le diagnostic se lit dans l'écart train/validation.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$L_{train} \ll L_{val} \Rightarrow \text{overfit}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">LE problème central du ML pratique. Remèdes anti-overfit: plus de données, régularisation, dropout, early stopping, modèle plus petit. Anti-underfit: modèle plus gros, meilleures features, entraîner plus longtemps.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Trace systématiquement les deux courbes de loss. Train qui baisse + val qui remonte = overfit, agis. Les deux hautes et plates = underfit. Ce diagnostic visuel est le geste de base du praticien.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">plt.plot(train_losses, label='train')
+plt.plot(val_losses, label='val')
+plt.legend()
+# si les deux baissent → bon entrainement
+# si train baisse et val monte → OVERFIT (arreter)
+# si les deux stagnent → UNDERFIT (modele trop simple)
+# si les deux oscillent → lr trop grand</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le diagnostic le plus important de tout le ML se fait les YEUX: tracer train_loss et val_loss sur le meme graphe. Pas de metriques, pas de chiffres: regarder la divergence. C'est gratuit, instantane, et ca dit tout.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-6-7">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⚖</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le compromis biais-variance</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Biais: erreur due à un modèle <b>trop simple</b> (il rate la vraie forme). Variance: erreur due à un modèle <b>trop sensible</b> (il change du tout au tout selon l'échantillon). Réduire l'un augmente souvent l'autre.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\text{Erreur} = \text{Biais}^2 + \text{Variance} + \text{Bruit}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Le cadre théorique derrière l'overfitting. Les ensembles (random forest, bagging) attaquent la variance; le boosting attaque le biais. Nuance moderne: les très gros réseaux échappent partiellement à ce compromis (double descente).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Grille de lecture pour choisir un remède: mauvais partout = biais (modèle plus riche); bon en train, mauvais en val = variance (régularise ou moyenne plusieurs modèles).</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># visualiser biais vs variance:
+# on tire 10 echantillons et on ajuste 3 modeles:
+# modele simple (droite): peu de variance entre echantillons, mais erreur systematique
+# modele complexe (poly degre 9): variance enorme, pas de biais
+# modele moyen (degre 3): le compromis
+# le bruit: meme le meilleur modele a une erreur residuelle</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le bruit est IRREDUCTIBLE: meme si tu as le vrai modele, les donnees sont bruitees. Le compromis biais-variance dit qu'il faut choisir entre erreur systematique (biais) et instabilite (variance). En deep learning, les gros modeles 'doublent la mise' avec la double descente.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-6-8">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">split</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Train / Validation / Test</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Découper les données en 3: <b>train</b> (apprendre), <b>validation</b> (choisir les hyperparamètres), <b>test</b> (verdict final, touché UNE seule fois). Mélanger ces rôles = tricher sans le savoir.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$D = D_{train} \cup D_{val} \cup D_{test}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">La discipline qui sépare le ML sérieux du bricolage. Pour les séries temporelles (trading, capteurs): découpage chronologique obligatoire, jamais aléatoire, sinon le futur fuit dans le passé.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>train_test_split(X, y, test_size=0.2)</code>. Règle absolue que tu connais déjà via ORBIT: le test set est sacré. Si tu l'as regardé deux fois pour ajuster le modèle, il est mort.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># le bon decoupage:
+from sklearn.model_selection import train_test_split
+X_temp, X_test, y_temp, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_val, y_train, y_val = train_test_split(X_temp, y_temp, test_size=0.25, random_state=42)
+# au final: 60% train, 20% val, 20% test
+# le test n est touche qu UNE SEULE fois, a la fin</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Pour les series temporelles, le split aleatoire EST INTERDIT: tu ne peux pas entrainer sur le futur et predire le passe. Le split doit etre CHRONOLOGIQUE: train sur [t₀, t₁], val sur [t₁, t₂], test sur [t₂, t₃].</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-6-9">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">k-fold</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La validation croisée</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Découper les données en k blocs, entraîner k fois en laissant à chaque tour un bloc différent pour valider, puis <b>moyenner</b>. Estimation robuste de la performance quand les données sont limitées.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\text{score} = \frac{1}{k}\sum_{i=1}^{k} \text{score}_i$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Standard sur les datasets petits/moyens et dans les compétitions Kaggle. Donne aussi l'écart-type du score: indispensable pour savoir si un gain de 0.5% est réel ou du bruit.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>cross_val_score(model, X, y, cv=5)</code>. Rapporte toujours moyenne ± écart-type. Un résultat sans barre d'erreur ne prouve rien: réflexe qui te servira jusqu'au niveau 10.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># validation croisee avec ecart-type:
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
+print(f'{scores}')  # [0.82, 0.84, 0.79, 0.83, 0.81]
+print(f'moyenne: {scores.mean():.3f} +/- {scores.std():.3f}')
+# si l ecart-type est &gt; 0.03, la moyenne ne veut rien dire</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">k-fold garantit que CHAQUE exemple sert une fois dans le test. Mais les plis ne sont PAS independants (ils partagent des donnees similaires). L'ecart-type entre plis sous-estime donc la vraie variance. Pour une estimation honeste, refaire plusieurs k-fold avec des seeds differentes.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-6-10">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">F1</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Précision, rappel, F1, AUC</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">L'accuracy ment dès que les classes sont déséquilibrées. <b>Précision</b>: parmi mes alertes, combien de vraies ? <b>Rappel</b>: parmi les vrais cas, combien attrapés ? <b>F1</b>: leur moyenne harmonique. <b>AUC</b>: qualité du classement, tous seuils confondus.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$F_1 = 2\cdot\frac{P \cdot R}{P + R}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Détection de fraude à 0.1% de cas positifs: un modèle qui dit toujours « non » a 99.9% d'accuracy et zéro valeur. Le choix précision vs rappel est une décision MÉTIER (coût d'une fausse alerte vs d'un cas raté).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>classification_report(y_true, y_pred)</code>. Réflexe expert: commence par la matrice de confusion, elle raconte toute l'histoire; les métriques n'en sont que des résumés.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># precision vs rappel: un choix metier
+# diagnostic du cancer:
+# precision = vrais_positifs / (vrais_pos + faux_pos)
+# rappel = vrais_positifs / (vrais_pos + faux_neg)
+# si le traitement est dur (chimiotherapie): on veut une precision haute
+# si la maladie est contagieuse: on veut un rappel haut
+# F1 = 2 * (P*R)/(P+R) penalise des qu un des deux est bas</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">L'accuracy est une metrique menteuse sur les classes desequilibrees. Si 99% des emails sont normaux et 1% sont spams, un modele qui dit 'tout normal' a 99% d'accuracy et ZERO valeur. Precision/rappel/F1 sont les vraies mesures.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-6-11">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">k-m</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">k-means (clustering)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Regrouper les points en k paquets sans étiquettes: placer k centres, affecter chaque point au centre le plus proche, recalculer les centres, répéter jusqu'à stabilité.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\min \sum_{i} \|x_i - \mu_{c(i)}\|^2$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Segmentation clients, quantification de couleurs, regroupement de logs ou d'incidents de sécurité similaires, construction de vocabulaires visuels.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>KMeans(n_clusters=k).fit(X)</code>. Choisir k: méthode du coude ou score silhouette. Piège: k-means suppose des paquets ronds et de tailles comparables; sinon, regarde DBSCAN ou GMM.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># l'algorithme k-means en 20 lignes:
+def kmeans(X, k, max_iter=100):
+    centers = X[torch.randperm(len(X))[:k]]
+    for _ in range(max_iter):
+        dists = torch.cdist(X, centers)  # distances aux centres
+        labels = dists.argmin(dim=1)      # assignation au plus proche
+        new_centers = torch.stack([X[labels == i].mean(dim=0) for i in range(k)])
+        if (new_centers - centers).norm() &lt; 1e-6: break
+        centers = new_centers
+    return labels, centers</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">k-means trouve des clusters SPHERIQUES. Si tes donnees forment des bananes ou des anneaux, k-means echoue. Regarde DBSCAN pour les formes libres, et verifie toujours les resultats visuellement (en 2D avec PCA).</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-6-12">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">PCA</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">PCA (réduction de dimension)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Trouver les <b>axes qui capturent le maximum de variance</b> des données et projeter dessus: passer de 1000 dimensions à 10 en perdant le minimum d'information. C'est de l'algèbre linéaire pure (vecteurs propres de la covariance).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$Z = XW_{top\text{-}k}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Visualiser des embeddings en 2D, dédupliquer des features corrélées, accélérer un modèle en compressant l'entrée, débruiter. Cousins modernes non linéaires: t-SNE, UMAP (visualisation).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>PCA(n_components=0.95)</code> garde 95% de la variance automatiquement. Standardise les features AVANT (sinon la feature à grande échelle domine tout): piège classique n°1 du PCA.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># PCA: trouver les axes de variance maximale
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+X_scaled = StandardScaler().fit_transform(X)  # OBLIGATOIRE!
+pca = PCA(n_components=2)                      # projeter en 2D
+X_pca = pca.fit_transform(X_scaled)
+print(f'variance expliquee: {pca.explained_variance_ratio_}')
+# première composante: direction de plus grande variance</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Standardiser AVANT la PCA est OBLIGATOIRE. Si une feature est en euros (0-1000) et une autre en pourcentage (0-1), la feature en euros domine la premiere composante juste a cause de son echelle, pas de son importance.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

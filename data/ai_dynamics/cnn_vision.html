@@ -1,0 +1,123 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+
+    <div class="bg-gradient-to-r from-sky-600 to-indigo-700 p-8 rounded-2xl shadow-xl text-white">
+        <h2 class="text-3xl font-extrabold mb-4">CNN &amp; Vision</h2>
+        <p class="text-lg text-sky-100 leading-relaxed">
+            Une image, c'est trop de pixels pour un réseau dense : une photo 224&times;224 en couleur, c'est
+            150 528 entrées, donc des milliards de poids dès la première couche. Le CNN règle ça avec deux idées
+            simples — <strong>on regarde localement</strong>, et <strong>on réutilise le même détecteur partout</strong>.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">La convolution : un filtre qui glisse</h3>
+        <p class="text-gray-600 mb-4">
+            Un <strong>noyau</strong> (kernel) est une petite matrice de poids, typiquement 3&times;3. On la fait
+            glisser sur toute l'image ; à chaque position on multiplie terme à terme et on somme. Le résultat est
+            une <strong>carte d'activation</strong> qui dit « à quel point ce motif est présent, ici ».
+        </p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$(I * K)(i,j) = \sum_{m}\sum_{n} I(i+m,\; j+n)\; K(m,n)$$
+        </div>
+        <p class="text-gray-600 mt-4">
+            Le même noyau sert sur toute l'image : c'est le <strong>partage de poids</strong>. Un détecteur de bord
+            vertical reste un détecteur de bord vertical qu'il soit en haut à gauche ou en bas à droite. C'est aussi
+            ce qui donne l'<strong>équivariance par translation</strong> : décaler l'entrée décale la sortie.
+        </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-sky-100 shadow-sm">
+            <h3 class="font-bold text-sky-800 mb-2">Stride</h3>
+            <p class="text-sm text-gray-700">
+                Le pas du glissement. Stride 1 = on teste chaque position. Stride 2 = on saute une position sur
+                deux, la sortie est deux fois plus petite. C'est un sous-échantillonnage gratuit.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-sky-100 shadow-sm">
+            <h3 class="font-bold text-sky-800 mb-2">Padding</h3>
+            <p class="text-sm text-gray-700">
+                Sans marge, l'image rétrécit à chaque couche et les bords sont sous-vus. Le padding « same »
+                ajoute des zéros autour pour conserver la taille.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-sky-100 shadow-sm">
+            <h3 class="font-bold text-sky-800 mb-2">Pooling</h3>
+            <p class="text-sm text-gray-700">
+                Le max-pooling garde le maximum de chaque bloc 2&times;2 : on perd la position exacte, on gagne
+                de l'<strong>invariance</strong> aux petits décalages et on divise la taille par 4.
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">La taille de sortie, à savoir calculer de tête</h3>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$H_{out} = \left\lfloor \frac{H_{in} + 2p - k}{s} \right\rfloor + 1$$
+        </div>
+        <p class="text-gray-600 mt-4 text-sm">
+            Avec <code>k</code> la taille du noyau, <code>p</code> le padding, <code>s</code> le stride. Exemple :
+            entrée 224, noyau 3, padding 1, stride 2 &rarr; (224 + 2 − 3)/2 + 1 = 112. C'est le calcul que tu feras
+            en boucle en débuggant une architecture.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">La hiérarchie de features</h3>
+        <p class="text-gray-600 mb-4">
+            C'est le résultat le plus important, et il est <em>appris</em>, pas programmé :
+        </p>
+        <ul class="space-y-2 text-sm text-gray-700 list-disc list-outside ml-5">
+            <li><strong>Couches basses</strong> : bords, coins, gradients de couleur. Elles ressemblent
+                remarquablement aux filtres de Gabor du cortex visuel primaire.</li>
+            <li><strong>Couches intermédiaires</strong> : textures, motifs répétés, parties d'objets (une roue,
+                un œil).</li>
+            <li><strong>Couches hautes</strong> : objets entiers, configurations sémantiques.</li>
+        </ul>
+        <p class="text-gray-600 mt-4">
+            Le <strong>champ réceptif</strong> grandit à chaque couche : un neurone de la couche 10 « voit »
+            indirectement une large portion de l'image, alors qu'il ne lit que 3&times;3 valeurs de la couche 9.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">ResNet : la connexion résiduelle</h3>
+        <p class="text-gray-600 mb-4">
+            Au-delà de ~20 couches, empiler dégradait les performances — même sur les données d'entraînement, donc
+            ce n'était pas du sur-apprentissage mais un problème d'optimisation. La solution de He et al. (2015) :
+            faire apprendre à la couche non pas la sortie, mais la <strong>correction</strong> à apporter.
+        </p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$y = \mathcal{F}(x, W) + x$$
+        </div>
+        <p class="text-gray-600 mt-4">
+            Le gradient dispose alors d'une autoroute (le <code>+ x</code>) pour remonter intact jusqu'aux
+            premières couches. C'est ce qui a rendu possibles les réseaux à 50, 101, 152 couches — et l'idée est
+            reprise telle quelle dans chaque bloc de Transformer.
+        </p>
+    </div>
+
+    <div class="bg-amber-50 border border-amber-200 p-6 rounded-xl">
+        <h3 class="font-bold text-amber-800 mb-3">CNN ou Vision Transformer ?</h3>
+        <p class="text-sm text-amber-900 mb-3">
+            Le ViT découpe l'image en patchs (16&times;16) et les traite comme des tokens. Il n'a <em>aucun</em>
+            biais inductif de localité : il doit tout apprendre des données.
+        </p>
+        <ul class="space-y-2 text-sm text-amber-900">
+            <li>• <strong>Peu de données</strong> : le CNN gagne, son biais de localité est un a priori correct offert gratuitement.</li>
+            <li>• <strong>Beaucoup de données</strong> (100M+ images) : le ViT dépasse, il apprend des relations à longue portée qu'un noyau 3&times;3 ne peut pas exprimer.</li>
+            <li>• <strong>En pratique</strong> : les architectures modernes (ConvNeXt, hybrides) recombinent les deux.</li>
+        </ul>
+    </div>
+
+    <div class="bg-rose-50 border border-rose-200 p-6 rounded-xl">
+        <h3 class="font-bold text-rose-800 mb-3">Le piège</h3>
+        <p class="text-sm text-rose-900">
+            Un CNN est <strong>équivariant</strong> par translation, pas <strong>invariant</strong> — et il n'est
+            ni l'un ni l'autre pour la rotation ou l'échelle. Un modèle entraîné sur des chats debout se plante sur
+            des chats tête en bas. C'est pour ça que l'augmentation de données (rotations, zooms, flips) n'est pas
+            un détail mais une nécessité structurelle.
+        </p>
+    </div>
+
+</div>

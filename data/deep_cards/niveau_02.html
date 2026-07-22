@@ -1,0 +1,384 @@
+<div class="space-y-6 qa-level" data-qa-level="deep:2">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">DEEP ACADEMY &middot; Niveau 2 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Algèbre linéaire</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: penser en <b>vecteurs et matrices</b>. C'est LA langue maternelle du ML: un modèle n'est qu'une suite de multiplications de matrices. Niveau le plus rentable de tout le parcours.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">10 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-2-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">v⃗</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le vecteur</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Une <b>liste ordonnée de nombres</b> = un point ou une flèche dans un espace à n dimensions. C'est l'unité de base: toute donnée devient un vecteur avant d'entrer dans un modèle.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$v = [v_1, v_2, \dots, v_n] \in \mathbb{R}^n$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Un mot devient un vecteur (embedding), une image devient un vecteur de pixels, ton profil client devient un vecteur de features. « Vectoriser » = traduire le monde en nombres.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>np.array([1.2, 0.5, -3])</code>. Intuition à cultiver: des vecteurs proches dans l'espace = des choses similaires dans le monde réel. Tout le ML repose sur cette idée.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">v1 = torch.tensor([1, 2, 3])   # shape (3,)
+v2 = torch.tensor([[1, 2, 3]])  # shape (1, 3)
+# les deux ne sont PAS equivalents!
+print(v1 @ v2.T)  # scalaire
+print(v1 @ v2)     # erreur de shape</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Attention au reshape: torch.tensor([1, 2, 3]).shape donne (3,) alors que torch.tensor([[1, 2, 3]]).shape donne (1, 3). Le premier est un VECTEUR (1D), le second est une MATRICE LIGNE (2D). Les operations comme @ et * ne se comportent pas pareil entre les deux.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-2-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">u·v</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le produit scalaire</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Multiplier deux vecteurs élément par élément et tout additionner: un seul nombre qui mesure <b>à quel point ils pointent dans la même direction</b>. Grand = alignés, 0 = perpendiculaires, négatif = opposés.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$u \cdot v = \sum_i u_i v_i = \|u\|\|v\|\cos\theta$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">C'est LE calcul de similarité: la recherche sémantique, les recommandations, et surtout l'attention des transformers (Q·K = « ce token est-il pertinent pour moi ? »).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>np.dot(u,v)</code>. Manipule le Lab 02: quand tu auras senti physiquement que produit scalaire = alignement, l'attention (niveau 8) deviendra évidente.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># produit scalaire = alignement:
+u = F.normalize(emb_cat, dim=-1)   # embedding du mot 'chat'
+v = F.normalize(emb_dog, dim=-1)   # embedding du mot 'chien'
+similarite = (u @ v.T).item()       # proche de 1 = meme sens</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le produit scalaire ne capte que l'alignement LINEAIRE. u·v = 0 ne signifie pas 'pas de relation' mais 'perpendiculaire dans cet espace'. Deux mots peuvent etre relies (synonymes) sans alignement lineaire.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-2-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">‖·‖₂</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Normes L1 et L2</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La norme mesure la <b>longueur</b> d'un vecteur. L2 = distance à vol d'oiseau (racine de la somme des carrés). L1 = distance « en taxi » (somme des valeurs absolues).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\|v\|_2=\sqrt{\textstyle\sum v_i^2} \qquad \|v\|_1=\textstyle\sum |v_i|$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Régularisation L2 (weight decay) = garder les poids petits. L1 = pousser des poids exactement à 0 (sélection de features). Gradient clipping = plafonner ‖∇L‖.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Normaliser un vecteur (<code>v / np.linalg.norm(v)</code>) le ramène à longueur 1: indispensable avant une similarité cosinus, standard pour les embeddings.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># gradient clipping: on limite la norme du gradient
+grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+# si ||grad|| &gt; 1, on le reduit a 1 sans changer la direction</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">L1 et L2 sont deux philosophies: L2 penalise les grands ecarts de maniere quadratique (les outliers ecrasent tout), L1 penalise lineairement (robuste mais non derivable en zero). Le choix = quel comportement face aux extremes.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-2-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">W</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La matrice</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Un <b>tableau de nombres</b> (lignes × colonnes). Mais surtout: une matrice EST une transformation qui prend un vecteur et le projette dans un autre espace (rotation, étirement, changement de dimension).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$W \in \mathbb{R}^{m \times n}: \ \mathbb{R}^n \rightarrow \mathbb{R}^m$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Chaque couche d'un réseau est une matrice de poids W. GPT-4, c'est essentiellement quelques milliers de matrices. « Paramètres du modèle » = les cases de ces matrices.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Arrête de voir un tableau Excel: vois une <b>machine à transformer des vecteurs</b>. W de shape (768, 3072) = machine qui mange du 768 dimensions et crache du 3072.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># les deux ecritures sont equivalentes:
+W = nn.Linear(768, 3072)          # PyTorch: (in, out)
+# W stockee en [3072, 768] en interne
+# W(x) = x @ W.T  (contrairement a la notation papier)</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">nn.Linear(in, out) stocke la matrice en (out, in) dans .weight. Si tu lis un papier qui ecrit W ∈ R^{in×out} et que tu codes nn.Linear(in, out), la multiplication est deja transposee: tu n'as rien a faire.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-2-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Wx</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le produit matriciel</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Multiplier matrice × vecteur = calculer <b>plein de produits scalaires d'un coup</b>: chaque ligne de W fait son produit scalaire avec x. Règle des shapes: (m,n)×(n,p) → (m,p), les dimensions intérieures doivent coïncider.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$(AB)_{ij} = \sum_k A_{ik}B_{kj}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">90% du calcul d'un LLM = des produits matriciels. C'est pour ça que les GPU existent en IA: ils font des milliards de multiplications-additions en parallèle.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>W @ x</code> en NumPy/PyTorch. Le bug n°1 du débutant est une erreur de shape: prends l'habitude d'annoter chaque tenseur avec sa shape en commentaire.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># la regle des shapes:
+A = torch.randn(32, 768)   # batch de 32, features 768
+B = torch.randn(768, 3072) # matrice de poids
+C = A @ B                   # (32, 768) @ (768, 3072) -&gt; (32, 3072) ✓
+# les 768 interieurs coincident</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">(m, n) @ (n, p) = (m, p): la dimension interieure n DISPARAIT. C'est la seule regle a retenir. Si tu lis 'la regle de la chaine en dimension n', c'est un produit de Jacobiennes qui suit exactement cette regle.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-2-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Aᵀ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La transposée</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Aᵀ = retourner la matrice le long de sa diagonale: les lignes deviennent des colonnes. Sert surtout à <b>faire coïncider les shapes</b> pour les produits.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$(A^\top)_{ij} = A_{ji} \qquad (AB)^\top = B^\top A^\top$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Dans l'attention: QKᵀ, on transpose K pour que chaque requête puisse faire son produit scalaire avec chaque clé. En backprop, les gradients traversent les couches via Wᵀ.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>A.T</code>. Quand une multiplication plante pour cause de shapes, la transposée est souvent la clé, mais comprends POURQUOI avant de l'appliquer au hasard.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># transposer pour aligner les shapes:
+x = torch.randn(32, 10)    # batch
+W = torch.randn(5, 10)     # poids
+z = x @ W.T                # (32, 10) @ (10, 5) = (32, 5) ✓
+# sans T: (32, 10) @ (5, 10) -&gt; erreur</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">(AB)^T = B^T A^T. L'ordre s'inverse quand tu transposes un produit. Si tu retiens une seule identite matricielle, retiens celle-la: elle te sauve 90% des erreurs de shape.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-2-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">A⁻¹</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Identité et inverse</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">I = la matrice « ne rien faire » (des 1 sur la diagonale). A⁻¹ = la transformation qui <b>annule</b> A: A⁻¹A = I. N'existe pas toujours.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$A^{-1}A = I \qquad Ax=b \Rightarrow x=A^{-1}b$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">La régression linéaire a une solution exacte via l'inverse (équation normale). En pratique sur de gros systèmes, inverser est trop coûteux et instable: on préfère la descente de gradient.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>np.linalg.solve(A,b)</code> plutôt que <code>inv(A) @ b</code> (plus stable). Retiens surtout le concept: inverse = défaire une transformation.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># resoudre Ax = b SANS inverser:
+A = torch.randn(100, 100)
+b = torch.randn(100)
+x = torch.linalg.solve(A, b)  # O(n^3) mais stable
+# vs x = A.inverse() @ b      # moins stable, eviter</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">L'inverse d'une matrice n'existe pas toujours. Si le determinant est nul ou proche de zero, la matrice est 'singuliere': l'information a ete ecrasee et ne peut pas etre recuperee. En ML c'est frequent (rang faible).</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-2-7">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">λv</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Valeurs et vecteurs propres</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Les vecteurs propres d'une matrice sont ses <b>directions privilégiées</b>: A les étire (par un facteur λ, la valeur propre) sans les faire tourner. Ils révèlent la structure cachée de la transformation.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$Av = \lambda v$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">PCA trouve les directions de plus grande variance des données = vecteurs propres de la covariance. Le PageRank de Google est un vecteur propre. La stabilité d'un entraînement dépend des valeurs propres de la Hessienne.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>np.linalg.eig(A)</code>. Intuition suffisante pour 95% des usages: valeurs propres = « forces » de la matrice dans ses directions naturelles.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># PCA = vecteurs propres de la covariance:
+X_centered = X - X.mean(dim=0)
+cov = X_centered.T @ X_centered / (n-1)
+eigvals, eigvecs = torch.linalg.eigh(cov)  # plus rapide que eig
+# eigvals[0] = variance expliquee par le 1er axe</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Les valeurs propres de la Hessienne (derivees secondes) determinent la vitesse de convergence de la descente de gradient. Un rapport grande/petite valeur propre eleve = 'ravin' = l'optimisation va zigzaguer.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-2-8">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">UΣVᵀ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">SVD : décomposition en valeurs singulières</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Toute matrice se décompose en rotation × étirement × rotation. Les valeurs singulières classent l'information de la plus importante à la plus négligeable: on peut <b>tronquer</b> pour compresser.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$A = U\Sigma V^\top \approx U_r \Sigma_r V_r^\top$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">LoRA fine-tune les LLM en n'apprenant que des matrices de rang faible (l'idée même de la SVD tronquée). Compression de modèles, systèmes de recommandation, débruitage.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>np.linalg.svd(A)</code>. Garde les r plus grandes valeurs singulières = garder l'essentiel de A avec une fraction de la mémoire. C'est l'outil roi de la basse dimension.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">U, S, Vt = torch.linalg.svd(A, full_matrices=False)
+# reconstruction au rang r:
+A_r = U[:, :r] @ torch.diag(S[:r]) @ Vt[:r, :]
+# rapport S[0]/S[-1] = condition number = stabilite</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Les valeurs singulieres decroissent GENERALEMENT vite. Les premieres contiennent l'essentiel de l'information, les dernieres sont du bruit. 'Couper a r' = garder le signal, jeter le bruit. C'est le principe du debruitage par SVD.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-2-9">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⧉</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le tenseur</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Généralisation: scalaire (0D) → vecteur (1D) → matrice (2D) → <b>tenseur</b> (3D et plus). Juste un tableau multidimensionnel avec une shape.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$X \in \mathbb{R}^{B \times T \times d}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Le tenseur standard d'un LLM: (batch, tokens, dimension) = par exemple (32, 2048, 768). Une image en batch: (B, canaux, hauteur, largeur). D'où le nom TensorFlow.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En PyTorch tout est <code>torch.Tensor</code>. Compétence clé: lire et manipuler les shapes (<code>.shape</code>, <code>.reshape</code>, <code>.permute</code>). Maîtrise ça et le code des repos de recherche s'ouvre à toi.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># les 3 axes d'un tenseur transformer:
+x = torch.randn(4, 128, 768)  # (batch=4, tokens=128, dim=768)
+# les operations selon chaque axe:
+x.mean(dim=0)  # moyenne sur le batch: [128, 768]
+x.mean(dim=1)  # moyenne par token: [4, 768]
+x.mean(dim=2)  # moyenne des features: [4, 128]</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Tenseur = matrice avec plus de 2 axes. Chaque axe a un sens (batch, sequence, feature). Un reshape maladroit melange les dimensions et detruit la semantique. Toujours commenter la signification de chaque axe.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

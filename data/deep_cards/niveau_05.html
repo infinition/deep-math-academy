@@ -1,0 +1,377 @@
+<div class="space-y-6 qa-level" data-qa-level="deep:5">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">DEEP ACADEMY &middot; Niveau 5 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Optimisation</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: comprendre comment on <b>entraîne</b> réellement un modèle: descendre une montagne de coût dans le brouillard, avec les bons réglages.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">9 concepts</span>
+            <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-700 font-bold">1 lab interactif</span>
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <div class="qa-lab" id="qa-lab-deep-5" data-qa-lab="deep:5">
+        <div class="qa-lab-loading">Chargement du lab interactif&hellip;</div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-5-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">L(θ)</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La fonction de coût (loss)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">UN nombre qui mesure à quel point le modèle se trompe. Tout l'entraînement consiste à le faire baisser. Choisir la loss = définir <b>ce que « bien » veut dire</b> pour ton problème.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$L(\theta) = \frac{1}{n}\sum_i \ell(f_\theta(x_i), y_i)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">MSE pour la régression, cross-entropy pour la classification, contrastive pour les embeddings, récompense pour le RL. Une loss mal choisie = un modèle qui optimise la mauvaise chose avec brio.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Devant tout projet, pose d'abord LA question: « quelle est ma loss et reflète-t-elle vraiment mon objectif métier ? » C'est la première cause d'échec des projets ML, avant les modèles.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># la loss est fonction des POIDS, pas des donnees:
+for x, y in loader:                   # les donnees sont fixees
+    loss = F.mse_loss(model(x), y)
+    loss.backward()                    # ∇_θ L(θ; x, y)
+    optimizer.step()                   # θ ← θ - α∇L
+    optimizer.zero_grad()
+# c'est θ qu'on bouge, pas x</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La loss depend des POIDS du modele. Les donnees sont des constantes fixees. C'est le renversement de perspective le plus important du ML: on ne change pas les donnees, on change le modele pour qu'elles deviennent probables.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-5-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">↓∇</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La descente de gradient</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">L'algorithme d'apprentissage universel: calcule la pente, fais un pas dans le sens de la descente, répète. C'est tout. <b>Chaque</b> réseau de neurones au monde apprend ainsi.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\theta_{t+1} = \theta_t - \alpha \nabla L(\theta_t)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">L'unique équation qui entraîne GPT, Stable Diffusion, AlphaFold et ton petit modèle sklearn. Les milliards investis en GPU servent à exécuter cette ligne des milliards de fois.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Manipule le Lab 03: vois l'effet du learning rate en direct (trop petit = lent, trop grand = divergence). Ancre cette image, elle t'accompagnera dans tous tes débugs d'entraînement.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># la boucle d'entrainement universelle:
+for epoch in range(num_epochs):
+    for batch in dataloader:
+        loss = model(batch)
+        loss.backward()       # calcule ∇L sur CE batch
+        optimizer.step()       # θ ← θ - α∇L
+        optimizer.zero_grad()  # remet les gradients a zero!
+# zero_grad est le geste oublie le plus frequemment</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La descente de gradient ne garantit PAS de trouver le minimum global. Elle trouve un minimum LOCAL, qui depend du point de depart et du learning rate. C'est pour ca que la seed compte.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-5-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">α</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le learning rate</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La <b>taille du pas</b> à chaque itération. L'hyperparamètre le plus important de tout le deep learning. Trop grand: on saute par dessus la vallée et on diverge. Trop petit: des semaines pour converger.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\theta \leftarrow \theta - \alpha \nabla L, \quad \alpha \sim 10^{-5} \text{ à } 10^{-2}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Toute recette d'entraînement commence par régler α. Les LLM utilisent des schedules: warmup (montée douce) puis décroissance cosinus. Une loss qui explose en NaN = presque toujours α trop grand.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Heuristique de terrain: commence à 3e-4 (Adam), puis cherche par puissances de 10. Si la loss oscille: divise α par 10. Si elle descend trop lentement et régulièrement: multiplie par 3.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># essai systematique des learning rates:
+lrs = [1e-4, 3e-4, 1e-3, 3e-3]
+for lr in lrs:
+    model = create_model()
+    opt = torch.optim.AdamW(model.parameters(), lr=lr)
+    train(model, opt, epochs=5)
+    print(f'lr={lr}: loss={test(model):.4f}')
+# le meilleur lr varie d'un facteur ~3 entre valeurs</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le learning rate ideal est rarement 0.1, 0.01 ou 0.001. C'est souvent 3e-4 (pour Adam). Le '3' est plus frequent que le '1'. Pourquoi? Mystere empirique, mais ca marche.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-5-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">SGD</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">SGD et mini-batch</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Calculer le gradient sur TOUT le dataset à chaque pas est trop coûteux. On l'estime sur un petit <b>batch</b> tiré au hasard: gradient bruité mais 1000x plus rapide, et le bruit aide même à s'échapper des mauvais creux.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\nabla L \approx \frac{1}{|B|}\sum_{i \in B} \nabla \ell_i$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Le « S » de stochastique = ce tirage aléatoire. Batch size typique: 32 à quelques millions (LLM). Gros batch = gradient précis mais coûteux; petit batch = bruité mais régularisant.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>DataLoader(dataset, batch_size=64, shuffle=True)</code>. Le shuffle n'est pas optionnel: sans lui le gradient est biaisé par l'ordre des données et l'entraînement se dégrade.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># l'effet du batch size sur le bruit du gradient:
+for batch_size in [1, 32, 1024]:
+    loader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
+    loss = train_one_epoch(model, loader)
+    print(f'batch {batch_size}: {loss:.4f}')
+# batch=1: bruit maximal mais pas cher
+# batch=1024: gradient precis mais cher et generalise moins bien</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Un mini-batch de 1 donne un gradient tres bruite (chaque exemple tire dans sa direction). Un batch de la taille du dataset donne le gradient exact mais coûte trop cher. Le sweet spot: entre 32 et 256, la ou le GPU est efficace et le bruit regularise.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-5-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">β</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le momentum</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Au lieu de suivre le gradient brut, on accumule une <b>vitesse</b> (moyenne mobile des gradients passés): comme une bille lourde qui lisse les zigzags et traverse les petits creux.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$v \leftarrow \beta v + \nabla L, \quad \theta \leftarrow \theta - \alpha v$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Accélère massivement la convergence dans les vallées étroites où le gradient pur oscille. β = 0.9 typiquement: la bille se souvient de ~90% de son élan.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Présent dans quasiment tous les optimiseurs modernes. Image mentale: gradient seul = randonneur prudent qui recalcule à chaque pas; momentum = boule de bowling lancée dans la pente.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># momentum a la main:
+velocity = 0
+beta = 0.9
+for _ in range(steps):
+    grad = compute_gradient(params)
+    velocity = beta * velocity + grad   # accumulation
+    params -= lr * velocity             # mise a jour avec vitesse
+# beta = 0.9: memoire d environ 10 pas
+# beta = 0.99: memoire d environ 100 pas</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le momentum transforme la descente de gradient en 'bille qui descend une pente'. Si le gradient change brusquement de direction (fond d'une vallee erroite), la bille continue tout droit et amortit l'oscillation. β=0.9 est le standard presque universel.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-5-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Adam</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Adam</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">L'optimiseur par défaut du deep learning: momentum + <b>learning rate adaptatif par paramètre</b> (les poids au gradient historiquement fort avancent doucement, les autres plus vite).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\theta \leftarrow \theta - \alpha\, \frac{\hat m}{\sqrt{\hat v}+\epsilon}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Le choix standard pour transformers, CNN et à peu près tout. AdamW (sa variante avec weight decay corrigé) entraîne la totalité des LLM modernes.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>torch.optim.AdamW(model.parameters(), lr=3e-4)</code>. Sauf raison précise, commence toujours par AdamW: il pardonne les réglages approximatifs bien mieux que SGD.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># Adam = momentum + lr adaptatif:
+optimizer = torch.optim.AdamW(
+    model.parameters(),
+    lr=3e-4,           # learning rate de base
+    betas=(0.9, 0.999), # momentum et scaling
+    eps=1e-8,           # securite anti-division par zero
+    weight_decay=0.01   # L2 decouple
+)
+# 4 hyperparametres, mais seuls lr et weight_decay sont vraiment a tuner</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">AdamW corrige un bug historique d'Adam: dans Adam, le weight_decay s'applique AVANT la normalisation adaptative (donc les gros poids sont penalises plus que les petits). AdamW applique le weight_decay APRES, normalement. Toujours utiliser AdamW, pas Adam.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-5-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">λ‖θ‖</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Régularisation L1 / L2</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Ajouter à la loss une <b>pénalité sur la taille des poids</b>: le modèle doit expliquer les données SANS poids extravagants. L2 les rétrécit tous (weight decay), L1 en met certains exactement à 0.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$L' = L + \lambda\|\theta\|_2^2$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">L'arme de base anti-overfitting. L1 fait de la sélection de features automatique (Lasso). Le « W » de AdamW = weight decay intégré proprement.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>weight_decay=0.01</code> dans AdamW. Interprétation bayésienne élégante: L2 = croire a priori que les poids sont petits (prior gaussien). λ se règle par validation.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># l'effet du weight decay:
+model = nn.Linear(10, 1)
+optimizer = torch.optim.AdamW(model.parameters(), weight_decay=0.1)
+# a chaque step, les poids sont multiplies par (1 - lr * wd) ≈ 0.99997
+# c'est un 'retrecissement continu' vers zero
+# les poids non utiles sont doucement pousses vers 0</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La regularisation L2 (weight decay) n'empeche pas l'overfitting par magie: elle encode une croyance a priori que les poids doivent rester petits. Un poids de 100 est 'surprenant' et doit etre justifie par une forte reduction de la loss.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-5-7">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">∪</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Convexité et minima locaux</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Fonction convexe = <b>un seul creux</b> (un bol): la descente de gradient trouve LE minimum garanti. Les réseaux profonds sont non convexes: des milliards de creux, cols et plateaux.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$f(\tfrac{x+y}{2}) \le \tfrac{f(x)+f(y)}{2}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Régression linéaire/logistique: convexes, convergence garantie. Deep learning: non convexe, mais surprise empirique: en très haute dimension, la plupart des minima locaux sont bons et les vrais pièges sont les points-selles.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Retiens la conséquence pratique: en deep learning, relancer avec une autre graine aléatoire donne un autre minimum, souvent aussi bon. D'où l'usage des moyennes sur plusieurs runs dans les papiers sérieux.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># la fonction de loss d'un MLP:
+def loss_mlp(theta, x, y):
+    h = F.relu(W1 @ x + b1)  # non-lineaire
+    out = W2 @ h + b2
+    return F.mse_loss(out, y)
+# a cause de ReLU, cette fonction n'est PAS convexe
+# il y a plusieurs minima, pas un seul bol</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Les reseaux profonds ne sont PAS convexes: leur paysage de loss a des creux, des bosses, des cols. Le 'bon' minimum n'est pas garanti. Mais en haute dimension, la plupart des minima locaux ont une loss proche du minimum global.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-5-8">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⏹</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Early stopping et schedules</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Surveiller la loss de <b>validation</b> et arrêter quand elle remonte (le modèle commence à mémoriser). Les schedules font varier α au fil du temps: montée douce (warmup) puis décroissance.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\alpha_t = \alpha_{max}\cdot \tfrac{1}{2}\left(1+\cos\tfrac{\pi t}{T}\right)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">L'early stopping est la régularisation gratuite la plus utilisée au monde. Le duo warmup + cosine decay est la recette standard d'entraînement des transformers.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Garde toujours un set de validation, sauvegarde le meilleur checkpoint (<code>patience=10</code>), et trace TOUJOURS les deux courbes train/val: leur divergence est le battement de cœur de ton entraînement.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># le schedule cosine avec warmup:
+optimizer = torch.optim.AdamW(model.parameters(), lr=0)
+scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=100)
+# warmup: lr monte de 0 a 3e-4 sur les premiers steps
+# cosine: lr descend en douceur vers 0
+# pourquoi? les premiers pas sont critiques: un lr plein casse les poids frais</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">L'early stopping est la regularisation la plus utilisee au monde: arrete l'entrainement quand la loss de validation remonte. Pas d'hyperparametre, pas de cout, et ca fonctionne parce que le modele commence par apprendre les vrais motifs avant de memoriser le bruit.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

@@ -1,0 +1,252 @@
+<div class="space-y-6 qa-level" data-qa-level="quantum:1">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">QUANTUM ACADEMY &middot; Niveau 1 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Ondes et nombres complexes</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: comprendre pourquoi le quantique parle en nombres complexes — phases, interférences, dualité onde-particule.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">6 concepts</span>
+            <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-700 font-bold">1 lab interactif</span>
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <div class="qa-lab" id="qa-lab-quantum-1" data-qa-lab="quantum:1">
+        <div class="qa-lab-loading">Chargement du lab interactif&hellip;</div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-1-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">ψ(x,t)</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'onde plane complexe</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">ψ(x,t) = A·e^{i(kx−ωt)}: LA brique de base — une onde qui se propage, écrite en complexe. k (nombre d'onde) = combien d'oscillations par mètre, ω (pulsation) = combien par seconde. L'aiguille e^{iθ} du niveau 0, mais dont l'angle dépend du lieu et du temps.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\psi(x,t) = A\,e^{i(kx - \omega t)}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« psi de x et t égale A fois e puissance i, fois k x moins oméga t ». La parenthèse (kx − ωt) est la PHASE: elle avance quand x avance ou quand t recule — l'onde se déplace vers les x croissants.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">L'état d'une particule libre est cette onde. En photonique quantique, chaque mode du champ en est une. Toute fonction d'onde se décompose en somme d'ondes planes (Fourier, carte 13) — comprends celle-ci et tu les comprends toutes.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Fixe t = 0 et photographie l'onde: ψ = A·e^{ikx} — une aiguille qui fait un tour complet chaque fois que x avance de λ = 2π/k. k grand = oscillations serrées.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Fixe x = 0 et regarde le temps passer: ψ = A·e^{−iωt} — l'aiguille tourne sur place à la fréquence ω/2π.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule |ψ|²: |A·e^{iθ}|² = |A|² — CONSTANT partout ! Une onde plane pure a une impulsion parfaite (k exact) mais une position totalement indéterminée. Première rencontre avec Heisenberg.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: l'image mentale à garder: un tapis roulant d'aiguilles d'horloge, toutes tournant en cadence, décalées le long de x. Le lab de ce niveau te le dessine — joue avec k et ω.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Vérifie une convention en ouvrant un papier: e^{i(kx−ωt)} (physique) ou e^{i(ωt−kx)} (ingénierie) — le signe change les conjugués partout. Repère-la dès l'équation (1).</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-1-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">|ψ₁+ψ₂|²</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Phase et interférence</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Quand deux chemins mènent au même endroit, on ADDITIONNE les amplitudes (pas les probabilités): |ψ₁+ψ₂|² = |ψ₁|² + |ψ₂|² + 2Re(ψ₁*ψ₂). Le terme croisé — l'INTERFÉRENCE — peut être positif (renforcement) ou négatif (annulation). C'est LE phénomène qui sépare le quantique du classique.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\psi_1+\psi_2|^2 = |\psi_1|^2+|\psi_2|^2+2\,\mathrm{Re}(\psi_1^*\psi_2)$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« le module carré de psi un plus psi deux égale: module carré de psi un, plus module carré de psi deux, plus DEUX FOIS la partie réelle de psi un étoile psi deux » — le troisième terme est l'interférence.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Les fentes de Young, mais surtout: TOUT algorithme quantique est une machine à interférences — on arrange les phases pour que les mauvaises réponses s'annulent et que les bonnes se renforcent. Grover et Shor sont des chorégraphies d'interférence.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends deux amplitudes égales ψ₁ = ψ₂ = 1/√2 (en phase, φ = 0).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Somme: |1/√2 + 1/√2|² = |√2|² = 2. Alors que les probas séparées donneraient 0.5 + 0.5 = 1 → interférence CONSTRUCTIVE: 2× plus que la somme classique.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Mets-les en opposition: ψ₂ = −1/√2 (phase φ = π). Somme: |1/√2 − 1/√2|² = 0 → interférence DESTRUCTIVE: l'événement devient IMPOSSIBLE alors que chaque chemin seul le permettait.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Formule générale à deux chemins égaux: intensité ∝ 2 + 2cos φ — elle oscille entre 0 et 4 selon la phase relative. Le lab de ce niveau te fait tourner ce φ.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: les probabilités classiques s'additionnent; les amplitudes quantiques s'additionnent PUIS on prend le carré. Tout le « mystère » quantique tient dans cet ordre des opérations.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Grille de lecture pour TOUT algorithme quantique: « où sont les chemins ? comment les phases sont-elles arrangées pour que les mauvais chemins s'annulent ? ». Si tu poses cette question, tu lis les papiers comme un pro.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-1-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">λ, E=ℏω</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Dualité onde-particule (de Broglie)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Tout objet a une onde associée: λ = h/p (longueur d'onde de de Broglie) et E = ℏω. Particule ↔ onde ne sont pas deux natures mais deux LECTURES du même objet quantique: localisé à la détection, ondulatoire dans la propagation.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\lambda = \frac{h}{p} \qquad E=\hbar\omega \qquad p=\hbar k$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« lambda égale h sur p »: la longueur d'onde égale la constante de Planck divisée par l'impulsion. « E égale h-barre oméga, p égale h-barre k »: énergie ↔ fréquence, impulsion ↔ nombre d'onde — le dictionnaire particule/onde.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Les électrons diffractent (microscopie électronique: on UTILISE leur λ minuscule pour voir les atomes). Les neutrons, les atomes, et même des molécules de 2000 atomes ont montré des interférences. Le qubit supraconducteur EST une onde de courant.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule λ d'un électron accéléré sous 100 V: énergie E = 100 eV = 1.6×10⁻¹⁷ J.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Impulsion: p = √(2mE) = √(2 × 9.1×10⁻³¹ × 1.6×10⁻¹⁷) ≈ 5.4×10⁻²⁴ kg·m/s.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">λ = h/p = 6.63×10⁻³⁴ / 5.4×10⁻²⁴ ≈ 1.2×10⁻¹⁰ m = 1.2 Å — l'ordre de grandeur d'un ATOME → l'électron diffracte sur les cristaux (expérience de Davisson-Germer, 1927).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Compare: toi qui marches (70 kg, 1 m/s): λ ≈ 10⁻³⁶ m. Aucun espoir d'interférer avec toi-même en passant une porte.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: la dualité n'est pas un paradoxe mais une échelle: λ = h/p dit QUAND le comportement ondulatoire devient visible. Petit p → grande onde → monde quantique.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Le dictionnaire p = ℏk, E = ℏω sert en permanence: il traduit toute équation d'onde en équation de particule et inversement. C'est lui qui transforme « dérivée seconde en x » en « énergie cinétique » dans Schrödinger.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-1-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Δk·Δx</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le paquet d'ondes</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Une particule localisée = une SOMME d'ondes planes de k voisins qui interfèrent constructivement en un endroit et s'annulent partout ailleurs. Plus tu veux un paquet étroit (Δx petit), plus il faut mélanger de k différents (Δk grand): l'incertitude de Heisenberg est déjà là, avant toute physique — c'est une propriété des ondes.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\psi(x)=\int A(k)\,e^{ikx}\,dk \qquad \Delta x\,\Delta k \gtrsim \tfrac{1}{2}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« psi de x égale l'intégrale des A de k, fois e puissance i k x, d k » — l'état est une superposition continue d'ondes planes, pondérées par A(k). Et « delta x fois delta k est au moins de l'ordre de un demi ».</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Un photon dans une fibre, un électron émis par un canon, une impulsion laser: tous des paquets d'ondes. La dispersion (le paquet qui s'étale en se propageant) limite les communications — et les impulsions de contrôle des qubits sont façonnées avec ces maths.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Additionne mentalement 2 ondes de k proches (k et k+δ): elles battent — des zones où elles s'accordent (gros paquet) et des zones où elles s'annulent. C'est le phénomène des battements sonores.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Additionne-en 10, puis 100, centrées sur k₀: les zones d'accord se raréfient jusqu'à n'en laisser QU'UNE — un paquet localisé qui se déplace à la vitesse de groupe v_g = dω/dk.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Constate le troc: paquet ultra-étroit en x ⟺ énorme étalement des k utilisés. Un pur e^{ik₀x} (UN seul k) est infiniment étalé en x. Tu ne peux pas gagner des deux côtés.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: Heisenberg (niveau 3) n'inventera rien: ΔxΔp ≥ ℏ/2 est ce Δx·Δk ≥ ½ multiplié par ℏ (car p = ℏk). L'incertitude est une propriété de Fourier, pas un flou de mesure.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Retiens le troc « étroit ici = large là-bas »: il t'évitera les faux mystères. Toute impulsion courte a un spectre large — vrai pour un photon, un son de batterie ou un pulse micro-ondes sur un transmon.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-1-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">FT</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La transformée de Fourier</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La TF change de lunettes: ψ(x) (vision position) ⟷ φ(p) (vision impulsion) — même état, deux descriptions. Chaque coefficient de Fourier dit « combien d'onde e^{ikx} il y a dans ψ ». En quantique, position et impulsion sont LITTÉRALEMENT reliées par une transformée de Fourier.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\varphi(p)=\frac{1}{\sqrt{2\pi\hbar}}\int \psi(x)\,e^{-ipx/\hbar}\,dx$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« phi de p égale, à la normalisation près, l'intégrale de psi de x fois e puissance moins i p x sur h-barre, d x » — on projette l'état sur chaque onde plane d'impulsion p.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">La QFT (Quantum Fourier Transform, niveau 7) est la version circuit de cette idée — le cœur de Shor et de l'estimation de phase. Et en pratique quotidienne: analyser le spectre d'un signal de qubit, c'est une FFT.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends une gaussienne étroite en position (σₓ petit): sa TF est une gaussienne LARGE en impulsion (σ_p grand) — et le produit σₓσ_p = ℏ/2 exactement: la gaussienne sature Heisenberg.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Prends l'extrême inverse: ψ(x) = e^{ik₀x} (onde plane pure) → sa TF est un pic infiniment fin en p = ℏk₀. Une seule impulsion, position complètement délocalisée.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Note la dualité des opérations: dériver en x ⟺ multiplier par ip/ℏ en Fourier. C'est pourquoi l'impulsion s'écrit p̂ = −iℏ∂/∂x: c'est « la multiplication par p, vue depuis l'espace des positions ».</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: position et impulsion ne sont pas deux propriétés indépendantes mais deux BASES du même espace, reliées par Fourier — voilà le contenu profond de l'incertitude, et l'intuition qui te servira pour lire la QFT.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En code: <code>np.fft.fft(psi)</code> pour passer côté impulsion d'une fonction d'onde discrétisée — c'est l'outil de base de toute simulation 1D de Schrödinger (méthode split-step).</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-1-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">∫|ψ|²</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La normalisation</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">∫|ψ(x)|²dx = 1: la particule doit être QUELQUE PART avec certitude — |ψ(x)|² est une densité de probabilité et son intégrale totale vaut 1. Tout état physique est normalisé; toute évolution légitime (unitaire) le préserve.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\int_{-\infty}^{+\infty} |\psi(x)|^2\,dx = 1$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« l'intégrale sur tout l'espace du module carré de psi, d x, égale un » — la somme de toutes les probabilités de présence fait 100%.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">C'est le pendant continu du « Σ|αᵢ|² = 1 » des qubits. Chaque état que tu prépares en Qiskit est normalisé; si ta simulation maison voit cette somme dériver de 1, ton intégrateur numérique fuit — bug détecté.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends ψ(x) = C sur l'intervalle [0, L], nulle ailleurs (particule « quelque part dans la boîte, uniformément »).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Impose la normalisation: ∫₀ᴸ |C|² dx = |C|²·L = 1 → C = 1/√L.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Utilise-la: probabilité de trouver la particule dans la première moitié = ∫₀^{L/2} (1/L) dx = 1/2 ✓ — cohérent avec l'uniformité.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: normaliser = fixer la constante globale pour que le total fasse 1 — exactement le geste du softmax de Deep Academy: des poids relatifs → une vraie distribution. La constante de normalisation n'est jamais « de la physique », juste de la comptabilité.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Réflexe de simulation: après chaque pas numérique, vérifie <code>np.sum(np.abs(psi)**2)*dx ≈ 1</code>. C'est ton assert de santé, l'équivalent du « la loss démarre à ln(10) » du ML.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

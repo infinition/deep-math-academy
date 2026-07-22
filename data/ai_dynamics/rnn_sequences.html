@@ -1,0 +1,121 @@
+<div class="space-y-8 max-w-6xl mx-auto">
+
+    <div class="bg-gradient-to-r from-violet-600 to-purple-700 p-8 rounded-2xl shadow-xl text-white">
+        <h2 class="text-3xl font-extrabold mb-4">RNN, LSTM &amp; Séquences</h2>
+        <p class="text-lg text-violet-100 leading-relaxed">
+            Une phrase, un signal audio, une série temporelle : la longueur varie et l'<strong>ordre</strong>
+            porte le sens. Un réseau dense ne sait pas gérer ça. La réponse historique : une boucle, avec une
+            mémoire qu'on transporte d'un pas de temps au suivant.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">La récurrence : un état caché qui voyage</h3>
+        <p class="text-gray-600 mb-4">
+            À chaque pas <code>t</code>, le réseau lit l'entrée courante et son propre état précédent, puis produit
+            un nouvel état. Les poids sont les <strong>mêmes à chaque pas</strong> — comme le partage de poids du
+            CNN, mais dans le temps.
+        </p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center">
+            $$h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t + b) \qquad y_t = W_{hy} h_t$$
+        </div>
+        <p class="text-gray-600 mt-4">
+            <code>h_t</code> est un résumé compressé de tout ce qui a été vu jusqu'ici. Un RNN déroulé sur 50 pas
+            de temps est mathématiquement un réseau à 50 couches qui partagent leurs poids.
+        </p>
+    </div>
+
+    <div class="bg-rose-50 border border-rose-200 p-6 rounded-xl">
+        <h3 class="font-bold text-rose-800 mb-3">Le problème fondateur : le gradient qui s'évanouit</h3>
+        <p class="text-sm text-rose-900 mb-3">
+            La rétropropagation dans le temps (BPTT) multiplie les jacobiennes à chaque pas. Le gradient sur
+            <code>k</code> pas contient un produit de <code>k</code> matrices :
+        </p>
+        <div class="bg-white/60 border border-rose-200 rounded-lg p-3 text-center">
+            $$\frac{\partial h_t}{\partial h_{t-k}} = \prod_{i=1}^{k} W_{hh}^{\top}\,\mathrm{diag}\big(\tanh'(\cdot)\big)$$
+        </div>
+        <p class="text-sm text-rose-900 mt-3">
+            Si la valeur propre dominante est &lt; 1, le produit tend vers 0 : <strong>vanishing gradient</strong>,
+            le réseau ne peut rien apprendre au-delà de ~10 pas. Si elle est &gt; 1, il explose. Comme
+            <code>tanh′ ≤ 1</code> partout, le cas « évanouissant » est le régime par défaut.
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">LSTM : ajouter au lieu de multiplier</h3>
+        <p class="text-gray-600 mb-4">
+            Hochreiter &amp; Schmidhuber (1997) introduisent un <strong>état de cellule</strong> <code>c_t</code>
+            qui se met à jour de façon <em>additive</em>, contrôlé par trois portes — chacune est un sigmoïde qui
+            sort un coefficient entre 0 (« ferme ») et 1 (« laisse passer »).
+        </p>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 text-center space-y-1">
+            $$f_t = \sigma(W_f[h_{t-1},x_t]) \qquad i_t = \sigma(W_i[h_{t-1},x_t]) \qquad o_t = \sigma(W_o[h_{t-1},x_t])$$
+            $$c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t \qquad h_t = o_t \odot \tanh(c_t)$$
+        </div>
+        <ul class="space-y-2 text-sm text-gray-700 list-disc list-outside ml-5 mt-4">
+            <li><strong>Forget gate</strong> <code>f</code> : qu'est-ce que j'efface de ma mémoire ?</li>
+            <li><strong>Input gate</strong> <code>i</code> : qu'est-ce que j'y écris de nouveau ?</li>
+            <li><strong>Output gate</strong> <code>o</code> : qu'est-ce que j'expose au reste du réseau ?</li>
+        </ul>
+        <p class="text-gray-600 mt-4">
+            La clé est le <code>c_t = f_t ⊙ c_{t-1} + …</code> : quand la porte d'oubli est proche de 1, le gradient
+            traverse le temps quasi intact. C'est exactement la même astuce que la connexion résiduelle de ResNet,
+            découverte 18 ans plus tôt.
+        </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-violet-100 shadow-sm">
+            <h3 class="font-bold text-violet-800 mb-2">GRU</h3>
+            <p class="text-sm text-gray-700">
+                Version allégée : deux portes au lieu de trois, pas d'état de cellule séparé. ~25 % de paramètres
+                en moins, performances souvent équivalentes. À essayer en premier quand les données sont limitées.
+            </p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-violet-100 shadow-sm">
+            <h3 class="font-bold text-violet-800 mb-2">Bidirectionnel</h3>
+            <p class="text-sm text-gray-700">
+                Deux RNN, un dans chaque sens, concaténés. Excellent pour la classification ou l'étiquetage
+                (la fin de la phrase éclaire le début), impossible pour la génération en temps réel.
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Seq2seq, le goulot, puis l'attention</h3>
+        <p class="text-gray-600 mb-4">
+            L'architecture encodeur–décodeur (2014) compressait toute la phrase source dans <strong>un seul
+            vecteur</strong>. Sur une phrase de 40 mots, ce goulot d'étranglement fait s'effondrer la qualité de
+            traduction.
+        </p>
+        <p class="text-gray-600">
+            Bahdanau (2015) ajoute l'<strong>attention</strong> : le décodeur peut relire tous les états de
+            l'encodeur et pondérer ceux qui l'intéressent. En 2017, « Attention is All You Need » supprime la
+            récurrence et ne garde que l'attention.
+        </p>
+    </div>
+
+    <div class="bg-amber-50 border border-amber-200 p-6 rounded-xl">
+        <h3 class="font-bold text-amber-800 mb-3">Pourquoi les Transformers ont gagné</h3>
+        <ul class="space-y-2 text-sm text-amber-900">
+            <li>• <strong>Parallélisme</strong> : le RNN doit calculer le pas <code>t</code> avant le pas
+                <code>t+1</code>. Le Transformer traite toute la séquence d'un coup — décisif sur GPU.</li>
+            <li>• <strong>Chemin de gradient constant</strong> : n'importe quels deux tokens sont à distance 1 l'un
+                de l'autre, contre <code>O(n)</code> pour un RNN.</li>
+            <li>• <strong>Le prix</strong> : l'attention coûte <code>O(n²)</code> en mémoire, là où le RNN est
+                linéaire. D'où le retour des architectures à état récurrent (Mamba, S4, RWKV) pour les très
+                longues séquences.</li>
+        </ul>
+    </div>
+
+    <div class="bg-rose-50 border border-rose-200 p-6 rounded-xl">
+        <h3 class="font-bold text-rose-800 mb-3">Le piège</h3>
+        <p class="text-sm text-rose-900">
+            « LSTM est obsolète » est faux. Sur des séries temporelles courtes avec peu de données, un LSTM à
+            2 couches bat régulièrement un Transformer, qui a besoin de volume pour compenser son absence de biais
+            inductif. Et en inférence embarquée, un RNN à état fixe est infiniment plus économe qu'un cache
+            attention qui grandit avec le contexte.
+        </p>
+    </div>
+
+</div>

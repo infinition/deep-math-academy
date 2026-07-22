@@ -1,0 +1,477 @@
+<div class="space-y-6 qa-level" data-qa-level="deep:7">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">DEEP ACADEMY &middot; Niveau 7 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Deep Learning</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: assembler les niveaux 2, 3 et 5 en <b>réseaux de neurones</b>: MLP, CNN, RNN, embeddings, et comprendre backprop en profondeur.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">11 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-7-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⊕</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le neurone</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">L'unité de calcul: produit scalaire poids·entrée + biais, puis une fonction d'activation non linéaire. Tu connais déjà chaque morceau (niveaux 1, 2, 6): un neurone = <b>ax+b passé dans une non-linéarité</b>.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$a = \phi(w^\top x + b)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Empilés par milliers, les neurones composent des fonctions arbitrairement complexes (théorème d'approximation universelle). Chaque neurone apprend à détecter UN motif dans son entrée.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Démystification totale: pas de magie biologique, juste dot product + biais + activation. Écris-en un en NumPy en 3 lignes, c'est le meilleur vaccin contre le jargon.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># un neurone artificiel:
+class Neurone(nn.Module):
+    def __init__(self, n_entrees):
+        super().__init__()
+        self.w = nn.Parameter(torch.randn(n_entrees))
+        self.b = nn.Parameter(torch.randn(1))
+    def forward(self, x):
+        z = x @ self.w + self.b  # somme ponderee + biais
+        return F.relu(z)          # non-linearite
+# un neurone = une machine a detecter un motif dans l entree</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Un neurone SEUL avec ReLU cree une frontiere lineaire dans l'espace: il est 'actif' d'un cote, 'inactif' de l'autre. Empiler des neurones, c'est superposer ces frontieres pour decouper l'espace en regions de plus en plus complexes.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-7-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">ReLU</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les fonctions d'activation</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La <b>non-linéarité</b> insérée entre les couches. Sans elle, empiler 100 couches linéaires = une seule couche linéaire (les matrices se multiplient entre elles). ReLU = max(0, x): brutale, rapide, efficace.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\text{ReLU}(x)=\max(0,x)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">ReLU domine les CNN/MLP; GELU (version lissée) équipe les transformers; tanh/sigmoid survivent dans les LSTM. Le choix influence la circulation du gradient (ReLU ne sature pas côté positif).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Par défaut: ReLU (ou GELU pour un transformer). Symptôme à connaître: des « neurones morts » (toujours à 0) si le learning rate est trop violent; LeakyReLU corrige ça.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># courbes des activations:
+import matplotlib.pyplot as plt
+x = torch.linspace(-5, 5, 100)
+plt.plot(x, F.relu(x), label='ReLU')
+plt.plot(x, torch.sigmoid(x), label='Sigmoid')
+plt.plot(x, torch.tanh(x), label='Tanh')
+# ReLU: 0 pour x &lt; 0, x pour x &gt; 0
+# Sigmoid: S doux entre 0 et 1
+# Tanh: S entre -1 et 1
+# le choix = la forme de la non-linearite</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Les neurones 'morts' de ReLU (toujours a 0) sont un probleme reel: ils ne propagent jamais de gradient et n'apprennent plus. Dans un grand modele avec 10% de neurones morts par couche, apres 10 couches il reste (0.9)^10 ≈ 35% de neurones vivants.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-7-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">MLP</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Couche dense et MLP</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Une couche dense = <b>une matrice W</b> (chaque neurone de sortie connecté à toutes les entrées) + activation. Un MLP = plusieurs couches denses empilées: le réseau de neurones de base.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$h = \phi(W_2\,\phi(W_1 x + b_1) + b_2)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Le MLP est partout: classifieur final des CNN, bloc feed-forward des transformers (2/3 de leurs paramètres!), tête de projection des modèles contrastifs.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>nn.Sequential(nn.Linear(784,256), nn.ReLU(), nn.Linear(256,10))</code>. Construis et entraîne un MLP sur MNIST de bout en bout: rite de passage obligatoire, une soirée suffit.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># compter les parametres d un MLP:
+model = nn.Sequential(
+    nn.Linear(784, 256),  # 784*256 + 256 = 200,960 params
+    nn.ReLU(),
+    nn.Linear(256, 128),  # 256*128 + 128 = 32,896 params
+    nn.ReLU(),
+    nn.Linear(128, 10)    # 128*10 + 10 = 1,290 params
+)
+total = sum(p.numel() for p in model.parameters())  # 235,146
+# 235k parametres pour un petit reseau</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La premiere couche d'un MLP sur des images 224×224 a 224*224*3 = 150 528 entrees. Une couche dense avec 1000 neurones → 150 MILLIONS de parametres pour UNE couche. C'est pour ca que les CNN existent.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-7-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">→</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le forward pass</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">L'inférence: l'entrée <b>traverse les couches</b> une à une jusqu'à la sortie. Chaque couche transforme la représentation, du brut (pixels, tokens) vers l'abstrait (concepts, probabilités).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$x \rightarrow h_1 \rightarrow h_2 \rightarrow \dots \rightarrow \hat y$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Ce que fait le modèle en production à chaque requête. Les représentations intermédiaires hᵢ (les « activations ») sont réutilisables: c'est la base du transfer learning et des embeddings.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>output = model(x)</code>. Pour comprendre un réseau, imprime la shape après chaque couche: suivre la transformation des shapes = suivre le raisonnement du modèle.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># tracer les activations pendant un forward:
+activations = {}
+def hook_fn(name):
+    def hook(module, input, output):
+        activations[name] = output.detach()
+    return hook
+for name, layer in model.named_modules():
+    layer.register_forward_hook(hook_fn(name))
+output = model(x)
+for name, act in activations.items():
+    print(f'{name}: {act.shape}, mean={act.mean():.3f}, std={act.std():.3f}')</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le forward pass MEMORISE toutes les activations intermediaires: c'est le 'graphe de calcul'. C'est pour ca qu'un forward consomme de la memoire GPU proportionnellement a la profondeur du reseau. En inference avec torch.no_grad(), ce graphe n'est pas stocke.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-7-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">←∇</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La backpropagation</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">L'algorithme qui calcule le gradient de la loss par rapport à CHAQUE poids: la règle de la chaîne (niveau 3) appliquée <b>en remontant</b> de la loss vers l'entrée, en réutilisant les calculs intermédiaires. Efficace: un aller-retour = tous les gradients.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\frac{\partial L}{\partial W_1} = \frac{\partial L}{\partial h_2}\frac{\partial h_2}{\partial h_1}\frac{\partial h_1}{\partial W_1}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">L'algorithme qui a rendu le deep learning possible (1986, généralisé 2012+). Chaque <code>loss.backward()</code> de chaque framework exécute exactement ceci via l'autodiff.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Exercice qui change une carrière: coder backprop à la main sur un réseau 2 couches en NumPy (le cours « micrograd » de Karpathy le fait en 2h). Après ça, plus jamais de boîte noire.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># backprop a la main sur un mini-reseau:
+# forward:
+h = W1 @ x + b1  # [128] -&gt; [64]
+h_relu = max(0, h)  # [64]
+y_pred = W2 @ h_relu + b2  # [64] -&gt; [10]
+# backward (regle de la chaine):
+dL_dy = 2 * (y_pred - y_true) / n  # derivee de MSE
+dL_dW2 = dL_dy @ h_relu.T
+dL_dh_relu = W2.T @ dL_dy
+dL_dh = dL_dh_relu * (h &gt; 0).float()  # derivee de ReLU
+dL_dW1 = dL_dh @ x.T</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La backpropagation est la raison pour laquelle le deep learning a conquis le monde. Avant 1986, on ne savait pas entrainer les reseaux multicouches. Le 'c'est juste la regle de la chaine' est vrai mais en cache la prouesse: appliquer cette regle a des millions de parametres automatiquement.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-7-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">W₀</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'initialisation des poids</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">On ne démarre ni à zéro (symétrie: tous les neurones apprendraient la même chose) ni au hasard brut (explosion/extinction des signaux). On tire des gaussiennes <b>calibrées selon la taille des couches</b> (Xavier, He).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$W \sim \mathcal{N}\!\left(0, \tfrac{2}{n_{in}}\right)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Une mauvaise init = un réseau qui n'apprend rien ou diverge à l'époque 1. Les recettes He (pour ReLU) et Xavier (pour tanh) maintiennent la variance des activations constante de couche en couche.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">PyTorch applique de bonnes init par défaut: sache juste qu'elles existent et pourquoi. Si un réseau custom n'apprend rien, l'init fait partie du top 3 des suspects avec le learning rate et les données.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># tester l initialisation:
+model = nn.Sequential(nn.Linear(100, 100), nn.ReLU(), nn.Linear(100, 100))
+x = torch.randn(32, 100)
+# mesurer la variance des activations couche par couche:
+for name, layer in model.named_children():
+    x = layer(x)
+    print(f'{name}: std={x.std():.3f}')
+# si la variance explose (×10 par couche) ou s effondre (÷10): mauvaise init</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">L'initialisation de He utilise une variance de 2/n_in (n_in = nombre d'entrees du neurone). Pourquoi 2? Parce que ReLU met a zero la moitie des neurones en moyenne: la variance est deja divisee par 2 a cause de cette mise a zero. Le facteur 2 compense exactement cette perte. Sans ce calibrage, les activations explosent ou s'eteignent de couche en couche.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-7-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">drop</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le dropout</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Pendant l'entraînement, <b>éteindre aléatoirement</b> une fraction p des neurones à chaque batch: le réseau ne peut compter sur aucun neurone en particulier et apprend des représentations redondantes, robustes.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$h' = h \odot m, \quad m_i \sim \text{Bernoulli}(1-p)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Régularisation standard des MLP et transformers (p entre 0.1 et 0.5). Interprétation élégante: entraîner un ensemble implicite de milliers de sous-réseaux qui votent.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>nn.Dropout(0.1)</code>. Piège classique en production: oublier <code>model.eval()</code>, qui désactive le dropout à l'inférence. Symptôme: des prédictions qui changent à chaque appel identique.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># dropout pendant l'entrainement:
+model = nn.Sequential(
+    nn.Linear(784, 256),
+    nn.Dropout(0.5),  # 50% des neurones eteints
+    nn.ReLU(),
+    nn.Linear(256, 10)
+)
+model.train()  # mode entrainement: dropout ACTIF
+for batch in loader:
+    out = model(batch)  # a chaque batch, un masque different
+
+model.eval()   # mode evaluation: dropout DESACTIVE
+out = model(batch)  # tous les neurones sont presents</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">En entrainement, dropout eteint une fraction p des neurones et MULTIPLIE les sorties par 1/(1-p) pour que l'amplitude moyenne reste la meme (c'est 'l'inverted dropout', la version standard depuis 2014). Sans cette compensation, l'intensite des signaux chuterait entre train et eval. Et SURTOUT: sans model.eval(), le dropout reste actif en production et les predictions changent a chaque appel.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-7-7">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">BN</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Batch normalization</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Standardiser les activations (moyenne 0, variance 1) <b>au sein de chaque batch</b>, puis laisser le réseau réapprendre échelle et décalage. Stabilise et accélère énormément l'entraînement.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\hat h = \frac{h - \mu_B}{\sqrt{\sigma_B^2+\epsilon}}\cdot\gamma + \beta$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Incontournable dans les CNN (ResNet). Les transformers utilisent sa cousine <b>layer norm</b> (niveau 8) car la normalisation par batch se marie mal avec les séquences de longueurs variables.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>nn.BatchNorm2d(channels)</code> après la convolution, avant l'activation. Même piège que le dropout: comportement différent en train et en eval, d'où l'importance rituelle de <code>model.eval()</code>.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># BatchNorm en action:
+class MyBlock(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.linear = nn.Linear(256, 256)
+        self.bn = nn.BatchNorm1d(256)
+    def forward(self, x):
+        return F.relu(self.bn(self.linear(x)))
+# la norm calcule mu et sigma sur le BATCH courant
+# en eval, les mu/sigma accumules pendant l entrainement sont utilises</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">BatchNorm normalise PAR BATCH. Si ton batch est de taille 1 (ex: streaming), la moyenne = la valeur elle-meme → variance nulle → c'est la catastrophe. Solution: utiliser LayerNorm (normalise par echantillon) ou GroupNorm. C'est pourquoi les LLM utilisent LayerNorm.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-7-8">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⊞</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La convolution (CNN)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Faire glisser un petit <b>filtre</b> (3×3 par ex.) sur l'image: mêmes poids partout, chaque position produit une réponse « ce motif est-il ici ? ». Exploite le fait qu'un chat en haut à gauche reste un chat en bas à droite.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$(I * K)_{ij} = \sum_{m,n} I_{i+m,j+n} K_{mn}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Vision par ordinateur: classification, détection, segmentation, imagerie médicale. Les premières couches apprennent des bords, puis des textures, puis des objets: hiérarchie visuelle émergente.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>nn.Conv2d(3, 64, kernel_size=3, padding=1)</code>. Le partage de poids divise les paramètres par des ordres de grandeur vs une couche dense: c'est ça, le génie du CNN.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># convolution 1D intuitive:
+signal = torch.tensor([1, 3, 2, 5, 1, 4])
+filtre = torch.tensor([-1, 0, 1])  # detecteur de pente
+# le filtre glisse sur le signal:
+# position 1: (-1*1 + 0*3 + 1*2) = 1 (montee)
+# position 2: (-1*3 + 0*2 + 1*5) = 2 (montee rapide)
+# position 3: (-1*2 + 0*5 + 1*1) = -1 (descente)
+# resultat: [1, 2, -1] = pentes locales</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Un filtre de convolution a une PROPRIETE FONDAMENTALE: il est invariant par translation. Detecter un bord en haut a gauche de l'image utilise le MEME filtre qu'en bas a droite. 9 poids appris, et le motif est detecte partout. C'est le genie du CNN.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-7-9">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">h_t</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">RNN et LSTM</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Traiter une séquence pas à pas en maintenant un <b>état mémoire</b> h_t mis à jour à chaque élément. Le LSTM ajoute des portes (oublier/écrire/lire) pour retenir l'information sur de longues distances.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$h_t = \phi(W_h h_{t-1} + W_x x_t)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Ex-rois du texte et des séries temporelles, largement détrônés par les transformers (parallélisables, meilleure longue portée). Survivent en embarqué, streaming temps réel, et inspirent les SSM modernes (Mamba).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">À connaître pour lire la littérature pré-2018 et comprendre POURQUOI l'attention a gagné: le RNN traite t=1000 après les 999 précédents; le transformer traite tout en parallèle.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># LSTM: memoriser sur de longues distances
+lstm = nn.LSTM(768, 256, num_layers=2, batch_first=True)
+# entrees: x de shape (batch, sequence, 768)
+# sortie: output (batch, sequence, 256)
+# etat cache: h_n (2, batch, 256)
+# etat cellule: c_n (2, batch, 256) - LA MEMOIRE LONGUE
+output, (h_n, c_n) = lstm(x)
+# le LSTM a 4 portes (oublier, entree, sortie, candidat) pour controler ce qui entre et sort de la memoire</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">L'avantage du LSTM sur le RNN simple: le gradient peut traverser la 'cellule' sans etre multiplie par des poids, donc il ne s'evanouit pas sur les longues sequences. L'inconvenient: il reste SEQUENTIEL, chaque token attend le precedent.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-7-10">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">emb</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les embeddings</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Représenter un objet discret (mot, token, utilisateur, produit) par un <b>vecteur dense appris</b>, tel que la géométrie reflète le sens: les voisins dans l'espace sont proches dans le monde.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$e = E[i] \in \mathbb{R}^d$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Première couche de tout LLM (token → vecteur). Recherche sémantique, RAG, recommandation, célèbre arithmétique roi - homme + femme ≈ reine. L'idée la plus féconde du NLP moderne.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>nn.Embedding(vocab_size, 768)</code> ou une API d'embeddings pour du RAG. Compétence directement monétisable: similarité cosinus sur embeddings = moteur de recherche sémantique en 20 lignes.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># les embeddings apprennent la semantique:
+embedding = nn.Embedding(vocab_size=10000, embedding_dim=768)
+# au debut, les vecteurs sont aleatoires, sans signification
+word_idx = torch.tensor([42, 128, 7])  # indices de mots
+vectors = embedding(word_idx)            # [3, 768]
+# apres entrainement, les vecteurs de mots similaires sont proches
+# roi - homme + femme ≈ reine
+similarite = F.cosine_similarity(emb_roi - emb_homme + emb_femme, emb_reine, dim=0)</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">L'embedding n'est PAS un dictionnaire: il n'y a pas de 'sens' stocke explicitement. C'est un espace vectoriel ou les relations sont GEOMETRIQUES. 'Roi' est proche de 'reine' dans la meme direction que 'homme' est proche de 'femme'. L'arithmetique vectorielle du sens.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

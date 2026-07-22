@@ -1,0 +1,475 @@
+<div class="space-y-6 qa-level" data-qa-level="deep:0">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">DEEP ACADEMY &middot; Niveau 0 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Lire les mathématiques</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: <b>décoder n'importe quelle équation</b> comme une phrase. Les maths sont une langue: ici tu apprends l'alphabet et la grammaire. Après ce niveau, plus aucun symbole d'un papier ML ne te bloque.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">13 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-0-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">αβθ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Les lettres grecques</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Pas de panique: ce sont juste des <b>noms de variables</b>, comme <code>x</code> ou <code>lr</code> en code. Chaque lettre a un rôle habituel qu'on retrouve partout.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\alpha,\ \beta,\ \theta,\ \lambda,\ \mu,\ \sigma,\ \varepsilon,\ \eta$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">θ = les paramètres du modèle (poids). α ou η = learning rate. λ = force de régularisation. μ = moyenne. σ = écart-type. ε = un tout petit nombre (éviter division par zéro).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Quand tu lis une équation, remplace mentalement chaque lettre grecque par son nom de variable code: θ devient <code>weights</code>, α devient <code>lr</code>. L'équation devient du pseudo-code.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">alpha = 0.001  # learning rate
+theta = model.state_dict()  # les poids du modele</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Les lettres grecques ne sont pas magiques: ce sont juste des noms de variable. theta et alpha sont les plus frequentes, les autres apparaissent dans un papier precis -&gt; note leur definition.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-0-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">xᵢ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Indices et exposants</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1"><code>x_i</code> = le i-ème élément d'une liste (comme <code>x[i]</code>). <code>x²</code> = puissance. Piège: <code>x^{(j)}</code> avec parenthèses = le j-ème <b>exemple</b> du dataset, pas une puissance.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$x_i = x[i] \qquad x^{(j)} = \text{exemple } j$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Dans les papiers: x⁽ⁱ⁾ est la i-ème donnée d'entraînement, xⱼ la j-ème feature, Wᵢⱼ la cellule ligne i colonne j d'une matrice de poids.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Lis toujours les indices comme des accès tableau: W_{ij} = <code>W[i][j]</code>. Une équation avec indices est une boucle <code>for</code> déguisée.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">batch[:, 0]      # x_i: tous les exemples, feature 0
+batch[0, :]      # x^(j): le premier exemple du batch</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Les indices papier commencent a 1 mais Python a 0. Quand tu lis W_{ij} dans un papier, ecris W[i][j] en code avec le decalage mental.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-0-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Σ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Sigma : la somme</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Σ signifie simplement <b>une boucle for qui additionne</b>. En dessous: où commence la boucle. Au dessus: où elle finit. À droite: ce qu'on additionne à chaque tour.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\sum_{i=1}^{n} x_i = x_1 + x_2 + \dots + x_n$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">La loss totale d'un modèle est presque toujours une somme des erreurs sur chaque exemple: L = Σ des erreurs individuelles, souvent divisée par n (moyenne).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Traduction directe en Python: <code>sum(x[i] for i in range(n))</code>. Dès que tu vois Σ, écris la boucle dans ta tête et le symbole perd tout son mystère.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">loss = F.mse_loss(pred, target, reduction='sum')  # Sigma des erreurs
+loss = F.mse_loss(pred, target, reduction='mean')      # (1/n) Sigma, standard</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Sigma seule grossit avec n. En pratique on utilise (1/n)Sigma (mean) pour que la loss soit comparable entre batches de tailles differentes.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-0-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Π</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Pi majuscule : le produit</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Le frère de Σ mais qui <b>multiplie</b> au lieu d'additionner. Une boucle for avec <code>*=</code>.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\prod_{i=1}^{n} p_i = p_1 \times p_2 \times \dots \times p_n$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">La vraisemblance d'un dataset = produit des probabilités de chaque exemple. Comme multiplier plein de petits nombres tend vers 0, on passe au log qui transforme Π en Σ.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>math.prod(p)</code> en Python. Retiens le réflexe clé du ML: log(Π) = Σ log. C'est pour ça que toutes les loss sont des log-quelque-chose.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">log_likelihood = sum(log(prob) for prob in probs)  # log(Pi) = Sigma(log)
+# sous le capot: c'est ce que fait cross_entropy</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le produit direct de 1000 probabilites &lt; 1 donne un nombre tellement petit que l'ordinateur le tronque a 0. Le log transforme ce cancer numerique en somme stable.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-0-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">∈ ℝ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Ensembles : ∈, ℝ, ℝⁿ</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1"><code>∈</code> = « appartient à » (est de type). <code>ℝ</code> = les nombres réels (un float). <code>ℝⁿ</code> = un vecteur de n floats. <code>ℝ^{m×n}</code> = une matrice m lignes n colonnes.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$x \in \mathbb{R}^{768} \quad W \in \mathbb{R}^{768\times 3072}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">« x ∈ ℝ⁷⁶⁸ » = un embedding de dimension 768. « W ∈ ℝ⁷⁶⁸ˣ³⁰⁷²  » = la matrice de poids d'une couche. C'est la déclaration de type des maths.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Lis ∈ comme une annotation de type: <code>x: Tensor[768]</code>. Quand tu lis un papier, note d'abord les « shapes » déclarées avec ∈, ça t'évite 90% de la confusion.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">def forward(self, x: Tensor[Batch, 784]) -&gt; Tensor[Batch, 10]:
+    return self.W @ x + self.b
+# les types sont la signature de la fonction</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Les declarations de type avec ∈ ne sont pas du decor. Si un papier dit W ∈ R^{768x3072} et que ta matrice est [3072, 768], tout est faux sans erreur explicite.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-0-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">∀∃</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Quantificateurs : ∀ et ∃</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1"><code>∀</code> = « pour tout » (chaque élément sans exception). <code>∃</code> = « il existe » (au moins un).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\forall x \in D,\ f(x) \ge 0$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">« ∀x, loss(x) ≥ 0 » = la loss est positive pour tous les exemples. Utilisé dans les preuves, définitions et garanties théoriques (convergence, bornes).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">∀ = <code>all(...)</code>, ∃ = <code>any(...)</code>. Ces symboles apparaissent surtout dans les sections théoriques des papiers, tu peux souvent les survoler en première lecture.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">assert all(loss &gt;= -1e-6 for loss in losses)  # ∀ loss &gt;= 0
+# faux si une loss est negative -&gt; bug</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">∀ et ∃ sont la matiere des preuves et des garanties. Dans un papier, ∀ signifie 'vrai pour tous les cas, sans exception'. Un seul contre-exemple suffit a le tuer.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-0-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">‖x‖</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">|x| et ‖x‖ : tailles</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1"><code>|x|</code> = valeur absolue d'un nombre (distance à zéro). <code>‖x‖</code> = <b>norme</b> d'un vecteur: sa longueur. Deux barres = version vecteur d'une barre.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\|x\|_2 = \sqrt{x_1^2 + x_2^2 + \dots + x_n^2}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">La norme mesure la « taille » d'un gradient (gradient clipping), d'un vecteur de poids (weight decay), ou la distance entre deux embeddings.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>np.linalg.norm(x)</code>. Quand tu vois ‖·‖² dans une loss, c'est presque toujours « erreur au carré » ou « pénalité sur la taille des poids ».</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">v = torch.tensor([3.0, 4.0])
+norme = torch.norm(v)  # ||v|| = sqrt(3^2 + 4^2) = 5.0
+# en numpy: np.linalg.norm(v)
+
+# normaliser un vecteur (le ramener a longueur 1):
+norme = v / torch.norm(v)  # [0.6, 0.8]</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">||x|| en exposant (||x||^2) apparait dans les loss MSE et weight decay. Ne confonds pas |x| (valeur absolue, un nombre) et ||x|| (norme, longueur d'un vecteur). C'est deux concepts differents.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-0-7">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">arg</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">argmax et argmin</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">max(f) = la <b>valeur</b> maximale. argmax(f) = <b>l'endroit</b> (l'argument) où ce maximum est atteint. Nuance capitale en ML.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\hat{y} = \underset{c}{\operatorname{argmax}}\ p(c \mid x)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">La prédiction finale d'un classifieur: la classe c qui a la plus grande probabilité. L'entraînement lui-même est un argmin: trouver les θ qui minimisent la loss.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>np.argmax(probs)</code> te donne l'indice, <code>np.max(probs)</code> la valeur. Tout le ML tient en une ligne: θ* = argmin de la loss.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">def predict(logits):
+    return logits.argmax(dim=-1)  # renvoie l'INDICE de la meilleure classe
+    # pas la valeur max, mais SA POSITION</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">argmax et max renvoient deux choses differentes: max donne la valeur, argmax donne la POSITION. Faire l'inverse sans s'en rendre compte est un classique.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-0-8">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">E[X]</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">E[·] et P(·)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1"><code>P(A)</code> = probabilité de l'événement A (entre 0 et 1). <code>E[X]</code> = espérance: la <b>moyenne pondérée</b> attendue de X. P(A|B) = proba de A sachant que B est vrai.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\mathbb{E}[X] = \sum_i x_i\, p_i$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">La loss qu'on optimise est en théorie une espérance sur toutes les données possibles; en pratique on l'estime par la moyenne sur le batch. E[·] partout dans les papiers = « en moyenne ».</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Chaque fois que tu vois E[...], lis « la moyenne de ... sur les données ». En code, c'est <code>.mean()</code> sur le batch. Ce réflexe débloque la moitié des équations de RL et de LLM.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">x = torch.tensor([1.0, 2.0, 3.0])
+p = torch.tensor([0.2, 0.3, 0.5])  # probabilites (somme = 1)
+E = (x * p).sum()  # E[X] = 1*0.2 + 2*0.3 + 3*0.5 = 2.3
+
+# equivalent a la moyenne si toutes les probas sont egales:
+moyenne = x.mean()  # (1+2+3)/3 = 2.0</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">E[X] = 0 ne signifie PAS que la moyenne de tes 100 echantillons sera 0. Elle le SERAIT si tu en avais une infinite, mais avec n echantillons il y a un ecart residuel. L'esperance est la valeur theorique, la moyenne empirique est son approximation.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-0-9">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">∂∇</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">∂ et ∇ (aperçu)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1"><code>∂</code> = dérivée partielle: « de combien bouge la sortie si je bouge UNE variable ». <code>∇</code> (nabla) = gradient: toutes les dérivées partielles rangées dans un vecteur. Détaillés au niveau 3.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\nabla_\theta L = \left[\tfrac{\partial L}{\partial \theta_1}, \dots, \tfrac{\partial L}{\partial \theta_n}\right]$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">∇L (le gradient de la loss) est LE signal d'apprentissage: il dit à chaque poids dans quel sens bouger pour réduire l'erreur.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Pour l'instant retiens juste la lecture: « ∇θ L » se lit « gradient de la loss par rapport aux paramètres ». En PyTorch: <code>loss.backward()</code> le calcule pour toi.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">x = torch.tensor(3.0, requires_grad=True)  # feuille du graphe
+y = x ** 2
+y.backward()  # remonte le gradient jusqu'a x
+print(x.grad)  # 6.0, soit dy/dx en x=3</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">∂ et ∇ sont les memes objets a deux echelles: ∂ pour une composante, ∇ pour le vecteur complet. ∇L est trop gros pour etre affiche mais ∂L/∂w_i se lit dans w_i.grad.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-0-10">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">ŷ x̄</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Chapeau, barre, tilde, étoile</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1"><code>ŷ</code> (chapeau) = valeur <b>prédite/estimée</b>. <code>x̄</code> (barre) = <b>moyenne</b>. <code>x̃</code> (tilde) = version bruitée ou approchée. <code>θ*</code> (étoile) = la valeur <b>optimale</b>.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\hat{y} \approx y \qquad \bar{x} = \tfrac{1}{n}\sum_i x_i$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Toute la littérature ML: ŷ = sortie du modèle, y = vraie étiquette, la loss compare les deux. θ* = les poids parfaits qu'on cherche à approcher.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Réflexe de lecture: chapeau = « estimé par le modèle », étoile = « le meilleur possible ». Ces décorations changent le sens d'un symbole sans changer la lettre.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">y_hat = model(x)     # prediction: chapeau = estime par le modele
+y = labels            # verite terrain: sans chapeau = reel
+loss = (y_hat - y).pow(2).mean()  # MSE: compare les deux</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La convention chapeau/barre/tilde/etoile n'est jamais expliquee dans les papiers, elle est sous-entendue. Si tu vois un symbole decore que tu ne reconnais pas, cherche sa definition a la premiere occurrence.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-0-11">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">f:→</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Signatures : f: ℝⁿ → ℝ</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La flèche déclare <b>ce qui entre et ce qui sort</b> d'une fonction. « f: ℝⁿ → ℝ » = f prend un vecteur de n nombres et rend un seul nombre.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Un réseau de neurones entier se déclare ainsi: GPT est une fonction ℝ^{contexte} → ℝ^{vocabulaire}. Une loss est toujours → ℝ (elle sort UN nombre à minimiser).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">C'est la signature de fonction des maths, exactement comme <code>def f(x: Vec[n]) -&gt; float</code>. Identifier les shapes d'entrée/sortie est ta première étape face à toute équation.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># signature d'un classifieur:
+# f: R^784 -&gt; [0,1]^10  (softmax en sortie)
+# la signature dit tout: 784 pixels en entree, 10 probas en sortie</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La signature f: A -&gt; B est la premiere chose a lire dans un papier. Avant de comprendre COMMENT ca marche, comprends CE QUE ca mange et CE QUE ca rend.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-0-12">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">∝≈</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Comparer : ∝, ≈, ≫, ⇒</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1"><code>≈</code> = environ égal. <code>∝</code> = proportionnel à (égal à un facteur constant près). <code>≫</code> = très supérieur. <code>⇒</code> = implique.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$P(\theta\mid D) \propto P(D\mid\theta)\,P(\theta)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Bayes s'écrit souvent avec ∝ pour ignorer la constante de normalisation. Les scaling laws utilisent ∝: la loss ∝ (taille du modèle)^{-α}.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">∝ te dit « la forme compte, pas l'échelle ». Quand un papier écrit ∝, il te dispense de calculer un dénominateur pénible: profite-en.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># proportionnel: double les donnees -&gt; double la perte
+# approx: 3.14159 ≈ 3.14
+# implique: si le modele converge, alors loss diminue</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">∝ (proportionnel) et ≈ (approximativement) ne sont pas des symboles de paresse: ils signalent qu'on a deliberately ignore un facteur constant ou un terme negligeable. C'est un choix, pas une imprecision.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

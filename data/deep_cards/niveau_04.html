@@ -1,0 +1,469 @@
+<div class="space-y-6 qa-level" data-qa-level="deep:4">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">DEEP ACADEMY &middot; Niveau 4 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Probabilités et statistiques</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: raisonner en <b>incertitude</b>. Un modèle ML ne dit jamais la vérité, il donne une distribution de probabilités. Ici tu apprends à la lire et à la mesurer.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">12 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-4-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">X∼</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Variable aléatoire et ∼</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Une variable dont la valeur dépend du hasard. Le symbole <code>∼</code> se lit « suit la loi »: X ∼ N(0,1) = X est tiré d'une gaussienne centrée réduite.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$X \sim \mathcal{N}(\mu, \sigma^2)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Les poids sont initialisés en tirant X ∼ N(0, σ²). Le dropout tire des Bernoulli. Un LLM qui génère = qui échantillonne le prochain token depuis une distribution.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>np.random.normal(mu, sigma)</code>. Lis ∼ comme « échantillonné depuis ». Une fois ce symbole acquis, les sections « method » des papiers deviennent lisibles.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">torch.manual_seed(42)
+x1 = torch.randn(3)  # [0.34, -1.28, 0.57]
+x2 = torch.randn(3)  # [0.45, 0.71, -0.93]
+# meme distribution N(0,1), tirages differents
+# c'est ca une variable aleatoire</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">X ∼ N(0,1) signifie que X peut prendre differentes valeurs a chaque tirage, avec une frequence qui suit la courbe en cloche. X n'est PAS egal a 0.3 ou -1.2: X est la LOI de tirage, pas une valeur.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-4-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">p(x)</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La distribution</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La fonction qui dit <b>quelles valeurs sont probables</b> et à quel point. Discrète: des probas qui somment à 1. Continue: une densité dont l'aire totale vaut 1.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\sum_x p(x) = 1 \quad \text{ou} \quad \int p(x)dx = 1$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">La sortie d'un classifieur est une distribution sur les classes. Un LLM produit une distribution sur ~100k tokens à chaque étape. Le ML génératif = apprendre la distribution des données réelles.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Vérifie toujours qu'une sortie « proba » somme à 1 (<code>probs.sum() ≈ 1</code>). Vocabulaire à ancrer: masse (discret), densité (continu), support (les valeurs possibles).</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># verifier qu'un vecteur est une distribution:
+probs = F.softmax(torch.tensor([2.0, 1.0, 0.5]), dim=-1)
+print(probs)                        # [0.59, 0.22, 0.19]
+print(probs.sum())                  # 1.0
+print((probs &gt;= 0).all())           # True (tous &gt;= 0)
+# c'est la definition d'une distribution de proba</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Somme = 1 et tous les elements ≥ 0: ce sont les deux seules regles d'une distribution discrete. Si tu vois un vecteur qui les verifie, c'est une distribution, meme si personne ne l'appelle comme ca.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-4-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">𝒩</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La gaussienne (loi normale)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La courbe en cloche, décrite par 2 nombres seulement: μ (le centre) et σ (la largeur). Elle émerge partout car la somme de nombreux petits hasards indépendants tend vers elle (théorème central limite).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$p(x)=\frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Initialisation des poids, bruit des modèles de diffusion, espace latent des VAE, hypothèse derrière la loss MSE, modélisation des erreurs: la gaussienne est l'ossature probabiliste du ML.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Repères à connaître par cœur: 68% des tirages tombent à ±1σ du centre, 95% à ±2σ, 99.7% à ±3σ. Ça te permet de juger n'importe quel écart « surprenant » en une seconde.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">from scipy.stats import norm
+# calculer la probabilite d'un intervalle:
+p_68 = norm.cdf(1) - norm.cdf(-1)  # ≈ 0.68
+p_95 = norm.cdf(2) - norm.cdf(-2)  # ≈ 0.95
+# cdf = fonction de repartition: P(X &lt; x)</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La gaussienne est definie par DEUX parametres seulement: μ (ou elle est centree) et σ (sa largeur). Si quelqu'un te dit 'une distribution a 2 params qui ressemble a une cloche', c'est une gaussienne. 68%, 95%, 99.7%.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-4-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">E[X]</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'espérance</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La <b>moyenne pondérée par les probabilités</b>: la valeur « attendue » sur le long terme. Linéaire: E[aX+bY] = aE[X]+bE[Y], propriété utilisée sans arrêt dans les preuves.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\mathbb{E}[X]=\sum_i x_i p_i \ \approx\ \frac{1}{n}\sum_i x_i$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">La vraie loss est E[erreur] sur la distribution des données; le batch en donne une estimation. Le RL maximise E[récompenses]. Presque tout objectif ML s'écrit « E[quelque chose] ».</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Traduction systématique: E[...] → <code>.mean()</code> sur des échantillons. La loi des grands nombres garantit que la moyenne empirique converge vers l'espérance: c'est ce qui rend le ML possible.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># esperance empirique vs theorique:
+n = 1000
+X = torch.randn(n)  # E[X] = 0 en theorie
+print(X.mean())      # ≈ 0.03, pas exactement 0
+# la loi des grands nombres: plus n est grand, plus c'est proche</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">E[X] = 0 ne signifie PAS que la moyenne de tes 100 echantillons sera 0. Elle le SERAIT si tu en avais une infinite. Avec n echantillons, il y a un ecart residuel en 1/√n. C'est la difference entre theorie et pratique.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-4-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">σ²</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Variance et écart-type</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La variance mesure la <b>dispersion</b> autour de la moyenne (moyenne des écarts au carré). L'écart-type σ = sa racine, dans la même unité que les données.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\operatorname{Var}(X)=\mathbb{E}[(X-\mu)^2] \qquad \sigma=\sqrt{\operatorname{Var}}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Batch norm standardise avec μ et σ. L'initialisation des poids calibre la variance pour éviter l'explosion des activations. Le compromis biais-variance (niveau 6) porte son nom.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>x.std()</code>, <code>x.var()</code>. Standardiser des features: <code>(x - x.mean()) / x.std()</code>, un des prétraitements les plus rentables de tout le ML classique.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># variance le long de differents axes:
+x = torch.randn(100, 768)  # 100 vecteurs de dimension 768
+var_per_feat = x.var(dim=0)  # variance de chaque feature
+var_per_sample = x.var(dim=1)  # variance de chaque echantillon
+# deux idees tres differentes</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La variance est en UNITE CARREE. Si tes donnees sont en euros, la variance est en euros^2 → non interpretable directement. L'ecart-type σ = √Var remet dans l'unite d'origine: c'est lui qu'on reporte.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-4-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">P(A|B)</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La probabilité conditionnelle</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">P(A|B) = la proba de A <b>sachant que</b> B est vrai. On restreint l'univers aux cas où B a eu lieu, puis on mesure A dedans. Attention: P(A|B) ≠ P(B|A) en général.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$P(A\mid B) = \frac{P(A \cap B)}{P(B)}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Un LLM modélise P(token suivant | tous les tokens précédents). Un classifieur estime P(classe | features). Le « | » est probablement le symbole le plus fréquent des papiers ML.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Lis toujours « | » comme « sachant ». Piège classique à éviter: P(malade | test positif) ≠ P(test positif | malade). La confusion des deux s'appelle l'erreur du procureur.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># P(token suivant | tokens precedents) = softmax(Q @ K.T / sqrt(d))
+# le | signifie 'sachant': on conditionne sur le passe
+# c'est LE calcul fondamental de tout LLM
+def next_token_proba(model, context):
+    return model(context)[:, -1, :]  # P(token | contexte)</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">P(A|B) ≠ P(B|A). 99% des gens se trompent la-dessus. P(malade|test_positif) est tres different de P(test_positif|malade). Le premier depend de la prevalence (1%), le second de la fiabilite du test (99%).</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-4-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Bayes</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le théorème de Bayes</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La machine à <b>renverser les conditionnelles</b> et à mettre à jour une croyance avec des preuves: prior (croyance initiale) × vraisemblance (ce que disent les données) → posterior (croyance mise à jour).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$P(\theta\mid D)=\frac{P(D\mid\theta)P(\theta)}{P(D)}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Classifieur naïf bayésien, ML bayésien (incertitude sur les poids), interprétation de la régularisation comme un prior, A/B testing. Cadre mental fondamental du raisonnement sous incertitude.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Retiens le mantra: posterior ∝ vraisemblance × prior. Utilisable au quotidien bien au-delà du ML: toute mise à jour d'opinion face à un fait nouveau est un calcul bayésien.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># Bayes avec les vrais chiffres:
+def bayes_update(prior, likelihood, evidence):
+    return prior * likelihood / evidence
+# prior = croyance avant la donnee
+# posterior = croyance apres la donnee
+# likelihood = probabilite des donnees sous l'hypothese</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le fameux P(D) au denominateur est un cauchemar a calculer: c'est la somme/integrale de la vraisemblance sur TOUS les θ possibles. Pour contourner, on utilise ∝ (on compare sans normaliser) ou MCMC (on echantillonne).</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-4-7">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">MLE</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Vraisemblance et MLE</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La vraisemblance L(θ) = la proba que le modèle réglé à θ ait produit les données observées. Le MLE (maximum de vraisemblance) = choisir les θ qui rendent les données <b>les moins surprenantes</b>.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\theta^* = \underset{\theta}{\operatorname{argmax}} \sum_i \log p_\theta(x_i)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Entraîner un LLM = MLE: maximiser la proba des textes du corpus. Minimiser la cross-entropy et maximiser la log-vraisemblance sont exactement la même chose.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Ce recadrage unifie tout: « entraîner = rendre les données probables selon le modèle ». Quand tu lis « NLL loss » (negative log-likelihood), c'est ce mécanisme, avec un signe moins pour en faire une minimisation.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># maximiser la log-vraisemblance = minimiser la cross-entropy:
+loss = F.cross_entropy(logits, labels)
+# c'est exactement: -sum(log(p(y_i | x_i, theta)))
+# le signe moins transforme le max en min</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">MLE = Maximum Likelihood Estimation = trouver les parametres qui rendent les donnees les PLUS PROBABLES. C'est si puissant que c'est la methode d'entrainement de 90% des modeles ML, y compris les LLM.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-4-8">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">H(p)</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'entropie</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La mesure de <b>l'incertitude</b> d'une distribution, en bits: distribution concentrée = entropie basse (prévisible), uniforme = entropie maximale (imprévisible). Aussi: le nombre moyen de bits pour encoder les tirages.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$H(p) = -\sum_x p(x)\log p(x)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">L'entropie de la sortie d'un LLM mesure son hésitation sur le prochain token. En RL, un bonus d'entropie force l'exploration. La compression et le ML sont deux faces de la même pièce (Shannon).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>-(p * np.log(p)).sum()</code>. Jauge rapide: H proche de 0 = le modèle est sûr de lui, H haute = il hésite. Utile pour détecter les entrées ambiguës en production.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">def entropie(probs):
+    return -(probs * torch.log2(probs + 1e-10)).sum()
+# certitude: [1, 0, 0] → H = 0.0 bit
+# uniforme: [0.5, 0.5] → H = 1.0 bit
+# hesitante: [0.6, 0.4] → H = 0.97 bit
+print(entropie(torch.tensor([1.0, 0.0, 0.0])))  # 0.0</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">L'entropie mesure 'combien de bits d'information apporte un tirage'. Pile=0, face=1 → 1 bit. Distribution sure (toujours pile) → 0 bit. En LLM, l'entropie du prochain token mesure l'hesitation du modele.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-4-9">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">CE</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La cross-entropy</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Mesure l'écart entre la vraie distribution p et la prédiction q: <b>le coût d'utiliser q quand la vérité est p</b>. Minimale quand q = p. C'est LA loss de classification et des LLM.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$H(p,q) = -\sum_x p(x)\log q(x)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Chaque token généré par un LLM a été appris via cross-entropy: y vaut 1 sur le vrai token suivant, et la loss vaut -log q(vrai token). Toute la puissance de GPT sort de cette formule d'une ligne.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>nn.CrossEntropyLoss()</code> (qui inclut le softmax, piège classique: ne pas softmaxer deux fois). Intuition: prédire 0.9 sur la bonne classe → loss 0.1; prédire 0.01 → loss 4.6. L'erreur confiante coûte très cher.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># les trois formes equivalentes:
+loss1 = F.cross_entropy(logits, labels)           # version standard
+loss2 = F.nll_loss(F.log_softmax(logits, dim=-1), labels)  # version explicite
+loss3 = -F.log_softmax(logits, dim=-1).gather(1, labels.unsqueeze(1)).mean()  # a la main
+# toutes donnent le meme resultat</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Log loss: si la bonne classe a une proba de 0.99 → loss = -ln(0.99) ≈ 0.01 (bon). Si la bonne classe a 0.01 → loss = -ln(0.01) ≈ 4.6 (tres mal). La loss explose quand le modele est confiant et faux.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-4-10">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">KL</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La divergence KL</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Mesure combien une distribution q s'écarte d'une référence p. Pas une vraie distance (asymétrique: KL(p‖q) ≠ KL(q‖p)) mais l'outil standard pour <b>comparer deux distributions</b>. Toujours ≥ 0, nulle si p = q.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$D_{KL}(p\,\|\,q)=\sum_x p(x)\log\frac{p(x)}{q(x)}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">RLHF contraint le modèle aligné à rester proche du modèle de base via une pénalité KL. Les VAE régularisent leur espace latent avec une KL vers la gaussienne. Distillation, DPO: KL partout.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Identité qui fait tout tenir ensemble: cross-entropy = entropie + KL. Minimiser la CE, c'est minimiser la KL entre la vérité et ton modèle. Les trois cartes précédentes sont une seule histoire.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100">def kl_div(p, q):
+    return (p * torch.log(p / q)).sum()
+# KL(p||q) = 0.1: en moyenne, 0.1 nat de plus pour encoder p avec q
+# KL(p||p) = 0.0: code optimal
+p = torch.tensor([0.5, 0.5])
+q = torch.tensor([0.9, 0.1])
+print(kl_div(p, q))  # ≈ 0.51
+print(kl_div(q, p))  # ≈ 0.37 (ASYMETRIQUE!)</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">KL(p||q) ≠ KL(q||p). KL(p||q) penalise q d'avoir peu de masse la ou p en a beaucoup. KL(q||p) penalise q d'avoir de la masse la ou p n'en a pas. Choix crucial en pratique: la premiere est utilisee en RLHF.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-4-11">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">ρ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Covariance et corrélation</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">La covariance dit si deux variables <b>bougent ensemble</b>; la corrélation ρ la normalise entre -1 et 1. Attention: elle ne capte que les liens linéaires, et corrélation n'est PAS causalité.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\rho = \frac{\operatorname{Cov}(X,Y)}{\sigma_X \sigma_Y} \in [-1,1]$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Détection de features redondantes, PCA (qui diagonalise la matrice de covariance), analyse exploratoire avant tout modèle, détection de fuite de données (une feature suspicieusement corrélée au label).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed"><code>np.corrcoef(X, Y)</code>. Réflexe pro: une corrélation quasi parfaite entre une feature et la cible n'est pas une bonne nouvelle, c'est probablement une fuite (leakage). Tu l'as vécu sur ORBIT.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># calculer la correlation:
+data = torch.stack([X, Y])  # X et Y: (n,) chacun
+corr = torch.corrcoef(data)  # matrice 2x2
+# corr[0,1] = ρ ∈ [-1, 1]
+# si ρ ≈ 1: les deux montent ensemble
+# si ρ ≈ -1: l'une monte, l'autre descend
+# si ρ ≈ 0: PAS de lien LINEAIRE</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">ρ = 0 ne signifie PAS 'pas de relation'. Si Y = X^2 avec X symetrique autour de 0, ρ ≈ 0 alors que la relation est parfaite. La correlation ne capte que le lien LINEAIRE. Toujours tracer le nuage de points avant de conclure.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

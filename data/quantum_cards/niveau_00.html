@@ -1,0 +1,364 @@
+<div class="space-y-6 qa-level" data-qa-level="quantum:0">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">QUANTUM ACADEMY &middot; Niveau 0 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Lire les maths du quantique</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: que plus aucun symbole ne t'arrête — i, |ψ⟩, ⟨φ|ψ⟩, †, ⊗, ℏ. Après ce niveau, tu sais PRONONCER toute équation quantique.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">9 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-0-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">i</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">i, le nombre imaginaire</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">i est LE nombre inventé pour que i² = −1. Pas de mystique: c'est une extension du système de nombres, comme les négatifs l'ont été. Toute la mécanique quantique est écrite avec.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$i^2 = -1 \qquad i^3=-i \qquad i^4=1$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« i au carré égale moins un ». Les puissances de i tournent en cycle de quatre: i, moins un, moins i, un — retiens: i FAIT TOURNER.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">L'équation de Schrödinger commence par « iℏ ». Les amplitudes des qubits sont des nombres complexes. Sans i, pas de phase, pas d'interférence, pas de quantique.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule les puissances: i¹ = i, i² = −1, i³ = i²·i = −i, i⁴ = (i²)² = 1. Puis ça reboucle: i⁵ = i.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Visualise: sur un plan, multiplier par i = tourner de 90°. 1 → i → −1 → −i → 1: quatre quarts de tour.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résous x² + 1 = 0: impossible avec les réels (un carré est toujours ≥ 0). Avec i: x = ±i. L'équation « insoluble » a deux solutions.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: i n'est pas « imaginaire » au sens de faux — c'est un opérateur de rotation déguisé en nombre. Ce lien rotation ↔ i est LA clé de tout le niveau 1.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Réflexe: chaque fois que tu vois i dans une équation quantique, pense « rotation de phase », pas « nombre bizarre ». En Python: <code>1j</code> (<code>(1j)**2 → (-1+0j)</code>).</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-0-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">z</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le nombre complexe</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">z = a + bi: une paire de réels (a = partie réelle, b = partie imaginaire) qu'on peut voir comme un POINT du plan. Son module |z| = sa distance à l'origine, son conjugué z* = son reflet (b → −b).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$z = a+bi \qquad |z|=\sqrt{a^2+b^2} \qquad z^*=a-bi \qquad z z^* = |z|^2$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« z égale a plus b i; le module de z égale racine de a carré plus b carré; z étoile (le conjugué) égale a moins b i ». Et la perle: « z fois z étoile égale module de z au carré ».</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Une amplitude quantique est un z. La probabilité d'un résultat = |z|² = z·z* — c'est la règle de Born. Le conjugué est partout: c'est lui qui fabrique les probabilités réelles à partir d'amplitudes complexes.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends z = 3 + 4i.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Module: |z| = √(3² + 4²) = √25 = 5. C'est la « taille » de z.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Conjugué: z* = 3 − 4i. Multiplie: z·z* = (3+4i)(3−4i) = 9 − 16i² = 9 + 16 = 25 = |z|² ✓ — le i a disparu, résultat RÉEL.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: c'est exactement le tour de passe-passe de la règle de Born: amplitude complexe → module carré → probabilité réelle. Tu viens de faire le calcul central du quantique.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Python: <code>z = 3+4j; abs(z) → 5.0; z.conjugate() → (3-4j)</code>. Automatise: « proba = |amplitude|² » doit devenir un réflexe moteur.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-0-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">e^{iθ}</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La formule d'Euler</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">e^{iθ} = cos θ + i sin θ: l'exponentielle d'un imaginaire est un point du CERCLE unité, à l'angle θ. Tout complexe s'écrit alors z = |z|·e^{iθ}: une taille et un angle (la PHASE). La plus belle formule des maths, et l'outil n°1 du quantique.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$e^{i\theta} = \cos\theta + i\sin\theta \qquad z = |z|\,e^{i\theta}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« e puissance i thêta égale cosinus thêta plus i sinus thêta ». Et la forme polaire: « z égale module de z, fois e puissance i thêta » — une longueur fois une direction.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">La phase e^{iθ} est LA ressource quantique: les portes S, T, Rz ne font QUE multiplier une amplitude par e^{iθ}. L'évolution temporelle d'un état d'énergie E est e^{−iEt/ℏ} — une rotation de phase perpétuelle.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Teste θ = 0: e⁰ = cos 0 + i sin 0 = 1. Le point (1, 0) du cercle.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">θ = π/2: cos(π/2) + i sin(π/2) = 0 + i = i. Quart de tour ✓ (cohérent avec « multiplier par i = tourner de 90° »).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">θ = π: e^{iπ} = −1 → la célèbre identité e^{iπ} + 1 = 0, qui relie e, i, π, 1 et 0 en une ligne.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Multiplie deux phases: e^{iα}·e^{iβ} = e^{i(α+β)} — composer des rotations = additionner des angles. C'est pour ça que les exponentielles rendent le quantique CALCULABLE.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: mémorise l'image « e^{iθ} = une aiguille d'horloge d'angle θ ». Le lab du niveau 1 te la fait tourner en direct.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Trois valeurs par cœur: e^{iπ/2} = i, e^{iπ} = −1, e^{2iπ} = 1. Dans un circuit, « ajouter une phase de π » = multiplier par −1: tu sauras lire les matrices des portes S et T.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-0-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">|ψ⟩</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le ket |ψ⟩ (notation de Dirac)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">|ψ⟩ (« ket psi ») = un vecteur colonne qui contient TOUT l'état d'un système quantique. Le bra ⟨ψ| est son partenaire ligne (transposé + conjugué). Cette notation de Dirac est LA langue du domaine: apprends à la lire et 90% de l'intimidation disparaît.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\psi\rangle = \begin{pmatrix}\alpha\\ \beta\end{pmatrix} \qquad \langle\psi| = (\alpha^*\ \beta^*)$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« ket psi » pour |ψ⟩, « bra psi » pour ⟨ψ|. Le ket est une colonne d'amplitudes; le bra est la ligne des amplitudes CONJUGUÉES. Bra + ket = bracket (crochet) — le jeu de mots est officiel.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Un qubit: |ψ⟩ = α|0⟩ + β|1⟩ où |0⟩ = colonne (1,0) et |1⟩ = colonne (0,1). Tout circuit quantique = des multiplications de matrices sur des kets.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Écris les deux états de base d'un qubit: |0⟩ = (1, 0) en colonne, |1⟩ = (0, 1). Ce sont les « 0 » et « 1 » quantiques.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Fabrique un ket général: |ψ⟩ = 0.6|0⟩ + 0.8|1⟩ = la colonne (0.6, 0.8). Deux nombres = tout l'état.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Fabrique son bra: ⟨ψ| = ligne (0.6, 0.8) — ici les amplitudes sont réelles, le conjugué ne change rien. Avec |φ⟩ = (0.6, 0.8i), le bra serait (0.6, −0.8i): conjugue TOUJOURS.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: ket = colonne, bra = ligne conjuguée. C'est tout. La notation qui terrifie les débutants est un simple habillage de l'algèbre linéaire que tu connais déjà (niveau 2 de Deep Academy).</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Traduis systématiquement en code: <code>psi = np.array([alpha, beta])</code> pour le ket, <code>psi.conj().T</code> pour le bra. Un papier quantique se lit comme du NumPy déguisé.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-0-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⟨φ|ψ⟩</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le braket ⟨φ|ψ⟩</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">⟨φ|ψ⟩ = le produit scalaire quantique: bra fois ket = un NOMBRE complexe qui mesure le recouvrement entre deux états. ⟨ψ|ψ⟩ = 1 (état normalisé), ⟨φ|ψ⟩ = 0 (états orthogonaux = parfaitement distinguables).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\langle\varphi|\psi\rangle = \sum_i \varphi_i^*\,\psi_i \qquad \langle\psi|\psi\rangle = 1$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« braket phi psi égale la somme des phi i étoile, fois psi i » — comme un produit scalaire ordinaire, mais on CONJUGUE le premier vecteur. « Braket psi psi égale un » se lit: l'état est normalisé.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">|⟨φ|ψ⟩|² = la probabilité de trouver ψ « dans l'état » φ lors d'une mesure — la règle de Born s'écrit avec un braket. La fidélité entre deux états quantiques, les amplitudes de transition: tout est braket.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends |ψ⟩ = (0.6, 0.8) et |φ⟩ = |0⟩ = (1, 0).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule ⟨φ|ψ⟩ = 1*·0.6 + 0*·0.8 = 0.6 — le « recouvrement » de ψ avec l'état 0.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Élève au module carré: |0.6|² = 0.36 → 36% de chances de mesurer 0. Et ⟨1|ψ⟩ = 0.8 → 64% de mesurer 1. Total: 0.36 + 0.64 = 1 ✓.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Vérifie la normalisation: ⟨ψ|ψ⟩ = 0.6² + 0.8² = 1 ✓ — les probabilités somment à 1 PARCE QUE l'état est normalisé.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: braket = « à quel point ces deux états se ressemblent », et son module carré = une probabilité. Les deux tiers des équations d'un papier quantique sont des variations de ce calcul.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En code: <code>np.vdot(phi, psi)</code> (vdot conjugue le premier argument automatiquement — le piège classique est d'utiliser <code>dot</code> et d'oublier le conjugué).</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-0-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">ℏ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">ℏ, la constante de Planck réduite</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">ℏ (« h-barre ») = h/2π ≈ 1.055×10⁻³⁴ J·s: LA constante qui fixe l'échelle du monde quantique. Elle convertit fréquence en énergie (E = ℏω) et rend les effets quantiques invisibles à notre échelle (elle est ridiculement petite).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\hbar = \frac{h}{2\pi} \approx 1.055\times 10^{-34}\ \text{J·s} \qquad E=\hbar\omega$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« h barre égale h sur deux pi ». Et « E égale h barre oméga »: l'énergie d'un quantum égale h-barre fois sa pulsation.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">ℏ apparaît dans Schrödinger (iℏ∂ψ/∂t), dans l'incertitude (ΔxΔp ≥ ℏ/2), dans chaque niveau d'énergie. En quantum computing on pose souvent ℏ = 1 pour alléger — si un facteur semble « manquer » dans un papier, c'est ça.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule l'énergie d'un photon rouge (λ = 700 nm): fréquence ν = c/λ = 3×10⁸/700×10⁻⁹ ≈ 4.3×10¹⁴ Hz.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">E = hν = 6.63×10⁻³⁴ × 4.3×10¹⁴ ≈ 2.8×10⁻¹⁹ J ≈ 1.8 eV. Minuscule — d'où des milliards de photons dans un simple faisceau.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Compare les échelles: une balle de tennis (m = 57 g, v = 50 m/s) a une longueur d'onde de de Broglie λ = h/mv ≈ 2×10⁻³⁴ m — 10¹⁹ fois plus petit qu'un proton: AUCUN effet ondulatoire visible.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: ℏ ≈ 10⁻³⁴ explique pourquoi le monde quantique nous est caché. Petit objet (électron) → effets énormes; gros objet → effets néants. La frontière classique/quantique est une question d'échelle, pas de magie.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Réflexe de lecture: dans les papiers théoriques et QC, « unités naturelles: ℏ = 1 » est quasi systématique — les énergies deviennent des fréquences. Ne cherche pas le ℏ manquant, il vaut 1.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-0-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Â</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Opérateurs et valeurs propres</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Un opérateur Â (le chapeau signale « je suis une matrice/opération, pas un nombre ») transforme un état en un autre: Â|ψ⟩. Ses états propres |a⟩ sont ceux qu'il ne fait qu'étirer: Â|a⟩ = a|a⟩ — et ces valeurs propres a sont les seuls résultats de mesure possibles.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\hat A\,|a\rangle = a\,|a\rangle$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« A chapeau, appliqué au ket a, égale a fois ket a » — l'opérateur ne fait que multiplier son état propre par la valeur propre a.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">CHAQUE grandeur mesurable (énergie, position, spin) est un opérateur, et mesurer = obtenir une de ses valeurs propres. « Résoudre un système quantique » = trouver les valeurs propres de son hamiltonien. C'est le même Av = λv que ton PCA — même maths, autre costume.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends l'opérateur Z (matrice de Pauli): Z = [[1, 0], [0, −1]].</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique-le à |0⟩ = (1, 0): Z|0⟩ = (1, 0) = +1·|0⟩ → |0⟩ est état propre, valeur propre +1.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique-le à |1⟩ = (0, 1): Z|1⟩ = (0, −1) = −1·|1⟩ → valeur propre −1.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique-le à |+⟩ = (1, 1)/√2: Z|+⟩ = (1, −1)/√2 ≠ λ|+⟩ → PAS un état propre de Z: une mesure de Z sur |+⟩ donnera ±1 au hasard.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: « mesurer l'observable  » = le système répond par une valeur propre, et saute dans l'état propre associé. Trouver des valeurs propres, ce n'est plus une corvée d'algèbre: c'est prédire les résultats d'expérience.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En code: <code>np.linalg.eigh(A)</code> → valeurs et vecteurs propres. Le « h » final = pour matrices hermitiennes (carte suivante) — plus rapide et garantit des valeurs propres réelles.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-0-7">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">†</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La dague †: adjoint, hermitien, unitaire</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">A† (« A dague ») = transposer PUIS conjuguer. Deux familles royales en découlent: les HERMITIENNES (A = A†) = les observables (valeurs propres réelles), et les UNITAIRES (U†U = I) = les évolutions (préservent les probabilités). Tout le quantique vit entre ces deux familles.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$A^\dagger = (A^*)^\top \qquad \text{hermitien: } A=A^\dagger \qquad \text{unitaire: } U^\dagger U = I$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« A dague égale la transposée conjuguée de A ». « A est hermitien si A égale A dague ». « U est unitaire si U dague U égale l'identité » — l'adjoint d'une unitaire est son inverse.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Toute porte quantique est UNITAIRE (l'information ne se perd pas, l'évolution est réversible: U⁻¹ = U†). Tout hamiltonien est HERMITIEN (les énergies mesurées sont réelles). Vérifier ces deux propriétés = le premier test de santé de n'importe quel calcul.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends A = [[0, −i], [i, 0]] (c'est la Pauli Y).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Transpose: [[0, i], [−i, 0]]. Conjugue: [[0, −i], [i, 0]] = A → A = A†: HERMITIENNE ✓. Ses valeurs propres seront réelles (±1).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Teste l'unitarité: calcule A†A = A² = [[0,−i],[i,0]]² = [[1,0],[0,1]] = I ✓ → Y est AUSSI unitaire (les Pauli cumulent les deux casquettes: observables ET portes).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Contre-exemple: M = [[1, 1], [0, 1]]: M† ≠ M et M†M ≠ I → ni observable ni porte légitime. Un circuit qui la contiendrait « fuiterait » de la probabilité.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: hermitien = « mesurable », unitaire = « exécutable ». Deux tampons de validité que tu peux vérifier en une ligne de NumPy sur toute matrice croisée dans un papier.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En code: <code>A.conj().T</code> (ou <code>A.T.conj()</code>). Test réflexe: <code>np.allclose(U.conj().T @ U, np.eye(n))</code> avant de faire confiance à une « porte ».</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-0-8">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⊗</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le produit tensoriel ⊗</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">⊗ (« tenseur ») combine deux systèmes en UN: si A a 2 états et B a 2 états, A⊗B en a 2×2 = 4. Les dimensions se MULTIPLIENT — c'est de là que vient la puissance exponentielle du quantique: n qubits = espace de dimension 2ⁿ.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|0\rangle\otimes|1\rangle = |01\rangle \qquad \dim(\mathcal H_A\otimes\mathcal H_B)=\dim\mathcal H_A\times\dim\mathcal H_B$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« ket zéro, tenseur, ket un — égale ket zéro-un ». La dimension du produit tensoriel égale le PRODUIT des dimensions.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Un registre de n qubits vit dans (ℂ²)^⊗n, de dimension 2ⁿ: 50 qubits = 2⁵⁰ ≈ 10¹⁵ amplitudes — d'où l'impossibilité de simuler classiquement, et l'espoir computationnel. Les portes à 1 qubit s'étendent par ⊗: H sur le qubit 1 d'un système à 2 = H⊗I.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule |0⟩⊗|1⟩ avec les colonnes: (1,0)⊗(0,1) = chaque élément du premier multiplie tout le second → (1·0, 1·1, 0·0, 0·1) = (0, 1, 0, 0).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Lis le résultat: c'est le 2ème vecteur de base sur 4 → l'état |01⟩ (binaire 01 = position 1). L'ordre des bases: |00⟩, |01⟩, |10⟩, |11⟩.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Compte la croissance: 1 qubit = 2 amplitudes, 2 qubits = 4, 10 qubits = 1024, 300 qubits = 2³⁰⁰ &gt; le nombre d'atomes de l'univers observable.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: ⊗ n'additionne pas les systèmes, il les multiplie. Et le niveau 5 te montrera le vrai trésor: les états de A⊗B qui ne se factorisent PAS en |a⟩⊗|b⟩ — l'intrication.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En code: <code>np.kron(a, b)</code> (produit de Kronecker = le tensoriel des matrices). Pour construire « X sur le qubit 2 d'un registre de 3 »: <code>np.kron(np.kron(I, X), I)</code>.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

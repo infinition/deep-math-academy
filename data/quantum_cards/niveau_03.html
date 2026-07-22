@@ -1,0 +1,325 @@
+<div class="space-y-6 qa-level" data-qa-level="quantum:3">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">QUANTUM ACADEMY &middot; Niveau 3 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Les principes de la mécanique quantique</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: les postulats — état, superposition, règle de Born, mesure, Schrödinger, incertitude. Le cœur conceptuel.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">8 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-3-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">|ψ⟩</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Postulat 1: l'état quantique</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">TOUT ce qu'on peut savoir d'un système est contenu dans un vecteur |ψ⟩ de l'espace de Hilbert, normalisé. Pas une liste de propriétés cachées: un vecteur d'amplitudes. Deux états qui ne diffèrent que d'une phase GLOBALE e^{iθ}|ψ⟩ sont physiquement identiques.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\psi\rangle \in \mathcal H, \quad \langle\psi|\psi\rangle=1, \quad |\psi\rangle \sim e^{i\theta}|\psi\rangle$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« l'état est un ket psi normalisé de l'espace de Hilbert, défini à une phase globale près » — le tilde ∼ se lit « physiquement équivalent à ».</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Le « quantum state » que tu prépares, transformes et mesures dans chaque circuit. La phase GLOBALE est invisible (aucune mesure ne la voit) mais les phases RELATIVES entre composantes sont toute la richesse — distinction capitale.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Compare |ψ₁⟩ = (|0⟩+|1⟩)/√2 et |ψ₂⟩ = −(|0⟩+|1⟩)/√2 = e^{iπ}|ψ₁⟩: phase globale. Toutes les probas |⟨a|ψ⟩|² sont identiques → INDISTINGUABLES. Même état physique.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Compare maintenant |+⟩ = (|0⟩+|1⟩)/√2 et |−⟩ = (|0⟩−|1⟩)/√2: le signe ne porte que sur |1⟩ → phase RELATIVE.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Mesure-les en base Z: 50/50 pour les deux — aucune différence. Mesure-les en base X: |+⟩ donne + avec certitude, |−⟩ donne − avec certitude → PARFAITEMENT distinguables.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: phase globale = jauge sans conséquence; phase relative = information physique complète, révélée en changeant de base. Les algorithmes quantiques stockent leurs secrets dans les phases relatives.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Réflexe de simplification: tu peux toujours multiplier ton état par e^{iθ} pour rendre la première amplitude réelle positive — les papiers le font sans prévenir, ne cherche pas la porte qui aurait fait ça.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-3-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">α|0⟩+β|1⟩</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Postulat: la superposition</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Si |0⟩ et |1⟩ sont des états possibles, alors α|0⟩ + β|1⟩ l'est aussi (α, β complexes, |α|²+|β|² = 1). Le système n'est ni « 0 », ni « 1 », ni « 0 et 1 à la fois » au sens classique: il est dans un état LINÉAIREMENT COMBINÉ qui n'a pas d'équivalent classique — et qui interfère.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\psi\rangle = \alpha|0\rangle + \beta|1\rangle, \qquad |\alpha|^2+|\beta|^2=1$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« ket psi égale alpha ket zéro, plus bêta ket un — avec module d'alpha au carré plus module de bêta au carré égale un ».</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">La ressource de base du QC: H|0⟩ = (|0⟩+|1⟩)/√2 met un qubit en superposition égale; H^⊗n sur n qubits crée la superposition des 2ⁿ entrées d'un coup — le point de départ de quasi tous les algorithmes.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prépare |ψ⟩ = (3/5)|0⟩ + (4/5)|1⟩. Vérifie: (3/5)² + (4/5)² = 9/25 + 16/25 = 1 ✓.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Prédiction de mesure: P(0) = 9/25 = 36%, P(1) = 64%. UNE mesure donne 0 ou 1, jamais « 0.36 ».</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Le piège classique à désamorcer: « c'est comme une pièce déjà lancée mais cachée » — NON: une pièce cachée n'interfère pas. Ajoute une phase: (3/5)|0⟩ − (4/5)|1⟩ a les MÊMES probas en Z mais se comporte différemment en X. L'ignorance classique n'a pas de phase.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: superposition = amplitudes complexes qui coexistent et peuvent s'annuler mutuellement. La différence avec une probabilité classique tient en un mot: INTERFÉRENCE (revois la carte 10 — c'est le même fil).</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit: <code>qc.h(0)</code> et voilà. Pour une superposition arbitraire (α, β): <code>qc.initialize([alpha, beta], 0)</code> — mais sache qu'en hardware ça se compile en rotations Ry/Rz.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-3-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">|⟨a|ψ⟩|²</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La règle de Born</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">LA règle qui connecte les maths aux expériences: la probabilité d'obtenir le résultat a en mesurant |ψ⟩ = |⟨a|ψ⟩|² — le module carré de l'amplitude. C'est un POSTULAT (pas une déduction): l'axiome probabiliste du monde, vérifié sans exception depuis un siècle.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$P(a) = |\langle a|\psi\rangle|^2$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« la probabilité du résultat a égale le module carré du braket a psi » — projette, prends le module, élève au carré.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Chaque histogramme de sortie de circuit (les « counts » de Qiskit) est la règle de Born échantillonnée. Tout le pont simulation ↔ hardware passe par elle: le simulateur calcule les amplitudes, le hardware tire selon leurs modules carrés.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends |ψ⟩ = (1/√2)|0⟩ + (i/√2)|1⟩ — attention, une amplitude IMAGINAIRE.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">P(0) = |1/√2|² = 1/2. P(1) = |i/√2|² = |i|²/2 = 1/2 — le i ne change RIEN aux probas en base Z (module de i = 1).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Où est passé le i, alors ? Mesure en base Y: là, les amplitudes se combinent différemment et le i devient décisif. La phase est invisible dans SA base, agissante dans les autres.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Répète l'expérience 1000 fois (1000 shots): tu observes ~500/500 ± 16 (bruit binomial √(npq)). La règle de Born prédit la DISTRIBUTION, jamais le coup individuel.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: amplitude → |·|² → probabilité: le geste que tu as fait 10 fois depuis le niveau 0 est un des postulats les plus profonds de la physique. Personne ne sait POURQUOI le carré — mais il ne rate jamais.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Debug de circuit: compare toujours <code>Statevector(qc).probabilities()</code> (Born exact, simulateur) aux counts hardware — l'écart entre les deux EST ton bruit (niveau 8).</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-3-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">↯</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La mesure et le collapse</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Mesurer change l'état: si le résultat est a, l'état SAUTE sur |a⟩ (projection + renormalisation). Irréversible, probabiliste — la seule opération non-unitaire du formalisme. Re-mesurer immédiatement redonne a: le système a « choisi ».</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$|\psi\rangle \ \xrightarrow{\text{résultat } a}\ \frac{P_a|\psi\rangle}{\|P_a|\psi\rangle\|}$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« après une mesure donnant a, l'état devient: P a psi, divisé par sa norme » — la composante compatible avec le résultat, renormalisée à 1.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">En circuit: la mesure convertit un qubit en bit et DÉTRUIT la superposition — d'où la règle d'or « mesure le plus tard possible ». Exceptions créatives: mesures intermédiaires pour la téléportation et la correction d'erreur (on mesure des SYNDROMES sans toucher l'information).</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prépare |ψ⟩ = (0.6)|0⟩ + (0.8)|1⟩ et mesure en Z. Tirage selon Born: disons que tu obtiens 1 (64% de chances).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Applique la règle: P₁|ψ⟩ = (0, 0.8) → renormalise: (0, 1) = |1⟩. Les 36% de « possibilité 0 » ont disparu à jamais.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Re-mesure: P(1) = |⟨1|1⟩|² = 1 → résultat 1, certain. La répétabilité est la trace observable du collapse.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Contraste avec l'unitaire: une porte fait TOURNER le vecteur (réversible, déterministe); la mesure le PROJETTE (irréversible, probabiliste). Deux dynamiques, un formalisme.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: opérationnellement, le collapse = projection + renormalisation, point. Ce que ça « signifie » (Copenhague, mondes multiples, décohérence...) est un débat d'interprétation passionnant — mais AUCUN calcul n'en dépend. Calcule d'abord, philosophe ensuite.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En Qiskit: <code>qc.measure(q, c)</code>. Piège de conception: toute mesure au milieu d'un circuit tue les interférences en aval sur ce qubit — vérifie que c'est voulu (téléportation) et non un accident.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-3-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">iℏ∂ₜ</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'équation de Schrödinger</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">iℏ ∂|ψ⟩/∂t = H|ψ⟩: l'équation du mouvement quantique. Le hamiltonien H (l'énergie) dicte la vitesse de rotation de l'état. Solution pour H constant: |ψ(t)⟩ = e^{−iHt/ℏ}|ψ(0)⟩ — une évolution UNITAIRE: l'exponentielle d'un hermitien fois −i est unitaire. La boucle des niveaux 0-2 se referme.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$i\hbar\,\frac{\partial|\psi\rangle}{\partial t} = H|\psi\rangle \quad\Rightarrow\quad |\psi(t)\rangle = e^{-iHt/\hbar}|\psi(0)\rangle$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« i h-barre, d psi sur d t, égale H psi ». Solution: « psi de t égale e puissance moins i H t sur h-barre, appliqué à psi de zéro » — le temps fait tourner l'état sous la baguette du hamiltonien.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">CHAQUE porte quantique est physiquement un e^{−iHt/ℏ}: on allume un hamiltonien de contrôle (impulsion micro-onde, laser) pendant une durée calibrée. « Programmer un quantique » = sculpter des hamiltoniens dans le temps.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Prends un état propre de H: H|E⟩ = E|E⟩. Alors |ψ(t)⟩ = e^{−iEt/ℏ}|E⟩ — juste une phase qui tourne: rien d'observable ne bouge. C'est un état STATIONNAIRE (carte 36).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Prends une superposition de deux énergies: |ψ(0)⟩ = (|E₁⟩+|E₂⟩)/√2. À t: (e^{−iE₁t/ℏ}|E₁⟩ + e^{−iE₂t/ℏ}|E₂⟩)/√2 — la phase RELATIVE (E₂−E₁)t/ℏ tourne: LÀ il y a du mouvement observable, à la fréquence de Bohr (E₂−E₁)/ℏ.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Conclusion à graver: toute dynamique quantique = des phases relatives entre niveaux d'énergie qui tournent à des vitesses différentes. Un qubit qui « oscille de Rabi » fait exactement ça.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: Schrödinger est linéaire (pas de chaos d'amplitudes), déterministe (le hasard n'entre qu'à la mesure), et unitaire. Le fameux « bizarre quantique » n'est pas dans l'évolution — elle est d'une sagesse totale — mais dans la mesure.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">En simulation: <code>scipy.linalg.expm(-1j*H*t)</code> pour l'unitaire exact (petits systèmes). Les portes des vrais processeurs sont calibrées en ajustant la DURÉE de l'impulsion — la carte Rabi de tout labo.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-3-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">H</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le hamiltonien</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">H = l'opérateur ÉNERGIE du système: ses valeurs propres sont les niveaux d'énergie autorisés, ses états propres les états stationnaires. Connaître H = connaître toute la physique du système (spectres, dynamique, thermodynamique). « Résoudre un système » = diagonaliser son H.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$H|E_n\rangle = E_n|E_n\rangle$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« H ket E n égale E n ket E n » — le hamiltonien appliqué à un état propre rend son énergie fois l'état: l'équation aux valeurs propres de l'énergie.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">En chimie quantique: H d'une molécule → son spectre → ses réactions (le job de VQE). En hardware: le H d'un transmon définit son qubit. Les problèmes d'optimisation se CODENT en hamiltoniens (QAOA) dont l'état fondamental est la solution.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Écris le H d'un qubit dans un champ: H = (ℏω/2)Z — deux niveaux séparés de ℏω.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Diagonalise (ici trivial, Z est déjà diagonale): états propres |0⟩ (E = +ℏω/2) et |1⟩ (E = −ℏω/2). L'écart ℏω est LA fréquence du qubit (~5 GHz pour un transmon).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Ajoute un contrôle: H = (ℏω/2)Z + Ω(t)X — le terme X (l'impulsion micro-onde) fait basculer |0⟩↔|1⟩: c'est ainsi qu'on exécute une porte X en vrai.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Change d'échelle: H d'une molécule H₂ = somme de termes de Pauli (Z₁Z₂, X₁X₂...) après encodage — 4 qubits suffisent, et VQE cherche son état fondamental.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: le hamiltonien est le « code source » d'un système physique. Lire un papier de hardware ou de simulation = commencer par trouver son H (souvent équation 1) et identifier chaque terme: qui est le qubit, qui est le contrôle, qui est le bruit.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Vocabulaire à reconnaître: « ground state » = état propre d'énergie minimale (la cible de VQE); « gap » = écart au premier excité (la robustesse); « driving » = terme de contrôle dépendant du temps.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-3-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">[A,B]</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le commutateur</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">[A,B] = AB − BA mesure si l'ORDRE compte. [A,B] = 0: compatibles — mesurables simultanément, diagonalisables ensemble. [A,B] ≠ 0: incompatibles — mesurer l'un brouille l'autre. Le commutateur est le détecteur d'incompatibilité quantique.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$[A,B] = AB - BA \qquad [x,p]=i\hbar \qquad [X,Z] \ne 0$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« le commutateur de A et B égale A B moins B A ». Le plus célèbre: « x et p commutent à i h-barre près » — position et impulsion sont incompatibles par un montant exactement égal à iℏ.</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">[x,p] = iℏ ⟹ l'incertitude de Heisenberg (carte suivante). En QC: X et Z ne commutent pas → pas de mesure simultanée → sécurité de BB84. En correction d'erreur, on choisit des stabilisateurs qui COMMUTENT pour pouvoir tous les mesurer.</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Calcule [X, Z]: XZ = [[0,−1],[1,0]], ZX = [[0,1],[−1,0]] → XZ − ZX = [[0,−2],[2,0]] = −2iY ≠ 0. X et Z sont incompatibles.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Conséquence directe: aucun état n'est état propre de X ET de Z à la fois (à part... aucun): connaître parfaitement le « bit » (Z) interdit de connaître la « phase » (X).</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Contre-exemple: [Z₁, Z₂] (Z sur deux qubits différents) = 0 → parfaitement compatibles: on peut mesurer les deux, c'est la base des mesures de parité.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: dessine ta carte mentale: commuter = partager une base propre = questions posables ensemble. Ne pas commuter = trade-off inévitable. La structure de QUI commute avec QUI est le squelette caché de chaque protocole quantique.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Test en une ligne: <code>A@B - B@A</code>. Avant de « mesurer deux observables » dans un protocole, vérifie leur commutateur — s'il est non nul, ton protocole a besoin de deux copies ou de deux runs.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="quantum-3-7">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">ΔxΔp</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Le principe d'incertitude</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">ΔxΔp ≥ ℏ/2: on ne peut pas préparer un état où position ET impulsion sont arbitrairement précises. Ce n'est PAS une maladresse de mesure: c'est structurel (Fourier, carte 12 + commutateur, carte 29). Version générale: ΔAΔB ≥ |⟨[A,B]⟩|/2.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\Delta x\,\Delta p \ \ge\ \frac{\hbar}{2} \qquad \Delta A\,\Delta B \ge \tfrac{1}{2}|\langle[A,B]\rangle|$$</div>
+        </section>
+        <section class="bg-violet-50 border border-violet-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-violet-600 mb-2">&#128483; Comment ça se lit, à voix haute</div>
+            <p class="text-gray-700 leading-relaxed">« delta x fois delta p est supérieur ou égal à h-barre sur deux ». Version générale: « le produit des incertitudes de A et B est au moins la moitié du module de la valeur moyenne de leur commutateur ».</p>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#9883;&#65039; En quantique &amp; QC</div>
+            <p class="text-gray-700 leading-relaxed">Fixe la taille minimale des atomes (un électron trop confiné a trop d'énergie cinétique), le bruit de point zéro des circuits, le compromis temps-fréquence des impulsions de contrôle, et la limite standard de la métrologie (que le « squeezing » contourne en déshabillant une variable pour l'autre — LIGO le fait).</p>
+        </section>
+        <section class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2">&#129489;&#8205;&#127979; Exemple guidé, pas à pas</div>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li class="pl-1 leading-relaxed text-gray-700">Estime la taille d'un atome d'hydrogène par Heisenberg seul: confine l'électron dans Δx = a → Δp ≳ ℏ/a → énergie cinétique ~ ℏ²/2ma².</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Ajoute l'attraction coulombienne: E(a) ≈ ℏ²/2ma² − e²/4πε₀a. Minimise en a (dérive, annule):</li>
+                <li class="pl-1 leading-relaxed text-gray-700">a* = 4πε₀ℏ²/me² ≈ 0.53×10⁻¹⁰ m — le rayon de Bohr, à quelques % près, obtenu SANS résoudre Schrödinger. L'incertitude à elle seule explique pourquoi la matière ne s'effondre pas.</li>
+                <li class="pl-1 leading-relaxed text-gray-700">Résultat: Heisenberg n'est pas une limite de nos instruments mais le prix du confinement: serrer une variable fait gonfler sa conjuguée. Relis les cartes 12 (paquet d'ondes) et 29 (commutateur): trois visages du même théorème.</li>
+            </ol>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Grille de lecture hardware: chaque fois qu'un papier parle de « vacuum fluctuations », « zero-point energy » ou « squeezed states », c'est cette inégalité qui travaille. ΔEΔt ≥ ℏ/2 relie aussi durée de vie et largeur de raie.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

@@ -1,0 +1,354 @@
+<div class="space-y-6 qa-level" data-qa-level="deep:8">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">DEEP ACADEMY &middot; Niveau 8 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Transformers et LLM</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: comprendre l'architecture qui domine l'IA moderne: <b>attention</b>, tokens, température, fine-tuning, LoRA. Après ce niveau, tu lis le code de GPT.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">8 concepts</span>
+            <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-700 font-bold">1 lab interactif</span>
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <div class="qa-lab" id="qa-lab-deep-8" data-qa-lab="deep:8">
+        <div class="qa-lab-loading">Chargement du lab interactif&hellip;</div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-8-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">tok</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">La tokenisation</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Découper le texte en <b>tokens</b>: des morceaux de mots issus d'un vocabulaire appris par fréquence (BPE). « anticonstitutionnellement » → plusieurs tokens; « the » → un seul. Le modèle ne voit que des numéros de tokens.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\text{texte} \rightarrow [t_1, t_2, \dots, t_n], \ t_i \in \{1..V\}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Explique les comportements étranges des LLM: difficultés à compter les lettres, à faire de l'arithmétique sur grands nombres, coûts facturés au token, langues non anglaises plus coûteuses (plus de tokens par mot).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Joue avec un tokenizer en ligne (tiktoken) sur tes propres textes: voir le découpage réel dissipe la moitié des mystères des LLM. ~0.75 mot par token en anglais, moins en français.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># voir le tokenizer en action:
+from transformers import AutoTokenizer
+tok = AutoTokenizer.from_pretrained('bert-base-uncased')
+print(tok.tokenize('anticonstitutionnellement'))
+# ['anti', '##const', '##itu', '##tion', '##nelle', '##ment']
+# le modele ne voit PAS les lettres a, n, t, i...
+# il voit des morceaux de mots appris par frequence
+print(tok.encode('Hello world'))  # [101, 7592, 2088, 102] (IDs)</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Les LLM ne connaissent PAS l'alphabet. Quand tu demandes 'combien de r dans strawberry?', le modele voit ['st', 'raw', 'berry'] ou ['straw', 'berry'] selon le tokenizer. Il n'a jamais appris ce qu'est la lettre 'r'. D'ou la difficulte.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-8-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">QKV</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'attention (Q, K, V)</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Chaque token émet une <b>requête</b> (Q: ce que je cherche), une <b>clé</b> (K: ce que je propose) et une <b>valeur</b> (V: mon contenu). Produit scalaire Q·K = pertinence, softmax = pondération, moyenne pondérée des V = nouvelle représentation. Chaque token « regarde » les autres et absorbe ce qui l'aide.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\text{Att}(Q,K,V)=\operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">LA formule de l'IA moderne: GPT, Claude, BERT, ViT, AlphaFold, Whisper. Le √d_k évite que les produits scalaires saturent le softmax. Coût quadratique en longueur: d'où la course aux contextes longs.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Relis cette formule bloc par bloc avec tes acquis: produit scalaire (N2) = similarité, softmax (N6) = poids, moyenne pondérée (N4) = espérance. Tu possèdes déjà chaque pièce: c'est le boss final qui n'en est pas un.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># attention entre 3 tokens:
+Q = torch.randn(3, 64)  # 3 tokens, chaque requete en 64d
+K = torch.randn(3, 64)
+V = torch.randn(3, 64)
+scores = Q @ K.T / math.sqrt(64)  # (3,3): chaque token VS chaque token
+poids = F.softmax(scores, dim=-1)  # normalisation par token
+sortie = poids @ V                # melange pondere des valeurs
+# le token 1 regarde les tokens 1,2,3 et absorbe ce qui est pertinent</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">L'attention calcule des poids DYNAMIQUES: ils dependent du contenu des tokens, pas de leur position fixe. C'est la difference fondamentale avec une convolution (poids fixes) ou un RNN (ordre impose). Le coût O(T^2) limite la longueur de contexte.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-8-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">×h</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'attention multi-têtes</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Faire tourner h attentions <b>en parallèle</b>, chacune avec ses propres projections Q,K,V dans un sous-espace: une tête suit la syntaxe, une autre les coréférences, une autre les positions... puis on concatène.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\text{MHA} = \text{Concat}(\text{head}_1,\dots,\text{head}_h)W^O$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Standard: 12 à 128 têtes selon la taille du modèle. L'interprétabilité mécaniste (Anthropic notamment) dissèque ces têtes et y découvre des circuits: têtes d'induction, de copie, de négation.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Retiens l'intuition: plusieurs experts qui lisent la même phrase avec des lunettes différentes. En code, c'est un simple reshape (B, T, h, d/h) suivi d'attentions parallèles.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># attention multi-tetes decomposee:
+d_model = 768
+h = 12  # tetes
+d_k = d_model // h  # 64
+# chaque tete travaille dans un sous-espace de 64 dimensions
+# requete pour toutes les tetes simultanement:
+Q = linear_q(x).view(B, T, h, d_k).transpose(1, 2)
+# Q.shape: [B, h, T, d_k]
+# chaque tete a sa propre copie de Q,K,V
+# les sorties sont concatenees et reprojetees</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Chaque tete d'attention apprend un type de relation different: certaines suivent la syntaxe (sujet-verbe), d'autres les coreferences (il → chat), d'autres la position (token precedent). 12 tetes = 12 lenses differentes sur la meme phrase.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-8-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">pos</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">L'encodage positionnel</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">L'attention est <b>aveugle à l'ordre</b> (permuter les tokens donne les mêmes scores): on injecte donc la position dans les représentations, via des sinusoïdes, des embeddings appris, ou des rotations (RoPE).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$PE_{(pos,2i)} = \sin\!\left(\frac{pos}{10000^{2i/d}}\right)$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Sans lui, « le chat mange la souris » = « la souris mange le chat ». RoPE (rotary) équipe Llama, Qwen et la plupart des LLM récents, et conditionne l'extrapolation à des contextes plus longs.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">À l'usage, sache simplement: c'est ce qui donne la notion d'ordre au modèle, et c'est un des leviers des contextes 1M tokens. Détail d'implémentation sauf si tu codes un transformer from scratch.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># RoPE: encoder la position dans des rotations
+# sans entrer dans les details techniques:
+# chaque paire de dimensions (2i, 2i+1) dans Q et K
+# subit une rotation dont L'ANGLE depend de la position
+# l'attention entre token i et token j depend alors de (j-i)
+# c'est la position RELATIVE qui compte, pas l'absolue
+
+# le resultat est qu'on peut &quot;apprendre a etre 3 tokens plus loin&quot;
+# independamment de la position de depart (0, 100 ou 1000)</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">RoPE encode la position dans l'ANGLE de rotation des paires de dimensions. La difference de position entre token i et token j est encodee dans la DIFFERENCE d'angle. L'attention peut ainsi 'apprendre a etre 3 tokens plus loin' independamment de la position absolue.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-8-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">LN+</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Layer norm et résiduels</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Deux astuces de plomberie qui rendent les réseaux TRÈS profonds entraînables. <b>Résiduel</b>: sortie = x + f(x), le gradient a une autoroute directe vers les premières couches. <b>Layer norm</b>: standardiser chaque token individuellement pour stabiliser.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$h' = \text{LN}(h + \text{Att}(h))$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Le bloc transformer = [LN → attention → addition résiduelle → LN → MLP → addition résiduelle], répété 12 à 100+ fois. Sans résiduels, impossible d'entraîner au-delà de ~20 couches.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Vision moderne éclairante: le « residual stream » est un bus de données que chaque couche lit et enrichit. Ce cadre (utilisé en interprétabilité) rend l'architecture entière limpide.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># le bloc transformer standard:
+class TransformerBlock(nn.Module):
+    def forward(self, x):
+        # x passe dans le 'residual stream'
+        resid = x
+        x = self.ln1(x)
+        x = self.attn(x)
+        x = resid + x  # AJOUT: le gradient traverse directement
+        resid = x
+        x = self.ln2(x)
+        x = self.mlp(x)
+        x = resid + x  # AJOUT: deuxieme autoroute
+        return x
+# le 'x = x + f(x)' porte le nom de 'skip connection' ou 'residual connection'</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">SANS les connexions residuelles (le 'x + f(x)'), le gradient de la loss devait traverser 100 couches en se multipliant par les derivees de chaque couche → vanishing/exploding gradient. AVEC, le gradient a une autoroute directe: le '1' dans d(x + f(x))/dx = 1 + f'(x).</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-8-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">T°</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Température et sampling</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">À l'inférence, on divise les logits par T avant le softmax. <b>T faible</b> (0.1): distribution piquée, sorties sûres et répétitives. <b>T élevée</b> (1.5): distribution plate, créatif mais incohérent. S'y ajoutent top-k et top-p (couper la queue).</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$p_i = \frac{e^{z_i/T}}{\sum_j e^{z_j/T}}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Le réglage que tu utilises déjà dans chaque appel API: T≈0 pour du code ou de l'extraction, T≈0.7-1.0 pour de la rédaction créative. greedy = argmax = T→0.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Manipule le Lab 04: vois la distribution se déformer en direct. Retiens que le modèle ne change pas: seule la façon de TIRER dans sa distribution change.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># l effet de la temperature sur le tirage:
+logits = torch.tensor([2.0, 1.0, 0.5])
+for T in [0.1, 1.0, 5.0]:
+    probs = F.softmax(logits / T, dim=-1)
+    print(f'T={T}: {probs}')
+    # T=0.1: [0.99, 0.01, 0.00] → quasi deterministe
+    # T=1.0: [0.73, 0.20, 0.07] → normal
+    # T=5.0: [0.41, 0.33, 0.26] → presque uniforme
+    # T faible = accentue les differences, T fort = les gomme</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Temperature NE CHANGE PAS le modele, seulement la facon de tirer dans sa distribution. A T=0, c'est toujours le token le plus probable qui sort (argmax). A T=∞, tous les tokens sont equiprobables. L'editorial d'un journal utilise T bas, le slam poetry utilise T haut.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-8-6">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">PT→FT</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Pré-entraînement et fine-tuning</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1"><b>Pré-entraînement</b>: apprendre le langage sur des trillions de tokens (prédire le mot suivant), des mois de GPU. <b>Fine-tuning</b>: spécialiser ce modèle généraliste sur TA tâche avec peu de données. Le transfer learning à l'échelle.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\theta_{task} = \theta_{pretrained} + \Delta\theta$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Le paradigme dominant: personne ne réentraîne from scratch. Variantes: SFT (instructions), RLHF/DPO (préférences humaines), continued pretraining (domaine spécialisé: juridique, médical, cyber).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Arbre de décision pratique: prompt engineering d'abord (gratuit), puis RAG (connaissance externe), puis fine-tuning (style/format/domaine), dans cet ordre de coût croissant.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># fine-tuning: partir d un modele existant
+from transformers import AutoModelForSequenceClassification
+# charger les poids d un modele entraine sur des milliards de tokens
+model = AutoModelForSequenceClassification.from_pretrained('bert-base-uncased')
+# remplacer la tete de classification
+model.classifier = nn.Linear(768, n_classes)
+# entrainer avec un lr 100x plus petit
+optimizer = torch.optim.AdamW(model.parameters(), lr=2e-5)</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le pre-entrainement a deja integre la grammaire, la semantique, les faits generaux. Le fine-tuning n'a besoin que de DECALER legerement ces connaissances vers TA tache. Si tu utilises un lr de pre-entrainement (3e-4), les connaissances apprises sont detruites en quelques steps.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-8-7">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">LoRA</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">LoRA</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Fine-tuner un LLM sans toucher à ses milliards de poids: on gèle tout et on apprend seulement de petites matrices de <b>rang faible</b> (A×B) ajoutées en parallèle. 0.1% des paramètres, ~100% du résultat.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$W' = W_{frozen} + \underbrace{BA}_{\text{rang } r \ll d}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Rend le fine-tuning accessible sur un seul GPU grand public (QLoRA: sur du quantifié 4-bit). L'écosystème open source (Llama, Mistral, Qwen) repose massivement dessus. C'est la SVD (niveau 2) devenue industrie.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Librairie <code>peft</code> de HuggingFace, r entre 8 et 64. Boucle complète: tu as l'algèbre linéaire du niveau 2 qui explique POURQUOI le rang faible suffit: les mises à jour utiles vivent dans un petit sous-espace.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># ajouter un adaptateur LoRA:
+from peft import LoraConfig, get_peft_model
+config = LoraConfig(
+    r=8,                # rang: la correction est de rang 8
+    lora_alpha=32,      # echelle de la mise a jour
+    target_modules=['q_proj', 'v_proj']  # sur quelles couches
+)
+model = get_peft_model(model, config)
+# parametres entrainables: 0.1% du modele original
+# le reste est gele (pas de gradient, pas de mise a jour)</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">LoRA = correction de rang faible. L'hypothese: quand on fine-tune un LLM, les changements de poids (ΔW) vivent dans un espace de petite dimension. Avec r=8, chaque poids de 4096×4096 est modifie via deux petits blocs B (4096×8) et A (8×4096): 65k parametres au lieu de 16M. C'est exactement la SVD tronquee du niveau 2, mais apprise directement au lieu d'etre calculee.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>

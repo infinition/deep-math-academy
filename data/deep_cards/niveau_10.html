@@ -1,0 +1,261 @@
+<div class="space-y-6 qa-level" data-qa-level="deep:10">
+
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-l-8 border-indigo-600">
+        <div class="text-xs uppercase tracking-[0.2em] text-indigo-500 font-bold">DEEP ACADEMY &middot; Niveau 10 / 10</div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-800 mt-2 mb-4">Niveau chercheur</h2>
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">Objectif: la méthode: <b>lire un papier efficacement</b>, décoder sa notation, reproduire, faire des ablations. Ce qui sépare l'utilisateur de l'expert.</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold">6 concepts</span>
+            
+            <button type="button" class="qa-toggle-all px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold transition">Tout replier</button>
+        </div>
+    </div>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-10-0">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">📄</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Lire un papier efficacement</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Jamais linéairement. <b>3 passes</b>: (1) titre, abstract, figures, conclusion: 10 min, décider si ça vaut plus. (2) méthode en diagonale, noter les shapes et la loss: 1h. (3) lecture ligne à ligne avec re-dérivation: réservée aux papiers qui comptent pour TOI.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Un chercheur « lit » 20 papiers par semaine mais n'en lit vraiment que 2. Les figures + la loss contiennent 80% de l'information. La section related work se lit en dernier (ou jamais).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Rituel concret: pour chaque papier retenu, écris en 3 phrases À TOI: le problème, l'idée, la preuve. Si tu n'y arrives pas, tu n'as pas compris: retourne à la passe 2. Ton pipeline digest-hub peut automatiser la passe 1.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># ta fiche de lecture:
+class PaperNote:
+    def __init__(self, title):
+        self.title = title
+        self.problem = ''  # 1 phrase: quel probleme?
+        self.solution = '' # 1 phrase: quelle idee?
+        self.result = ''   # 1 phrase: quels chiffres?
+        self.vibe = ''     # mon opinion en 3 mots
+    def __repr__(self):
+        return f'[{self.problem}] → [{self.solution}] → [{self.result}]'
+# une note de 3 lignes par papier, rien de plus. le cerveau ne retient pas plus</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">La methode des 3 passes n'est pas optionnelle. Passe 1 (5 min): titre, abstract, figures. Passe 2 (1h): sauf les preuves. Passe 3 (3h+): ligne a ligne. 80% des papiers ne meritent pas la passe 3. Savoir jeter un papier est aussi important que savoir le lire.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-10-1">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">θ*∈?</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Décoder la notation d'un papier</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Chaque papier redéfinit ses symboles. Méthode: à la première équation, <b>construis ta table des symboles</b> (symbole → sens → shape). Les papiers sérieux ont une section « Notation »: lis-la TOUJOURS en premier.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$x \in \mathbb{R}^d,\ \theta \in \Theta,\ \mathcal{D} = \{(x_i, y_i)\}_{i=1}^n$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">90% des blocages de lecture viennent d'un symbole raté page 2 et réutilisé page 5. La convention dominante: minuscules = vecteurs, majuscules = matrices, calligraphié (𝒟, 𝒩) = ensembles/lois, indices = position.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Ta checklist niveau 0 est l'outil: devant une équation opaque, identifie chaque symbole un à un (grec ? indice ? décoration ? shape ?). Une équation n'est jamais dure, elle est juste dense: décompresse-la.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># la table de notation du papier en cours:
+notepad = {
+    'θ': 'parametres du modele (poids) ∈ R^d',
+    'D': 'dataset {(x_i, y_i)}_1^n',
+    'L': 'fonction de perte L(θ) = (1/n) Σ ℓ(f_θ(x_i), y_i)',
+    '∇': 'gradient, vecteur des derivees partielles',
+    'E': 'esperance sur la distribution P_data',
+    '𝒩': 'loi normale (gaussienne)',
+    'σ': 'ecart-type ou sigmoide selon le contexte'
+}
+# a completer a chaque nouveau papier</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Les memes symboles peuvent avoir des sens DIFFERENTS dans des papiers differents. π peut etre 3.14 (geometrie), la politique (RL), ou la probabilite a priori (Bayes). Le contexte est le seul desambigueur. La section 'Notation' est la page la plus importante du papier.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-10-2">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">⌘R</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Reproduire avant d'innover</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Le rite de passage du chercheur: <b>réimplémenter un papier</b> depuis le texte, sans regarder le code officiel, jusqu'à retrouver (à peu près) les chiffres annoncés. C'est là que se forgent les vraies compétences.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">La crise de la reproductibilité est réelle: beaucoup de résultats ne tiennent pas. Savoir reproduire = savoir détecter les détails cachés qui font tout (le learning rate non mentionné, la data augmentation « oubliée »).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Commence petit: reproduis « Attention is All You Need » sur un mini-dataset (nanoGPT de Karpathy comme correction). Puis un papier récent de TON domaine. Deux reproductions faites sérieusement valent un master.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># le protocole de reproduction:
+def reproduce(paper_code_url, dataset, seed=42):
+    # etape 1: faire tourner le code officiel SANS modification
+    result_official = run(paper_code_url, dataset, seed)
+    # etape 2: verifier qu on retrouve les chiffres ±1%
+    assert abs(result_official['acc'] - paper_claim['acc']) &lt; 0.01
+    # etape 3: NE CHANGER QU UNE chose
+    result_modified = run(paper_code_url, dataset, seed, my_change=True)
+    return result_official, result_modified
+# c est le protocole qui separe le bricolage de la science</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Reproduire est le MEILLEUR investissement de ton temps: tu decouvres les details que le papier omet (version de lib, preprocessing cache, hyperparametre non mentionne, seed magique). Deux reproductions valent un master dans le domaine concerne.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-10-3">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">Δ?</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Ablations et baselines</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Une <b>ablation</b> = retirer un composant de ta méthode et mesurer la chute: prouve que chaque pièce sert. Une <b>baseline</b> honnête et bien réglée = le point de comparaison sans lequel ton gain ne veut rien dire.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\Delta = \text{score}_{full} - \text{score}_{-composant}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Ce que les reviewers vérifient en premier. Le péché capital du domaine: comparer sa méthode soigneusement tunée à des baselines réglées avec les pieds. Tes tests ORBIT (le LLM n'apporte pas d'edge durable) étaient exactement cette démarche.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Discipline: une seule variable change à la fois, plusieurs graines aléatoires, moyenne ± écart-type, et le courage de publier l'ablation qui dessert ton histoire. C'est ça, être chercheur.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># ablation systematique:
+results = {}
+baselines = {
+    'full': run_model(components=['A', 'B', 'C']),
+    'sans_A': run_model(components=['B', 'C']),
+    'sans_B': run_model(components=['A', 'C']),
+    'sans_C': run_model(components=['A', 'B']),
+    'baseline_simple': LinearRegression().fit(X_train, y_train),
+    'baseline_sota': load_sota_model().eval()
+}
+# si l ablation de A ne change rien, alors A ne sert a rien
+# publier ce resultat est plus honorable que le cacher</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Le pire peche du domaine: comparer sa methode finement tunee a des baselines avec les hyperparametres par defaut. Tu ne mesures pas si ton idee est bonne, tu mesures si tu as passe plus de temps a regler ton modele. La seule comparaison juste: TOUS les modeles tunee avec le meme budget.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-10-4">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">n=?</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Significativité et rigueur statistique</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">Un gain de 0.4% sur un run unique n'est <b>pas un résultat</b>, c'est du bruit. Il faut: plusieurs graines, des intervalles de confiance, et l'honnêteté de dire quand les barres d'erreur se chevauchent.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 mb-2">La formule</div>
+            <div class="text-center overflow-x-auto">$$\bar x \pm 1.96\,\frac{s}{\sqrt{n}}$$</div>
+        </section>
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Une part embarrassante des « avancées » publiées disparaît avec 5 graines. Les benchmarks LLM ajoutent un piège moderne: la contamination (le test set était dans les données d'entraînement).</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Standard minimal pour tes propres travaux: 3 à 5 graines, moyenne ± écart-type dans chaque tableau. Tu l'as appliqué en falsifiant LVS à 3078σ: la rigueur qui tue une hypothèse vaut celle qui en valide une.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># test statistique entre deux modeles:
+from scipy import stats
+# 5 seeds pour chaque modele
+scores_A = [92.1, 91.8, 92.3, 91.6, 92.0]  # ton modele
+scores_B = [91.9, 91.5, 91.7, 91.3, 91.6]  # baseline
+t_stat, p_value = stats.ttest_ind(scores_A, scores_B)
+print(f'p = {p_value:.4f}')
+if p_value &lt; 0.05:
+    print('Difference significative')
+else:
+    print('Pas de difference concluante (barres d erreur qui se chevauchent)')</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">3 seeds, ce n'est pas assez: l'intervalle de confiance est enorme. 5 seeds, c'est le minimum acceptable. 10 seeds, c'est bien. Et meme avec p &lt; 0.05, il y a 5% de chance que ta conclusion soit fausse. C'est le probleme de la replication en science.</p>
+        </section>
+        </div>
+    </article>
+
+    <article class="qa-card bg-white rounded-xl shadow-md border border-gray-200" data-qa-card="deep-10-5">
+        <header class="qa-card-head" role="button" tabindex="0" aria-expanded="true">
+            <span class="qa-glyph">🎓</span>
+            <div class="qa-card-title">
+                <h3 class="text-lg font-bold text-indigo-800">Ton parcours de ressources</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">L'ordre optimal des ressources, calibré sur ce curriculum: chacune correspond à un ou plusieurs niveaux de cette page. Tout est gratuit.</p>
+            </div>
+            <span class="qa-chevron" aria-hidden="true">&#9662;</span>
+        </header>
+        <div class="qa-card-body">
+        <section class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 mb-2">&#129302; En machine learning</div>
+            <p class="text-gray-700 leading-relaxed">Niveaux 0-3: 3Blue1Brown (Essence of Linear Algebra + Calculus, la meilleure intuition visuelle au monde) + Khan Academy pour la pratique. Niveau 4: StatQuest. Niveaux 2-5 formalisés: le livre « Mathematics for Machine Learning » (mml-book.github.io, gratuit). Niveaux 6-7: cours fast.ai + « Neural Networks: Zero to Hero » de Karpathy (backprop à la main). Niveau 8: le blog « The Illustrated Transformer » puis nanoGPT + le cours ARENA (Callum McDougall) pour l'interprétabilité mécanistique et la pratique des transformers. Niveaux 9-10: d2l.ai + les essais de Neel Nanda sur la mechanistic interpretability + lire des papiers avec la méthode des 3 passes.</p>
+        </section>
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 mb-2">&#128736; Comment t'en servir</div>
+            <p class="text-gray-700 leading-relaxed">Rythme réaliste avec un travail à côté: 6 à 12 mois pour les niveaux 0-7 à raison de 5h/semaine, en codant CHAQUE concept. Ta règle: jamais de vidéo passive sans notebook ouvert à côté. La compréhension vient des doigts.</p>
+        </section>
+        <section class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-300 mb-2">&#128187; En code</div>
+            <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-slate-100"># ton environnement optimal:
+# 1. arXiv: alerts personnalisees sur tes mots-cles
+# 2. Semantic Scholar: suivre les citations des papiers cles
+# 3. Un fichier NOTABLE.md: UNE ligne par papier lu
+# 4. Un notebook ouvert a cote de chaque video/cours
+# 5. Git: chaque concept code = un commit
+# 6. Timer: 25 min de focus, 5 min de pause
+# le materiel ne remplace pas la discipline</code></pre>
+        </section>
+        <section class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-rose-600 mb-2">&#9888;&#65039; Le piège</div>
+            <p class="text-gray-700 leading-relaxed">Ne JAMAIS regarder 3Blue1Brown les mains dans les poches. La comprehension des maths ne passe pas par les yeux, elle passe par les DOIGTS. Ouvre un notebook, recode chaque formule, change les parametres, casse-la, repare-la. C'est en cassant qu'on comprend.</p>
+        </section>
+        </div>
+    </article>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600">
+        <b class="text-indigo-700">Règle d'or :</b> ne passe au niveau suivant que si tu peux expliquer chaque carte à voix haute, sans la relire.
+    </div>
+
+</div>
